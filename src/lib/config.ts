@@ -16,7 +16,7 @@ export const company = {
 
   phone: "(248) 568-6081",
   phoneTel: "+12485686081",
-  email: "sunduslewis@gmail.com",
+  email: "realestatemarketmedia@gmail.com",
   address: "2032 E Square Lake Rd, Suite 400A, Troy, MI",
 
   googleMapsEmbed:
