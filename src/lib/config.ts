@@ -139,41 +139,4 @@ export const neighborhoods = [
   { name: "Rochester Hills", blurb: "Family-friendly, parks, and excellent new-construction inventory." },
 ];
 
-export const featuredListings = [
-  {
-    id: "1",
-    price: "$1,250,000",
-    beds: 4,
-    baths: 3,
-    sqft: 2850,
-    address: "1847 Oakwood Lane",
-    neighborhood: "Birmingham",
-    image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
-    status: "Just Listed",
-  },
-  {
-    id: "2",
-    price: "$875,000",
-    beds: 3,
-    baths: 2,
-    sqft: 1920,
-    address: "412 Lakeshore Drive",
-    neighborhood: "Bloomfield Hills",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80",
-    status: "Open House Sat",
-  },
-  {
-    id: "3",
-    price: "$2,450,000",
-    beds: 5,
-    baths: 4,
-    sqft: 4100,
-    address: "27 Hilltop Court",
-    neighborhood: "Rochester Hills",
-    image:
-      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&q=80",
-    status: "New Price",
-  },
-];
+// Listings are now sourced from src/lib/listings.ts (MLS-ready).

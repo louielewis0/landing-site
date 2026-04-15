@@ -39,13 +39,7 @@ export default function LeadMagnet() {
       className="relative py-24 overflow-hidden bg-[#0B1733]"
     >
       <div className="absolute inset-0 glow-orange opacity-50 -z-0" />
-      <div
-        className="absolute inset-0 -z-10 opacity-10 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url(https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=2400&q=80)",
-        }}
-      />
+      <div className="absolute inset-0 grid-overlay opacity-40 -z-0" />
 
       <div className="relative max-w-6xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-14 items-center">

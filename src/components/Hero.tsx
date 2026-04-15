@@ -8,16 +8,8 @@ export default function Hero() {
       className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-[#0A1429] noise"
     >
       <div className="absolute inset-0 -z-10">
-        <div
-          className="absolute inset-0 bg-cover bg-center scale-105"
-          style={{
-            backgroundImage:
-              "url(https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=2400&q=85)",
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0A1429] via-[#0A1429]/85 to-[#0A1429]/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A1429] via-transparent to-transparent" />
-        <div className="absolute inset-0 glow-orange opacity-70" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0A1429] via-[#111C36] to-[#0A1429]" />
+        <div className="absolute inset-0 glow-orange opacity-80" />
         <div className="absolute inset-0 grid-overlay" />
       </div>
 
