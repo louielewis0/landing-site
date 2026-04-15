@@ -49,10 +49,11 @@ export default function Header() {
 
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
           {[
-            { label: "Services", href: "#services" },
-            { label: "Areas", href: "#areas" },
-            { label: "About", href: "#about" },
-            { label: "Contact", href: "#contact" },
+            { label: "Search Homes", href: "/search" },
+            { label: "Services", href: "/#services" },
+            { label: "Areas", href: "/#areas" },
+            { label: "About", href: "/#about" },
+            { label: "Contact", href: "/#contact" },
           ].map((item) => (
             <a
               key={item.label}
