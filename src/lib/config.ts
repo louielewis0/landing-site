@@ -8,16 +8,17 @@ export const company = {
   city: "Troy",
   state: "MI",
   region: "Metro Detroit",
-  tagline: "Find Your Dream Home or Sell for Top Dollar",
+  tagline: "Metro Detroit's trusted full-service real estate experts.",
+  footerTagline:
+    "Proudly serving Metro Detroit homeowners, buyers, and investors.",
   description:
-    "Metro Detroit's trusted real estate brokerage. Over 20 years, $100M+ closed, and still picking up the phone.",
+    "Metro Detroit real estate experts with 20+ years of experience and $100M+ in closed sales. Serving Troy, Rochester Hills, Birmingham, Bloomfield Hills, Sterling Heights, Royal Oak, Detroit, Warren, and Farmington Hills.",
 
   phone: "(248) 568-6081",
   phoneTel: "+12485686081",
   email: "sunduslewis@gmail.com",
   address: "2032 E Square Lake Rd, Suite 400A, Troy, MI",
 
-  // Address-based embed (works without an API key). Swap anytime via maps.google.com → Share → Embed a map.
   googleMapsEmbed:
     "https://maps.google.com/maps?q=2032%20E%20Square%20Lake%20Rd%20Suite%20400A%20Troy%20MI&t=&z=15&ie=UTF8&iwloc=&output=embed",
 
@@ -35,6 +36,69 @@ export const company = {
   ],
 } as const;
 
+export const cities = [
+  { name: "Troy", slug: "troy" },
+  { name: "Rochester Hills", slug: "rochester-hills" },
+  { name: "Birmingham", slug: "birmingham" },
+  { name: "Bloomfield Hills", slug: "bloomfield-hills" },
+  { name: "Sterling Heights", slug: "sterling-heights" },
+  { name: "Royal Oak", slug: "royal-oak" },
+  { name: "Detroit", slug: "detroit" },
+  { name: "Warren", slug: "warren" },
+  { name: "Farmington Hills", slug: "farmington-hills" },
+];
+
+export const services = [
+  {
+    id: "buy",
+    title: "Buy a Home in Michigan",
+    blurb: "Find the right home, at the right price, without compromising.",
+    icon: "home",
+  },
+  {
+    id: "sell",
+    title: "Sell Your Home Fast",
+    blurb: "Sell at or above asking with our proven pricing and marketing system.",
+    icon: "sell",
+  },
+  {
+    id: "first-time",
+    title: "First-Time Home Buyers",
+    blurb: "Step-by-step guidance plus access to down-payment assistance programs.",
+    icon: "key",
+  },
+  {
+    id: "luxury",
+    title: "Luxury Real Estate",
+    blurb: "Discreet, high-touch representation for premium Metro Detroit properties.",
+    icon: "crown",
+  },
+  {
+    id: "commercial",
+    title: "Commercial Properties",
+    blurb: "Offices, retail, and mixed-use representation across Metro Detroit.",
+    icon: "building",
+  },
+  {
+    id: "investment",
+    title: "Investment Consulting",
+    blurb: "Cash-flow, cap-rate, and 1031 strategy for serious investors.",
+    icon: "chart",
+  },
+  {
+    id: "management",
+    title: "Property Management",
+    blurb: "Full-service management that protects your investment and your tenants.",
+    icon: "shield",
+  },
+  {
+    id: "relocation",
+    title: "Relocation Services",
+    blurb: "Move in or out of Metro Detroit with zero stress — we handle every detail.",
+    icon: "map",
+  },
+];
+
 export const testimonials = [
   {
     quote:
@@ -46,46 +110,33 @@ export const testimonials = [
     quote:
       "As a first-time buyer, I had no idea what I was doing. They walked me through every step, negotiated aggressively on my behalf, and got me a better deal than I expected. I wouldn't have gotten this home without them.",
     name: "First-Time Buyer",
-    role: "Metro Detroit",
+    role: "Rochester Hills, MI",
   },
   {
     quote:
       "We had our house listed with another agent for months with no results. Real Estate Market Center came in with a completely different strategy and had it under contract within 2 weeks. That says everything.",
     name: "Relisted Seller",
-    role: "Oakland County",
+    role: "Birmingham, MI",
   },
   {
     quote:
       "I've worked with multiple agents, but this team actually understands the market. They helped me find a property with strong upside and negotiated terms that immediately put me ahead. This is who you want if you're serious about real estate.",
     name: "Investor Client",
-    role: "Metro Detroit",
+    role: "Bloomfield Hills, MI",
   },
   {
     quote:
       "What stood out most was how much they actually cared. They weren't just trying to close a deal — they made sure it was the right deal for us. That level of honesty is rare.",
     name: "Happy Homeowner",
-    role: "Troy, MI",
+    role: "Sterling Heights, MI",
   },
 ];
 
-// TODO: swap neighborhoods for the Metro Detroit areas you actually work (add/remove freely).
 export const neighborhoods = [
-  {
-    name: "Troy",
-    blurb: "Top-rated schools, strong resale value, and a thriving local economy.",
-  },
-  {
-    name: "Birmingham",
-    blurb: "Walkable downtown, upscale homes, Metro Detroit's premier lifestyle.",
-  },
-  {
-    name: "Bloomfield Hills",
-    blurb: "Executive estates, top schools, and long-term value appreciation.",
-  },
-  {
-    name: "Rochester Hills",
-    blurb: "Family-friendly, parks, and excellent new-construction inventory.",
-  },
+  { name: "Troy", blurb: "Top-rated schools, strong resale value, and a thriving local economy." },
+  { name: "Birmingham", blurb: "Walkable downtown, upscale homes, Metro Detroit's premier lifestyle." },
+  { name: "Bloomfield Hills", blurb: "Executive estates, top schools, and long-term value appreciation." },
+  { name: "Rochester Hills", blurb: "Family-friendly, parks, and excellent new-construction inventory." },
 ];
 
 export const featuredListings = [

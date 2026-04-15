@@ -10,29 +10,41 @@ const geistSans = Geist({
 
 export const metadata: Metadata = {
   title: {
-    default: `${company.name} — Real Estate in ${company.city}`,
+    default: `Metro Detroit Real Estate | Buy & Sell Homes in Michigan | ${company.name}`,
     template: `%s | ${company.name}`,
   },
-  description: `${company.name}: ${company.city}'s trusted real estate brokerage. Buy, sell, or invest with local experts who deliver real results.`,
+  description:
+    "Metro Detroit real estate experts serving Troy, Rochester Hills, Birmingham, Bloomfield Hills, Sterling Heights, Royal Oak, Detroit, and Warren. 20+ years experience, $100M+ in closed sales. Get a free home valuation today.",
   keywords: [
-    `homes for sale in ${company.city}`,
-    `real estate agent ${company.city}`,
-    `${company.city} realtor`,
-    "sell my home",
-    "home valuation",
+    "homes for sale in Troy MI",
+    "sell my house fast Metro Detroit",
+    "real estate agent Rochester Hills",
+    "Birmingham MI real estate",
+    "Bloomfield Hills homes for sale",
+    "Metro Detroit realtor",
+    "Troy Michigan real estate",
+    "Sterling Heights homes",
+    "Detroit real estate agent",
+    "Michigan luxury homes",
+    "first-time home buyer Michigan",
+    "investment properties Michigan",
     company.name,
   ],
   openGraph: {
-    title: `${company.name} — Real Estate in ${company.city}`,
-    description: `Buy, sell, or invest in ${company.city} with the team that delivers real results.`,
+    title: `Metro Detroit Real Estate Experts | ${company.name}`,
+    description:
+      "Buy and sell homes with confidence across Troy, Rochester Hills, Birmingham, Bloomfield Hills and surrounding areas. 20+ years experience, $100M+ closed.",
     type: "website",
     locale: "en_US",
+    url: "https://marketcenterrealty.com",
+    siteName: company.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${company.name} — ${company.city}`,
+    title: `Metro Detroit Real Estate | ${company.name}`,
   },
   robots: { index: true, follow: true },
+  alternates: { canonical: "https://marketcenterrealty.com" },
 };
 
 const jsonLd = {
@@ -42,14 +54,32 @@ const jsonLd = {
   description: company.description,
   telephone: company.phone,
   email: company.email,
+  url: "https://marketcenterrealty.com",
   address: {
     "@type": "PostalAddress",
-    streetAddress: company.address,
+    streetAddress: "2032 E Square Lake Rd Suite 400A",
     addressLocality: company.city,
     addressRegion: company.state,
+    postalCode: "48098",
+    addressCountry: "US",
   },
-  areaServed: company.city,
+  areaServed: [
+    "Troy, MI",
+    "Rochester Hills, MI",
+    "Birmingham, MI",
+    "Bloomfield Hills, MI",
+    "Sterling Heights, MI",
+    "Royal Oak, MI",
+    "Detroit, MI",
+    "Warren, MI",
+    "Farmington Hills, MI",
+  ],
   priceRange: "$$-$$$$",
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "50",
+  },
 };
 
 export default function RootLayout({

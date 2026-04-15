@@ -23,7 +23,7 @@ export default function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-3 group">
+        <a href="#top" className="flex items-center gap-3">
           <div
             className={`rounded-xl p-1 transition-all duration-300 ${
               scrolled ? "bg-transparent" : "bg-white/95 shadow-md"
@@ -48,17 +48,20 @@ export default function Header() {
         </a>
 
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          {["Listings", "Services", "About", "Contact"].map((item) => (
+          {[
+            { label: "Services", href: "#services" },
+            { label: "Areas", href: "#areas" },
+            { label: "About", href: "#about" },
+            { label: "Contact", href: "#contact" },
+          ].map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className={`relative transition-colors ${
-                scrolled
-                  ? "text-slate-700 hover:text-slate-900"
-                  : "text-white/85 hover:text-white"
+              key={item.label}
+              href={item.href}
+              className={`transition-colors ${
+                scrolled ? "text-slate-700 hover:text-slate-900" : "text-white/85 hover:text-white"
               }`}
             >
-              {item}
+              {item.label}
             </a>
           ))}
         </nav>
