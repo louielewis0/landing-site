@@ -31,7 +31,7 @@ export default function HeroLeadForm({ source = "hero" }: { source?: string }) {
     }
 
     setStatus("ok");
-    setMessage("Thanks! We'll be in touch within 24 hours.");
+    setMessage("We've got your info. Expect a call within the hour.");
     setName("");
     setEmail("");
     setPhone("");
@@ -39,13 +39,15 @@ export default function HeroLeadForm({ source = "hero" }: { source?: string }) {
 
   if (status === "ok") {
     return (
-      <div className="bg-white/95 backdrop-blur rounded-2xl p-8 shadow-xl">
-        <div className="w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-4">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+      <div className="rounded-2xl p-10 bg-white/95 backdrop-blur-xl shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] border border-white/40">
+        <div className="w-14 h-14 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-5">
+          <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-xl font-bold text-slate-900 mb-2 text-center">You're all set.</h3>
+        <h3 className="text-2xl font-bold text-slate-900 mb-2 text-center tracking-tight">
+          Request received.
+        </h3>
         <p className="text-slate-600 text-center">{message}</p>
       </div>
     );
@@ -54,29 +56,31 @@ export default function HeroLeadForm({ source = "hero" }: { source?: string }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white/95 backdrop-blur rounded-2xl p-6 sm:p-8 shadow-xl space-y-4"
+      className="rounded-2xl p-7 sm:p-8 bg-white/95 backdrop-blur-xl shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] border border-white/40 space-y-4"
     >
       <div>
-        <h3 className="text-xl font-bold text-slate-900">Get Started — It's Free</h3>
+        <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
+          Let's talk.
+        </h3>
         <p className="text-sm text-slate-600 mt-1">
-          Tell us a bit about your goals. No spam, ever.
+          No pressure, no spam. A real person will reach out.
         </p>
       </div>
 
       <div className="grid grid-cols-4 gap-2">
         {([
-          ["buy", "Buying"],
-          ["sell", "Selling"],
-          ["invest", "Investing"],
+          ["buy", "Buy"],
+          ["sell", "Sell"],
+          ["invest", "Invest"],
           ["other", "Other"],
         ] as [Intent, string][]).map(([val, label]) => (
           <button
             key={val}
             type="button"
             onClick={() => setIntent(val)}
-            className={`py-2 text-sm font-medium rounded-lg border-2 transition-all ${
+            className={`py-2.5 text-sm font-semibold rounded-lg border transition-all ${
               intent === val
-                ? "bg-slate-900 text-white border-slate-900"
+                ? "bg-slate-900 text-white border-slate-900 shadow-md"
                 : "bg-white text-slate-700 border-slate-200 hover:border-slate-400"
             }`}
           >
@@ -91,7 +95,7 @@ export default function HeroLeadForm({ source = "hero" }: { source?: string }) {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Full name"
-        className="w-full px-4 py-3 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-900"
+        className="w-full px-4 py-3.5 rounded-lg border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-900/5 transition-all"
       />
 
       <input
@@ -99,32 +103,32 @@ export default function HeroLeadForm({ source = "hero" }: { source?: string }) {
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email address"
-        className="w-full px-4 py-3 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-900"
+        placeholder="Email"
+        className="w-full px-4 py-3.5 rounded-lg border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-900/5 transition-all"
       />
 
       <input
         type="tel"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
-        placeholder="Phone (optional)"
-        className="w-full px-4 py-3 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-900"
+        placeholder="Phone"
+        className="w-full px-4 py-3.5 rounded-lg border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-900/5 transition-all"
       />
 
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full px-6 py-4 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold text-lg transition-colors disabled:opacity-60"
+        className="w-full px-6 py-4 rounded-lg bg-orange-500 hover:bg-orange-400 text-white font-semibold text-base shadow-[0_10px_30px_-10px_rgba(249,115,22,0.6)] hover:shadow-[0_10px_30px_-5px_rgba(249,115,22,0.8)] transition-all disabled:opacity-60 disabled:shadow-none"
       >
-        {status === "loading" ? "Sending..." : "Get My Free Consultation →"}
+        {status === "loading" ? "Sending…" : "Request a callback →"}
       </button>
 
       {status === "error" && (
         <p className="text-sm text-red-600 text-center">{message}</p>
       )}
 
-      <p className="text-xs text-slate-500 text-center">
-        🔒 Your info is private. We respond within 24 hours.
+      <p className="text-xs text-slate-500 text-center pt-1">
+        Your info stays with us. Never shared, never sold.
       </p>
     </form>
   );

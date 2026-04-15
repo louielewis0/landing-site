@@ -1,84 +1,86 @@
 const services = [
   {
     id: "buyers",
-    title: "For Buyers",
-    tagline: "Win the home you love — without overpaying.",
+    label: "Buyers",
+    title: "Get the home. Not the stress.",
     points: [
-      "Off-market opportunities and pre-MLS access",
-      "Neighborhood-level market intelligence",
-      "Negotiation strategy that saves clients $15K+ on average",
-      "End-to-end guidance: inspection, lender, closing",
+      "Pre-MLS access to listings before they go public",
+      "Block-by-block insight on pricing, schools, and resale",
+      "Sharp negotiation on contingencies, credits, and price",
+      "Vetted lenders, inspectors, and attorneys on call",
     ],
-    cta: "Start My Home Search",
+    cta: "Start my search",
   },
   {
     id: "sellers",
-    title: "For Sellers",
-    tagline: "Sell faster and for more than the market average.",
+    label: "Sellers",
+    title: "Maximize the number on the check.",
     points: [
-      "Free, instant home valuation — no obligation",
-      "Professional photography, video, and staging",
-      "Targeted digital marketing to active buyers",
-      "Average listing sells 12 days faster than the local median",
+      "Free, no-obligation home valuation",
+      "Professional photography, video, and staging — at no extra cost",
+      "Targeted campaigns that reach active, qualified buyers",
+      "Proven pricing strategy backed by 20+ years of local data",
     ],
-    cta: "Get My Home's Value",
+    cta: "Get my home's value",
   },
   {
     id: "investors",
-    title: "For Investors",
-    tagline: "Data-driven opportunities with real ROI analysis.",
+    label: "Investors",
+    title: "Real numbers. Real returns.",
     points: [
       "Cash-flow and cap-rate modeling on every deal",
-      "Access to distressed, probate, and off-market inventory",
-      "1031 exchange coordination and portfolio strategy",
-      "Trusted vendor network: lenders, PMs, contractors",
+      "Off-market, distressed, and 1031 opportunities",
+      "Portfolio strategy, not one-off transactions",
+      "Trusted network: lenders, PMs, contractors",
     ],
-    cta: "Explore Investment Deals",
+    cta: "See active deals",
   },
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-12 max-w-2xl mx-auto">
-          <p className="text-sm font-semibold text-amber-600 uppercase tracking-wider mb-2">
-            How we help
+    <section
+      id="services"
+      className="relative py-24 bg-[#0B1733] text-white overflow-hidden"
+    >
+      <div className="absolute inset-0 glow-orange opacity-20 -z-0" />
+
+      <div className="relative max-w-7xl mx-auto px-6">
+        <div className="max-w-2xl mx-auto text-center mb-16">
+          <p className="text-xs font-semibold text-orange-400 uppercase tracking-[0.2em] mb-3">
+            What we do
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-            Whatever your move, we've done it before.
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-5">
+            Specialized, not generic.
           </h2>
-          <p className="text-lg text-slate-600">
-            Specialized expertise for every client — not a one-size-fits-all
-            approach.
+          <p className="text-lg text-white/70">
+            Every transaction has a different playbook. We bring the right one.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-5">
           {services.map((s) => (
             <div
               key={s.id}
-              className="group bg-white rounded-2xl p-8 border-2 border-slate-100 hover:border-amber-400 hover:shadow-lg transition-all"
+              className="group relative rounded-2xl p-8 bg-white/[0.03] backdrop-blur border border-white/10 hover:border-orange-400/50 hover:bg-white/[0.06] transition-all"
             >
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-orange-500/10 border border-orange-400/20 text-orange-300 text-xs font-semibold uppercase tracking-wider mb-5">
+                {s.label}
+              </div>
+              <h3 className="text-2xl font-bold tracking-tight mb-5 leading-tight">
                 {s.title}
               </h3>
-              <p className="text-slate-600 mb-6">{s.tagline}</p>
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-2.5 mb-8 text-sm text-white/75">
                 {s.points.map((p) => (
-                  <li key={p} className="flex gap-3 text-sm text-slate-700">
+                  <li key={p} className="flex gap-3 leading-relaxed">
                     <svg
-                      className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5"
+                      className="w-4 h-4 text-orange-400 flex-shrink-0 mt-[3px]"
                       fill="none"
                       stroke="currentColor"
+                      strokeWidth={2.5}
                       viewBox="0 0 24 24"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     {p}
                   </li>
@@ -86,12 +88,10 @@ export default function Services() {
               </ul>
               <a
                 href="#lead-magnet"
-                className="inline-flex items-center gap-2 text-slate-900 font-bold group-hover:text-amber-600 transition-colors"
+                className="inline-flex items-center gap-1.5 text-white font-semibold text-sm group-hover:text-orange-300 transition-colors"
               >
                 {s.cta}
-                <span className="group-hover:translate-x-1 transition-transform">
-                  →
-                </span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
               </a>
             </div>
           ))}
