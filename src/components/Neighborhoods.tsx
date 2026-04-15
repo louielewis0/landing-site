@@ -32,7 +32,7 @@ export default function Neighborhoods() {
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-[11px] text-slate-500 uppercase tracking-wider mb-0.5">
-                    Homes for sale in
+                    Serving
                   </div>
                   <div className="text-lg font-bold text-slate-900 group-hover:text-orange-600 transition-colors">
                     {c.name}, MI
@@ -46,9 +46,17 @@ export default function Neighborhoods() {
           ))}
         </div>
 
-        <p className="text-center text-sm text-slate-500">
-          Don't see your city? <a href="#contact" className="text-orange-600 font-semibold hover:underline">Just ask</a> — we work across all of Michigan.
-        </p>
+        <div className="text-center">
+          <a
+            href="#lead-magnet"
+            className="inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold shadow-lg shadow-slate-900/10 transition-colors"
+          >
+            Get Free Home Valuation →
+          </a>
+          <p className="text-sm text-slate-500 mt-3">
+            Don't see your city? <a href="#contact" className="text-orange-600 font-semibold hover:underline">Just ask</a> — we work across all of Michigan.
+          </p>
+        </div>
       </div>
     </section>
   );

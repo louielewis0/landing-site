@@ -20,21 +20,22 @@ export default function Hero() {
               <span className="absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75 animate-ping" />
               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-orange-400" />
             </span>
-            Now serving {company.region} — call {company.phone}
+            Now accepting clients — call {company.phone}
           </div>
 
           <h1 className="text-[2.5rem] sm:text-5xl lg:text-[4.5rem] font-bold tracking-[-0.03em] leading-[1.02] mb-6">
-            Metro Detroit Real Estate Experts{" "}
-            <span className="gradient-text">helping you buy & sell with confidence.</span>
+            Sell for Top Dollar.
+            <br />
+            Buy with Confidence.
+            <br />
+            <span className="gradient-text">All in Metro Detroit.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-white/75 mb-9 max-w-2xl leading-[1.55]">
-            Serving Troy, Rochester Hills, Birmingham, Bloomfield Hills, and surrounding areas with
-            <strong className="text-white"> 20+ years of experience</strong> and
-            <strong className="text-white"> $100M+ in closed sales</strong>.
+          <p className="text-lg sm:text-xl text-white/75 mb-9 max-w-xl leading-[1.55]">
+            The team behind <strong className="text-white">$100M+ in closed Metro Detroit sales</strong>. Get your free home valuation in under 24 hours — or call us right now.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 mb-10">
+          <div className="flex flex-col sm:flex-row gap-3 mb-9">
             <a
               href="#lead-magnet"
               className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-orange-500 hover:bg-orange-400 text-white font-semibold shadow-[0_20px_50px_-12px_rgba(249,115,22,0.65)] hover:shadow-[0_20px_50px_-8px_rgba(249,115,22,0.9)] hover:-translate-y-0.5 transition-all duration-300"
@@ -53,19 +54,21 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* Trust badges */}
+          {/* Trust triggers */}
           <div className="grid grid-cols-3 gap-3 max-w-xl">
             {[
-              { v: "20+", l: "Years Experience" },
-              { v: "$100M+", l: "In Sales" },
-              { v: "Metro", l: "Detroit Specialists" },
+              { v: "$100M+", l: "Sold in Metro Detroit" },
+              { v: "20+", l: "Years Local Experience" },
+              { v: "500+", l: "Homes Closed" },
             ].map((b) => (
               <div
                 key={b.l}
                 className="px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 backdrop-blur-sm"
               >
                 <div className="text-lg font-bold gradient-text leading-none">{b.v}</div>
-                <div className="text-[11px] text-white/60 uppercase tracking-wider mt-1.5">{b.l}</div>
+                <div className="text-[11px] text-white/60 uppercase tracking-wider mt-1.5 leading-tight">
+                  {b.l}
+                </div>
               </div>
             ))}
           </div>
