@@ -19,7 +19,7 @@ const services = [
       "Free, no-obligation home valuation",
       "Professional photography, video, and staging — at no extra cost",
       "Targeted campaigns that reach active, qualified buyers",
-      "Proven pricing strategy backed by 20+ years of local data",
+      "Pricing strategy backed by 20+ years of local data",
     ],
     cta: "Get my home's value",
   },
@@ -41,19 +41,22 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative py-24 bg-[#0B1733] text-white overflow-hidden"
+      className="relative py-28 bg-[#0A1429] text-white overflow-hidden noise"
     >
-      <div className="absolute inset-0 glow-orange opacity-20 -z-0" />
+      <div className="absolute inset-0 glow-orange opacity-20" />
+      <div className="absolute inset-0 grid-overlay opacity-50" />
 
       <div className="relative max-w-7xl mx-auto px-6">
-        <div className="max-w-2xl mx-auto text-center mb-16">
-          <p className="text-xs font-semibold text-orange-400 uppercase tracking-[0.2em] mb-3">
+        <div className="max-w-2xl mx-auto text-center mb-20">
+          <p className="text-xs font-semibold text-orange-400 uppercase tracking-[0.22em] mb-4">
             What we do
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-5">
-            Specialized, not generic.
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.025em] mb-6 leading-[1.05]">
+            Specialized,
+            <br />
+            <span className="gradient-text">not generic.</span>
           </h2>
-          <p className="text-lg text-white/70">
+          <p className="text-lg text-white/65 leading-relaxed">
             Every transaction has a different playbook. We bring the right one.
           </p>
         </div>
@@ -62,19 +65,21 @@ export default function Services() {
           {services.map((s) => (
             <div
               key={s.id}
-              className="group relative rounded-2xl p-8 bg-white/[0.03] backdrop-blur border border-white/10 hover:border-orange-400/50 hover:bg-white/[0.06] transition-all"
+              className="group relative rounded-3xl p-8 lg:p-10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] backdrop-blur border border-white/10 hover:border-orange-400/40 hover:from-white/[0.06] hover:to-white/[0.02] transition-all duration-300"
             >
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-orange-500/10 border border-orange-400/20 text-orange-300 text-xs font-semibold uppercase tracking-wider mb-5">
+              <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-orange-400/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-orange-500/10 border border-orange-400/20 text-orange-300 text-[11px] font-semibold uppercase tracking-[0.15em] mb-6">
                 {s.label}
               </div>
-              <h3 className="text-2xl font-bold tracking-tight mb-5 leading-tight">
+              <h3 className="text-[1.65rem] font-bold tracking-[-0.02em] mb-6 leading-[1.15]">
                 {s.title}
               </h3>
-              <ul className="space-y-2.5 mb-8 text-sm text-white/75">
+              <ul className="space-y-3 mb-10 text-[15px] text-white/70">
                 {s.points.map((p) => (
                   <li key={p} className="flex gap-3 leading-relaxed">
                     <svg
-                      className="w-4 h-4 text-orange-400 flex-shrink-0 mt-[3px]"
+                      className="w-4 h-4 text-orange-400 flex-shrink-0 mt-[5px]"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth={2.5}
@@ -91,7 +96,7 @@ export default function Services() {
                 className="inline-flex items-center gap-1.5 text-white font-semibold text-sm group-hover:text-orange-300 transition-colors"
               >
                 {s.cta}
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
+                <span className="group-hover:translate-x-1.5 transition-transform duration-300">→</span>
               </a>
             </div>
           ))}

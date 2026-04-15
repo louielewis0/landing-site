@@ -10,10 +10,10 @@ export const company = {
   region: "Metro Detroit",
   tagline: "Find Your Dream Home or Sell for Top Dollar",
   description:
-    "Metro Detroit's trusted real estate brokerage. Over 20 years of experience helping buyers, sellers, and investors across Troy and beyond.",
+    "Metro Detroit's trusted real estate brokerage. Over 20 years, $100M+ closed, and still picking up the phone.",
 
-  phone: "(248) 860-7273",
-  phoneTel: "+12488607273",
+  phone: "(248) 568-6081",
+  phoneTel: "+12485686081",
   email: "sunduslewis@gmail.com",
   address: "2032 E Square Lake Rd, Suite 400A, Troy, MI",
 
@@ -29,9 +29,8 @@ export const company = {
 
   stats: [
     { value: "20+", label: "Years Experience" },
-    { value: "$50M+", label: "In Real Estate Sold" },
-    // TODO: replace "200+" with the real figure if you have it.
-    { value: "200+", label: "Homes Closed" },
+    { value: "$100M+", label: "In Real Estate Sold" },
+    { value: "500+", label: "Homes Closed" },
     { value: "Metro Detroit", label: "Local Experts" },
   ],
 } as const;

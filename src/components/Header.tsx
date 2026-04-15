@@ -16,17 +16,17 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur shadow-sm py-3"
+          ? "bg-white/85 backdrop-blur-xl shadow-[0_8px_32px_-12px_rgba(15,23,42,0.08)] border-b border-slate-200/50 py-3"
           : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-3">
+        <a href="#top" className="flex items-center gap-3 group">
           <div
-            className={`rounded-lg p-1 transition-colors ${
-              scrolled ? "bg-transparent" : "bg-white/95"
+            className={`rounded-xl p-1 transition-all duration-300 ${
+              scrolled ? "bg-transparent" : "bg-white/95 shadow-md"
             }`}
           >
             <Image
@@ -39,7 +39,7 @@ export default function Header() {
             />
           </div>
           <span
-            className={`hidden sm:inline font-bold text-base tracking-tight ${
+            className={`hidden sm:inline font-bold text-[15px] tracking-[-0.01em] transition-colors ${
               scrolled ? "text-slate-900" : "text-white"
             }`}
           >
@@ -52,10 +52,10 @@ export default function Header() {
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
-              className={`transition-colors ${
+              className={`relative transition-colors ${
                 scrolled
                   ? "text-slate-700 hover:text-slate-900"
-                  : "text-white/90 hover:text-white"
+                  : "text-white/85 hover:text-white"
               }`}
             >
               {item}
@@ -65,7 +65,11 @@ export default function Header() {
 
         <a
           href={`tel:${company.phoneTel}`}
-          className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-900 text-sm font-semibold transition-colors"
+          className={`hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+            scrolled
+              ? "bg-slate-900 text-white hover:bg-slate-800 shadow-md shadow-slate-900/10"
+              : "bg-orange-500 text-white hover:bg-orange-400 shadow-[0_8px_24px_-8px_rgba(249,115,22,0.6)]"
+          }`}
         >
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />

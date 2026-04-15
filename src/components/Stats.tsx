@@ -2,19 +2,19 @@ import { company } from "@/lib/config";
 
 export default function Stats() {
   return (
-    <section className="relative bg-[#0B1733] text-white py-20 overflow-hidden">
-      <div className="absolute inset-0 glow-orange opacity-30 -z-0" />
+    <section className="relative bg-[#0A1429] text-white py-24 overflow-hidden noise">
+      <div className="absolute inset-0 glow-orange opacity-25" />
       <div className="relative max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10">
+        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10 border border-white/10 rounded-3xl overflow-hidden bg-white/[0.02] backdrop-blur">
           {company.stats.map((stat) => (
             <div
               key={stat.label}
-              className="bg-[#0B1733] px-6 py-10 text-center hover:bg-white/[0.03] transition-colors"
+              className="px-6 py-12 text-center group hover:bg-white/[0.03] transition-colors"
             >
-              <div className="text-4xl md:text-5xl font-bold tracking-tight gradient-text mb-2">
+              <div className="text-4xl md:text-6xl font-bold tracking-[-0.03em] gradient-text mb-3 leading-none">
                 {stat.value}
               </div>
-              <div className="text-xs text-white/60 uppercase tracking-[0.15em] font-medium">
+              <div className="text-[11px] text-white/50 uppercase tracking-[0.22em] font-medium">
                 {stat.label}
               </div>
             </div>
