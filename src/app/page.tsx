@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import TrustBadges from "@/components/TrustBadges";
 import LeadCards from "@/components/LeadCards";
 import Testimonials from "@/components/Testimonials";
 import LeadMagnet from "@/components/LeadMagnet";
@@ -15,28 +16,14 @@ export default function Home() {
     <>
       <Header />
       <main className="flex-1">
-        {/* 1. Hero — above the fold: headline + form + trust triggers */}
         <Hero />
-
-        {/* 2. Lead cards — 4 direct paths to convert (valuation / listings / sell / call) */}
+        <TrustBadges />
         <LeadCards />
-
-        {/* 3. Social proof */}
         <Testimonials />
-
-        {/* 4. Primary seller-lead capture */}
         <LeadMagnet />
-
-        {/* 5. Services — 8 specialty cards, each funnels to valuation form */}
         <Services />
-
-        {/* 6. About — tight authority block */}
         <About />
-
-        {/* 7. Local SEO section */}
         <Neighborhoods />
-
-        {/* 8. Final contact / schedule */}
         <ContactForm />
       </main>
       <Footer />

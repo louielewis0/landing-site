@@ -1,15 +1,81 @@
-import { services } from "@/lib/config";
+import {
+  Home,
+  TrendingUp,
+  UserCheck,
+  Crown,
+  Building2,
+  BarChart3,
+  ShieldCheck,
+  MapPin,
+  ArrowRight,
+} from "lucide-react";
 
-const icons: Record<string, string> = {
-  home: "M10 2L2 9h2v9h4v-6h4v6h4V9h2L10 2z",
-  sell: "M12 2l1.5 5h5l-4 3 1.5 5-5-3-5 3 1.5-5-4-3h5z",
-  key: "M7 14a5 5 0 01-5-5V4a1 1 0 011-1h4a1 1 0 011 1v5a5 5 0 01-5 5zm5-11h5a1 1 0 011 1v8a1 1 0 01-1 1h-3m3 3l-2-2m4 4l-2-2",
-  crown: "M3 7l3 3 4-6 4 6 3-3v9H3V7z",
-  building: "M4 21V3h6v5h10v13H4zm6-10h4V8h-4v3zm0 4h4v-3h-4v3zm0 4h4v-3h-4v3z",
-  chart: "M3 17v2h18v-2H3zm4-2l3-3 3 3 6-6-1.4-1.4L13 12l-3-3-5 5 2 2z",
-  shield: "M10 1l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V4l7-3z",
-  map: "M10 2a6 6 0 00-6 6c0 4 6 10 6 10s6-6 6-10a6 6 0 00-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z",
+type Service = {
+  id: string;
+  label: string;
+  title: string;
+  blurb: string;
+  Icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
 };
+
+const services: Service[] = [
+  {
+    id: "buy",
+    label: "Buyers",
+    title: "Buy a Home in Michigan",
+    blurb: "Find the right home, at the right price, without compromising.",
+    Icon: Home,
+  },
+  {
+    id: "sell",
+    label: "Sellers",
+    title: "Sell Your Home Fast",
+    blurb: "Sell at or above asking with our proven pricing and marketing system.",
+    Icon: TrendingUp,
+  },
+  {
+    id: "first-time",
+    label: "First-Time",
+    title: "First-Time Home Buyers",
+    blurb: "Step-by-step guidance plus access to down-payment assistance programs.",
+    Icon: UserCheck,
+  },
+  {
+    id: "luxury",
+    label: "Luxury",
+    title: "Luxury Real Estate",
+    blurb: "Discreet, high-touch representation for premium Metro Detroit properties.",
+    Icon: Crown,
+  },
+  {
+    id: "commercial",
+    label: "Commercial",
+    title: "Commercial Properties",
+    blurb: "Offices, retail, and mixed-use representation across Metro Detroit.",
+    Icon: Building2,
+  },
+  {
+    id: "investment",
+    label: "Investors",
+    title: "Investment Consulting",
+    blurb: "Cash-flow, cap-rate, and 1031 strategy for serious investors.",
+    Icon: BarChart3,
+  },
+  {
+    id: "management",
+    label: "Management",
+    title: "Property Management",
+    blurb: "Full-service management that protects your investment and your tenants.",
+    Icon: ShieldCheck,
+  },
+  {
+    id: "relocation",
+    label: "Relocation",
+    title: "Relocation Services",
+    blurb: "Move in or out of Metro Detroit with zero stress — we handle every detail.",
+    Icon: MapPin,
+  },
+];
 
 export default function Services() {
   return (
@@ -37,33 +103,7 @@ export default function Services() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {services.map((s) => (
-            <a
-              key={s.id}
-              href="#lead-magnet"
-              className="group relative rounded-2xl p-7 bg-gradient-to-br from-white/[0.04] to-white/[0.01] backdrop-blur border border-white/10 hover:border-orange-400/40 hover:from-white/[0.07] hover:to-white/[0.02] hover:-translate-y-0.5 transition-all duration-300"
-            >
-              <div className="w-11 h-11 rounded-xl bg-orange-500/10 border border-orange-400/20 flex items-center justify-center mb-5 group-hover:bg-orange-500/20 transition-colors">
-                <svg
-                  className="w-5 h-5 text-orange-400"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  viewBox="0 0 20 20"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d={icons[s.icon]} />
-                </svg>
-              </div>
-              <h3 className="text-[17px] font-bold tracking-tight mb-2 leading-tight">
-                {s.title}
-              </h3>
-              <p className="text-[13.5px] text-white/60 leading-relaxed mb-5">
-                {s.blurb}
-              </p>
-              <span className="inline-flex items-center gap-1 text-xs font-semibold text-orange-300 group-hover:text-orange-200 transition-colors">
-                Learn more
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
-              </span>
-            </a>
+            <ServiceCard key={s.id} service={s} />
           ))}
         </div>
 
@@ -72,11 +112,42 @@ export default function Services() {
             href="#lead-magnet"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-orange-500 hover:bg-orange-400 text-white font-semibold shadow-[0_20px_50px_-12px_rgba(249,115,22,0.6)] hover:-translate-y-0.5 transition-all"
           >
-            Schedule Your Free Consultation
-            <span>→</span>
+            Get Free Home Valuation
+            <ArrowRight className="w-4 h-4" />
           </a>
         </div>
       </div>
     </section>
+  );
+}
+
+function ServiceCard({ service }: { service: Service }) {
+  const { Icon } = service;
+  return (
+    <a
+      href="#lead-magnet"
+      className="group relative flex flex-col h-full rounded-2xl p-7 bg-gradient-to-br from-white/[0.04] to-white/[0.01] backdrop-blur border border-white/10 hover:border-orange-400/40 hover:from-white/[0.07] hover:to-white/[0.02] hover:-translate-y-0.5 transition-all duration-300"
+    >
+      {/* Icon — primary visual anchor */}
+      <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-400/20 flex items-center justify-center mb-5 group-hover:bg-orange-500/20 transition-colors">
+        <Icon className="w-6 h-6 text-orange-400" strokeWidth={1.75} />
+      </div>
+
+      {/* Title */}
+      <h3 className="text-[17px] font-bold tracking-tight mb-2 leading-tight">
+        {service.title}
+      </h3>
+
+      {/* Description — fills available space so CTA aligns at bottom */}
+      <p className="text-[13.5px] text-white/60 leading-relaxed mb-6 flex-1">
+        {service.blurb}
+      </p>
+
+      {/* CTA — consistent label + arrow, pinned to bottom */}
+      <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-orange-300 group-hover:text-orange-200 transition-colors mt-auto">
+        Learn More
+        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+      </span>
+    </a>
   );
 }
