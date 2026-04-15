@@ -1,22 +1,33 @@
-import WaitlistForm from "@/components/WaitlistForm";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import Stats from "@/components/Stats";
+import Testimonials from "@/components/Testimonials";
+import Services from "@/components/Services";
+import FeaturedListings from "@/components/FeaturedListings";
+import LeadMagnet from "@/components/LeadMagnet";
+import About from "@/components/About";
+import Neighborhoods from "@/components/Neighborhoods";
+import ContactForm from "@/components/ContactForm";
+import Footer from "@/components/Footer";
+import FloatingCTA from "@/components/FloatingCTA";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 text-white flex items-center justify-center px-6">
-      <div className="max-w-2xl w-full text-center space-y-8">
-        <h1 className="text-5xl sm:text-6xl font-bold tracking-tight">
-          Something great is coming.
-        </h1>
-        <p className="text-lg sm:text-xl text-white/70">
-          Drop your email and be the first to know when we launch.
-        </p>
-        <div className="flex justify-center pt-4">
-          <WaitlistForm />
-        </div>
-        <p className="text-xs text-white/40 pt-12">
-          Built with Next.js, Supabase, and Vercel.
-        </p>
-      </div>
-    </main>
+    <>
+      <Header />
+      <main className="flex-1">
+        <Hero />
+        <Stats />
+        <Testimonials />
+        <Services />
+        <FeaturedListings />
+        <LeadMagnet />
+        <About />
+        <Neighborhoods />
+        <ContactForm />
+      </main>
+      <Footer />
+      <FloatingCTA />
+    </>
   );
 }
