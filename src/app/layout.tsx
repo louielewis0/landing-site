@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { company } from "@/lib/config";
+import ScrollInterceptor from "@/components/ScrollInterceptor";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -96,6 +97,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-white text-slate-900">
         {children}
+        <ScrollInterceptor />
       </body>
     </html>
   );
