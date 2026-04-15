@@ -3,7 +3,7 @@ import Hero from "@/components/Hero";
 import Stats from "@/components/Stats";
 import Testimonials from "@/components/Testimonials";
 import Services from "@/components/Services";
-import FeaturedListings from "@/components/FeaturedListings";
+import LeadCards from "@/components/LeadCards";
 import LeadMagnet from "@/components/LeadMagnet";
 import About from "@/components/About";
 import Neighborhoods from "@/components/Neighborhoods";
@@ -20,7 +20,7 @@ export default function Home() {
         <Stats />
         <Testimonials />
         <Services />
-        <FeaturedListings />
+        <LeadCards />
         <LeadMagnet />
         <About />
         <Neighborhoods />
