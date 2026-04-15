@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { company } from "@/lib/config";
 
 export default function Header() {
@@ -22,9 +23,23 @@ export default function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-2">
+        <a href="#top" className="flex items-center gap-3">
+          <div
+            className={`rounded-lg p-1 transition-colors ${
+              scrolled ? "bg-transparent" : "bg-white/95"
+            }`}
+          >
+            <Image
+              src="/logo.png"
+              alt={company.name}
+              width={44}
+              height={44}
+              priority
+              className="w-10 h-10 sm:w-11 sm:h-11 object-contain"
+            />
+          </div>
           <span
-            className={`font-bold text-lg tracking-tight ${
+            className={`hidden sm:inline font-bold text-base tracking-tight ${
               scrolled ? "text-slate-900" : "text-white"
             }`}
           >

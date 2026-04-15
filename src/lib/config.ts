@@ -1,88 +1,94 @@
 // ┌──────────────────────────────────────────────────────────────────┐
 // │  EDIT THIS FILE to update business info across the whole site.   │
-// │  Replace every "TODO:" value with your real info, then commit.   │
 // └──────────────────────────────────────────────────────────────────┘
 
 export const company = {
   name: "Real Estate Market Center",
   shortName: "REMC",
-  // TODO: set your primary city / service area
-  city: "Your City",
-  state: "ST",
+  city: "Troy",
+  state: "MI",
+  region: "Metro Detroit",
   tagline: "Find Your Dream Home or Sell for Top Dollar",
   description:
-    "The trusted real estate brokerage helping buyers and sellers win in today's market.",
+    "Metro Detroit's trusted real estate brokerage. Over 20 years of experience helping buyers, sellers, and investors across Troy and beyond.",
 
-  // TODO: replace with real contact info
-  phone: "(555) 123-4567",
-  phoneTel: "+15551234567", // E.164 format, used in tel: links
-  email: "hello@realestatemarketcenter.com",
-  address: "123 Main Street, Your City, ST 12345",
+  phone: "(248) 860-7273",
+  phoneTel: "+12488607273",
+  email: "sunduslewis@gmail.com",
+  address: "2032 E Square Lake Rd, Suite 400A, Troy, MI",
 
-  // TODO: replace with real Google Maps embed URL
-  // Get it from: maps.google.com → Share → Embed a map → copy the src URL
+  // Address-based embed (works without an API key). Swap anytime via maps.google.com → Share → Embed a map.
   googleMapsEmbed:
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.1!2d-122.4!3d37.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDQ1JzAwLjAiTiAxMjLCsDI0JzAwLjAiVw!5e0!3m2!1sen!2sus",
+    "https://maps.google.com/maps?q=2032%20E%20Square%20Lake%20Rd%20Suite%20400A%20Troy%20MI&t=&z=15&ie=UTF8&iwloc=&output=embed",
 
-  // TODO: replace with real social URLs (or empty string to hide)
   social: {
-    instagram: "https://instagram.com/",
-    facebook: "https://facebook.com/",
-    linkedin: "https://linkedin.com/",
+    facebook: "https://www.facebook.com/sunduslewis/",
+    instagram: "",
+    linkedin: "",
   },
 
-  // TODO: replace with real stats
   stats: [
-    { value: "500+", label: "Homes Sold" },
-    { value: "15+", label: "Years Experience" },
-    { value: "98%", label: "Client Satisfaction" },
-    { value: "$250M+", label: "In Closed Volume" },
+    { value: "20+", label: "Years Experience" },
+    { value: "$50M+", label: "In Real Estate Sold" },
+    // TODO: replace "200+" with the real figure if you have it.
+    { value: "200+", label: "Homes Closed" },
+    { value: "Metro Detroit", label: "Local Experts" },
   ],
 } as const;
 
-// TODO: swap with real testimonials. Keep 3-5 for the best visual balance.
 export const testimonials = [
   {
     quote:
-      "They sold our home in 6 days for over asking. The marketing, the photos, the negotiating — everything was handled. We've already recommended them to three friends.",
-    name: "Sarah & Michael J.",
-    role: "Sellers",
+      "Real Estate Market Center got our home sold in just 6 days for $18,000 over asking. The entire process was smooth, professional, and stress-free. If you're even thinking about selling, don't go with anyone else.",
+    name: "Recent Seller",
+    role: "Troy, MI",
   },
   {
     quote:
-      "As first-time buyers we had no idea what we were doing. They walked us through every step, caught issues in the inspection the other side missed, and got us into our dream home under budget.",
-    name: "David K.",
-    role: "Buyer",
+      "As a first-time buyer, I had no idea what I was doing. They walked me through every step, negotiated aggressively on my behalf, and got me a better deal than I expected. I wouldn't have gotten this home without them.",
+    name: "First-Time Buyer",
+    role: "Metro Detroit",
   },
   {
     quote:
-      "I've worked with three brokerages over the years. Real Estate Market Center is on another level — local knowledge, real negotiating skill, and they actually pick up the phone.",
-    name: "Linda R.",
-    role: "Investor",
+      "We had our house listed with another agent for months with no results. Real Estate Market Center came in with a completely different strategy and had it under contract within 2 weeks. That says everything.",
+    name: "Relisted Seller",
+    role: "Oakland County",
+  },
+  {
+    quote:
+      "I've worked with multiple agents, but this team actually understands the market. They helped me find a property with strong upside and negotiated terms that immediately put me ahead. This is who you want if you're serious about real estate.",
+    name: "Investor Client",
+    role: "Metro Detroit",
+  },
+  {
+    quote:
+      "What stood out most was how much they actually cared. They weren't just trying to close a deal — they made sure it was the right deal for us. That level of honesty is rare.",
+    name: "Happy Homeowner",
+    role: "Troy, MI",
   },
 ];
 
-// TODO: swap with real neighborhood copy (great for local SEO)
+// TODO: swap neighborhoods for the Metro Detroit areas you actually work (add/remove freely).
 export const neighborhoods = [
   {
-    name: "Downtown",
-    blurb: "Walkable core, new-construction condos, strong rental demand.",
+    name: "Troy",
+    blurb: "Top-rated schools, strong resale value, and a thriving local economy.",
   },
   {
-    name: "Westside",
-    blurb: "Top-rated schools, single-family homes, family-friendly parks.",
+    name: "Birmingham",
+    blurb: "Walkable downtown, upscale homes, Metro Detroit's premier lifestyle.",
   },
   {
-    name: "Lakeshore",
-    blurb: "Waterfront luxury, historic estates, long-term value appreciation.",
+    name: "Bloomfield Hills",
+    blurb: "Executive estates, top schools, and long-term value appreciation.",
   },
   {
-    name: "The Heights",
-    blurb: "Up-and-coming, craftsman bungalows, great first-home territory.",
+    name: "Rochester Hills",
+    blurb: "Family-friendly, parks, and excellent new-construction inventory.",
   },
 ];
 
-// Featured listings — replace with real photos + details, or wire to MLS later.
 export const featuredListings = [
   {
     id: "1",
@@ -91,7 +97,7 @@ export const featuredListings = [
     baths: 3,
     sqft: 2850,
     address: "1847 Oakwood Lane",
-    neighborhood: "Westside",
+    neighborhood: "Birmingham",
     image:
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
     status: "Just Listed",
@@ -103,7 +109,7 @@ export const featuredListings = [
     baths: 2,
     sqft: 1920,
     address: "412 Lakeshore Drive",
-    neighborhood: "Lakeshore",
+    neighborhood: "Bloomfield Hills",
     image:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80",
     status: "Open House Sat",
@@ -115,7 +121,7 @@ export const featuredListings = [
     baths: 4,
     sqft: 4100,
     address: "27 Hilltop Court",
-    neighborhood: "The Heights",
+    neighborhood: "Rochester Hills",
     image:
       "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&q=80",
     status: "New Price",
