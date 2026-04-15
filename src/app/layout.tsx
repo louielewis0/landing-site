@@ -45,6 +45,7 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   alternates: { canonical: "https://marketcenterrealty.com" },
+  icons: { icon: "/logo.png" },
 };
 
 const jsonLd = {
