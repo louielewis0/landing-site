@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const GOOGLE_REVIEW_URL =
-  "https://www.google.com/search?q=Real+Estate+Market+Center+Troy+MI";
+  "https://g.page/r/CedXUjtrh5QfEBM/review";
 
 export default function ReviewPage() {
   return (
