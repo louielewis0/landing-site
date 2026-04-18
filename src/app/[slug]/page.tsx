@@ -393,6 +393,119 @@ export default async function CityLandingPage({ params }: Props) {
           </div>
         </section>
 
+        {/* ── Troy-Exclusive: Schools Deep Dive ── */}
+        {page.schoolsDeepDive && (
+          <section className="py-20 bg-white">
+            <div className="max-w-4xl mx-auto px-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
+                  <GraduationCap className="w-5 h-5 text-blue-600" strokeWidth={1.75} />
+                </div>
+                <p className="text-xs font-semibold text-blue-600 uppercase tracking-[0.22em]">Schools</p>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-8">
+                {page.schoolsDeepDive.title}
+              </h2>
+              <div className="space-y-4 text-[17px] text-slate-700 leading-[1.75] mb-10">
+                {page.schoolsDeepDive.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+              </div>
+              <div className="space-y-3">
+                {page.schoolsDeepDive.schools.map((s) => (
+                  <div key={s.name} className="flex gap-4 p-5 rounded-2xl bg-gradient-to-br from-blue-50/80 to-white border border-blue-100/80 hover:border-blue-300/60 hover:shadow-md transition-all">
+                    <GraduationCap className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" strokeWidth={1.75} />
+                    <div>
+                      <div className="flex items-baseline gap-2 flex-wrap">
+                        <h3 className="font-bold text-slate-900">{s.name}</h3>
+                        <span className="text-xs text-blue-600 font-medium bg-blue-100 px-2 py-0.5 rounded-full">{s.grades}</span>
+                      </div>
+                      <p className="text-sm text-slate-600 mt-1">{s.note}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── Troy-Exclusive: Market Deep Dive ── */}
+        {page.marketDeepDive && (
+          <section className="relative py-20 bg-[#0A1429] overflow-hidden noise">
+            <div className="absolute inset-0 glow-orange opacity-20" />
+            <div className="absolute inset-0 grid-overlay" />
+            <div className="relative max-w-4xl mx-auto px-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-400/20 flex items-center justify-center">
+                  <BarChart3 className="w-5 h-5 text-orange-400" strokeWidth={1.75} />
+                </div>
+                <p className="text-xs font-semibold text-orange-400 uppercase tracking-[0.22em]">Deep Dive</p>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-8">
+                {page.marketDeepDive.title}
+              </h2>
+              <div className="space-y-5 text-[17px] text-white/75 leading-[1.75]">
+                {page.marketDeepDive.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── Troy-Exclusive: Lifestyle ── */}
+        {page.lifestyleHighlights && (
+          <section className="py-20 bg-slate-50">
+            <div className="max-w-6xl mx-auto px-6">
+              <p className="text-xs font-semibold text-orange-600 uppercase tracking-[0.22em] mb-3">Lifestyle</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-10">
+                {page.lifestyleHighlights.title}
+              </h2>
+              <div className="grid sm:grid-cols-2 gap-5">
+                {page.lifestyleHighlights.categories.map((cat) => (
+                  <div key={cat.name} className="rounded-2xl bg-white border border-slate-200/70 p-7">
+                    <h3 className="text-lg font-bold text-slate-900 mb-4">{cat.name}</h3>
+                    <ul className="space-y-2.5">
+                      {cat.items.map((item) => (
+                        <li key={item} className="flex gap-3 text-sm text-slate-600">
+                          <CheckCircle2 className="w-4 h-4 text-orange-500 flex-shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── Troy-Exclusive: Additional Testimonials ── */}
+        {page.additionalTestimonials && page.additionalTestimonials.length > 0 && (
+          <section className="py-20 bg-white">
+            <div className="max-w-6xl mx-auto px-6">
+              <p className="text-xs font-semibold text-orange-600 uppercase tracking-[0.22em] mb-3">More {page.city} reviews</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-10">
+                What {page.city} clients say
+              </h2>
+              <div className="grid md:grid-cols-2 gap-5">
+                {page.additionalTestimonials.map((t) => (
+                  <figure key={t.name} className="rounded-2xl bg-gradient-to-br from-white to-slate-50/50 border border-slate-200/60 p-8 hover:border-orange-300/60 hover:shadow-lg transition-all">
+                    <div className="flex gap-0.5 mb-5">
+                      {[1, 2, 3, 4, 5].map((i) => (
+                        <Star key={i} className="w-4 h-4 text-orange-500" fill="currentColor" strokeWidth={0} />
+                      ))}
+                    </div>
+                    <blockquote className="text-[15px] text-slate-800 leading-relaxed mb-5">
+                      &ldquo;{t.quote}&rdquo;
+                    </blockquote>
+                    <figcaption className="pt-4 border-t border-slate-100 text-sm">
+                      <div className="font-semibold text-slate-900">{t.name}</div>
+                      <div className="text-slate-500 text-[13px]">{t.context}</div>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* ── Related Cities (Internal Links) ── */}
         <section className="py-16 bg-white border-t border-slate-100">
           <div className="max-w-6xl mx-auto px-6">

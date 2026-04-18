@@ -33,6 +33,11 @@ export type CityPage = {
   marketTrend: string;
   ctaHeadline: string;
   ctaSubheadline: string;
+  /** Troy-exclusive expanded sections (optional for other cities) */
+  schoolsDeepDive?: { title: string; paragraphs: string[]; schools: { name: string; grades: string; note: string }[] };
+  lifestyleHighlights?: { title: string; categories: { name: string; items: string[] }[] };
+  additionalTestimonials?: { quote: string; name: string; context: string }[];
+  marketDeepDive?: { title: string; paragraphs: string[] };
 };
 
 export const cityPages: CityPage[] = [
@@ -55,15 +60,21 @@ export const cityPages: CityPage[] = [
     population: "87,000+",
     topSchoolDistrict: "Troy School District — rated among the top 10 in Michigan",
     neighborhoods: [
-      { name: "Northfield Hills", description: "Large colonial homes on generous lots, mature trees, walking distance to Boulan Park. Consistently one of Troy's strongest resale neighborhoods." },
-      { name: "Somerset Area", description: "Premium location near Somerset Collection and Big Beaver corridor. Mix of luxury condos and single-family homes with quick freeway access." },
-      { name: "South Troy", description: "More affordable entry point with solid ranch-style homes. Close to Royal Oak's dining scene while keeping Troy schools. First-time buyers love this area." },
-      { name: "Wattles-Livernois Corridor", description: "Established families, strong community feel, excellent access to Troy parks and recreation facilities." },
+      { name: "Northfield Hills", description: "Large colonial homes on generous lots with mature trees, walking distance to Boulan Park. Consistently one of Troy's strongest resale neighborhoods with homes ranging from $450K to $700K+." },
+      { name: "Somerset Area", description: "Premium location near Somerset Collection and the Big Beaver corridor. A mix of luxury condos and single-family homes with quick freeway access. Attracts professionals who want walkable retail and dining." },
+      { name: "South Troy / Royal Oak Border", description: "Troy's most affordable entry point with solid brick ranches from the 1960s-70s. You get Troy schools at near-Royal Oak prices — first-time buyers' favorite pocket. Median around $320K." },
+      { name: "Wattles-Livernois Corridor", description: "Established family area with strong community identity. Well-maintained colonials, proximity to Troy Community Center, and some of the city's best park access. Reliable resale market." },
+      { name: "Troy Historic Village Area", description: "Surrounding the Troy Historic Village off Livernois. Charming older homes with character, larger lots, and a sense of heritage rare in suburban Detroit. Quiet streets, walkable to the farmer's market." },
+      { name: "Square Lake / Crooks Corridor", description: "Central Troy with excellent access to I-75. Mix of updated ranches and newer townhome developments. Growing dining scene along Crooks Road. Our office is right here — we know this area block by block." },
+      { name: "Long Lake Estates", description: "Northern Troy's executive pocket. Larger lots, custom-built homes, and proximity to Bloomfield Hills without the Bloomfield price tag. Homes here range from $550K to $1M+." },
+      { name: "Emerald Lakes / Sylvan Glen", description: "Troy's newer planned communities with HOA-maintained common areas, ponds, and sidewalks. Modern builds from the 2000s-2010s. Popular with families relocating from out of state." },
     ],
     whyChooseUs: [
-      { title: "We're literally in Troy", description: "Our office is on Square Lake Road. We're not driving in from 30 miles away and pretending to know the market — we're here every day." },
-      { title: "Troy School District expertise", description: "We know which attendance boundaries matter, which schools have waitlists, and how school ratings directly impact your home's value." },
-      { title: "20+ years of Troy closings", description: "We've sold homes on nearly every street in this city. Our comp data goes deeper than what MLS shows." },
+      { title: "Headquartered in Troy — not visiting", description: "Our office is at 2032 E Square Lake Rd, Suite 400A. When we say we know Troy, we mean we eat lunch here, bank here, and close deals here every week. We're not an out-of-area agent with a GPS." },
+      { title: "Troy School District boundary experts", description: "School boundaries in Troy shift street by street. Buying on the wrong side of a road can mean a different school assignment. We verify every listing's exact attendance zone before you ever make an offer." },
+      { title: "20+ years of Troy-specific closings", description: "We've personally sold homes in Northfield Hills, South Troy, the Somerset area, Long Lake Estates, and nearly every subdivision in between. Our internal comp data on Troy goes deeper than what any MLS feed can show." },
+      { title: "Corporate relocation specialist", description: "Troy's Fortune 500 employers — Magna, Meritor, Kelly Services, Altair — generate constant relocation buyers. We understand their timelines, their corporate relo packages, and what they're looking for in a home. If you're selling, we know how to reach them." },
+      { title: "Troy condo + townhome expertise", description: "The condo market near Somerset Collection and along Big Beaver operates on different rules than single-family. HOA financials, special assessments, rental caps — we audit everything before our buyers commit." },
     ],
     testimonial: {
       quote: "They knew Troy better than we did and we've lived here for 15 years. Sold our home in 6 days for $18K over asking. The staging advice alone was worth it.",
@@ -75,6 +86,10 @@ export const cityPages: CityPage[] = [
       { question: "How long does it take to sell a home in Troy?", answer: "The average days on market in Troy is currently around 18 days. Homes that are priced correctly and properly staged tend to sell even faster — we've had several listings go under contract within the first weekend." },
       { question: "Is Troy a good area to buy a home?", answer: "Troy consistently ranks as one of the best cities in Michigan for families, safety, and property value appreciation. The Troy School District is among the state's top 10, major employers are nearby, and the city's infrastructure is well-maintained. It's one of the strongest long-term real estate investments in Metro Detroit." },
       { question: "Do I need a real estate agent to buy a home in Troy?", answer: "Technically no, but Troy's market is competitive enough that unrepresented buyers frequently lose out on homes. An experienced local agent gives you access to pre-market listings, negotiation leverage, and insight into which homes are worth the asking price — and which aren't." },
+      { question: "What are the best neighborhoods in Troy for families?", answer: "Northfield Hills, the Wattles-Livernois corridor, and Emerald Lakes consistently rank highest for families. All three offer proximity to top-rated Troy schools, parks, and family-oriented community events. Northfield Hills has the most established feel with larger lots, while Emerald Lakes offers more modern construction with sidewalks and planned amenities." },
+      { question: "How much does it cost to live in Troy compared to Birmingham or Rochester Hills?", answer: "Troy sits in the middle — more affordable than Birmingham (median $625K) but slightly above Rochester Hills ($405K). Troy's median of $435K gets you significantly more home than Birmingham dollar-for-dollar, with comparable school quality. Many families who are priced out of Birmingham find Troy offers the same lifestyle advantages at a lower entry point." },
+      { question: "What schools will my children attend if I buy in Troy?", answer: "Most of Troy is served by the Troy School District, which includes Troy High School and Athens High School — both highly rated. However, small pockets of Troy fall within the Avondale, Birmingham, or Rochester school districts depending on the exact street address. We verify school assignment on every listing before showing it." },
+      { question: "Are there investment opportunities in Troy?", answer: "Yes — Troy's corporate corridor creates consistent rental demand from professionals on 1-3 year assignments. Condos near Somerset Collection and the I-75 corridor are particularly strong for rental investors, with cap rates competitive for Oakland County. Single-family rentals in South Troy also perform well due to lower entry prices relative to rents." },
     ],
     localInsight: "Troy's Big Beaver Road corridor is one of the highest-value commercial strips in Michigan, and its proximity drives residential demand in surrounding neighborhoods. Homes within the Troy School District boundary command a measurable premium over identical homes just across the line in neighboring cities.",
     buyerHeadline: "Why Buyers Keep Choosing Troy Over Every Other Oakland County Suburb",
@@ -102,6 +117,83 @@ export const cityPages: CityPage[] = [
     marketTrend: "Troy's market is tightening as spring inventory remains below historical averages. The north-side neighborhoods around Northfield Hills and the Wattles corridor are seeing the most aggressive bidding, with multiple-offer situations becoming routine on homes under $500K. Meanwhile, the condo market near Somerset Collection has cooled slightly as higher interest rates push some buyers toward single-family homes where they see better long-term value. Expect this two-speed dynamic to continue through summer.",
     ctaHeadline: "Your Troy Home Search Starts at Square Lake Road",
     ctaSubheadline: "Talk to an agent who closes deals in Troy every month — not one who drives in from Lansing with a GPS and a prayer.",
+    schoolsDeepDive: {
+      title: "Troy Schools: What Every Buyer Needs to Know",
+      paragraphs: [
+        "The Troy School District is consistently ranked among Michigan's top 10 and is the primary reason many families choose Troy over neighboring cities. With two nationally recognized high schools, award-winning STEM and arts programs, and a graduation rate above 95%, Troy schools add measurable value to every home within district boundaries.",
+        "But here's what most out-of-area agents don't tell you: not every home in Troy is in the Troy School District. Small pockets along the southern, eastern, and western borders fall into Avondale, Birmingham, or Rochester districts. The difference in school assignment can mean a $30,000-$50,000 difference in home value for identical properties one block apart. We verify the exact attendance zone for every listing we show.",
+      ],
+      schools: [
+        { name: "Troy High School", grades: "9-12", note: "Ranked top 20 in Michigan. Strong AP and IB programs. Over 30 varsity sports. Nationally recognized STEM curriculum." },
+        { name: "Athens High School", grades: "9-12", note: "Blue Ribbon School. Known for performing arts, competitive robotics, and a diverse student body. Excellent college prep track record." },
+        { name: "Boulan Park Middle School", grades: "6-8", note: "Feeds into Troy High. Consistently high test scores. Popular neighborhood (Northfield Hills) surrounds it." },
+        { name: "Smith Middle School", grades: "6-8", note: "Feeds into Athens High. Strong academic and extracurricular offerings. Located in central Troy." },
+        { name: "Troy elementary schools (14 total)", grades: "K-5", note: "All highly rated. Enrollment is by attendance boundary, which varies by street address. International Academy elementary magnet also available." },
+      ],
+    },
+    lifestyleHighlights: {
+      title: "Living in Troy — Beyond the Home",
+      categories: [
+        {
+          name: "Dining & Food",
+          items: [
+            "Mon Jin Lau — Troy institution for Chinese-American cuisine since 1984",
+            "Ichiban Sushi — consistently rated best sushi in Oakland County",
+            "The Capital Grille at Somerset — upscale dining without leaving Troy",
+            "Rochester Road corridor — 50+ restaurants spanning Vietnamese, Korean, Indian, and Mediterranean cuisines",
+            "Troy Farmers Market — seasonal outdoor market near the Historic Village",
+          ],
+        },
+        {
+          name: "Parks & Recreation",
+          items: [
+            "Boulan Park — 58 acres with trails, ball fields, and the popular splash pad",
+            "Stage Nature Center — 100-acre preserve with boardwalks and educational programs",
+            "Troy Community Center — indoor pool, gym, climbing wall, and event space",
+            "Sylvan Glen Lake Park — fishing, disc golf, and winter cross-country skiing",
+            "Firefighters Park — the hidden gem with a playground and picnic pavilions off Coolidge",
+          ],
+        },
+        {
+          name: "Shopping & Convenience",
+          items: [
+            "Somerset Collection — Nordstrom, Neiman Marcus, Louis Vuitton, Tiffany, and 180+ stores",
+            "Oakland Mall — mid-range retail with ongoing redevelopment adding new tenants",
+            "Big Beaver Road corridor — the commercial spine of Troy with banks, professional offices, and retail",
+            "Troy's Asian grocery corridor — H Mart, 168 Asian Mart, and specialty markets along Rochester Road",
+          ],
+        },
+        {
+          name: "Commute & Transportation",
+          items: [
+            "I-75 access at Big Beaver, Rochester Road, and Crooks — downtown Detroit in 25 minutes",
+            "I-696 interchange — westbound to Southfield/Farmington Hills in 15 minutes",
+            "M-59 via Rochester Road — access to north Oakland County and Macomb",
+            "SMART bus routes along Big Beaver and Rochester Road for transit access",
+          ],
+        },
+      ],
+    },
+    additionalTestimonials: [
+      {
+        quote: "We relocated from Chicago for a position at Magna. They found us a home in Northfield Hills in 10 days — within our relo package, in the Troy school district, and with a shorter commute than we had in Chicago. Incredible.",
+        name: "Corporate Relocation Buyer",
+        context: "Northfield Hills, Troy",
+      },
+      {
+        quote: "We thought about selling FSBO to save on commission. They showed us the comps and explained what a real marketing plan looks like. We ended up netting $23K more than the Zestimate after their staging and pricing strategy. Commission paid for itself five times over.",
+        name: "Seller",
+        context: "Emerald Lakes, Troy",
+      },
+    ],
+    marketDeepDive: {
+      title: "Troy Real Estate Market: A Closer Look",
+      paragraphs: [
+        "Troy's housing stock is diverse — from 1960s brick ranches in South Troy to custom-built executive homes north of Long Lake Road, and everything in between. This range creates opportunity at every price point, but it also means accurate pricing requires true local expertise. A comp from Northfield Hills has zero relevance to a Somerset condo, even though they share a zip code.",
+        "The corporate employment base in Troy creates a unique demand pattern. Unlike cities that depend on organic population growth, Troy sees a steady influx of relocation buyers from national and international companies. This demand floor means that even in softer markets, Troy's home values remain more stable than surrounding cities. In the current market, homes priced under $450K are seeing the most competition, with multiple offers common on well-presented properties.",
+        "One trend worth watching: Troy's condo market near Somerset Collection is undergoing a shift. As interest rates keep some buyers in the condo price range longer, competition has increased for 2-bedroom units under $250K. Meanwhile, luxury condos above $400K have softened slightly. For investors, the sweet spot is currently 2BR units with in-unit laundry near Big Beaver — rental demand from young professionals remains strong and vacancies are under 3%.",
+      ],
+    },
   },
   {
     slug: "rochester-hills-real-estate-agent",
