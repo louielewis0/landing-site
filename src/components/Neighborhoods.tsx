@@ -6,14 +6,11 @@ import { ArrowRight } from "lucide-react";
 const areas = [
   "Troy",
   "Rochester Hills",
+  "Birmingham",
   "Bloomfield Hills",
   "West Bloomfield",
-  "Birmingham",
   "Sterling Heights",
-  "Royal Oak",
-  "Detroit",
   "Warren",
-  "Farmington Hills",
 ];
 
 function getAreaHref(cityName: string): string {

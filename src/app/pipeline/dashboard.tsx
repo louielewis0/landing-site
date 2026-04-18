@@ -43,11 +43,9 @@ const AREAS = [
   "Rochester Hills",
   "Birmingham",
   "Bloomfield Hills",
+  "West Bloomfield",
   "Sterling Heights",
-  "Royal Oak",
-  "Detroit",
   "Warren",
-  "Farmington Hills",
 ];
 
 export default function PipelineDashboard() {

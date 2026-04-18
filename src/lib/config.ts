@@ -41,11 +41,9 @@ export const cities = [
   { name: "Rochester Hills", slug: "rochester-hills" },
   { name: "Birmingham", slug: "birmingham" },
   { name: "Bloomfield Hills", slug: "bloomfield-hills" },
+  { name: "West Bloomfield", slug: "west-bloomfield" },
   { name: "Sterling Heights", slug: "sterling-heights" },
-  { name: "Royal Oak", slug: "royal-oak" },
-  { name: "Detroit", slug: "detroit" },
   { name: "Warren", slug: "warren" },
-  { name: "Farmington Hills", slug: "farmington-hills" },
 ];
 
 export const services = [

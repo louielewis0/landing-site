@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: `%s | ${company.name}`,
   },
   description:
-    "Metro Detroit real estate experts serving Troy, Rochester Hills, Birmingham, Bloomfield Hills, Sterling Heights, Royal Oak, Detroit, and Warren. 20+ years experience, $100M+ in closed sales. Get a free home valuation today.",
+    "Metro Detroit real estate experts serving Troy, Rochester Hills, Birmingham, Bloomfield Hills, West Bloomfield, Sterling Heights, and Warren. 20+ years experience, $100M+ in closed sales. Get a free home valuation today.",
   keywords: [
     "homes for sale in Troy MI",
     "sell my house fast Metro Detroit",
@@ -25,7 +25,8 @@ export const metadata: Metadata = {
     "Metro Detroit realtor",
     "Troy Michigan real estate",
     "Sterling Heights homes",
-    "Detroit real estate agent",
+    "Warren MI real estate agent",
+    "West Bloomfield homes for sale",
     "Michigan luxury homes",
     "first-time home buyer Michigan",
     "investment properties Michigan",
@@ -70,11 +71,9 @@ const jsonLd = {
     "Rochester Hills, MI",
     "Birmingham, MI",
     "Bloomfield Hills, MI",
+    "West Bloomfield, MI",
     "Sterling Heights, MI",
-    "Royal Oak, MI",
-    "Detroit, MI",
     "Warren, MI",
-    "Farmington Hills, MI",
   ],
   priceRange: "$$-$$$$",
   aggregateRating: {
