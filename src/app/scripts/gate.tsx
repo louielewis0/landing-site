@@ -21,15 +21,16 @@ export default function ScriptsGate() {
   if (unlocked) return <ScriptsDashboard />;
 
   return (
-    <div className="min-h-screen bg-[#0A1429] flex items-center justify-center px-6">
-      <form onSubmit={handleSubmit} className="w-full max-w-sm text-center">
-        <div className="w-16 h-16 rounded-2xl bg-orange-500/10 border border-orange-400/20 flex items-center justify-center mx-auto mb-8">
-          <svg className="w-8 h-8 text-orange-400" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+    <div className="min-h-screen atmosphere grain vignette flex items-center justify-center px-6 relative overflow-hidden">
+      <form onSubmit={handleSubmit} className="relative w-full max-w-sm text-center">
+        <div className="w-16 h-16 rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/5 flex items-center justify-center mx-auto mb-8">
+          <svg className="w-7 h-7 text-[var(--gold-soft)]" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
           </svg>
         </div>
-        <h1 className="text-2xl font-bold text-white tracking-tight mb-2">Call Playbook</h1>
-        <p className="text-sm text-white/50 mb-8">Internal scripts. Enter passcode.</p>
+        <p className="eyebrow mb-3">Internal · Private</p>
+        <h1 className="font-display text-4xl font-light text-bone tracking-tight mb-3">Call Playbook</h1>
+        <p className="text-[14px] text-bone/45 mb-10 font-light">Enter passcode to continue.</p>
         <input
           type="password"
           inputMode="numeric"
@@ -37,11 +38,16 @@ export default function ScriptsGate() {
           value={code}
           onChange={(e) => { setCode(e.target.value); setError(false); }}
           placeholder="Enter passcode"
-          className={`w-full px-5 py-4 rounded-xl bg-white/5 border text-center text-white text-2xl tracking-[0.5em] placeholder-white/30 placeholder:text-base placeholder:tracking-normal focus:outline-none transition-all ${error ? "border-red-500" : "border-white/15 focus:border-orange-400"}`}
+          className={`w-full px-5 py-4 rounded-xl bg-bone/[0.04] backdrop-blur-xl border text-center text-bone text-2xl tracking-[0.5em] placeholder-bone/30 placeholder:text-base placeholder:tracking-normal focus:outline-none transition-all duration-500 ${
+            error ? "border-rust" : "border-bone/15 focus:border-[var(--gold)]/60 focus:bg-bone/[0.07]"
+          }`}
           autoFocus
         />
-        {error && <p className="text-sm text-red-400 mt-3">Incorrect passcode.</p>}
-        <button type="submit" className="mt-6 w-full px-6 py-4 rounded-xl bg-orange-500 hover:bg-orange-400 text-white font-semibold shadow-[0_12px_40px_-12px_rgba(249,115,22,0.6)] transition-all">
+        {error && <p className="text-[13px] text-rust mt-3">Incorrect passcode.</p>}
+        <button
+          type="submit"
+          className="mt-6 w-full px-6 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
+        >
           Unlock
         </button>
       </form>
