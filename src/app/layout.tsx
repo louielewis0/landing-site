@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Cormorant_Garamond } from "next/font/google";
 import { company } from "@/lib/config";
 import ScrollInterceptor from "@/components/ScrollInterceptor";
 import "./globals.css";
@@ -7,6 +7,12 @@ import "./globals.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+const cormorant = Cormorant_Garamond({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -87,14 +93,17 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${cormorant.variable} h-full antialiased`}
+    >
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-white text-slate-900">
+      <body className="min-h-full flex flex-col bg-ink text-bone">
         {children}
         <ScrollInterceptor />
       </body>

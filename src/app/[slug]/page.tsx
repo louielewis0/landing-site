@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/FloatingCTA";
+import Reveal from "@/components/motion/Reveal";
 import { company } from "@/lib/config";
 import { getCityPage, getAllCitySlugs, cityPages } from "@/lib/city-pages";
 import {
@@ -108,63 +109,64 @@ export default async function CityLandingPage({ params }: Props) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
         {/* ── Hero ── */}
-        <section className="relative pt-32 pb-24 bg-[#0A1429] overflow-hidden noise">
-          <div className="absolute inset-0 glow-orange opacity-40" />
-          <div className="absolute inset-0 grid-overlay" />
+        <section className="relative pt-36 pb-28 atmosphere grain vignette overflow-hidden">
           <div className="relative max-w-6xl mx-auto px-6">
-            {/* Breadcrumb */}
-            <nav className="flex items-center gap-1.5 text-xs text-white/40 mb-8">
-              <a href="/" className="hover:text-white/70 transition-colors">Home</a>
+            <nav className="flex items-center gap-2 text-[11px] tracking-[0.18em] uppercase text-bone/35 mb-10">
+              <a href="/" className="hover:text-bone/70 transition-colors">Home</a>
               <ChevronRight className="w-3 h-3" />
-              <span className="text-white/70">{page.city} Real Estate</span>
+              <span className="text-bone/65">{page.city} Real Estate</span>
             </nav>
 
             <div className="max-w-4xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-white/70 mb-7">
-                <MapPin className="w-3.5 h-3.5 text-orange-400" />
-                {page.city}, {page.state} — {page.county}
+              <div className="fade-up flex items-center gap-3 mb-7">
+                <span className="block w-10 h-px bg-[var(--gold)] opacity-60" />
+                <span className="eyebrow">
+                  <MapPin className="w-3 h-3 inline mr-2 -mt-0.5 text-[var(--gold-soft)]" />
+                  {page.city}, {page.state} · {page.county}
+                </span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-[3.75rem] font-bold text-white tracking-[-0.03em] leading-[1.08] mb-6">
-                {page.headline}
+              <h1 className="font-display text-5xl sm:text-6xl lg:text-[5rem] font-light text-bone tracking-tight leading-[1.04] mb-7">
+                <span className="block overflow-hidden">
+                  <span className="block mask-wipe">{page.headline}</span>
+                </span>
               </h1>
 
-              <p className="text-lg sm:text-xl text-white/60 max-w-2xl leading-relaxed mb-10">
+              <p className="fade-up delay-2 text-[17px] sm:text-lg text-bone/60 max-w-2xl leading-[1.7] mb-10 font-light">
                 {page.subheadline}
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 mb-12">
+              <div className="fade-up delay-3 flex flex-col sm:flex-row gap-3 mb-14">
                 <a
                   href="/#lead-magnet"
-                  className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-orange-500 hover:bg-orange-400 text-white font-semibold shadow-[0_20px_50px_-12px_rgba(249,115,22,0.65)] hover:-translate-y-0.5 transition-all duration-300"
+                  className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
                 >
-                  Get Free Home Valuation
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  Request your valuation
+                  <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
                 </a>
                 <a
                   href={`tel:${company.phoneTel}`}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white text-slate-900 hover:bg-white/90 font-bold transition-all"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-bone/25 text-bone hover:border-bone/60 hover:bg-bone/5 font-medium text-[14px] tracking-wide transition-all duration-500"
                 >
-                  <Phone className="w-4 h-4" />
+                  <Phone className="w-4 h-4 text-[var(--gold-soft)]" />
                   {company.phone}
                 </a>
               </div>
 
-              {/* Inline trust */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {[
-                  { v: "20+", l: "Years Experience", Icon: Clock },
-                  { v: "$100M+", l: "Closed Sales", Icon: DollarSign },
-                  { v: "500+", l: "Homes Sold", Icon: Home },
+                  { v: "20+", l: "Years experience", Icon: Clock },
+                  { v: "$100M+", l: "Closed sales", Icon: DollarSign },
+                  { v: "500+", l: "Homes sold", Icon: Home },
                   { v: page.city, l: "Specialist", Icon: MapPin },
-                ].map((b) => (
-                  <div key={b.l} className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10">
-                    <b.Icon className="w-4 h-4 text-orange-400 flex-shrink-0" strokeWidth={1.75} />
+                ].map((b, i) => (
+                  <Reveal key={b.l} delay={((i % 4) + 1) as 1 | 2 | 3 | 4} className="flex items-center gap-3 px-4 py-3.5 rounded-xl bg-bone/[0.03] border border-bone/10">
+                    <b.Icon className="w-4 h-4 text-[var(--gold-soft)] flex-shrink-0" strokeWidth={1.5} />
                     <div>
-                      <div className="text-sm font-bold text-white leading-none">{b.v}</div>
-                      <div className="text-[10px] text-white/50 mt-0.5">{b.l}</div>
+                      <div className="font-display text-[15px] font-light text-bone leading-none">{b.v}</div>
+                      <div className="text-[10px] text-bone/45 mt-1 uppercase tracking-[0.18em]">{b.l}</div>
                     </div>
-                  </div>
+                  </Reveal>
                 ))}
               </div>
             </div>
@@ -172,392 +174,521 @@ export default async function CityLandingPage({ params }: Props) {
         </section>
 
         {/* ── Market Stats Bar ── */}
-        <section className="bg-white border-b border-slate-100">
-          <div className="max-w-6xl mx-auto px-6 py-10">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+        <section className="bg-ink-2 border-y border-bone/10 relative overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div className="relative max-w-6xl mx-auto px-6 py-12">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-6">
               {[
                 { Icon: DollarSign, value: page.medianPrice, label: "Median Price" },
                 { Icon: TrendingUp, value: page.priceChange, label: "Price Trend" },
                 { Icon: Clock, value: page.avgDaysOnMarket, label: "Days on Market" },
                 { Icon: Users, value: page.population, label: "Population" },
                 { Icon: GraduationCap, value: page.topSchoolDistrict.split("—")[0].trim(), label: "Schools" },
-              ].map((s) => (
-                <div key={s.label}>
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <s.Icon className="w-4 h-4 text-orange-500" strokeWidth={1.75} />
-                    <span className="text-[11px] text-slate-500 uppercase tracking-wider font-medium">{s.label}</span>
+              ].map((s, i) => (
+                <Reveal key={s.label} delay={((i % 4) + 1) as 1 | 2 | 3 | 4}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <s.Icon className="w-3.5 h-3.5 text-[var(--gold-soft)]" strokeWidth={1.5} />
+                    <span className="text-[10px] text-bone/45 uppercase tracking-[0.22em]">{s.label}</span>
                   </div>
-                  <div className="text-xl font-bold text-slate-900 tracking-tight">{s.value}</div>
-                </div>
+                  <div className="font-display text-2xl font-light text-bone tracking-tight">{s.value}</div>
+                </Reveal>
               ))}
             </div>
           </div>
         </section>
 
         {/* ── Intro ── */}
-        <section className="py-20 bg-white">
-          <div className="max-w-3xl mx-auto px-6">
-            <div className="space-y-5 text-[17px] text-slate-700 leading-[1.8]">
+        <section className="py-24 bg-ink relative overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div className="relative max-w-3xl mx-auto px-6">
+            <div className="space-y-6 text-[17px] text-bone/70 leading-[1.85] font-light">
               {page.introParagraphs.map((p, i) => (
-                <p key={i}>{p}</p>
+                <Reveal key={i} delay={((i % 3) + 1) as 1 | 2 | 3}>
+                  <p>{p}</p>
+                </Reveal>
               ))}
             </div>
           </div>
         </section>
 
         {/* ── For Buyers ── */}
-        <section className="py-20 bg-slate-50">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-14 items-start">
+        <section className="py-28 atmosphere relative overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div className="relative max-w-6xl mx-auto px-6">
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-200 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-5">
-                  <Key className="w-3.5 h-3.5" />
-                  For Buyers
-                </div>
-                <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-6 leading-tight">
-                  {page.buyerHeadline}
+                <Reveal>
+                  <p className="eyebrow mb-5">
+                    <Key className="w-3 h-3 inline mr-2 -mt-0.5 text-[var(--gold-soft)]" />
+                    For Buyers
+                  </p>
+                </Reveal>
+                <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-8">
+                  <span className="block overflow-hidden">
+                    <Reveal variant="mask" className="block">{page.buyerHeadline}</Reveal>
+                  </span>
                 </h2>
-                <div className="space-y-4 text-slate-700 text-[16px] leading-[1.7]">
+                <div className="space-y-5 text-bone/65 text-[16px] leading-[1.75] font-light">
                   {page.buyerParagraphs.map((p, i) => (
-                    <p key={i}>{p}</p>
+                    <Reveal key={i} delay={((i % 3) + 1) as 1 | 2 | 3}>
+                      <p>{p}</p>
+                    </Reveal>
                   ))}
                 </div>
               </div>
-              <div className="space-y-3 lg:mt-16">
-                {page.buyerPoints.map((point) => (
-                  <div key={point} className="flex gap-3 p-4 rounded-xl bg-white border border-slate-200/70 hover:border-blue-300 hover:shadow-md transition-all">
-                    <CheckCircle2 className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-[15px] text-slate-700">{point}</span>
-                  </div>
+              <div className="space-y-3 lg:mt-20">
+                {page.buyerPoints.map((point, i) => (
+                  <Reveal
+                    key={point}
+                    delay={((i % 3) + 1) as 1 | 2 | 3}
+                    className="flex gap-3 p-4 rounded-xl bg-bone/[0.03] border border-bone/10 hover:border-[var(--gold)]/30 transition-all duration-500"
+                  >
+                    <CheckCircle2 className="w-5 h-5 text-[var(--gold-soft)] flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+                    <span className="text-[14.5px] text-bone/75 font-light">{point}</span>
+                  </Reveal>
                 ))}
-                <a
-                  href="/#contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm transition-colors mt-4"
-                >
-                  Start Your Home Search <ArrowRight className="w-4 h-4" />
-                </a>
+                <Reveal delay={3}>
+                  <a
+                    href="/#contact"
+                    className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[13px] tracking-wide transition-all duration-500 mt-6"
+                  >
+                    Start your home search <ArrowRight className="w-4 h-4" />
+                  </a>
+                </Reveal>
               </div>
             </div>
           </div>
         </section>
 
         {/* ── For Sellers ── */}
-        <section className="py-20 bg-white">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-14 items-start">
+        <section className="py-28 bg-ink relative overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div className="relative max-w-6xl mx-auto px-6">
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div className="lg:order-2">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-200 text-emerald-700 text-xs font-semibold uppercase tracking-wider mb-5">
-                  <TrendingUp className="w-3.5 h-3.5" />
-                  For Sellers
-                </div>
-                <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-6 leading-tight">
-                  {page.sellerHeadline}
+                <Reveal>
+                  <p className="eyebrow mb-5">
+                    <TrendingUp className="w-3 h-3 inline mr-2 -mt-0.5 text-[var(--gold-soft)]" />
+                    For Sellers
+                  </p>
+                </Reveal>
+                <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-8">
+                  <span className="block overflow-hidden">
+                    <Reveal variant="mask" className="block">{page.sellerHeadline}</Reveal>
+                  </span>
                 </h2>
-                <div className="space-y-4 text-slate-700 text-[16px] leading-[1.7]">
+                <div className="space-y-5 text-bone/65 text-[16px] leading-[1.75] font-light">
                   {page.sellerParagraphs.map((p, i) => (
-                    <p key={i}>{p}</p>
+                    <Reveal key={i} delay={((i % 3) + 1) as 1 | 2 | 3}>
+                      <p>{p}</p>
+                    </Reveal>
                   ))}
                 </div>
               </div>
-              <div className="space-y-3 lg:order-1 lg:mt-16">
-                {page.sellerPoints.map((point) => (
-                  <div key={point} className="flex gap-3 p-4 rounded-xl bg-white border border-slate-200/70 hover:border-emerald-300 hover:shadow-md transition-all">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-[15px] text-slate-700">{point}</span>
-                  </div>
+              <div className="space-y-3 lg:order-1 lg:mt-20">
+                {page.sellerPoints.map((point, i) => (
+                  <Reveal
+                    key={point}
+                    delay={((i % 3) + 1) as 1 | 2 | 3}
+                    className="flex gap-3 p-4 rounded-xl bg-bone/[0.03] border border-bone/10 hover:border-[var(--gold)]/30 transition-all duration-500"
+                  >
+                    <CheckCircle2 className="w-5 h-5 text-[var(--gold-soft)] flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+                    <span className="text-[14.5px] text-bone/75 font-light">{point}</span>
+                  </Reveal>
                 ))}
-                <a
-                  href="/#lead-magnet"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-orange-500 hover:bg-orange-400 text-white font-semibold text-sm transition-colors mt-4"
-                >
-                  Get Free Home Valuation <ArrowRight className="w-4 h-4" />
-                </a>
+                <Reveal delay={3}>
+                  <a
+                    href="/#lead-magnet"
+                    className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[13px] tracking-wide transition-all duration-500 mt-6"
+                  >
+                    Request your valuation <ArrowRight className="w-4 h-4" />
+                  </a>
+                </Reveal>
               </div>
             </div>
           </div>
         </section>
 
         {/* ── Market Trend ── */}
-        <section className="py-16 bg-slate-50 border-y border-slate-100">
-          <div className="max-w-3xl mx-auto px-6">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-200 flex items-center justify-center flex-shrink-0">
-                <BarChart3 className="w-6 h-6 text-orange-600" strokeWidth={1.75} />
+        <section className="py-20 bg-ink-2 border-y border-bone/10 relative overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div className="relative max-w-3xl mx-auto px-6">
+            <Reveal className="flex items-start gap-5">
+              <div className="w-12 h-12 rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/5 flex items-center justify-center flex-shrink-0">
+                <BarChart3 className="w-5 h-5 text-[var(--gold-soft)]" strokeWidth={1.5} />
               </div>
               <div>
-                <p className="text-xs font-semibold text-orange-600 uppercase tracking-[0.2em] mb-2">
-                  {page.city} Market Outlook
-                </p>
-                <p className="text-[17px] text-slate-800 leading-[1.75]">{page.marketTrend}</p>
+                <p className="eyebrow mb-3">{page.city} Market Outlook</p>
+                <p className="text-[17px] text-bone/75 leading-[1.8] font-light">{page.marketTrend}</p>
               </div>
-            </div>
+            </Reveal>
           </div>
         </section>
 
         {/* ── Neighborhoods ── */}
-        <section className="py-20 bg-white">
-          <div className="max-w-6xl mx-auto px-6">
-            <p className="text-xs font-semibold text-orange-600 uppercase tracking-[0.22em] mb-3">Neighborhoods</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-10">
-              Where to buy in {page.city}
+        <section className="py-28 bg-ink relative overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div className="relative max-w-6xl mx-auto px-6">
+            <Reveal>
+              <p className="eyebrow mb-5">Neighborhoods</p>
+            </Reveal>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-12">
+              <span className="block overflow-hidden">
+                <Reveal variant="mask" className="block">Where to buy in {page.city}.</Reveal>
+              </span>
             </h2>
             <div className="grid sm:grid-cols-2 gap-5">
-              {page.neighborhoods.map((n) => (
-                <div
+              {page.neighborhoods.map((n, i) => (
+                <Reveal
                   key={n.name}
-                  className="group rounded-2xl bg-gradient-to-br from-white to-slate-50/50 border border-slate-200/70 p-7 hover:border-orange-300/60 hover:shadow-[0_20px_50px_-20px_rgba(15,23,42,0.12)] hover:-translate-y-0.5 transition-all duration-300"
+                  delay={((i % 3) + 1) as 1 | 2 | 3}
+                  className="group rounded-2xl border border-bone/10 bg-gradient-to-b from-bone/[0.03] to-transparent p-8 hover:border-[var(--gold)]/40 hover:from-bone/[0.06] transition-all duration-700 tilt"
                 >
-                  <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-orange-600 transition-colors">{n.name}</h3>
-                  <p className="text-[15px] text-slate-600 leading-relaxed">{n.description}</p>
-                </div>
+                  <h3 className="font-display text-[1.5rem] font-light text-bone mb-3 group-hover:text-[var(--gold-soft)] transition-colors duration-500">{n.name}</h3>
+                  <p className="text-[14.5px] text-bone/60 leading-[1.7] font-light">{n.description}</p>
+                </Reveal>
               ))}
             </div>
           </div>
         </section>
 
         {/* ── Why Choose Us ── */}
-        <section className="py-20 bg-slate-50">
-          <div className="max-w-4xl mx-auto px-6">
-            <p className="text-xs font-semibold text-orange-600 uppercase tracking-[0.22em] mb-3">Why us</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-10">
-              Why {page.city} clients choose us
+        <section className="py-28 atmosphere relative overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div className="relative max-w-4xl mx-auto px-6">
+            <Reveal>
+              <p className="eyebrow mb-5">Why us</p>
+            </Reveal>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-12">
+              <span className="block overflow-hidden">
+                <Reveal variant="mask" className="block">Why {page.city} clients</Reveal>
+              </span>
+              <span className="block overflow-hidden">
+                <Reveal variant="mask" delay={1} className="block italic gold-text">choose us.</Reveal>
+              </span>
             </h2>
             <div className="space-y-4">
-              {page.whyChooseUs.map((item) => (
-                <div key={item.title} className="flex gap-4 p-6 rounded-2xl bg-white border border-slate-200/70 hover:border-orange-300/60 hover:shadow-md transition-all">
-                  <CheckCircle2 className="w-6 h-6 text-orange-500 flex-shrink-0 mt-0.5" />
+              {page.whyChooseUs.map((item, i) => (
+                <Reveal
+                  key={item.title}
+                  delay={((i % 3) + 1) as 1 | 2 | 3}
+                  className="flex gap-5 p-7 rounded-2xl bg-bone/[0.04] border border-bone/10 hover:border-[var(--gold)]/35 transition-all duration-700"
+                >
+                  <CheckCircle2 className="w-5 h-5 text-[var(--gold-soft)] flex-shrink-0 mt-1" strokeWidth={1.5} />
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900 mb-1">{item.title}</h3>
-                    <p className="text-slate-600 leading-relaxed">{item.description}</p>
+                    <h3 className="font-display text-[1.4rem] font-light text-bone mb-2 leading-tight">{item.title}</h3>
+                    <p className="text-bone/65 leading-relaxed text-[14.5px] font-light">{item.description}</p>
                   </div>
-                </div>
+                </Reveal>
               ))}
             </div>
           </div>
         </section>
 
         {/* ── Testimonial ── */}
-        <section className="relative py-24 bg-[#0A1429] overflow-hidden noise">
-          <div className="absolute inset-0 glow-orange opacity-25" />
-          <div className="absolute inset-0 grid-overlay" />
-          <div className="relative max-w-3xl mx-auto px-6 text-center text-white">
-            <div className="flex justify-center gap-1 mb-6">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <Star key={i} className="w-7 h-7 text-orange-400" fill="currentColor" strokeWidth={0} />
-              ))}
-            </div>
-            <blockquote className="text-xl sm:text-2xl font-medium leading-relaxed mb-7 tracking-[-0.01em]">
-              &ldquo;{page.testimonial.quote}&rdquo;
-            </blockquote>
-            <div className="text-white/60 text-sm">
-              <span className="font-semibold text-white/85">{page.testimonial.name}</span>
-              <span className="mx-2">—</span>
-              {page.testimonial.context}
-            </div>
+        <section className="relative py-28 bg-ink overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div
+            aria-hidden
+            className="absolute inset-0 -z-10 opacity-40"
+            style={{
+              background:
+                "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(200,162,76,0.10), transparent 60%)",
+            }}
+          />
+          <div className="relative max-w-3xl mx-auto px-6 text-center">
+            <Reveal>
+              <div className="flex justify-center gap-1.5 mb-8">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star key={i} className="w-6 h-6 text-[var(--gold)]" fill="currentColor" strokeWidth={0} />
+                ))}
+              </div>
+            </Reveal>
+            <Reveal delay={1}>
+              <blockquote className="font-display text-2xl sm:text-3xl text-bone leading-[1.4] mb-8 italic font-light">
+                &ldquo;{page.testimonial.quote}&rdquo;
+              </blockquote>
+            </Reveal>
+            <Reveal delay={2}>
+              <div className="text-bone/55 text-[13px] tracking-[0.06em]">
+                <span className="font-medium text-bone">{page.testimonial.name}</span>
+                <span className="mx-2">—</span>
+                {page.testimonial.context}
+              </div>
+            </Reveal>
           </div>
         </section>
 
         {/* ── Local Insight ── */}
-        <section className="py-16 bg-white">
-          <div className="max-w-3xl mx-auto px-6">
-            <div className="rounded-2xl bg-gradient-to-br from-slate-50 to-orange-50/20 border border-slate-200/70 p-8">
-              <p className="text-xs font-semibold text-orange-600 uppercase tracking-[0.2em] mb-3">Local insight</p>
-              <p className="text-[17px] text-slate-800 leading-[1.75]">{page.localInsight}</p>
-            </div>
+        <section className="py-20 bg-ink-2 relative overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div className="relative max-w-3xl mx-auto px-6">
+            <Reveal className="rounded-2xl bg-bone/[0.03] border border-bone/10 p-9">
+              <p className="eyebrow mb-4">Local insight</p>
+              <p className="text-[17px] text-bone/75 leading-[1.85] font-light">{page.localInsight}</p>
+            </Reveal>
           </div>
         </section>
 
         {/* ── FAQ ── */}
-        <section className="py-20 bg-slate-50">
-          <div className="max-w-4xl mx-auto px-6">
-            <p className="text-xs font-semibold text-orange-600 uppercase tracking-[0.22em] mb-3">FAQ</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-10">
-              {page.city} real estate questions
+        <section className="py-28 atmosphere relative overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div className="relative max-w-4xl mx-auto px-6">
+            <Reveal>
+              <p className="eyebrow mb-5">FAQ</p>
+            </Reveal>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-12">
+              <span className="block overflow-hidden">
+                <Reveal variant="mask" className="block">{page.city} real-estate</Reveal>
+              </span>
+              <span className="block overflow-hidden">
+                <Reveal variant="mask" delay={1} className="block italic gold-text">questions.</Reveal>
+              </span>
             </h2>
-            <div className="space-y-4">
-              {page.faqs.map((f) => (
-                <details
+            <div className="space-y-3">
+              {page.faqs.map((f, i) => (
+                <Reveal
                   key={f.question}
-                  className="group rounded-2xl bg-white border border-slate-200/70 overflow-hidden hover:border-orange-300/60 transition-colors"
+                  delay={((i % 3) + 1) as 1 | 2 | 3}
+                  as="details"
+                  className="group rounded-2xl bg-bone/[0.03] border border-bone/10 overflow-hidden hover:border-[var(--gold)]/35 transition-colors duration-500"
                 >
-                  <summary className="flex items-center justify-between p-6 cursor-pointer text-[17px] font-bold text-slate-900 leading-snug list-none [&::-webkit-details-marker]:hidden">
+                  <summary className="flex items-center justify-between p-7 cursor-pointer text-[16px] font-medium text-bone leading-snug list-none [&::-webkit-details-marker]:hidden">
                     {f.question}
-                    <ChevronRight className="w-5 h-5 text-slate-400 flex-shrink-0 ml-4 group-open:rotate-90 transition-transform" />
+                    <ChevronRight className="w-4 h-4 text-[var(--gold-soft)] flex-shrink-0 ml-4 group-open:rotate-90 transition-transform duration-500" />
                   </summary>
-                  <div className="px-6 pb-6 text-slate-600 leading-relaxed -mt-1">
+                  <div className="px-7 pb-7 text-bone/65 leading-[1.8] -mt-1 text-[14.5px] font-light">
                     {f.answer}
                   </div>
-                </details>
+                </Reveal>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── Troy-Exclusive: Schools Deep Dive ── */}
+        {/* ── Schools Deep Dive (optional) ── */}
         {page.schoolsDeepDive && (
-          <section className="py-20 bg-white">
-            <div className="max-w-4xl mx-auto px-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
-                  <GraduationCap className="w-5 h-5 text-blue-600" strokeWidth={1.75} />
+          <section className="py-28 bg-ink relative overflow-hidden">
+            <div className="absolute inset-0 grain pointer-events-none" />
+            <div className="relative max-w-4xl mx-auto px-6">
+              <Reveal>
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/5 flex items-center justify-center">
+                    <GraduationCap className="w-5 h-5 text-[var(--gold-soft)]" strokeWidth={1.5} />
+                  </div>
+                  <p className="eyebrow">Schools</p>
                 </div>
-                <p className="text-xs font-semibold text-blue-600 uppercase tracking-[0.22em]">Schools</p>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-8">
-                {page.schoolsDeepDive.title}
+              </Reveal>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-10">
+                <span className="block overflow-hidden">
+                  <Reveal variant="mask" className="block">{page.schoolsDeepDive.title}</Reveal>
+                </span>
               </h2>
-              <div className="space-y-4 text-[17px] text-slate-700 leading-[1.75] mb-10">
-                {page.schoolsDeepDive.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+              <div className="space-y-5 text-[17px] text-bone/70 leading-[1.85] mb-12 font-light">
+                {page.schoolsDeepDive.paragraphs.map((p, i) => (
+                  <Reveal key={i} delay={((i % 3) + 1) as 1 | 2 | 3}>
+                    <p>{p}</p>
+                  </Reveal>
+                ))}
               </div>
               <div className="space-y-3">
-                {page.schoolsDeepDive.schools.map((s) => (
-                  <div key={s.name} className="flex gap-4 p-5 rounded-2xl bg-gradient-to-br from-blue-50/80 to-white border border-blue-100/80 hover:border-blue-300/60 hover:shadow-md transition-all">
-                    <GraduationCap className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" strokeWidth={1.75} />
+                {page.schoolsDeepDive.schools.map((s, i) => (
+                  <Reveal
+                    key={s.name}
+                    delay={((i % 3) + 1) as 1 | 2 | 3}
+                    className="flex gap-5 p-6 rounded-2xl bg-bone/[0.03] border border-bone/10 hover:border-[var(--gold)]/30 transition-all duration-500"
+                  >
+                    <GraduationCap className="w-5 h-5 text-[var(--gold-soft)] flex-shrink-0 mt-1" strokeWidth={1.5} />
                     <div>
-                      <div className="flex items-baseline gap-2 flex-wrap">
-                        <h3 className="font-bold text-slate-900">{s.name}</h3>
-                        <span className="text-xs text-blue-600 font-medium bg-blue-100 px-2 py-0.5 rounded-full">{s.grades}</span>
+                      <div className="flex items-baseline gap-3 flex-wrap">
+                        <h3 className="font-display text-[1.3rem] font-light text-bone">{s.name}</h3>
+                        <span className="text-[10px] text-[var(--gold-soft)] uppercase tracking-[0.18em]">{s.grades}</span>
                       </div>
-                      <p className="text-sm text-slate-600 mt-1">{s.note}</p>
+                      <p className="text-[14px] text-bone/55 mt-1.5 font-light">{s.note}</p>
                     </div>
-                  </div>
+                  </Reveal>
                 ))}
               </div>
             </div>
           </section>
         )}
 
-        {/* ── Troy-Exclusive: Market Deep Dive ── */}
+        {/* ── Market Deep Dive (optional) ── */}
         {page.marketDeepDive && (
-          <section className="relative py-20 bg-[#0A1429] overflow-hidden noise">
-            <div className="absolute inset-0 glow-orange opacity-20" />
-            <div className="absolute inset-0 grid-overlay" />
+          <section className="relative py-28 atmosphere overflow-hidden">
+            <div className="absolute inset-0 grain pointer-events-none" />
             <div className="relative max-w-4xl mx-auto px-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-400/20 flex items-center justify-center">
-                  <BarChart3 className="w-5 h-5 text-orange-400" strokeWidth={1.75} />
+              <Reveal>
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/5 flex items-center justify-center">
+                    <BarChart3 className="w-5 h-5 text-[var(--gold-soft)]" strokeWidth={1.5} />
+                  </div>
+                  <p className="eyebrow">Deep Dive</p>
                 </div>
-                <p className="text-xs font-semibold text-orange-400 uppercase tracking-[0.22em]">Deep Dive</p>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-8">
-                {page.marketDeepDive.title}
+              </Reveal>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-10">
+                <span className="block overflow-hidden">
+                  <Reveal variant="mask" className="block">{page.marketDeepDive.title}</Reveal>
+                </span>
               </h2>
-              <div className="space-y-5 text-[17px] text-white/75 leading-[1.75]">
-                {page.marketDeepDive.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+              <div className="space-y-5 text-[17px] text-bone/70 leading-[1.85] font-light">
+                {page.marketDeepDive.paragraphs.map((p, i) => (
+                  <Reveal key={i} delay={((i % 3) + 1) as 1 | 2 | 3}>
+                    <p>{p}</p>
+                  </Reveal>
+                ))}
               </div>
             </div>
           </section>
         )}
 
-        {/* ── Troy-Exclusive: Lifestyle ── */}
+        {/* ── Lifestyle (optional) ── */}
         {page.lifestyleHighlights && (
-          <section className="py-20 bg-slate-50">
-            <div className="max-w-6xl mx-auto px-6">
-              <p className="text-xs font-semibold text-orange-600 uppercase tracking-[0.22em] mb-3">Lifestyle</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-10">
-                {page.lifestyleHighlights.title}
+          <section className="py-28 bg-ink relative overflow-hidden">
+            <div className="absolute inset-0 grain pointer-events-none" />
+            <div className="relative max-w-6xl mx-auto px-6">
+              <Reveal>
+                <p className="eyebrow mb-5">Lifestyle</p>
+              </Reveal>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-12">
+                <span className="block overflow-hidden">
+                  <Reveal variant="mask" className="block">{page.lifestyleHighlights.title}</Reveal>
+                </span>
               </h2>
               <div className="grid sm:grid-cols-2 gap-5">
-                {page.lifestyleHighlights.categories.map((cat) => (
-                  <div key={cat.name} className="rounded-2xl bg-white border border-slate-200/70 p-7">
-                    <h3 className="text-lg font-bold text-slate-900 mb-4">{cat.name}</h3>
-                    <ul className="space-y-2.5">
+                {page.lifestyleHighlights.categories.map((cat, i) => (
+                  <Reveal
+                    key={cat.name}
+                    delay={((i % 3) + 1) as 1 | 2 | 3}
+                    className="rounded-2xl bg-bone/[0.03] border border-bone/10 p-8 hover:border-[var(--gold)]/30 transition-colors duration-500"
+                  >
+                    <h3 className="font-display text-[1.5rem] font-light text-bone mb-5">{cat.name}</h3>
+                    <ul className="space-y-3">
                       {cat.items.map((item) => (
-                        <li key={item} className="flex gap-3 text-sm text-slate-600">
-                          <CheckCircle2 className="w-4 h-4 text-orange-500 flex-shrink-0 mt-0.5" />
+                        <li key={item} className="flex gap-3 text-[14px] text-bone/65 font-light">
+                          <span className="w-1 h-1 rounded-full bg-[var(--gold-soft)] mt-2.5 flex-shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
-                  </div>
+                  </Reveal>
                 ))}
               </div>
             </div>
           </section>
         )}
 
-        {/* ── Troy-Exclusive: Additional Testimonials ── */}
+        {/* ── Additional Testimonials (optional) ── */}
         {page.additionalTestimonials && page.additionalTestimonials.length > 0 && (
-          <section className="py-20 bg-white">
-            <div className="max-w-6xl mx-auto px-6">
-              <p className="text-xs font-semibold text-orange-600 uppercase tracking-[0.22em] mb-3">More {page.city} reviews</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-10">
-                What {page.city} clients say
+          <section className="py-28 atmosphere relative overflow-hidden">
+            <div className="absolute inset-0 grain pointer-events-none" />
+            <div className="relative max-w-6xl mx-auto px-6">
+              <Reveal>
+                <p className="eyebrow mb-5">More {page.city} reviews</p>
+              </Reveal>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-12">
+                <span className="block overflow-hidden">
+                  <Reveal variant="mask" className="block">What {page.city} clients say.</Reveal>
+                </span>
               </h2>
               <div className="grid md:grid-cols-2 gap-5">
-                {page.additionalTestimonials.map((t) => (
-                  <figure key={t.name} className="rounded-2xl bg-gradient-to-br from-white to-slate-50/50 border border-slate-200/60 p-8 hover:border-orange-300/60 hover:shadow-lg transition-all">
-                    <div className="flex gap-0.5 mb-5">
+                {page.additionalTestimonials.map((t, i) => (
+                  <Reveal
+                    key={t.name}
+                    delay={((i % 3) + 1) as 1 | 2 | 3}
+                    as="figure"
+                    className="rounded-2xl bg-bone/[0.04] border border-bone/10 p-9 hover:border-[var(--gold)]/35 transition-all duration-700 tilt relative"
+                  >
+                    <span className="font-display absolute top-5 right-7 text-6xl text-[var(--gold)]/15 leading-none select-none">
+                      &ldquo;
+                    </span>
+                    <div className="flex gap-1 mb-5">
                       {[1, 2, 3, 4, 5].map((i) => (
-                        <Star key={i} className="w-4 h-4 text-orange-500" fill="currentColor" strokeWidth={0} />
+                        <Star key={i} className="w-3.5 h-3.5 text-[var(--gold-soft)]" fill="currentColor" strokeWidth={0} />
                       ))}
                     </div>
-                    <blockquote className="text-[15px] text-slate-800 leading-relaxed mb-5">
+                    <blockquote className="font-display text-bone text-[1.25rem] leading-[1.5] mb-6 italic font-light">
                       &ldquo;{t.quote}&rdquo;
                     </blockquote>
-                    <figcaption className="pt-4 border-t border-slate-100 text-sm">
-                      <div className="font-semibold text-slate-900">{t.name}</div>
-                      <div className="text-slate-500 text-[13px]">{t.context}</div>
+                    <figcaption className="pt-5 border-t border-bone/10 text-sm">
+                      <div className="font-medium text-bone">{t.name}</div>
+                      <div className="text-bone/45 text-[11px] uppercase tracking-[0.18em] mt-1.5">{t.context}</div>
                     </figcaption>
-                  </figure>
+                  </Reveal>
                 ))}
               </div>
             </div>
           </section>
         )}
 
-        {/* ── Related Cities (Internal Links) ── */}
-        <section className="py-16 bg-white border-t border-slate-100">
-          <div className="max-w-6xl mx-auto px-6">
-            <p className="text-xs font-semibold text-orange-600 uppercase tracking-[0.22em] mb-3">Also serving</p>
-            <h2 className="text-2xl font-bold text-slate-900 tracking-tight mb-6">
-              Explore more Metro Detroit communities
+        {/* ── Related Cities ── */}
+        <section className="py-20 bg-ink-2 relative overflow-hidden border-t border-bone/10">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div className="relative max-w-6xl mx-auto px-6">
+            <Reveal>
+              <p className="eyebrow mb-3">Also serving</p>
+            </Reveal>
+            <h2 className="font-display text-3xl font-light text-bone tracking-tight mb-8">
+              Explore more {company.region} communities
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-              {otherCities.map((c) => (
-                <a
+              {otherCities.map((c, i) => (
+                <Reveal
                   key={c.slug}
-                  href={`/${c.slug}`}
-                  className="group flex items-center justify-between px-5 py-4 rounded-xl bg-slate-50 border border-slate-200/70 hover:border-orange-300 hover:shadow-md hover:-translate-y-0.5 transition-all"
+                  delay={((i % 4) + 1) as 1 | 2 | 3 | 4}
+                  as="a"
+                  className="group flex items-center justify-between px-5 py-4 rounded-xl bg-bone/[0.03] border border-bone/10 hover:border-[var(--gold)]/40 hover:bg-bone/[0.06] transition-all duration-500"
                 >
+                  <a href={`/${c.slug}`} className="absolute inset-0 z-10" aria-label={c.city} />
                   <div>
-                    <div className="font-bold text-slate-900 text-sm group-hover:text-orange-600 transition-colors">{c.city}</div>
-                    <div className="text-[11px] text-slate-500">{c.medianPrice}</div>
+                    <div className="font-medium text-bone text-[14px] group-hover:text-[var(--gold-soft)] transition-colors duration-500">{c.city}</div>
+                    <div className="text-[10px] text-bone/40 uppercase tracking-[0.18em] mt-1">{c.medianPrice}</div>
                   </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-orange-500 group-hover:translate-x-0.5 transition-all" />
-                </a>
+                  <ArrowRight className="w-3.5 h-3.5 text-[var(--gold-soft)] group-hover:translate-x-1 transition-transform duration-500" />
+                </Reveal>
               ))}
             </div>
           </div>
         </section>
 
         {/* ── CTA ── */}
-        <section className="relative py-24 bg-[#0A1429] overflow-hidden noise">
-          <div className="absolute inset-0 glow-orange opacity-50" />
-          <div className="absolute inset-0 grid-overlay" />
-          <div className="relative max-w-2xl mx-auto px-6 text-center text-white">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.02em] mb-5 leading-tight">
-              {page.ctaHeadline}
+        <section className="relative py-32 atmosphere overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div
+            aria-hidden
+            className="absolute inset-0 -z-10 opacity-50"
+            style={{
+              background:
+                "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(200,162,76,0.18), transparent 60%)",
+            }}
+          />
+          <div className="relative max-w-2xl mx-auto px-6 text-center">
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.05] mb-6">
+              <span className="block overflow-hidden">
+                <Reveal variant="mask" className="block italic gold-text">{page.ctaHeadline}</Reveal>
+              </span>
             </h2>
-            <p className="text-lg text-white/60 mb-10 leading-relaxed">
-              {page.ctaSubheadline}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Reveal delay={1}>
+              <p className="text-[17px] text-bone/65 mb-10 leading-relaxed font-light">
+                {page.ctaSubheadline}
+              </p>
+            </Reveal>
+            <Reveal delay={2} className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href="/#lead-magnet"
-                className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-orange-500 hover:bg-orange-400 text-white font-semibold shadow-[0_20px_50px_-12px_rgba(249,115,22,0.65)] hover:-translate-y-0.5 transition-all"
+                className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
               >
-                Get Free Home Valuation
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                Request your valuation
+                <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
               </a>
               <a
                 href={`tel:${company.phoneTel}`}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white text-slate-900 font-bold transition-all"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-bone/25 text-bone hover:border-bone/60 hover:bg-bone/5 font-medium text-[14px] tracking-wide transition-all duration-500"
               >
-                <Phone className="w-4 h-4" />
-                Call Now
+                <Phone className="w-4 h-4 text-[var(--gold-soft)]" />
+                Call now
               </a>
-            </div>
+            </Reveal>
           </div>
         </section>
       </main>

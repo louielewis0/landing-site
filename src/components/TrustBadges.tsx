@@ -1,45 +1,41 @@
 import { Clock, DollarSign, Home } from "lucide-react";
+import Reveal from "./motion/Reveal";
 
 const badges = [
-  {
-    Icon: Clock,
-    value: "20+",
-    label: "Years of Experience",
-  },
-  {
-    Icon: DollarSign,
-    value: "$100M+",
-    label: "In Metro Detroit Sales",
-  },
-  {
-    Icon: Home,
-    value: "500+",
-    label: "Homes Closed",
-  },
+  { Icon: Clock, value: "20+", label: "Years of experience" },
+  { Icon: DollarSign, value: "$100M+", label: "In Metro Detroit sales" },
+  { Icon: Home, value: "500+", label: "Homes closed" },
 ];
 
 export default function TrustBadges() {
   return (
-    <section className="relative bg-white py-16 border-y border-slate-100">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {badges.map(({ Icon, value, label }) => (
-            <div
+    <section className="relative bg-ink-2 py-20 overflow-hidden">
+      <div className="absolute inset-0 grain pointer-events-none" />
+      <span className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] divider-rule" />
+      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60%] divider-rule" />
+
+      <div className="relative max-w-6xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-3">
+          {badges.map(({ Icon, value, label }, i) => (
+            <Reveal
               key={label}
-              className="flex items-center gap-5 p-6 rounded-2xl bg-gradient-to-br from-slate-50 to-white border border-slate-200/70 hover:border-orange-300/60 hover:shadow-[0_20px_50px_-20px_rgba(15,23,42,0.15)] transition-all"
+              delay={(i + 1) as 1 | 2 | 3}
+              className={`flex items-center justify-center gap-5 px-8 py-6 ${
+                i > 0 ? "md:border-l border-bone/10" : ""
+              }`}
             >
-              <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-orange-500/10 border border-orange-200 flex items-center justify-center">
-                <Icon className="w-7 h-7 text-orange-600" strokeWidth={1.75} />
+              <div className="flex-shrink-0 w-14 h-14 rounded-full border border-[var(--gold)]/40 flex items-center justify-center bg-[var(--gold)]/5">
+                <Icon className="w-6 h-6 text-[var(--gold-soft)]" strokeWidth={1.5} />
               </div>
               <div>
-                <div className="text-3xl font-bold text-slate-900 tracking-[-0.02em] leading-none">
+                <div className="font-display text-4xl font-light text-bone tracking-tight leading-none">
                   {value}
                 </div>
-                <div className="text-[13px] text-slate-500 mt-2 uppercase tracking-[0.12em] font-medium">
+                <div className="text-[11px] text-bone/45 mt-2 uppercase tracking-[0.22em]">
                   {label}
                 </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

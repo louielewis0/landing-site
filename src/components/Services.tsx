@@ -9,6 +9,7 @@ import {
   MapPin,
   ArrowRight,
 } from "lucide-react";
+import Reveal from "./motion/Reveal";
 
 type Service = {
   id: string;
@@ -81,73 +82,83 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative py-28 bg-[#0A1429] text-white overflow-hidden noise"
+      className="relative py-32 bg-ink-2 text-bone overflow-hidden"
     >
-      <div className="absolute inset-0 glow-orange opacity-20" />
-      <div className="absolute inset-0 grid-overlay opacity-50" />
+      <div className="absolute inset-0 grain pointer-events-none" />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 opacity-50"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 50% at 80% 20%, rgba(200,162,76,0.13), transparent 60%), radial-gradient(ellipse 60% 50% at 10% 80%, rgba(140,74,31,0.10), transparent 60%)",
+        }}
+      />
 
       <div className="relative max-w-7xl mx-auto px-6">
-        <div className="max-w-2xl mx-auto text-center mb-16">
-          <p className="text-xs font-semibold text-orange-400 uppercase tracking-[0.22em] mb-4">
-            What we do
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.025em] mb-5 leading-[1.05]">
-            Full-service real estate,
-            <br />
-            <span className="gradient-text">done at the highest level.</span>
+        <div className="max-w-3xl mb-20">
+          <Reveal>
+            <p className="eyebrow mb-5">What we do</p>
+          </Reveal>
+          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-light leading-[1.02] mb-6 text-bone">
+            <span className="block overflow-hidden">
+              <Reveal variant="mask" className="block">Full-service real estate,</Reveal>
+            </span>
+            <span className="block overflow-hidden">
+              <Reveal variant="mask" delay={1} className="block italic gold-text">at the highest level.</Reveal>
+            </span>
           </h2>
-          <p className="text-lg text-white/65 leading-relaxed">
-            From first-time buyers to seasoned investors — one team, every need.
-          </p>
+          <Reveal delay={2}>
+            <p className="text-[17px] text-bone/55 leading-relaxed font-light max-w-2xl">
+              From first-time buyers to seasoned investors — one team, every need.
+            </p>
+          </Reveal>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {services.map((s) => (
-            <ServiceCard key={s.id} service={s} />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {services.map((s, i) => (
+            <ServiceCard key={s.id} service={s} delay={((i % 4) + 1) as 1 | 2 | 3 | 4} />
           ))}
         </div>
 
-        <div className="mt-14 text-center">
+        <Reveal delay={2} className="mt-16 text-center">
           <a
             href="#lead-magnet"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-orange-500 hover:bg-orange-400 text-white font-semibold shadow-[0_20px_50px_-12px_rgba(249,115,22,0.6)] hover:-translate-y-0.5 transition-all"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
           >
-            Get Free Home Valuation
+            Request your valuation
             <ArrowRight className="w-4 h-4" />
           </a>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
 }
 
-function ServiceCard({ service }: { service: Service }) {
+function ServiceCard({ service, delay }: { service: Service; delay: 1 | 2 | 3 | 4 }) {
   const { Icon } = service;
   return (
-    <a
-      href="#lead-magnet"
-      className="group relative flex flex-col h-full rounded-2xl p-7 bg-gradient-to-br from-white/[0.04] to-white/[0.01] backdrop-blur border border-white/10 hover:border-orange-400/40 hover:from-white/[0.07] hover:to-white/[0.02] hover:-translate-y-0.5 transition-all duration-300"
+    <Reveal
+      delay={delay}
+      as="a"
+      className="group relative flex flex-col h-full rounded-2xl p-7 border border-bone/10 bg-gradient-to-b from-bone/[0.03] to-transparent hover:border-[var(--gold)]/40 hover:from-bone/[0.06] transition-all duration-700"
     >
-      {/* Icon — primary visual anchor */}
-      <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-400/20 flex items-center justify-center mb-5 group-hover:bg-orange-500/20 transition-colors">
-        <Icon className="w-6 h-6 text-orange-400" strokeWidth={1.75} />
+      <a href="#lead-magnet" className="absolute inset-0 z-10" aria-label={service.title} />
+      <div className="w-11 h-11 rounded-full border border-[var(--gold)]/30 flex items-center justify-center mb-6 text-[var(--gold-soft)] group-hover:border-[var(--gold)]/60 transition-colors duration-500">
+        <Icon className="w-5 h-5" strokeWidth={1.5} />
       </div>
 
-      {/* Title */}
-      <h3 className="text-[17px] font-bold tracking-tight mb-2 leading-tight">
+      <h3 className="font-display text-[1.5rem] font-light tracking-tight mb-3 leading-tight text-bone">
         {service.title}
       </h3>
 
-      {/* Description — fills available space so CTA aligns at bottom */}
-      <p className="text-[13.5px] text-white/60 leading-relaxed mb-6 flex-1">
+      <p className="text-[13.5px] text-bone/55 leading-relaxed mb-7 flex-1 font-light">
         {service.blurb}
       </p>
 
-      {/* CTA — consistent label + arrow, pinned to bottom */}
-      <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-orange-300 group-hover:text-orange-200 transition-colors mt-auto">
-        Learn More
-        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+      <span className="relative inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase font-semibold text-[var(--gold-soft)] group-hover:text-[var(--gold)] transition-colors duration-500 mt-auto">
+        Learn more
+        <ArrowRight className="w-3 h-3 transition-transform duration-500 group-hover:translate-x-1.5" />
       </span>
-    </a>
+    </Reveal>
   );
 }

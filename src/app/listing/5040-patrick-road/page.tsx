@@ -3,6 +3,7 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/FloatingCTA";
+import Reveal from "@/components/motion/Reveal";
 import { company } from "@/lib/config";
 import {
   Phone,
@@ -11,13 +12,9 @@ import {
   Bath,
   Ruler,
   Home,
-  Flame,
   Car,
-  TreePine,
   Sparkles,
   ArrowRight,
-  Share2,
-  Printer,
   Mail,
   CheckCircle2,
   Star,
@@ -60,111 +57,151 @@ export default function ListingPage() {
       <Header />
       <main className="flex-1">
         {/* ── Hero ── */}
-        <section className="relative pt-32 pb-20 bg-[#0A1429] overflow-hidden noise">
-          <div className="absolute inset-0 glow-orange opacity-40" />
-          <div className="absolute inset-0 grid-overlay" />
-
+        <section className="relative pt-36 pb-24 atmosphere grain vignette overflow-hidden">
           <div className="relative max-w-6xl mx-auto px-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-500/20 border border-orange-400/30 text-orange-300 text-xs font-semibold uppercase tracking-wider mb-6">
-              <Sparkles className="w-3.5 h-3.5" />
-              Just Listed — MLS #20261021717
+            <div className="fade-up flex items-center gap-3 mb-8">
+              <span className="block w-10 h-px bg-[var(--gold)] opacity-60" />
+              <span className="eyebrow">
+                <Sparkles className="w-3 h-3 inline mr-2 -mt-0.5 text-[var(--gold-soft)]" />
+                Just Listed · MLS #20261021717
+              </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-[-0.03em] leading-[1.05] mb-4">
-              5040 Patrick Road
+            <h1 className="font-display text-5xl sm:text-6xl lg:text-[5rem] font-light text-bone leading-[1.02] mb-4 tracking-tight">
+              <span className="block overflow-hidden">
+                <span className="block mask-wipe">5040 Patrick Road</span>
+              </span>
             </h1>
-            <p className="text-xl sm:text-2xl text-white/60 mb-2">
+            <p className="fade-up delay-1 text-xl sm:text-2xl text-bone/55 mb-2 font-light">
               West Bloomfield Twp, MI 48322
             </p>
 
-            <div className="flex flex-wrap items-baseline gap-4 mt-8 mb-10">
-              <span className="text-5xl sm:text-6xl font-black gradient-text tracking-tight">$448,900</span>
+            <div className="fade-up delay-2 flex flex-wrap items-baseline gap-4 mt-10 mb-12">
+              <span className="font-display text-6xl sm:text-7xl font-light gold-text tracking-tight">
+                $448,900
+              </span>
             </div>
 
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 mb-10">
-              {features.map((f) => (
-                <div key={f.label} className="flex items-center gap-2.5 px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10">
-                  <f.icon className="w-4 h-4 text-orange-400 flex-shrink-0" strokeWidth={1.75} />
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 mb-12">
+              {features.map((f, i) => (
+                <Reveal key={f.label} delay={((i % 4) + 1) as 1 | 2 | 3 | 4} className="flex items-center gap-3 px-4 py-3.5 rounded-xl bg-bone/[0.03] border border-bone/10">
+                  <f.icon className="w-4 h-4 text-[var(--gold-soft)] flex-shrink-0" strokeWidth={1.5} />
                   <div>
-                    <div className="text-sm font-bold text-white leading-none">{f.value}</div>
-                    <div className="text-[10px] text-white/50 mt-0.5">{f.label}</div>
+                    <div className="font-display text-[15px] font-light text-bone leading-none">{f.value}</div>
+                    <div className="text-[10px] text-bone/45 mt-1 uppercase tracking-[0.18em]">{f.label}</div>
                   </div>
-                </div>
+                </Reveal>
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="fade-up delay-3 flex flex-col sm:flex-row gap-3">
               <a
                 href={`tel:${company.phoneTel}`}
-                className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-orange-500 hover:bg-orange-400 text-white font-semibold shadow-[0_20px_50px_-12px_rgba(249,115,22,0.65)] hover:-translate-y-0.5 transition-all"
+                className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
               >
                 <Phone className="w-4 h-4" />
-                Schedule a Showing
+                Schedule a showing
               </a>
               <a
                 href={`mailto:${company.email}?subject=Inquiry: 5040 Patrick Road, West Bloomfield&body=Hi, I'm interested in the property at 5040 Patrick Road, West Bloomfield (MLS %2320261021717). Please send me more information.`}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white text-slate-900 hover:bg-white/90 font-bold transition-all"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-bone/25 text-bone hover:border-bone/60 hover:bg-bone/5 font-medium text-[14px] tracking-wide transition-all duration-500"
               >
-                <Mail className="w-4 h-4" />
-                Request Info
+                <Mail className="w-4 h-4 text-[var(--gold-soft)]" />
+                Request info
               </a>
             </div>
           </div>
         </section>
 
         {/* ── Description ── */}
-        <section className="py-16 bg-white">
-          <div className="max-w-4xl mx-auto px-6">
-            <h2 className="text-3xl font-bold text-slate-900 tracking-tight mb-6">About This Home</h2>
-            <div className="text-[17px] text-slate-700 leading-[1.8] space-y-5">
-              <p>
-                Beautifully maintained colonial-style home offering spacious living and thoughtful
-                updates throughout. Step inside to a bright and open layout featuring large living
-                and dining areas with abundant natural light and updated flooring, perfect for both
-                everyday living and entertaining.
-              </p>
-              <p>
-                The home includes a modernized kitchen with granite countertops, stainless steel
-                appliances, and ample cabinet space, seamlessly connected to the main living areas.
-                Enjoy a cozy family room with a stunning white brick fireplace and direct access to
-                the backyard.
-              </p>
-              <p>
-                Upstairs, you'll find generously sized bedrooms with hardwood flooring, while the
-                bathrooms have been tastefully updated with granite vanities and modern finishes.
-                The fully functional basement provides additional living or storage space, offering
-                flexibility for future customization.
-              </p>
-              <p>
-                Step outside to a large backyard with an expansive deck, ideal for relaxing,
-                hosting gatherings, or enjoying peaceful outdoor views. Complete with great curb
-                appeal, a 2-car garage, and a desirable layout, this home is move-in ready and a
-                must-see.
-              </p>
+        <section className="py-24 bg-ink relative overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div className="relative max-w-4xl mx-auto px-6">
+            <Reveal>
+              <p className="eyebrow mb-5">About this home</p>
+            </Reveal>
+            <h2 className="font-display text-4xl sm:text-5xl font-light text-bone leading-[1.05] mb-10">
+              <span className="block overflow-hidden">
+                <Reveal variant="mask" className="block italic gold-text">A move-in ready colonial.</Reveal>
+              </span>
+            </h2>
+            <div className="text-[17px] text-bone/70 leading-[1.85] space-y-6 font-light">
+              <Reveal>
+                <p>
+                  Beautifully maintained colonial-style home offering spacious living and thoughtful
+                  updates throughout. Step inside to a bright and open layout featuring large living
+                  and dining areas with abundant natural light and updated flooring, perfect for both
+                  everyday living and entertaining.
+                </p>
+              </Reveal>
+              <Reveal delay={1}>
+                <p>
+                  The home includes a modernized kitchen with granite countertops, stainless steel
+                  appliances, and ample cabinet space, seamlessly connected to the main living areas.
+                  Enjoy a cozy family room with a stunning white brick fireplace and direct access to
+                  the backyard.
+                </p>
+              </Reveal>
+              <Reveal delay={2}>
+                <p>
+                  Upstairs, you'll find generously sized bedrooms with hardwood flooring, while the
+                  bathrooms have been tastefully updated with granite vanities and modern finishes.
+                  The fully functional basement provides additional living or storage space, offering
+                  flexibility for future customization.
+                </p>
+              </Reveal>
+              <Reveal delay={3}>
+                <p>
+                  Step outside to a large backyard with an expansive deck, ideal for relaxing,
+                  hosting gatherings, or enjoying peaceful outdoor views. Complete with great curb
+                  appeal, a 2-car garage, and a desirable layout, this home is move-in ready and a
+                  must-see.
+                </p>
+              </Reveal>
             </div>
           </div>
         </section>
 
         {/* ── Highlights ── */}
-        <section className="py-16 bg-slate-50">
-          <div className="max-w-4xl mx-auto px-6">
-            <h2 className="text-3xl font-bold text-slate-900 tracking-tight mb-8">Key Features</h2>
+        <section className="py-24 atmosphere relative overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div className="relative max-w-4xl mx-auto px-6">
+            <Reveal>
+              <p className="eyebrow mb-5">Key features</p>
+            </Reveal>
+            <h2 className="font-display text-4xl sm:text-5xl font-light text-bone leading-[1.05] mb-12">
+              <span className="block overflow-hidden">
+                <Reveal variant="mask" className="block">What sets it apart.</Reveal>
+              </span>
+            </h2>
             <div className="grid sm:grid-cols-2 gap-3">
-              {highlights.map((h) => (
-                <div key={h} className="flex gap-3 p-4 rounded-xl bg-white border border-slate-200/70">
-                  <CheckCircle2 className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-[15px] text-slate-700">{h}</span>
-                </div>
+              {highlights.map((h, i) => (
+                <Reveal
+                  key={h}
+                  delay={((i % 3) + 1) as 1 | 2 | 3}
+                  className="flex gap-3 p-5 rounded-xl bg-bone/[0.03] border border-bone/10 hover:border-[var(--gold)]/30 transition-all duration-500"
+                >
+                  <CheckCircle2 className="w-5 h-5 text-[var(--gold-soft)] flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+                  <span className="text-[14.5px] text-bone/75 font-light leading-relaxed">{h}</span>
+                </Reveal>
               ))}
             </div>
           </div>
         </section>
 
         {/* ── Property Details ── */}
-        <section className="py-16 bg-white">
-          <div className="max-w-4xl mx-auto px-6">
-            <h2 className="text-3xl font-bold text-slate-900 tracking-tight mb-8">Property Details</h2>
-            <div className="grid sm:grid-cols-2 gap-x-12 gap-y-4">
+        <section className="py-24 bg-ink relative overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div className="relative max-w-4xl mx-auto px-6">
+            <Reveal>
+              <p className="eyebrow mb-5">Property details</p>
+            </Reveal>
+            <h2 className="font-display text-4xl sm:text-5xl font-light text-bone leading-[1.05] mb-12">
+              <span className="block overflow-hidden">
+                <Reveal variant="mask" className="block">The specifics.</Reveal>
+              </span>
+            </h2>
+            <div className="grid sm:grid-cols-2 gap-x-12 gap-y-1">
               {[
                 { label: "Address", value: "5040 Patrick Road" },
                 { label: "City", value: "West Bloomfield Twp, MI 48322" },
@@ -179,9 +216,9 @@ export default function ListingPage() {
                 { label: "MLS Number", value: "#20261021717" },
                 { label: "Status", value: "Active — Just Listed" },
               ].map((d) => (
-                <div key={d.label} className="flex justify-between py-3 border-b border-slate-100">
-                  <span className="text-sm text-slate-500">{d.label}</span>
-                  <span className="text-sm font-semibold text-slate-900">{d.value}</span>
+                <div key={d.label} className="flex justify-between py-4 border-b border-bone/10">
+                  <span className="text-[12px] text-bone/45 uppercase tracking-[0.18em]">{d.label}</span>
+                  <span className="text-[14px] text-bone font-medium">{d.value}</span>
                 </div>
               ))}
             </div>
@@ -189,115 +226,145 @@ export default function ListingPage() {
         </section>
 
         {/* ── Location ── */}
-        <section className="py-16 bg-slate-50">
-          <div className="max-w-4xl mx-auto px-6">
-            <h2 className="text-3xl font-bold text-slate-900 tracking-tight mb-6">Location</h2>
-            <p className="text-slate-600 mb-6">
-              Located in West Bloomfield Township — known for lakefront living, top-rated schools,
-              and a diverse community. Minutes from Orchard Lake Road shopping and dining, Cass Lake,
-              and major freeway access.
-            </p>
-            <div className="rounded-2xl overflow-hidden border border-slate-200 aspect-video">
+        <section className="py-24 atmosphere relative overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div className="relative max-w-4xl mx-auto px-6">
+            <Reveal>
+              <p className="eyebrow mb-5">Location</p>
+            </Reveal>
+            <h2 className="font-display text-4xl sm:text-5xl font-light text-bone leading-[1.05] mb-6">
+              <span className="block overflow-hidden">
+                <Reveal variant="mask" className="block">Where it lives.</Reveal>
+              </span>
+            </h2>
+            <Reveal delay={1}>
+              <p className="text-bone/65 mb-8 text-[16px] leading-relaxed font-light max-w-2xl">
+                Located in West Bloomfield Township — known for lakefront living, top-rated schools,
+                and a diverse community. Minutes from Orchard Lake Road shopping and dining, Cass Lake,
+                and major freeway access.
+              </p>
+            </Reveal>
+            <Reveal delay={2} className="rounded-2xl overflow-hidden border border-bone/10 aspect-video shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]">
               <iframe
                 src="https://maps.google.com/maps?q=5040+Patrick+Road+West+Bloomfield+MI+48322&t=&z=15&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
-                style={{ border: 0 }}
+                style={{ border: 0, filter: "grayscale(0.4) contrast(1.05)" }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="5040 Patrick Road, West Bloomfield"
               />
-            </div>
+            </Reveal>
           </div>
         </section>
 
         {/* ── West Bloomfield context ── */}
-        <section className="py-16 bg-white">
-          <div className="max-w-4xl mx-auto px-6">
-            <div className="rounded-2xl bg-gradient-to-br from-slate-50 to-orange-50/20 border border-slate-200/70 p-8">
-              <p className="text-xs font-semibold text-orange-600 uppercase tracking-[0.2em] mb-3">Why West Bloomfield</p>
-              <p className="text-[17px] text-slate-800 leading-[1.75]">
+        <section className="py-20 bg-ink-2 relative overflow-hidden border-y border-bone/10">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div className="relative max-w-3xl mx-auto px-6">
+            <Reveal className="rounded-2xl bg-bone/[0.03] border border-bone/10 p-9">
+              <p className="eyebrow mb-4">Why West Bloomfield</p>
+              <p className="text-[17px] text-bone/75 leading-[1.85] font-light">
                 West Bloomfield offers a unique combination of lakefront living, cultural diversity,
                 and suburban convenience. The township's 14+ lakes, highly rated schools, and proximity
                 to Orchard Lake Road's dining and retail make it one of Oakland County's most desirable
                 communities. Homes here hold their value and demand stays strong year-round.
               </p>
-              <a href="/west-bloomfield-real-estate-agent" className="inline-flex items-center gap-2 text-orange-600 font-semibold text-sm mt-4 hover:text-orange-500 transition-colors">
+              <a
+                href="/west-bloomfield-real-estate-agent"
+                className="inline-flex items-center gap-2 text-[var(--gold-soft)] font-medium text-[13px] tracking-wide mt-6 hover:text-[var(--gold)] transition-colors"
+              >
                 Learn more about West Bloomfield real estate <ArrowRight className="w-4 h-4" />
               </a>
-            </div>
+            </Reveal>
           </div>
         </section>
 
         {/* ── Agent CTA ── */}
-        <section className="relative py-20 bg-[#0A1429] overflow-hidden noise">
-          <div className="absolute inset-0 glow-orange opacity-40" />
-          <div className="absolute inset-0 grid-overlay" />
-
+        <section className="relative py-28 atmosphere overflow-hidden">
+          <div className="absolute inset-0 grain pointer-events-none" />
+          <div
+            aria-hidden
+            className="absolute inset-0 -z-10 opacity-50"
+            style={{
+              background:
+                "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(200,162,76,0.18), transparent 60%)",
+            }}
+          />
           <div className="relative max-w-4xl mx-auto px-6">
-            <div className="grid md:grid-cols-[auto_1fr] gap-10 items-center">
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden bg-white/10 mx-auto md:mx-0 ring-2 ring-white/10">
+            <div className="grid md:grid-cols-[auto_1fr] gap-12 items-center">
+              <Reveal className="w-32 h-32 md:w-44 md:h-44 rounded-2xl overflow-hidden bg-ink-2 mx-auto md:mx-0 ring-1 ring-bone/15 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]">
                 <Image
                   src="/agent.jpg"
                   alt="Real Estate Market Center Agent"
-                  width={160}
-                  height={160}
+                  width={176}
+                  height={176}
                   className="w-full h-full object-cover"
                 />
-              </div>
+              </Reveal>
 
-              <div className="text-white text-center md:text-left">
-                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-                  Interested in this property?
+              <div className="text-center md:text-left">
+                <Reveal>
+                  <p className="eyebrow mb-4">Talk to a broker</p>
+                </Reveal>
+                <h2 className="font-display text-4xl sm:text-5xl font-light text-bone leading-[1.05] mb-5">
+                  <span className="block overflow-hidden">
+                    <Reveal variant="mask" className="block italic gold-text">Interested in this property?</Reveal>
+                  </span>
                 </h2>
-                <p className="text-white/60 text-lg mb-6 leading-relaxed">
-                  Call to schedule a private showing, ask about the neighborhood, or request
-                  a full property report. We respond within the hour.
-                </p>
+                <Reveal delay={1}>
+                  <p className="text-bone/65 text-[16px] mb-8 leading-relaxed font-light">
+                    Call to schedule a private showing, ask about the neighborhood, or request
+                    a full property report. We respond within the hour.
+                  </p>
+                </Reveal>
 
-                <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+                <Reveal delay={2} className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
                   <a
                     href={`tel:${company.phoneTel}`}
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-orange-500 hover:bg-orange-400 text-white font-semibold shadow-[0_20px_50px_-12px_rgba(249,115,22,0.65)] transition-all"
+                    className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
                   >
                     <Phone className="w-4 h-4" />
                     Call {company.phone}
                   </a>
                   <a
                     href={`mailto:${company.email}?subject=Inquiry: 5040 Patrick Road&body=I'd like to schedule a showing for 5040 Patrick Road, West Bloomfield.`}
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white text-slate-900 font-bold transition-all"
+                    className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-bone/25 text-bone hover:border-bone/60 hover:bg-bone/5 font-medium text-[14px] tracking-wide transition-all duration-500"
                   >
-                    <Mail className="w-4 h-4" />
-                    Email Us
+                    <Mail className="w-4 h-4 text-[var(--gold-soft)]" />
+                    Email us
                   </a>
-                </div>
+                </Reveal>
 
-                <div className="flex items-center gap-6 mt-6 justify-center md:justify-start text-sm text-white/50">
+                <Reveal delay={3} className="flex items-center gap-7 mt-7 justify-center md:justify-start text-[12px] text-bone/45 tracking-wide">
                   <div className="flex items-center gap-1.5">
-                    <Star className="w-4 h-4 text-orange-400" fill="currentColor" strokeWidth={0} />
-                    <span>5-Star Rated</span>
+                    <Star className="w-3.5 h-3.5 text-[var(--gold-soft)]" fill="currentColor" strokeWidth={0} />
+                    <span>5-star rated</span>
                   </div>
-                  <div>20+ Years Experience</div>
-                  <div>$100M+ Sold</div>
-                </div>
+                  <div>20+ years</div>
+                  <div>$100M+ sold</div>
+                </Reveal>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── Social Media Flyers ── */}
-        <section className="py-20 bg-[#060B18]">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold text-white tracking-tight mb-2">Social Media Flyers</h2>
-              <p className="text-white/50 text-sm">Screenshot or save each image below and post to Instagram / TikTok / Facebook</p>
+        {/* ── Social Media Flyers (intentionally bright/orange — these get screenshotted for IG/TikTok) ── */}
+        <section className="py-24 bg-[#060B18] relative overflow-hidden">
+          <div className="relative max-w-6xl mx-auto px-6">
+            <div className="text-center mb-12">
+              <p className="eyebrow mb-3">Social media flyers</p>
+              <h2 className="font-display text-3xl font-light text-bone tracking-tight mb-2">
+                Screenshot &amp; post.
+              </h2>
+              <p className="text-bone/45 text-sm">Save each image below and post to Instagram, TikTok or Facebook</p>
             </div>
 
             <div className="flex flex-col items-center gap-16">
               {/* ── Instagram Post (1:1) ── */}
               <div>
-                <p className="text-xs text-white/40 uppercase tracking-wider text-center mb-3">Instagram Post — Square</p>
+                <p className="text-xs text-bone/40 uppercase tracking-wider text-center mb-3">Instagram Post — Square</p>
                 <div className="relative overflow-hidden bg-[#0A1429] rounded-2xl" style={{ width: 540, height: 540, maxWidth: "90vw", aspectRatio: "1/1" }}>
                   <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 20%, rgba(249,115,22,0.25), transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(37,99,235,0.15), transparent 50%)" }} />
                   <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
@@ -340,7 +407,7 @@ export default function ListingPage() {
 
               {/* ── TikTok / IG Story (9:16) ── */}
               <div>
-                <p className="text-xs text-white/40 uppercase tracking-wider text-center mb-3">TikTok / IG Story</p>
+                <p className="text-xs text-bone/40 uppercase tracking-wider text-center mb-3">TikTok / IG Story</p>
                 <div className="relative overflow-hidden bg-[#0A1429] rounded-2xl" style={{ width: 360, height: 640, maxWidth: "90vw" }}>
                   <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 10%, rgba(249,115,22,0.3), transparent 50%), radial-gradient(ellipse at 50% 90%, rgba(37,99,235,0.2), transparent 50%)" }} />
                   <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
@@ -381,7 +448,7 @@ export default function ListingPage() {
 
               {/* ── IG Feed (4:5) ── */}
               <div>
-                <p className="text-xs text-white/40 uppercase tracking-wider text-center mb-3">Instagram Feed — 4:5</p>
+                <p className="text-xs text-bone/40 uppercase tracking-wider text-center mb-3">Instagram Feed — 4:5</p>
                 <div className="relative overflow-hidden bg-[#0A1429] rounded-2xl" style={{ width: 432, height: 540, maxWidth: "90vw" }}>
                   <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 20% 30%, rgba(249,115,22,0.25), transparent 55%), radial-gradient(ellipse at 85% 75%, rgba(37,99,235,0.18), transparent 50%)" }} />
                   <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
@@ -421,12 +488,12 @@ export default function ListingPage() {
               </div>
             </div>
 
-            <p className="text-white/30 text-xs text-center mt-10">Open on your phone → screenshot each flyer → post to Instagram / TikTok / Facebook</p>
+            <p className="text-bone/30 text-xs text-center mt-12">Open on your phone → screenshot each flyer → post to Instagram, TikTok or Facebook</p>
           </div>
         </section>
 
         {/* ── Print section (visible only in print) ── */}
-        <div className="hidden print:block p-10">
+        <div className="hidden print:block p-10 bg-white text-black">
           <div className="text-center border-b-2 border-slate-900 pb-6 mb-6">
             <h1 className="text-4xl font-black">$448,900</h1>
             <h2 className="text-2xl font-bold mt-2">5040 Patrick Road, West Bloomfield Twp, MI 48322</h2>
