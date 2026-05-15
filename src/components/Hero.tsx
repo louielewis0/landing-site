@@ -1,6 +1,6 @@
 import { company } from "@/lib/config";
 import HeroLeadForm from "./HeroLeadForm";
-import HeroVideo from "./motion/HeroVideo";
+import KenBurns from "./motion/KenBurns";
 import SplitText from "./motion/SplitText";
 import MagneticButton from "./motion/MagneticButton";
 
@@ -8,28 +8,36 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative min-h-[100svh] flex items-center pt-32 pb-24 overflow-hidden bg-ink"
+      className="relative min-h-[100svh] flex items-center pt-32 pb-24 overflow-hidden atmosphere grain vignette"
     >
-      {/* Backdrop video — replaces the previous Ken Burns gradient.
-         Fades in with a slow scale (handled in HeroVideo.tsx), then
-         parallaxes + fades as the user scrolls. */}
-      <div className="absolute inset-0 -z-20">
-        <HeroVideo />
+      {/* Layer 1 — slow Ken Burns over a tonal gradient. The original
+         cinematic backdrop. The Kling video integration was reverted
+         because its split logo/interior composition fought the
+         headline-left layout. */}
+      <div className="absolute inset-0 -z-20 opacity-[0.55]">
+        <KenBurns className="absolute inset-0">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "radial-gradient(ellipse 70% 55% at 22% 30%, rgba(217,185,104,0.22), transparent 65%), radial-gradient(ellipse 60% 50% at 80% 70%, rgba(140,74,31,0.18), transparent 65%), linear-gradient(180deg, #14110D 0%, #0A0908 100%)",
+            }}
+          />
+        </KenBurns>
       </div>
 
-      {/* Layered architectural silhouette + scanline kept from the
-         previous design for added depth. These sit between the video
-         and the content. */}
+      {/* Layer 2 — faux architectural silhouette band at the foot of the hero */}
       <div
         aria-hidden
-        className="absolute bottom-0 left-0 right-0 h-[28vh] -z-10 opacity-50 pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 h-[28vh] -z-10 opacity-60 pointer-events-none"
         style={{
           background:
-            "linear-gradient(to top, rgba(10,9,8,0.95) 0%, rgba(10,9,8,0.55) 35%, transparent 100%)",
+            "linear-gradient(to top, rgba(10,9,8,0.95) 0%, rgba(10,9,8,0.65) 35%, transparent 100%), repeating-linear-gradient(90deg, transparent 0 8vw, rgba(200,162,76,0.06) 8vw 8.05vw, transparent 8.05vw 14vw, rgba(200,162,76,0.04) 14vw 14.04vw)",
         }}
       />
-      <div className="absolute inset-0 -z-10 scanline opacity-30 pointer-events-none" />
-      <div className="absolute inset-0 -z-10 grain pointer-events-none" />
+
+      {/* Layer 3 — fine scanline texture */}
+      <div className="absolute inset-0 -z-10 scanline opacity-40 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         <div className="lg:col-span-7">
