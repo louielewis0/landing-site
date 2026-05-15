@@ -46,9 +46,12 @@ export default function Hero() {
             </span>
           </div>
 
-          {/* Headline — word-by-word reveal via SplitType.
-             Each <SplitText> reveals on viewport entry; delay staggers
-             the three lines to give that 1000ms / 80ms cadence. */}
+          {/* Headline — first two lines split into words via SplitType for
+             a staggered fade-up. The third line uses .gold-text (a gradient
+             clipped to text) which doesn't survive being split into per-word
+             spans — children inherit transparent color with no background.
+             So we reveal it via mask-wipe instead, which preserves the
+             gradient and the cinematic feel. */}
           <h1 className="font-display text-[3rem] sm:text-6xl lg:text-[5.25rem] font-light leading-[0.98] mb-7 text-bone tracking-[-0.025em]">
             <SplitText as="span" className="block">
               Sell for top dollar.
@@ -56,9 +59,15 @@ export default function Hero() {
             <SplitText as="span" className="block" delay={0.6}>
               Buy with confidence.
             </SplitText>
-            <SplitText as="span" className="block italic gold-text" delay={1.2}>
-              All in Metro Detroit.
-            </SplitText>
+            <span className="block overflow-hidden">
+              {/* delay timed to land after the two split-text lines settle */}
+              <span
+                className="block italic gold-text mask-wipe"
+                style={{ animationDelay: "1.4s" }}
+              >
+                All in Metro Detroit.
+              </span>
+            </span>
           </h1>
 
           <p className="fade-up delay-2 max-w-xl text-[17px] sm:text-lg text-bone/65 leading-[1.65] mb-10 font-light">

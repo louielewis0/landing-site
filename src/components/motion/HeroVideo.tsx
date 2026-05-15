@@ -94,6 +94,11 @@ export default function HeroVideo({
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover"
+        style={{
+          // Crop toward the right side so the lit interior shows behind the
+          // form. The branded left half of the video falls off-screen.
+          objectPosition: "85% center",
+        }}
         autoPlay
         loop
         muted
@@ -105,12 +110,22 @@ export default function HeroVideo({
         <source src={mp4} type="video/mp4" />
       </video>
 
-      {/* Cinematic vignette (~10% darker corners) */}
+      {/* Strong left-side wash — keeps headline + body text legible no matter
+          what frame is currently visible. Fades out across the middle so the
+          right side (where the form sits) still reads as cinematic interior. */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at center, transparent 45%, rgba(10,9,8,0.35) 80%, rgba(10,9,8,0.65) 100%)",
+            "linear-gradient(to right, rgba(10,9,8,0.92) 0%, rgba(10,9,8,0.78) 30%, rgba(10,9,8,0.45) 55%, rgba(10,9,8,0.25) 80%, rgba(10,9,8,0.15) 100%)",
+        }}
+      />
+      {/* Cinematic vignette */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 45%, rgba(10,9,8,0.4) 80%, rgba(10,9,8,0.7) 100%)",
         }}
       />
       {/* Bottom fade into the next section */}
@@ -118,7 +133,7 @@ export default function HeroVideo({
         className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none"
         style={{
           background:
-            "linear-gradient(to bottom, transparent 0%, rgba(10,9,8,0.4) 60%, rgba(10,9,8,0.85) 100%)",
+            "linear-gradient(to bottom, transparent 0%, rgba(10,9,8,0.4) 60%, rgba(10,9,8,0.9) 100%)",
         }}
       />
       {/* Warm gold ambient wash to match site palette */}
@@ -126,7 +141,7 @@ export default function HeroVideo({
         className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-60"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 20% 30%, rgba(200,162,76,0.18), transparent 65%)",
+            "radial-gradient(ellipse 60% 50% at 30% 30%, rgba(200,162,76,0.20), transparent 65%)",
         }}
       />
     </div>
