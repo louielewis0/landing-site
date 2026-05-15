@@ -2,8 +2,6 @@ import Image from "next/image";
 import { company } from "@/lib/config";
 import Reveal from "./motion/Reveal";
 import Parallax from "./motion/Parallax";
-import TiltCard from "./motion/TiltCard";
-import MagneticButton from "./motion/MagneticButton";
 
 export default function About() {
   return (
@@ -21,7 +19,7 @@ export default function About() {
       <div className="relative max-w-6xl mx-auto px-6 grid lg:grid-cols-12 gap-14 lg:gap-20 items-center">
         <Reveal delay={1} className="lg:col-span-5 relative">
           <Parallax speed={-0.08}>
-            <TiltCard className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-ink-2 shadow-[0_50px_100px_-30px_rgba(0,0,0,0.8)] ring-1 ring-bone/10">
+            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-ink-2 shadow-[0_50px_100px_-30px_rgba(0,0,0,0.8)] ring-1 ring-bone/10">
               <Image
                 src="/agent.jpg"
                 alt={`${company.name} — Metro Detroit real estate experts`}
@@ -37,7 +35,7 @@ export default function About() {
                   background: "linear-gradient(135deg, rgba(200,162,76,0.5), transparent 60%)",
                 }}
               />
-            </TiltCard>
+            </div>
           </Parallax>
 
           {/* Floating credential card */}
@@ -86,22 +84,18 @@ export default function About() {
           </div>
 
           <Reveal delay={3} className="flex flex-col sm:flex-row gap-3">
-            <MagneticButton as="div" className="inline-block">
-              <a
-                href="#lead-magnet"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
-              >
-                Schedule a consultation
-              </a>
-            </MagneticButton>
-            <MagneticButton as="div" className="inline-block">
-              <a
-                href={`tel:${company.phoneTel}`}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-bone/25 text-bone hover:border-bone/60 hover:bg-bone/5 font-medium text-[14px] tracking-wide transition-all duration-500"
-              >
-                Call {company.phone}
-              </a>
-            </MagneticButton>
+            <a
+              href="#lead-magnet"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
+            >
+              Schedule a consultation
+            </a>
+            <a
+              href={`tel:${company.phoneTel}`}
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-bone/25 text-bone hover:border-bone/60 hover:bg-bone/5 font-medium text-[14px] tracking-wide transition-all duration-500"
+            >
+              Call {company.phone}
+            </a>
           </Reveal>
         </div>
       </div>

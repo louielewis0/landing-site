@@ -26,14 +26,7 @@ export default function ScrollInterceptor() {
       if (!el) return;
 
       e.preventDefault();
-      // Prefer Lenis when active (silky inertia matching the rest of the page);
-      // fall back to native smooth-scroll otherwise.
-      const lenis = window.__lenis;
-      if (lenis) {
-        lenis.scrollTo(el, { offset: -80 });
-      } else {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
     document.addEventListener("click", handler);

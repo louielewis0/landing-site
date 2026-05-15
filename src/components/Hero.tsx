@@ -1,8 +1,6 @@
 import { company } from "@/lib/config";
 import HeroLeadForm from "./HeroLeadForm";
 import KenBurns from "./motion/KenBurns";
-import SplitText from "./motion/SplitText";
-import MagneticButton from "./motion/MagneticButton";
 
 export default function Hero() {
   return (
@@ -10,10 +8,9 @@ export default function Hero() {
       id="top"
       className="relative min-h-[100svh] flex items-center pt-32 pb-24 overflow-hidden atmosphere grain vignette"
     >
-      {/* Layer 1 — slow Ken Burns over a tonal gradient. The original
-         cinematic backdrop. The Kling video integration was reverted
-         because its split logo/interior composition fought the
-         headline-left layout. */}
+      {/* Layer 1 — far backdrop. Slow Ken Burns over a tonal gradient.
+         TODO: drop a high-res cinematic Detroit twilight or interior photo
+         into /public/hero-bg.jpg and uncomment the <img>. */}
       <div className="absolute inset-0 -z-20 opacity-[0.55]">
         <KenBurns className="absolute inset-0">
           <div
@@ -23,13 +20,14 @@ export default function Hero() {
                 "radial-gradient(ellipse 70% 55% at 22% 30%, rgba(217,185,104,0.22), transparent 65%), radial-gradient(ellipse 60% 50% at 80% 70%, rgba(140,74,31,0.18), transparent 65%), linear-gradient(180deg, #14110D 0%, #0A0908 100%)",
             }}
           />
+          {/* <img src="/hero-bg.jpg" alt="" className="absolute inset-0 w-full h-full object-cover mix-blend-luminosity opacity-70" /> */}
         </KenBurns>
       </div>
 
-      {/* Layer 2 — faux architectural silhouette band at the foot of the hero */}
+      {/* Layer 2 — faux architectural silhouette via CSS gradient bands */}
       <div
         aria-hidden
-        className="absolute bottom-0 left-0 right-0 h-[28vh] -z-10 opacity-60 pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 h-[28vh] -z-10 opacity-60"
         style={{
           background:
             "linear-gradient(to top, rgba(10,9,8,0.95) 0%, rgba(10,9,8,0.65) 35%, transparent 100%), repeating-linear-gradient(90deg, transparent 0 8vw, rgba(200,162,76,0.06) 8vw 8.05vw, transparent 8.05vw 14vw, rgba(200,162,76,0.04) 14vw 14.04vw)",
@@ -54,27 +52,16 @@ export default function Hero() {
             </span>
           </div>
 
-          {/* Headline — first two lines split into words via SplitType for
-             a staggered fade-up. The third line uses .gold-text (a gradient
-             clipped to text) which doesn't survive being split into per-word
-             spans — children inherit transparent color with no background.
-             So we reveal it via mask-wipe instead, which preserves the
-             gradient and the cinematic feel. */}
-          <h1 className="font-display text-[3rem] sm:text-6xl lg:text-[5.25rem] font-light leading-[0.98] mb-7 text-bone tracking-[-0.025em]">
-            <SplitText as="span" className="block">
-              Sell for top dollar.
-            </SplitText>
-            <SplitText as="span" className="block" delay={0.6}>
-              Buy with confidence.
-            </SplitText>
+          {/* Headline — three masked lines, staggered wipe */}
+          <h1 className="font-display text-[3rem] sm:text-6xl lg:text-[5.25rem] font-light leading-[0.98] mb-7 text-bone">
             <span className="block overflow-hidden">
-              {/* delay timed to land after the two split-text lines settle */}
-              <span
-                className="block italic gold-text mask-wipe"
-                style={{ animationDelay: "1.4s" }}
-              >
-                All in Metro Detroit.
-              </span>
+              <span className="block mask-wipe">Sell for top dollar.</span>
+            </span>
+            <span className="block overflow-hidden">
+              <span className="block mask-wipe delay-1">Buy with confidence.</span>
+            </span>
+            <span className="block overflow-hidden">
+              <span className="block mask-wipe delay-2 italic gold-text">All in Metro Detroit.</span>
             </span>
           </h1>
 
@@ -83,30 +70,26 @@ export default function Hero() {
             A free home valuation, in less than 24 hours — or pick up the phone.
           </p>
 
-          <div className="cta-enter flex flex-col sm:flex-row gap-3 mb-10" style={{ animationDelay: "1.6s" }}>
-            <MagneticButton as="div" className="inline-block">
-              <a
-                href="#lead-magnet"
-                className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[15px] tracking-wide transition-all duration-500"
-              >
-                Request your valuation
-                <span className="transition-transform duration-500 group-hover:translate-x-1">→</span>
-              </a>
-            </MagneticButton>
-            <MagneticButton as="div" className="inline-block">
-              <a
-                href={`tel:${company.phoneTel}`}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-bone/25 text-bone hover:border-bone/60 hover:bg-bone/5 font-medium text-[15px] tracking-wide transition-all duration-500"
-              >
-                <svg className="w-4 h-4 text-[var(--gold-soft)]" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
-                Call {company.phone}
-              </a>
-            </MagneticButton>
+          <div className="fade-up delay-3 flex flex-col sm:flex-row gap-3 mb-10">
+            <a
+              href="#lead-magnet"
+              className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[15px] tracking-wide transition-all duration-500"
+            >
+              Request your valuation
+              <span className="transition-transform duration-500 group-hover:translate-x-1">→</span>
+            </a>
+            <a
+              href={`tel:${company.phoneTel}`}
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-bone/25 text-bone hover:border-bone/60 hover:bg-bone/5 font-medium text-[15px] tracking-wide transition-all duration-500"
+            >
+              <svg className="w-4 h-4 text-[var(--gold-soft)]" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+              </svg>
+              Call {company.phone}
+            </a>
           </div>
 
-          <div className="fade-up delay-3 flex flex-wrap items-center gap-x-7 gap-y-2 text-[13px] text-bone/45" style={{ animationDelay: "1.9s" }}>
+          <div className="fade-up delay-3 flex flex-wrap items-center gap-x-7 gap-y-2 text-[13px] text-bone/45">
             <span className="inline-flex items-center gap-2">
               <svg className="w-3.5 h-3.5 text-[var(--gold-soft)]" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
