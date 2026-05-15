@@ -222,18 +222,19 @@ body {
 
 /* ─────────────────────────────────────────────────────────────
    Hero video — Ken Burns fade-in (1200ms)
-   Tuning: scale 1.05 → 1.0 + opacity 0 → 1. JS parallax overrides
-   the transform once scroll begins; this only handles the entry.
+   Tuning: scale 1.05 → 1.0 + opacity 0 → 1.
+   Runs as a pure CSS animation on page load so the video is visible
+   even if JS fails to hydrate. JS parallax overrides transform once
+   scroll begins; inline styles take precedence over the animation's
+   final state, so the handoff is seamless.
    ───────────────────────────────────────────────────────────── */
 .hero-video-wrapper {
-  opacity: 0;
-  transform: scale(1.05);
-  transition: opacity 1200ms var(--ease-cinema), transform 1800ms var(--ease-cinema);
+  animation: heroVideoEnter 1200ms var(--ease-cinema) both;
   will-change: transform, opacity;
 }
-.hero-video-wrapper.hero-video-enter {
-  opacity: 1;
-  transform: scale(1);
+@keyframes heroVideoEnter {
+  from { opacity: 0; transform: scale(1.05); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -352,6 +353,7 @@ html.cursor-active label {
   }
   .parallax-target { transform: none !important; }
   .hero-video-wrapper {
+    animation: none !important;
     opacity: 1 !important;
     transform: none !important;
   }

@@ -47,9 +47,9 @@ export default function HeroVideo({
 
     if (prefersReducedMotion()) return;
 
-    // Ken Burns fade-in — driven by CSS class flip so the curve can be
-    // tuned in globals.css without touching JS.
-    wrapper.classList.add("hero-video-enter");
+    // Fade-in is now a pure CSS animation on .hero-video-wrapper.
+    // JS only adds scroll parallax — keeping the entry visible even if
+    // hydration is slow or fails.
 
     // Scroll parallax handler. We avoid querying layout in the rAF; instead
     // we read scrollY only and pre-compute the scrub range using the wrapper's
