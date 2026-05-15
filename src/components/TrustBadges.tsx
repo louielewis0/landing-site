@@ -1,10 +1,11 @@
 import { Clock, DollarSign, Home } from "lucide-react";
 import Reveal from "./motion/Reveal";
+import CountUp from "./motion/CountUp";
 
 const badges = [
-  { Icon: Clock, value: "20+", label: "Years of experience" },
-  { Icon: DollarSign, value: "$100M+", label: "In Metro Detroit sales" },
-  { Icon: Home, value: "500+", label: "Homes closed" },
+  { Icon: Clock, end: 20, prefix: "", suffix: "+", label: "Years of experience" },
+  { Icon: DollarSign, end: 100, prefix: "$", suffix: "M+", label: "In Metro Detroit sales" },
+  { Icon: Home, end: 500, prefix: "", suffix: "+", label: "Homes closed" },
 ];
 
 export default function TrustBadges() {
@@ -16,7 +17,7 @@ export default function TrustBadges() {
 
       <div className="relative max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3">
-          {badges.map(({ Icon, value, label }, i) => (
+          {badges.map(({ Icon, end, prefix, suffix, label }, i) => (
             <Reveal
               key={label}
               delay={(i + 1) as 1 | 2 | 3}
@@ -29,7 +30,7 @@ export default function TrustBadges() {
               </div>
               <div>
                 <div className="font-display text-4xl font-light text-bone tracking-tight leading-none">
-                  {value}
+                  <CountUp end={end} prefix={prefix} suffix={suffix} />
                 </div>
                 <div className="text-[11px] text-bone/45 mt-2 uppercase tracking-[0.22em]">
                   {label}

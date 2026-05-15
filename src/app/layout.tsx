@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Cormorant_Garamond } from "next/font/google";
 import { company } from "@/lib/config";
 import ScrollInterceptor from "@/components/ScrollInterceptor";
+import SmoothScroll from "@/components/motion/SmoothScroll";
+import CustomCursor from "@/components/motion/CustomCursor";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -104,8 +106,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-ink text-bone">
+        <SmoothScroll />
         {children}
         <ScrollInterceptor />
+        <CustomCursor />
       </body>
     </html>
   );
