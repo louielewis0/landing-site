@@ -14,6 +14,9 @@ import {
   AlertCircle,
   FileText,
   TriangleAlert,
+  Plus,
+  X,
+  MapPin,
 } from "lucide-react";
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -31,12 +34,30 @@ type Lead = {
   intent: string | null;
   message: string | null;
   source: string | null;
+  address: string | null;
   status: LeadStatus;
   dnc_scrubbed: boolean;
   do_not_call: boolean;
 };
 
 const STATUS_CYCLE: LeadStatus[] = ["new", "attempted", "contacted", "dead"];
+
+/* Intent + source vocabularies for the manual-entry form.
+   Keep these in sync with the public /leads page intent values so the
+   dashboard can filter / report consistently. */
+const INTENT_OPTIONS = ["Buy", "Sell", "Both", "Just browsing"] as const;
+type IntentOption = (typeof INTENT_OPTIONS)[number];
+
+const SOURCE_OPTIONS = [
+  "Expired",
+  "FSBO",
+  "Circle Prospect",
+  "Geographic Farm",
+  "Referral",
+  "Inbound",
+  "Other",
+] as const;
+type SourceOption = (typeof SOURCE_OPTIONS)[number];
 
 const STATUS_STYLES: Record<LeadStatus, string> = {
   new: "bg-bone/10 text-bone border-bone/20",
@@ -72,6 +93,19 @@ export default function LeadsDashboard() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | LeadStatus>("all");
 
+  // Manual add-lead panel state
+  const [showAdd, setShowAdd] = useState(false);
+  const [addName, setAddName] = useState("");
+  const [addPhone, setAddPhone] = useState("");
+  const [addEmail, setAddEmail] = useState("");
+  const [addAddress, setAddAddress] = useState("");
+  const [addIntent, setAddIntent] = useState<IntentOption>("Buy");
+  const [addSource, setAddSource] = useState<SourceOption | "">("");
+  const [addNotes, setAddNotes] = useState("");
+  const [adding, setAdding] = useState(false);
+  const [addErr, setAddErr] = useState("");
+  const [addJustSaved, setAddJustSaved] = useState(false);
+
   // DNC scrubber UI state
   const [dncInput, setDncInput] = useState("");
   const [scrubbing, setScrubbing] = useState(false);
@@ -91,7 +125,7 @@ export default function LeadsDashboard() {
     const { data, error } = await supabase
       .from("leads")
       .select(
-        "id, created_at, name, email, phone, intent, message, source, status, dnc_scrubbed, do_not_call"
+        "id, created_at, name, email, phone, intent, message, source, address, status, dnc_scrubbed, do_not_call"
       )
       .order("created_at", { ascending: false });
 
@@ -143,6 +177,65 @@ export default function LeadsDashboard() {
       setLeads((cur) => cur.map((l) => (l.id === lead.id ? { ...l, status: lead.status } : l)));
       alert(`Failed to update status: ${error.message}`);
     }
+  }
+
+  /* ── Manual add lead ──────────────────────────────────────────────────── */
+  // Inserts a single row into the leads table from the manual-entry panel.
+  // RLS: leads_insert_anon (defined in supabase/leads.sql) already allows
+  // anon INSERT, which is how the public /leads form works. No policy
+  // change needed for this entry point.
+  // After insert, we .select().single() to get the row back and prepend it
+  // to local state instead of refetching everything.
+  async function addLead(e: React.FormEvent) {
+    e.preventDefault();
+    if (!addName.trim()) return;
+    if (!addSource) {
+      setAddErr("Pick a source so cold leads are distinguishable from inbound ones.");
+      return;
+    }
+    setAdding(true);
+    setAddErr("");
+
+    const { data, error } = await supabase
+      .from("leads")
+      .insert({
+        name: addName.trim(),
+        phone: addPhone.trim() || null,
+        email: addEmail.trim() || null,
+        address: addAddress.trim() || null,
+        intent: addIntent,
+        source: addSource,
+        message: addNotes.trim() || null,
+        // status, dnc_scrubbed, do_not_call all use column defaults
+      })
+      .select(
+        "id, created_at, name, email, phone, intent, message, source, address, status, dnc_scrubbed, do_not_call"
+      )
+      .single();
+
+    if (error) {
+      setAddErr(error.message);
+      setAdding(false);
+      return;
+    }
+
+    if (data) {
+      setLeads((cur) => [data as Lead, ...cur]);
+    }
+
+    // Clear fields, leave the panel open for batch entry (FSBO / Expired
+    // workflows usually mean entering 5-20 leads in a row).
+    setAddName("");
+    setAddPhone("");
+    setAddEmail("");
+    setAddAddress("");
+    setAddIntent("Buy");
+    // Keep source selection sticky — same source on consecutive batch entries.
+    setAddNotes("");
+    setAdding(false);
+
+    setAddJustSaved(true);
+    setTimeout(() => setAddJustSaved(false), 2200);
   }
 
   // Manual DNC scrubbed toggle. Locked when do_not_call is true.
@@ -251,6 +344,7 @@ export default function LeadsDashboard() {
       "name",
       "phone",
       "email",
+      "address",
       "intent",
       "message",
       "source",
@@ -270,6 +364,7 @@ export default function LeadsDashboard() {
       l.name,
       l.phone,
       l.email,
+      l.address,
       l.intent,
       l.message,
       l.source,
@@ -306,13 +401,35 @@ export default function LeadsDashboard() {
               Internal · Private
             </p>
           </div>
-          <button
-            onClick={fetchAll}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-bone/20 text-bone/80 text-[12px] tracking-wide hover:border-[var(--gold)]/40 hover:text-bone transition-all duration-400"
-          >
-            <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
-            Refresh
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setShowAdd((v) => !v)}
+              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-[12px] font-semibold tracking-wide transition-all duration-400 ${
+                showAdd
+                  ? "border border-bone/25 text-bone/80 hover:text-bone hover:border-bone/50"
+                  : "bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink"
+              }`}
+            >
+              {showAdd ? (
+                <>
+                  <X className="w-3.5 h-3.5" />
+                  Close
+                </>
+              ) : (
+                <>
+                  <Plus className="w-3.5 h-3.5" />
+                  Add Lead
+                </>
+              )}
+            </button>
+            <button
+              onClick={fetchAll}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-bone/20 text-bone/80 text-[12px] tracking-wide hover:border-[var(--gold)]/40 hover:text-bone transition-all duration-400"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
+              Refresh
+            </button>
+          </div>
         </div>
       </div>
 
@@ -328,6 +445,153 @@ export default function LeadsDashboard() {
               </div>
             </div>
           </div>
+        )}
+
+        {/* Manual add-lead panel */}
+        {showAdd && (
+          <section className="rounded-2xl bg-bone/[0.06] backdrop-blur-2xl border border-bone/15 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] p-7 mb-8 relative">
+            <span className="absolute -top-px left-8 right-8 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/50 to-transparent" />
+
+            <div className="flex items-start justify-between mb-6 flex-wrap gap-3">
+              <div>
+                <p className="eyebrow mb-2">Add lead</p>
+                <h2 className="font-display text-2xl font-light text-bone tracking-tight">
+                  Manual entry
+                </h2>
+                <p className="text-[13px] text-bone/55 mt-2 font-light max-w-2xl">
+                  Enter FSBOs, expireds, circle prospects, or referrals.
+                  Source defaults to whatever you pick — use it to tell cold
+                  leads apart from inbound form leads.
+                </p>
+              </div>
+            </div>
+
+            <form onSubmit={addLead} className="space-y-4">
+              <div className="grid sm:grid-cols-2 gap-3">
+                <input
+                  type="text"
+                  required
+                  value={addName}
+                  onChange={(e) => setAddName(e.target.value)}
+                  placeholder="Full name *"
+                  autoFocus
+                  className="px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
+                />
+                <input
+                  type="tel"
+                  value={addPhone}
+                  onChange={(e) => setAddPhone(e.target.value)}
+                  placeholder="Phone"
+                  className="px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
+                />
+                <input
+                  type="email"
+                  value={addEmail}
+                  onChange={(e) => setAddEmail(e.target.value)}
+                  placeholder="Email (optional)"
+                  className="px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
+                />
+                <input
+                  type="text"
+                  value={addAddress}
+                  onChange={(e) => setAddAddress(e.target.value)}
+                  placeholder="Property address"
+                  className="px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
+                />
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[10px] text-bone/45 uppercase tracking-[0.22em] mb-2">
+                    I&rsquo;m looking to
+                  </label>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {INTENT_OPTIONS.map((val) => (
+                      <button
+                        key={val}
+                        type="button"
+                        onClick={() => setAddIntent(val)}
+                        className={`py-2.5 text-[10px] font-semibold tracking-[0.14em] uppercase rounded-full border transition-all duration-400 ${
+                          addIntent === val
+                            ? "bg-[var(--gold)] text-ink border-[var(--gold)]"
+                            : "bg-transparent text-bone/65 border-bone/20 hover:border-bone/40 hover:text-bone"
+                        }`}
+                      >
+                        {val}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] text-bone/45 uppercase tracking-[0.22em] mb-2">
+                    Source *
+                  </label>
+                  <select
+                    required
+                    value={addSource}
+                    onChange={(e) => setAddSource(e.target.value as SourceOption)}
+                    className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone text-[13.5px] font-medium focus:outline-none focus:border-[var(--gold)]/60 transition-all appearance-none cursor-pointer"
+                  >
+                    <option value="" disabled className="bg-ink">
+                      Choose source…
+                    </option>
+                    {SOURCE_OPTIONS.map((s) => (
+                      <option key={s} value={s} className="bg-ink">
+                        {s}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <textarea
+                value={addNotes}
+                onChange={(e) => setAddNotes(e.target.value)}
+                placeholder="Notes — listing details, prior contact, motivation, anything worth remembering"
+                rows={3}
+                className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] resize-y transition-all"
+              />
+
+              <div className="flex flex-wrap items-center gap-3 pt-1">
+                <button
+                  type="submit"
+                  disabled={adding || !addName.trim()}
+                  className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[13px] tracking-wide transition-all duration-500 disabled:opacity-50"
+                >
+                  {adding ? "Saving…" : "Save lead"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAddName("");
+                    setAddPhone("");
+                    setAddEmail("");
+                    setAddAddress("");
+                    setAddIntent("Buy");
+                    setAddNotes("");
+                    setAddErr("");
+                  }}
+                  className="text-[12px] text-bone/45 hover:text-bone/70 transition-colors tracking-wide"
+                >
+                  Clear
+                </button>
+                {addJustSaved && (
+                  <span className="inline-flex items-center gap-2 text-[12.5px] text-[var(--gold-soft)] font-medium">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    Saved. Ready for the next one.
+                  </span>
+                )}
+              </div>
+
+              {addErr && (
+                <div className="text-[13px] text-rust flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4" />
+                  {addErr}
+                </div>
+              )}
+            </form>
+          </section>
         )}
 
         {/* Stats */}
@@ -583,8 +847,14 @@ function LeadRow({
       </td>
       <td className="px-5 py-4">
         <div className="font-medium text-bone">{lead.name}</div>
+        {lead.address && (
+          <div className="flex items-center gap-1.5 text-[12px] text-bone/55 mt-1">
+            <MapPin className="w-3 h-3 text-[var(--gold-soft)] flex-shrink-0" strokeWidth={1.5} />
+            <span className="truncate">{lead.address}</span>
+          </div>
+        )}
         {lead.source && (
-          <div className="text-[11px] text-bone/40 uppercase tracking-[0.18em] mt-1">
+          <div className="text-[10px] text-bone/40 uppercase tracking-[0.18em] mt-1.5">
             {lead.source}
           </div>
         )}
