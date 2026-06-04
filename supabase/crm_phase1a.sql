@@ -1,5 +1,5 @@
 -- ─────────────────────────────────────────────────────────────────────────
---  CRM — Phase 1 (Path C)
+--  CRM — Phase 1A (additive, run BEFORE merging feat/crm-phase1 to main)
 --
 --  Run in Supabase SQL Editor. Idempotent. Safe to re-run.
 --
@@ -8,22 +8,25 @@
 --     nullable or have defaults; no row data is rewritten)
 --   - Widens leads.status CHECK to allow old + new vocab side-by-side
 --   - Adds public.agents (keyed to auth.users) and public.activities
---   - Adds public.leads_v view that normalizes status for the CRM
+--   - Adds public.leads_v view with security_invoker=true
 --   - Strict RLS on new tables (agents, activities)
---   - **Tightens leads RLS: anon → INSERT-only (no SELECT, no UPDATE).**
---     /dashboard now goes through /api/dashboard/* server routes that use
---     the service role key. Public form inserts continue to work via
---     leads_insert_anon.
+--   - Indexes
 --
---  Sequencing recommendation (no temporary breakage):
---   1. Confirm the new code on the feat/crm-phase1 preview deployment
---      reads/writes leads via the /api/dashboard/* routes correctly.
---   2. Merge feat/crm-phase1 to main. Production /dashboard now uses
---      the new routes (still tolerates anon SELECT/UPDATE since that's
---      not yet revoked).
---   3. Run THIS SQL. Anon SELECT/UPDATE on leads is revoked. /dashboard
---      keeps working because routes use service role and bypass RLS.
---      Public form INSERTs keep working via leads_insert_anon.
+--  What this does NOT do:
+--   - Anon SELECT/UPDATE on public.leads is intentionally left intact so
+--     production /dashboard (still on the old code that uses the anon
+--     key directly) keeps working through the merge window. That's
+--     tightened in crm_phase1b.sql after the new code is in production.
+--
+--  Sequencing:
+--   1. Run THIS file (crm_phase1a.sql). Old production /dashboard now has
+--      all the columns it needs (it was already broken on `address`).
+--      /dashboard starts working again.
+--   2. Merge feat/crm-phase1 to main. Production /dashboard switches to
+--      the new server-route code that uses the service role.
+--   3. Run crm_phase1b.sql. Anon SELECT/UPDATE on leads revoked.
+--      /dashboard keeps working because the new code uses service role
+--      and bypasses RLS.
 -- ─────────────────────────────────────────────────────────────────────────
 
 -- 1 ─ Shared trigger function for auto-updated_at columns
@@ -37,8 +40,9 @@ $$;
 
 -- 2 ─ Extend public.leads — additive only.
 --     `address` was added by supabase/leads_address_migration.sql but that
---     file was never run on production. Folding it into Phase 1 so there's
---     a single source-of-truth migration to run.
+--     file was never run on production. Folding it here so production
+--     /dashboard (which already references address in its SELECT) starts
+--     working again the moment this migration finishes.
 alter table public.leads
   add column if not exists updated_at       timestamptz not null default now(),
   add column if not exists address          text,
@@ -81,10 +85,8 @@ alter table public.leads drop constraint if exists leads_transaction_type_check;
 alter table public.leads add  constraint leads_transaction_type_check
   check (transaction_type is null or transaction_type in ('buy','sell','lease'));
 
--- 7 ─ source stays as free text. No CHECK added; existing values
+-- 7 ─ source stays as free text (no CHECK). Existing values
 --     ('hero','leads-page','FSBO','Expired',…) remain valid.
---     New code writes the channel enum (website/meta/google/call/
---     referral/walk-in/other). Convention enforced in app code.
 
 -- 8 ─ updated_at trigger on leads
 drop trigger if exists trg_leads_updated_at on public.leads;
@@ -92,10 +94,23 @@ create trigger trg_leads_updated_at
   before update on public.leads
   for each row execute function public.set_updated_at();
 
--- 9 ─ Mapping view: canonical_status + pipeline_stage grouping.
---     The CRM (Phase 4+) queries leads_v for uniform shape.
---     /dashboard queries public.leads directly via the route handlers.
-create or replace view public.leads_v as
+-- 9 ─ Mapping view with security_invoker=true.
+--
+--     Why security_invoker=true: Postgres views default to running the
+--     internal query as the view OWNER (Supabase creates objects as
+--     `postgres`, which is superuser and bypasses RLS). With
+--     security_invoker=true, the internal `select from public.leads`
+--     runs with the calling role's RLS context instead. Combined with
+--     `revoke all from anon` + `grant select to authenticated` below,
+--     this means:
+--       - anon: no privilege on the view, can't query it at all
+--       - even if anon ever got SELECT on the view, post-1b they'd hit
+--         leads RLS and get nothing
+--       - authenticated: needs an explicit leads SELECT policy (added
+--         in Phase 3) to read through the view
+create or replace view public.leads_v
+  with (security_invoker = true)
+as
 select
   l.*,
   case l.status
@@ -119,7 +134,7 @@ select
     and l.status not in ('dead','closed_lost','closed_won'))               as is_overdue_followup
 from public.leads l;
 
--- View permissions: only authenticated reads. Anon doesn't need leads_v.
+revoke all on public.leads_v from public;
 revoke all on public.leads_v from anon;
 grant select on public.leads_v to authenticated;
 
@@ -138,7 +153,6 @@ create trigger trg_agents_updated_at
   before update on public.agents
   for each row execute function public.set_updated_at();
 
--- Now that agents exists, attach the FK from leads.assigned_to.
 alter table public.leads drop constraint if exists leads_assigned_to_fkey;
 alter table public.leads add  constraint leads_assigned_to_fkey
   foreign key (assigned_to) references public.agents(id) on delete set null;
@@ -191,19 +205,6 @@ create policy "activities_delete_auth" on public.activities
 grant select on public.agents to authenticated;
 grant select, insert, update, delete on public.activities to authenticated;
 
--- 14 ─ Tighten leads RLS — Path C.
---     Anon retains INSERT only (public forms still work via
---     leads_insert_anon). SELECT and UPDATE are removed.
---     /dashboard's /api/dashboard/* routes use the service role key
---     server-side, which bypasses RLS, so they keep working.
-
-drop policy if exists "leads_select_anon" on public.leads;
-drop policy if exists "leads_update_anon" on public.leads;
-
-revoke select, update on public.leads from anon;
-
--- Sanity: confirm the only remaining anon access to leads is INSERT.
--- Run after migration to verify:
---   select policyname, cmd, roles from pg_policies
---     where schemaname='public' and tablename='leads';
--- Expected: a single policy "leads_insert_anon" with cmd='INSERT'.
+-- ── End of 1A. public.leads anon RLS is intentionally LEFT INTACT here.
+--    Run crm_phase1b.sql AFTER merging feat/crm-phase1 to main to revoke
+--    anon SELECT/UPDATE on leads.
