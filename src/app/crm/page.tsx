@@ -5,7 +5,7 @@ export const metadata: Metadata = { title: "Overview" };
 
 export default function CrmOverviewPage() {
   return (
-    <main className="px-6 py-10 max-w-7xl">
+    <>
       <p className="eyebrow mb-3">Overview</p>
       <h1 className="font-display text-4xl font-light text-bone tracking-tight mb-3">
         Welcome back.
@@ -27,6 +27,6 @@ export default function CrmOverviewPage() {
           "Closed Won Value",
         ]}
       />
-    </main>
+    </>
   );
 }

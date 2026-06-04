@@ -5,7 +5,7 @@ export const metadata: Metadata = { title: "Leads" };
 
 export default function CrmLeadsPage() {
   return (
-    <main className="px-6 py-10 max-w-7xl">
+    <>
       <p className="eyebrow mb-3">Leads</p>
       <h1 className="font-display text-4xl font-light text-bone tracking-tight mb-3">
         All leads.
@@ -30,6 +30,6 @@ export default function CrmLeadsPage() {
           "Row-click drawer",
         ]}
       />
-    </main>
+    </>
   );
 }

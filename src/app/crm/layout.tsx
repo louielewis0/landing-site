@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import CrmGate from "./gate";
+import Sidebar from "./shell/Sidebar";
+import Topbar from "./shell/Topbar";
 
 export const metadata: Metadata = {
   title: { template: "%s | CRM", default: "CRM" },
@@ -14,11 +16,19 @@ export const metadata: Metadata = {
  * session and sidebar navigation between routes doesn't unmount
  * it.
  *
- * 2A commit (1): bare gate + atmospheric background, page stubs
- * render directly into the body.
+ * Layout shape:
+ *   ┌──────────┐ ┌─────────────────────────────┐
+ *   │          │ │ Topbar (sticky)             │
+ *   │ Sidebar  │ ├─────────────────────────────┤
+ *   │ (sticky, │ │                             │
+ *   │  md+    )│ │ <main> {children}           │
+ *   │          │ │                             │
+ *   └──────────┘ └─────────────────────────────┘
  *
- * 2A commit (2): the sidebar + topbar shell wraps `{children}` in
- * here. Subsequent sub-phases never need to touch this file again.
+ * The main wrapper provides horizontal padding and the page
+ * content cap (`max-w-7xl`), so every page can return raw
+ * content without re-declaring its own outer container. Each
+ * sub-phase replaces a single page's content in place.
  */
 export default function CrmLayout({
   children,
@@ -27,8 +37,12 @@ export default function CrmLayout({
 }) {
   return (
     <CrmGate>
-      <div className="min-h-screen atmosphere grain vignette relative">
-        {children}
+      <div className="min-h-screen atmosphere grain vignette relative flex">
+        <Sidebar />
+        <div className="flex-1 min-w-0 flex flex-col">
+          <Topbar />
+          <main className="flex-1 px-6 py-8 max-w-7xl w-full">{children}</main>
+        </div>
       </div>
     </CrmGate>
   );
