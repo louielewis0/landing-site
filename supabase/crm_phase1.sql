@@ -35,9 +35,13 @@ begin
 end;
 $$;
 
--- 2 ─ Extend public.leads — additive only
+-- 2 ─ Extend public.leads — additive only.
+--     `address` was added by supabase/leads_address_migration.sql but that
+--     file was never run on production. Folding it into Phase 1 so there's
+--     a single source-of-truth migration to run.
 alter table public.leads
   add column if not exists updated_at       timestamptz not null default now(),
+  add column if not exists address          text,
   add column if not exists lead_type        text,
   add column if not exists property_type    text,
   add column if not exists transaction_type text,
