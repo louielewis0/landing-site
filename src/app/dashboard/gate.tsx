@@ -4,29 +4,47 @@ import { useState } from "react";
 import LeadsDashboard from "./dashboard";
 
 /**
- * Passcode gate — matches the cinematic /scripts/gate.tsx pattern.
+ * Passcode gate — Path C.
  *
- * Note: passcode is client-side only. Anyone who reads this JS bundle can see
- * "2003". This is UX gating, not security. The real boundary is RLS — which is
- * currently permissive (anon can SELECT/UPDATE leads). Acceptable for the
- * low-PII profile here; upgrade to Supabase Auth if that changes.
+ * The passcode is no longer hardcoded in this file. Validation is server-side
+ * via POST /api/dashboard/auth (which compares against DASHBOARD_PASSCODE in
+ * the server env). On success, we hand the passcode down to <LeadsDashboard>,
+ * which forwards it as the `x-dashboard-auth` header on every API call.
+ *
+ * Why the dashboard needs the passcode: each /api/dashboard/* route revalidates
+ * the header server-side before any service-role query runs. The passcode lives
+ * only in memory on the client and is never persisted.
  */
 export default function DashboardGate() {
   const [code, setCode] = useState("");
   const [unlocked, setUnlocked] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (code === "2003") {
-      setUnlocked(true);
-      setError(false);
-    } else {
+    if (!code.trim()) return;
+    setSubmitting(true);
+    setError(false);
+    try {
+      const res = await fetch("/api/dashboard/auth", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ passcode: code }),
+      });
+      if (res.ok) {
+        setUnlocked(true);
+      } else {
+        setError(true);
+      }
+    } catch {
       setError(true);
+    } finally {
+      setSubmitting(false);
     }
   }
 
-  if (unlocked) return <LeadsDashboard />;
+  if (unlocked) return <LeadsDashboard passcode={code} />;
 
   return (
     <div className="min-h-screen atmosphere grain vignette flex items-center justify-center px-6 relative overflow-hidden">
@@ -42,21 +60,22 @@ export default function DashboardGate() {
         <input
           type="password"
           inputMode="numeric"
-          maxLength={4}
+          maxLength={8}
           value={code}
           onChange={(e) => { setCode(e.target.value); setError(false); }}
           placeholder="Enter passcode"
+          autoFocus
           className={`w-full px-5 py-4 rounded-xl bg-bone/[0.04] backdrop-blur-xl border text-center text-bone text-2xl tracking-[0.5em] placeholder-bone/30 placeholder:text-base placeholder:tracking-normal focus:outline-none transition-all duration-500 ${
             error ? "border-rust" : "border-bone/15 focus:border-[var(--gold)]/60 focus:bg-bone/[0.07]"
           }`}
-          autoFocus
         />
         {error && <p className="text-[13px] text-rust mt-3">Incorrect passcode.</p>}
         <button
           type="submit"
-          className="mt-6 w-full px-6 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
+          disabled={submitting || !code.trim()}
+          className="mt-6 w-full px-6 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500 disabled:opacity-50"
         >
-          Unlock
+          {submitting ? "Checking…" : "Unlock"}
         </button>
       </form>
     </div>
