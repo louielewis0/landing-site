@@ -14,6 +14,7 @@ import AddLeadPanel from "./AddLeadPanel";
 import DncScrubber from "./DncScrubber";
 import Filters, { makeEmptyFilters, type FilterState } from "./Filters";
 import LeadsTable from "./LeadsTable";
+import LeadDrawer from "./LeadDrawer";
 
 /**
  * Top-level client component for /crm/leads. Owns:
@@ -355,6 +356,29 @@ export default function LeadsTableClient() {
         onCycleStatus={cycleStatus}
         onToggleScrubbed={toggleScrubbed}
       />
+
+      {/* Drawer mounts when ?lead=<id> matches a known row. If the
+          param refers to an id we don't have locally (e.g. a stale
+          bookmark for a deleted lead), the drawer stays closed and
+          the URL param is harmless. */}
+      {selectedLeadId &&
+        (() => {
+          const selectedLead = leads.find((l) => l.id === selectedLeadId);
+          if (!selectedLead) return null;
+          return (
+            <LeadDrawer
+              lead={selectedLead}
+              onClose={() => selectLead(selectedLeadId)}
+              onLocalUpdate={(p) =>
+                setLeads((cur) =>
+                  cur.map((l) =>
+                    l.id === selectedLeadId ? { ...l, ...p } : l,
+                  ),
+                )
+              }
+            />
+          );
+        })()}
     </div>
   );
 }
