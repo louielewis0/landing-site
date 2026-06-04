@@ -1,0 +1,360 @@
+"use client";
+
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { AlertCircle, RefreshCw } from "lucide-react";
+import { usePasscode } from "../gate";
+import { useLeads } from "../_lib/use-leads";
+import { apiFetch } from "../_lib/api-client";
+import {
+  STATUS_CYCLE,
+  type Lead,
+} from "@/lib/lead-shape";
+import AddLeadPanel from "./AddLeadPanel";
+import DncScrubber from "./DncScrubber";
+import Filters, { makeEmptyFilters, type FilterState } from "./Filters";
+import LeadsTable from "./LeadsTable";
+
+/**
+ * Top-level client component for /crm/leads. Owns:
+ *   • a local mirror of the leads array (for optimistic
+ *     mutations — same pattern as PipelineClient in 2C)
+ *   • the FilterState (search + status + source + priority +
+ *     propertyType)
+ *   • the showAddPanel boolean (auto-true if ?add=1 in URL)
+ *   • the row-select bridge to ?lead=<id> URL state, which the
+ *     2E drawer subscribes to
+ *
+ * Mutations:
+ *   • AddLeadPanel.onCreated  → prepend the new lead, clear ?add=1
+ *   • DncScrubber.onScrubbed  → apply blocked/cleared IDs locally
+ *   • cycleStatus (row pill)  → PATCH + optimistic + rollback
+ *   • toggleScrubbed (row chip) → PATCH + optimistic + rollback
+ *
+ * The status pill on a row cycles only the LEGACY four-status
+ * vocab (new → attempted → contacted → dead). CRM-set statuses
+ * (qualified, showing, negotiating, closed_*) are managed
+ * exclusively from the Kanban or the 2E drawer — the pill goes
+ * read-only when its current status isn't in STATUS_CYCLE.
+ */
+export default function LeadsTableClient() {
+  const passcode = usePasscode();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const result = useLeads();
+  const [leads, setLeads] = useState<Lead[]>([]);
+  useEffect(() => {
+    if (result.status === "ready") setLeads(result.leads);
+  }, [result]);
+
+  const [filters, setFilters] = useState<FilterState>(makeEmptyFilters());
+  const [showAddPanel, setShowAddPanel] = useState(false);
+  const [mutErr, setMutErr] = useState<string | null>(null);
+
+  // Read ?lead and ?add from URL on each render — these stay in
+  // sync with browser back/forward and external links.
+  const selectedLeadId = searchParams.get("lead");
+  const addParam = searchParams.get("add");
+
+  // Auto-expand the Add Lead panel when arriving with ?add=1
+  // (deep-link from the topbar). Strip the param after consuming
+  // it so reloads don't keep re-opening.
+  useEffect(() => {
+    if (addParam === "1") {
+      setShowAddPanel(true);
+      const params = new URLSearchParams(searchParams);
+      params.delete("add");
+      router.replace(
+        `${pathname}${params.toString() ? `?${params.toString()}` : ""}`,
+        { scroll: false },
+      );
+    }
+  }, [addParam, pathname, router, searchParams]);
+
+  // Filter-options derived from the actual data so dropdowns
+  // track reality, not a frozen vocabulary.
+  const sourceOptions = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          leads
+            .map((l) => l.source ?? "")
+            .filter((s): s is string => s.trim().length > 0),
+        ),
+      ).sort(),
+    [leads],
+  );
+  const propertyTypeOptions = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          leads
+            .map((l) => l.property_type ?? "")
+            .filter((s): s is string => s.trim().length > 0),
+        ),
+      ).sort(),
+    [leads],
+  );
+
+  // Filtered view — search across name / phone / email, then
+  // the four select-based filters.
+  const visible = useMemo(() => {
+    const q = filters.search.trim().toLowerCase();
+    return leads.filter((l) => {
+      if (filters.status !== "all" && l.status !== filters.status) return false;
+      if (filters.source !== "all" && l.source !== filters.source) return false;
+      if (filters.priority !== "all" && l.priority !== filters.priority)
+        return false;
+      if (
+        filters.propertyType !== "all" &&
+        l.property_type !== filters.propertyType
+      )
+        return false;
+      if (!q) return true;
+      const hay = `${l.name} ${l.phone ?? ""} ${l.email ?? ""}`.toLowerCase();
+      return hay.includes(q);
+    });
+  }, [leads, filters]);
+
+  // Row selection updates ?lead=<id> in the URL. 2E's drawer
+  // subscribes to that param to pop in. Until then, the URL
+  // change + row highlight is the only visible side-effect.
+  const selectLead = useCallback(
+    (id: string) => {
+      const params = new URLSearchParams(searchParams);
+      if (selectedLeadId === id) {
+        params.delete("lead");
+      } else {
+        params.set("lead", id);
+      }
+      router.push(
+        `${pathname}${params.toString() ? `?${params.toString()}` : ""}`,
+        { scroll: false },
+      );
+    },
+    [pathname, router, searchParams, selectedLeadId],
+  );
+
+  // Status-pill cycle (legacy four-status flow). Same semantics
+  // as the legacy dashboard: CRM-set statuses are no-op here.
+  const cycleStatus = useCallback(
+    async (lead: Lead) => {
+      if (!STATUS_CYCLE.includes(lead.status)) return;
+      const idx = STATUS_CYCLE.indexOf(lead.status);
+      const next = STATUS_CYCLE[(idx + 1) % STATUS_CYCLE.length];
+
+      setLeads((cur) =>
+        cur.map((l) => (l.id === lead.id ? { ...l, status: next } : l)),
+      );
+      setMutErr(null);
+      try {
+        await apiFetch(passcode, `/leads/${lead.id}`, {
+          method: "PATCH",
+          body: JSON.stringify({ status: next }),
+        });
+      } catch (e) {
+        setLeads((cur) =>
+          cur.map((l) =>
+            l.id === lead.id ? { ...l, status: lead.status } : l,
+          ),
+        );
+        setMutErr(
+          `Couldn't update status: ${
+            e instanceof Error ? e.message : String(e)
+          }`,
+        );
+      }
+    },
+    [passcode],
+  );
+
+  const toggleScrubbed = useCallback(
+    async (lead: Lead) => {
+      if (lead.do_not_call) return;
+      const next = !lead.dnc_scrubbed;
+      setLeads((cur) =>
+        cur.map((l) =>
+          l.id === lead.id ? { ...l, dnc_scrubbed: next } : l,
+        ),
+      );
+      setMutErr(null);
+      try {
+        await apiFetch(passcode, `/leads/${lead.id}`, {
+          method: "PATCH",
+          body: JSON.stringify({ dnc_scrubbed: next }),
+        });
+      } catch (e) {
+        setLeads((cur) =>
+          cur.map((l) =>
+            l.id === lead.id ? { ...l, dnc_scrubbed: lead.dnc_scrubbed } : l,
+          ),
+        );
+        setMutErr(
+          `Couldn't update DNC scrubbed flag: ${
+            e instanceof Error ? e.message : String(e)
+          }`,
+        );
+      }
+    },
+    [passcode],
+  );
+
+  function handleScrubbed(blockedIds: string[], clearedIds: string[]) {
+    const blockSet = new Set(blockedIds);
+    const clearSet = new Set(clearedIds);
+    setLeads((cur) =>
+      cur.map((l) => {
+        if (blockSet.has(l.id))
+          return { ...l, do_not_call: true, dnc_scrubbed: false };
+        if (clearSet.has(l.id))
+          return { ...l, do_not_call: false, dnc_scrubbed: true };
+        return l;
+      }),
+    );
+  }
+
+  function handleCreated(lead: Lead) {
+    setLeads((cur) => [lead, ...cur]);
+  }
+
+  function exportCsv() {
+    const header = [
+      "id",
+      "created_at",
+      "name",
+      "phone",
+      "email",
+      "address",
+      "intent",
+      "message",
+      "source",
+      "lead_type",
+      "property_type",
+      "transaction_type",
+      "budget_range",
+      "priority",
+      "follow_up_date",
+      "assigned_to",
+      "lost_reason",
+      "status",
+      "dnc_scrubbed",
+      "do_not_call",
+    ];
+    const escape = (v: string | null | boolean | undefined) => {
+      const s = v == null ? "" : String(v);
+      if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
+      return s;
+    };
+    const rows = visible.map((l) => [
+      l.id,
+      l.created_at,
+      l.name,
+      l.phone,
+      l.email,
+      l.address,
+      l.intent,
+      l.message,
+      l.source,
+      l.lead_type,
+      l.property_type,
+      l.transaction_type,
+      l.budget_range,
+      l.priority,
+      l.follow_up_date,
+      l.assigned_to,
+      l.lost_reason,
+      l.status,
+      l.dnc_scrubbed,
+      l.do_not_call,
+    ]);
+    const csv = [header, ...rows]
+      .map((r) => r.map(escape).join(","))
+      .join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `leads-${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  if (result.status === "error") {
+    return (
+      <div className="rounded-2xl border border-rust/40 bg-rust/[0.05] p-8 text-center">
+        <div className="w-12 h-12 rounded-full border border-rust/40 bg-rust/10 flex items-center justify-center mx-auto mb-4 text-rust">
+          <AlertCircle className="w-5 h-5" strokeWidth={1.5} />
+        </div>
+        <p className="font-display text-2xl font-light text-bone mb-2">
+          Couldn&apos;t load leads.
+        </p>
+        <p className="text-bone/55 text-[14px] mb-6 font-light">
+          {result.error}
+        </p>
+        <button
+          type="button"
+          onClick={result.reload}
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink text-[13px] font-semibold tracking-wide transition-all duration-400"
+        >
+          <RefreshCw className="w-4 h-4" strokeWidth={2} />
+          Retry
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {showAddPanel && (
+        <AddLeadPanel
+          onCreated={(l) => {
+            handleCreated(l);
+          }}
+          onClose={() => setShowAddPanel(false)}
+        />
+      )}
+
+      <DncScrubber onScrubbed={handleScrubbed} />
+
+      <Filters
+        state={filters}
+        onChange={setFilters}
+        sourceOptions={sourceOptions}
+        propertyTypeOptions={propertyTypeOptions}
+        visibleCount={visible.length}
+        onAddLead={() => setShowAddPanel((v) => !v)}
+        onExportCsv={exportCsv}
+        showingAddPanel={showAddPanel}
+      />
+
+      {mutErr && (
+        <div className="mb-4 px-4 py-2.5 rounded-lg border border-rust/40 bg-rust/[0.05] flex items-center gap-3 text-[13px] text-rust">
+          <AlertCircle className="w-4 h-4 shrink-0" strokeWidth={1.75} />
+          <span className="flex-1">{mutErr}</span>
+          <button
+            type="button"
+            onClick={() => setMutErr(null)}
+            className="text-rust/70 hover:text-rust transition-colors duration-200"
+            aria-label="Dismiss error"
+          >
+            ×
+          </button>
+        </div>
+      )}
+
+      <LeadsTable
+        leads={visible}
+        loading={result.status === "loading"}
+        totalCount={leads.length}
+        selectedId={selectedLeadId}
+        onSelect={selectLead}
+        onCycleStatus={cycleStatus}
+        onToggleScrubbed={toggleScrubbed}
+      />
+    </div>
+  );
+}
