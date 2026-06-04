@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import { checkDashboardAuth } from "@/lib/dashboard-auth";
-import { LEAD_COLUMNS } from "@/lib/lead-shape";
+import { LEAD_COLUMNS, LEADS_V_COLUMNS } from "@/lib/lead-shape";
 
 /**
  * GET  /api/dashboard/leads  → list all leads, newest first
@@ -11,6 +11,17 @@ import { LEAD_COLUMNS } from "@/lib/lead-shape";
  * the server using the service role key (bypasses RLS), so anon RLS on
  * public.leads can be locked down to INSERT-only without breaking the
  * dashboard.
+ *
+ * As of Phase 2A commit 3, GET reads from `leads_v` (not the base
+ * `leads` table) so the response carries the five computed flags
+ * defined in supabase/crm_phase1a.sql — canonical_status,
+ * pipeline_stage, is_active, is_hot_active, is_overdue_followup.
+ * Phase 2B (overview KPIs) and 2C (Kanban by stage) consume these
+ * directly. POST still writes to the base `leads` table; views
+ * aren't writable by default in Postgres. Existing /dashboard
+ * legacy client (still tracked until 2D lifts the list to /crm)
+ * keeps working because the extra columns are additive — TS
+ * simply ignores fields the older `Lead` type doesn't name.
  */
 
 export async function GET(req: NextRequest) {
@@ -19,8 +30,8 @@ export async function GET(req: NextRequest) {
   }
 
   const { data, error } = await getSupabaseAdmin()
-    .from("leads")
-    .select(LEAD_COLUMNS)
+    .from("leads_v")
+    .select(LEADS_V_COLUMNS)
     .order("created_at", { ascending: false });
 
   if (error) {
