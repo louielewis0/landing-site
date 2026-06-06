@@ -1,38 +1,19 @@
-"use client";
-
-import { useState } from "react";
-import { supabase } from "@/lib/supabase";
-
+/**
+ * Homepage valuation CTA — mid-page section.
+ *
+ * Originally embedded its own seller-lead form (4 inputs → INSERT with
+ * source: "lead-magnet"). Replaced with a CTA card linking to /home-value
+ * so all valuation traffic funnels through one tool and lands in /crm
+ * tagged source = "home-valuation-tool". Section structure, eyebrow,
+ * headline, sub-copy, bullet list, and id="lead-magnet" anchor are all
+ * preserved so existing in-page navigation links (Hero CTAs, footer
+ * links, etc.) that target #lead-magnet still scroll here.
+ *
+ * Historical leads tagged source="lead-magnet" remain in the database
+ * untouched — see commit message for the optional one-line UPDATE if
+ * you want to retag them.
+ */
 export default function LeadMagnet() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
-  const [err, setErr] = useState("");
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setStatus("loading");
-    setErr("");
-
-    const { error } = await supabase.from("leads").insert({
-      name,
-      email,
-      phone,
-      intent: "sell",
-      message: `Requested valuation for: ${address}`,
-      source: "lead-magnet",
-    });
-
-    if (error) {
-      setStatus("error");
-      setErr(error.message);
-      return;
-    }
-    setStatus("ok");
-  }
-
   return (
     <section
       id="lead-magnet"
@@ -47,7 +28,7 @@ export default function LeadMagnet() {
             <p className="eyebrow mb-5">Free · 24-hour turnaround</p>
             <h2 className="font-display text-5xl md:text-6xl lg:text-[4.5rem] font-light text-bone leading-[1.04] mb-7">
               <span className="block overflow-hidden">
-                <span className="block fade-up">What's your home</span>
+                <span className="block fade-up">What&rsquo;s your home</span>
               </span>
               <span className="block overflow-hidden">
                 <span className="block fade-up delay-1 italic gold-text">actually worth?</span>
@@ -83,78 +64,34 @@ export default function LeadMagnet() {
             </ul>
           </div>
 
-          {status === "ok" ? (
-            <div className="rounded-2xl p-12 text-center bg-bone shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] border border-bone/20">
-              <div className="w-14 h-14 rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 text-[var(--gold-deep)] flex items-center justify-center mx-auto mb-5">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 className="font-display text-3xl font-light text-ink mb-2">
-                You're all set.
-              </h3>
-              <p className="text-ink/65 text-[15px]">Your valuation arrives within 24 hours.</p>
-            </div>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="relative rounded-2xl p-9 bg-bone/[0.06] backdrop-blur-2xl border border-bone/15 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] space-y-4"
-            >
-              <span className="absolute -top-px left-8 right-8 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/50 to-transparent" />
+          {/* CTA card — same glass treatment as the original form card, but
+              routes to /home-value instead of embedding a form. */}
+          <div className="relative rounded-2xl p-9 sm:p-10 bg-bone/[0.06] backdrop-blur-2xl border border-bone/15 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] text-center">
+            <span className="absolute -top-px left-8 right-8 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/50 to-transparent" />
 
-              <div className="mb-2">
-                <p className="eyebrow mb-3">Request your valuation</p>
-                <h3 className="font-display text-3xl font-light text-bone">
-                  Tell us about the property.
-                </h3>
-              </div>
-              <input
-                required
-                type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                placeholder="Property address"
-                className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
-              />
-              <input
-                required
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Full name"
-                className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
-              />
-              <input
-                required
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-                className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
-              />
-              <input
-                required
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="Phone"
-                className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
-              />
-              <button
-                type="submit"
-                disabled={status === "loading"}
-                className="w-full px-6 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[15px] tracking-wide transition-all duration-400 disabled:opacity-60"
-              >
-                {status === "loading" ? "Sending…" : "Send me my valuation →"}
-              </button>
-              {status === "error" && (
-                <p className="text-sm text-rust text-center">{err}</p>
-              )}
-              <p className="text-[11px] text-bone/40 text-center pt-1 tracking-wide">
-                Private. We never share your details.
-              </p>
-            </form>
-          )}
+            <p className="eyebrow mb-3">Start your valuation</p>
+            <h3 className="font-display text-3xl sm:text-4xl font-light text-bone tracking-tight mb-4">
+              A real broker,
+              <br />
+              <span className="italic gold-text">in 24 hours.</span>
+            </h3>
+            <p className="text-[14.5px] text-bone/65 leading-relaxed font-light mb-8 max-w-sm mx-auto">
+              Three quick steps. No algorithm, no instant lowball — a local Troy
+              broker reviews your property and sends a real number back.
+            </p>
+
+            <a
+              href="/home-value"
+              className="group inline-flex items-center justify-center gap-3 w-full px-7 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[15px] tracking-wide transition-all duration-500 shadow-[0_20px_50px_-20px_rgba(200,162,76,0.45)]"
+            >
+              Get my free valuation
+              <span className="transition-transform duration-500 group-hover:translate-x-1">→</span>
+            </a>
+
+            <p className="text-[11px] text-bone/40 text-center pt-5 tracking-wide">
+              Private. We never share your details.
+            </p>
+          </div>
         </div>
       </div>
     </section>
