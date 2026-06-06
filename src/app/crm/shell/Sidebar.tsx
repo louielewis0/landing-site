@@ -1,4 +1,4 @@
-import { LayoutDashboard, Columns3, Users, Activity } from "lucide-react";
+import { LayoutDashboard, Columns3, Users, Activity, BookOpen } from "lucide-react";
 import Brand from "./Brand";
 import NavLink from "./NavLink";
 
@@ -42,6 +42,11 @@ export default function Sidebar() {
           href="/crm/activity"
           label="Activity"
           icon={<Activity className="w-4 h-4" strokeWidth={1.5} />}
+        />
+        <NavLink
+          href="/crm/playbook"
+          label="Playbook"
+          icon={<BookOpen className="w-4 h-4" strokeWidth={1.5} />}
         />
       </nav>
       <footer className="border-t border-bone/10 px-5 py-4 flex items-center gap-2 text-[11px] text-bone/45 tracking-wide">
