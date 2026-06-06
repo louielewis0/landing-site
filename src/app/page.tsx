@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import HomeValueBanner from "@/components/HomeValueBanner";
 import TrustBadges from "@/components/TrustBadges";
 import LeadCards from "@/components/LeadCards";
 import Testimonials from "@/components/Testimonials";
@@ -17,6 +18,7 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
+        <HomeValueBanner />
         <TrustBadges />
         <LeadCards />
         <Testimonials />
