@@ -4,14 +4,28 @@ import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/FloatingCTA";
 import Reveal from "@/components/motion/Reveal";
 import { company } from "@/lib/config";
-import { Star, ExternalLink, Phone } from "lucide-react";
+import { Star, Phone } from "lucide-react";
+import StarGate from "./StarGate";
 
+/**
+ * /reviews — rating-gated capture surface.
+ *
+ * The Google review URL is NEVER hardcoded on this page (or referenced
+ * anywhere in the client bundle). All three previously-public
+ * "Leave a Google review" buttons are gone. The single entry point is
+ * the <StarGate> client component in the hero: 5★ → server route
+ * hands back the URL → same-tab nav. 1–4★ → private feedback form →
+ * POST to public.public_feedback.
+ *
+ * The "How it works" and bottom "Thank you for choosing" sections
+ * retain the cinematic styling but their CTAs now scroll back to the
+ * star picker (id="rating") instead of linking to Google. There is no
+ * Google href anywhere on this page.
+ */
 export const metadata: Metadata = {
   title: "Leave a Review | Real Estate Market Center",
   description: `Share your experience with ${company.name}. Your feedback helps Metro Detroit families find a team they can trust.`,
 };
-
-const GOOGLE_REVIEW_URL = "https://g.page/r/CedXUjtrh5QfEBM/review";
 
 export default function ReviewPage() {
   return (
@@ -41,34 +55,14 @@ export default function ReviewPage() {
 
             <p className="fade-up delay-2 text-[17px] text-bone/60 leading-relaxed max-w-lg mx-auto mb-12 font-light">
               If we helped you buy, sell, or invest in {company.region} real estate,
-              we'd love to hear about your experience. Your review helps future
+              we&rsquo;d love to hear about your experience. Your review helps future
               clients find a team they can trust.
             </p>
 
-            <div className="fade-up delay-3 flex justify-center gap-2 mb-12">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <Star
-                  key={i}
-                  className="w-9 h-9 sm:w-11 sm:h-11 text-[var(--gold)]"
-                  fill="currentColor"
-                  strokeWidth={0}
-                />
-              ))}
-            </div>
-
-            <a
-              href={GOOGLE_REVIEW_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="fade-up delay-3 group inline-flex items-center justify-center gap-3 px-10 py-5 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[15px] tracking-wide transition-all duration-500 shadow-[0_30px_80px_-20px_rgba(200,162,76,0.4)]"
-            >
-              Leave a Google review
-              <ExternalLink className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
-            </a>
-
-            <p className="fade-up delay-3 text-[13px] text-bone/40 mt-6">
-              Takes less than 30 seconds
-            </p>
+            {/* The single gated entry point — interactive stars, branching
+                inside the component based on rating. No Google link in the
+                surrounding markup. */}
+            <StarGate />
           </div>
         </section>
 
@@ -91,18 +85,18 @@ export default function ReviewPage() {
               {[
                 {
                   num: "01",
-                  title: "Click the button",
-                  desc: "Opens your Google account on the review page.",
-                },
-                {
-                  num: "02",
                   title: "Pick your rating",
                   desc: "Tap the stars that match your experience.",
                 },
                 {
+                  num: "02",
+                  title: "Share your experience",
+                  desc: "A few words — what stood out, what didn't.",
+                },
+                {
                   num: "03",
-                  title: "Write a few words",
-                  desc: "Even one sentence helps. Mention what we did well.",
+                  title: "We read every one.",
+                  desc: "Honest feedback shapes how we show up next time.",
                 },
               ].map((s, i) => (
                 <Reveal key={s.num} delay={((i % 3) + 1) as 1 | 2 | 3} className="text-center">
@@ -117,15 +111,13 @@ export default function ReviewPage() {
               ))}
             </div>
 
+            {/* Was: anchor to Google. Now: anchor back to the star picker. */}
             <Reveal delay={3} className="text-center mt-16">
               <a
-                href={GOOGLE_REVIEW_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#rating"
                 className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
               >
-                Leave your review
-                <ExternalLink className="w-4 h-4" />
+                Rate your experience
               </a>
             </Reveal>
           </div>
@@ -153,11 +145,14 @@ export default function ReviewPage() {
             </h2>
             <Reveal delay={2}>
               <p className="text-bone/60 text-[17px] leading-relaxed mb-12 font-light">
-                We don't take your trust for granted. Every review — good or
+                We don&rsquo;t take your trust for granted. Every review — good or
                 constructive — helps us serve {company.region} better.
               </p>
             </Reveal>
 
+            {/* Was: a duplicate Google link next to the Call button. Now:
+                an anchor back to the gated star picker. The Call button
+                stays — it's a direct phone CTA and was always fine. */}
             <Reveal delay={3} className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href={`tel:${company.phoneTel}`}
@@ -167,13 +162,10 @@ export default function ReviewPage() {
                 Call {company.phone}
               </a>
               <a
-                href={GOOGLE_REVIEW_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#rating"
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
               >
-                Leave a review
-                <ExternalLink className="w-4 h-4" />
+                Rate your experience
               </a>
             </Reveal>
           </div>
