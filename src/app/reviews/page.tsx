@@ -53,10 +53,9 @@ export default function ReviewPage() {
               </span>
             </h1>
 
-            <p className="fade-up delay-2 text-[17px] text-bone/60 leading-relaxed max-w-lg mx-auto mb-12 font-light">
-              If we helped you buy, sell, or invest in {company.region} real estate,
-              we&rsquo;d love to hear about your experience. Your review helps future
-              clients find a team they can trust.
+            <p className="fade-up delay-2 text-[17px] text-bone/60 leading-relaxed max-w-md mx-auto mb-12 font-light">
+              If we helped you buy, sell, or invest in {company.region}, we&rsquo;d
+              love to hear how it went.
             </p>
 
             {/* The single gated entry point — interactive stars, branching
