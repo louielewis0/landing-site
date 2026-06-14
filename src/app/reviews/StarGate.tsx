@@ -15,9 +15,18 @@ import {
  * interactive; clicking commits a rating. Two branches:
  *
  *   5★ → POST /api/reviews/google-link → server validates rating === 5 →
- *        returns the URL from a server-only env var → window.location.href
- *        navigates same-tab to Google. The URL is never in the client
- *        bundle, never in the static markup.
+ *        returns the URL from a server-only env var → opens Google in a
+ *        new tab. The URL is never in the client bundle, never in the
+ *        static markup.
+ *
+ *        Mobile-safari quirk: window.open is only honored while the
+ *        call stack is still attached to the user gesture. Awaiting
+ *        the fetch BEFORE calling window.open breaks the chain and
+ *        Safari silently blocks the popup. To survive that, we
+ *        synchronously pre-open a blank tab on the click, then set its
+ *        location once the URL comes back. If the browser refuses even
+ *        the pre-open (rare — embedded webviews, strict configs), we
+ *        fall back to same-tab nav so the user still reaches Google.
  *
  *   1–4★ → no Google. Local feedback form appears (textarea + optional
  *          name + optional email) → POST /api/reviews/feedback → inserts
@@ -59,7 +68,23 @@ export default function StarGate() {
     setErrorMsg("");
 
     if (rating === 5) {
+      // CRITICAL — open the placeholder tab SYNCHRONOUSLY, BEFORE any
+      // await. iOS Safari only honors window.open while the call stack
+      // is still attached to the user gesture; an await before this
+      // line breaks the chain and the popup is silently blocked. This
+      // is the entire reason the previous "new tab after fetch" pattern
+      // failed on iPhone.
+      //
+      // We intentionally omit 'noopener' here. With noopener, the
+      // browser returns null instead of a window reference, which would
+      // strand us — we couldn't redirect the tab we just opened. The
+      // destination is our own Google Business Profile URL, so the
+      // weaker hygiene is an acceptable trade for the redirect actually
+      // working. (For belt-and-suspenders, we could set win.opener =
+      // null right after open(); skipping for now to keep this small.)
+      const win = window.open("", "_blank");
       setStatus("redirecting");
+
       try {
         const res = await fetch("/api/reviews/google-link", {
           method: "POST",
@@ -73,15 +98,26 @@ export default function StarGate() {
         }
         const data = (await res.json()) as { url?: string };
         if (!data.url) throw new Error("Missing redirect URL.");
-        // Open Google in a new tab so the user's session on our site
-        // stays put. noopener,noreferrer is standard hygiene — the new
-        // tab can't reach back into our window.
-        window.open(data.url, "_blank", "noopener,noreferrer");
-        // Reset the StarGate to its initial state. The visible
-        // confirmation is the new tab itself; we don't need a
-        // "thanks!" interstitial here.
-        changeRating();
+
+        if (win && !win.closed) {
+          // Pre-open succeeded — redirect the placeholder tab to Google.
+          // Our tab stays on /reviews; we reset the gate.
+          win.location.href = data.url;
+          changeRating();
+        } else {
+          // The browser blocked even the pre-open (embedded webviews,
+          // strict configs, "Block Pop-ups" set very aggressively). Fall
+          // back to same-tab navigation so the user still reaches Google.
+          // We DON'T reset state here — the page is about to unload.
+          window.location.href = data.url;
+        }
       } catch (e) {
+        // Fetch failed (network error, env var missing, etc.). Close the
+        // placeholder tab so the user doesn't end up with a stranded
+        // blank window, and surface the error in our UI.
+        if (win && !win.closed) {
+          win.close();
+        }
         setStatus("error");
         setErrorMsg(
           e instanceof Error ? e.message : "Something went wrong.",
