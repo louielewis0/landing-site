@@ -49,12 +49,18 @@ export default function PipelineClient() {
   const updater = useUpdateLeadStatus();
   const deleter = useDeleteLead();
 
-  // Local mirror seeded from useLeads and re-seeded whenever the
-  // upstream array changes (e.g. after a manual reload).
+  // Local mirror seeded from useLeads and re-seeded only when the
+  // upstream array actually changes — NOT on every render. Depending
+  // on the whole `result` object would re-fire this effect every time
+  // PipelineClient re-renders (useLeads returns a fresh object literal
+  // each call), which would wipe any optimistic update from a drag
+  // or delete the moment React committed it. Depending on the array
+  // reference + the status flag means: on first ready, on reload, and
+  // nowhere else.
   const [leads, setLeads] = useState<Lead[]>([]);
   useEffect(() => {
     if (result.status === "ready") setLeads(result.leads);
-  }, [result]);
+  }, [result.status, result.leads]);
 
   const [error, setError] = useState<string | null>(null);
   // Tracks which card is currently mid-delete so the confirmation

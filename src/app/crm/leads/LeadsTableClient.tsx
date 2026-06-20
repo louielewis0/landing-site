@@ -45,10 +45,15 @@ export default function LeadsTableClient() {
   const searchParams = useSearchParams();
 
   const result = useLeads();
+  // Local mirror seeded from useLeads. Depending on `result.status` +
+  // `result.leads` instead of the whole result object — see
+  // PipelineClient for the same fix. useLeads returns a new object
+  // literal every render, and `[result]` would wipe any optimistic
+  // mutation we add here later.
   const [leads, setLeads] = useState<Lead[]>([]);
   useEffect(() => {
     if (result.status === "ready") setLeads(result.leads);
-  }, [result]);
+  }, [result.status, result.leads]);
 
   const [filters, setFilters] = useState<FilterState>(makeEmptyFilters());
   const [showAddPanel, setShowAddPanel] = useState(false);
