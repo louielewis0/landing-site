@@ -13,6 +13,7 @@ import { AlertCircle, RefreshCw, X } from "lucide-react";
 import Column from "./Column";
 import { useLeads } from "../_lib/use-leads";
 import { useUpdateLeadStatus } from "../_lib/use-update-lead-status";
+import { useDeleteLead } from "../_lib/use-delete-lead";
 import { PIPELINE_STAGES } from "@/lib/pipeline-stages";
 import type { Lead, PipelineStage } from "@/lib/lead-shape";
 
@@ -46,6 +47,7 @@ import type { Lead, PipelineStage } from "@/lib/lead-shape";
 export default function PipelineClient() {
   const result = useLeads();
   const updater = useUpdateLeadStatus();
+  const deleter = useDeleteLead();
 
   // Local mirror seeded from useLeads and re-seeded whenever the
   // upstream array changes (e.g. after a manual reload).
@@ -55,6 +57,10 @@ export default function PipelineClient() {
   }, [result]);
 
   const [error, setError] = useState<string | null>(null);
+  // Tracks which card is currently mid-delete so the confirmation
+  // button can render a spinner state without us widening the deleter
+  // hook to expose a multi-id pending map.
+  const [deletingLeadId, setDeletingLeadId] = useState<string | null>(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
@@ -111,6 +117,28 @@ export default function PipelineClient() {
       });
   }
 
+  function handleDelete(leadId: string) {
+    const previous = leads.find((l) => l.id === leadId);
+    if (!previous) return;
+
+    setDeletingLeadId(leadId);
+    setError(null);
+    // Optimistic remove — the card vanishes immediately so a slow
+    // network doesn't leave the confirmation row stuck on "Deleting…"
+    setLeads((prev) => prev.filter((l) => l.id !== leadId));
+
+    deleter
+      .mutate(leadId)
+      .catch((e: unknown) => {
+        // Restore the row in its original position. We don't know the
+        // exact index from inside the setter, so push to the same
+        // bucket's tail — close enough and the user can grab it back.
+        setLeads((prev) => [...prev, previous]);
+        setError(e instanceof Error ? e.message : String(e));
+      })
+      .finally(() => setDeletingLeadId(null));
+  }
+
   if (result.status === "loading") {
     return (
       <div className="flex gap-3 overflow-x-auto pb-4">
@@ -161,9 +189,7 @@ export default function PipelineClient() {
       {error && (
         <div className="mb-4 px-4 py-2.5 rounded-lg border border-rust/40 bg-rust/[0.05] flex items-center gap-3 text-[13px] text-rust">
           <AlertCircle className="w-4 h-4 shrink-0" strokeWidth={1.75} />
-          <span className="flex-1">
-            Couldn&apos;t move lead: {error}
-          </span>
+          <span className="flex-1">{error}</span>
           <button
             type="button"
             onClick={() => setError(null)}
@@ -184,6 +210,8 @@ export default function PipelineClient() {
               description={s.description}
               isTerminal={s.isTerminal}
               leads={buckets.get(s.stage) ?? []}
+              onDelete={handleDelete}
+              deletingLeadId={deletingLeadId}
             />
           ))}
         </div>

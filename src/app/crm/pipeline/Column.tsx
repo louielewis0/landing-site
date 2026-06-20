@@ -29,12 +29,16 @@ export default function Column({
   description,
   isTerminal,
   leads,
+  onDelete,
+  deletingLeadId,
 }: {
   stage: PipelineStage;
   label: string;
   description: string;
   isTerminal: boolean;
   leads: Lead[];
+  onDelete: (leadId: string) => void;
+  deletingLeadId: string | null;
 }) {
   const { setNodeRef, isOver } = useDroppable({ id: stage });
 
@@ -70,7 +74,14 @@ export default function Column({
             drop leads here
           </p>
         ) : (
-          leads.map((lead) => <KanbanCard key={lead.id} lead={lead} />)
+          leads.map((lead) => (
+            <KanbanCard
+              key={lead.id}
+              lead={lead}
+              onDelete={onDelete}
+              deleting={deletingLeadId === lead.id}
+            />
+          ))
         )}
       </div>
     </div>

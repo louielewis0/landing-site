@@ -4,6 +4,43 @@ import { checkDashboardAuth } from "@/lib/dashboard-auth";
 import { LEAD_COLUMNS } from "@/lib/lead-shape";
 
 /**
+ * DELETE /api/dashboard/leads/[id]  → hard delete a lead row
+ *
+ * Permanent removal. The activities table FK is `on delete cascade`,
+ * so any per-lead touch timeline rows get cleaned up automatically by
+ * Postgres — we don't have to fan out a secondary delete here.
+ *
+ * Passcode-gated. Service-role connection bypasses RLS the same way
+ * every other /api/dashboard/* write does. No body required.
+ */
+export async function DELETE(
+  req: NextRequest,
+  ctx: { params: Promise<{ id: string }> },
+) {
+  if (!checkDashboardAuth(req)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { id } = await ctx.params;
+  if (!id) {
+    return NextResponse.json({ error: "id is required" }, { status: 400 });
+  }
+
+  const { error } = await getSupabaseAdmin()
+    .from("leads")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
+  }
+  // 204 is the canonical "deleted, nothing to return" status. We return
+  // a small JSON body anyway so the fetch wrapper has something to
+  // parse — easier than special-casing 204 in apiFetch.
+  return NextResponse.json({ ok: true });
+}
+
+/**
  * PATCH /api/dashboard/leads/[id]  → update whitelisted fields on a lead
  *
  * Whitelist prevents the client from updating arbitrary columns
