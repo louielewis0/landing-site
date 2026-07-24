@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, UserPlus, AlertCircle } from "lucide-react";
+import { X, UserPlus, AlertCircle, Trash2 } from "lucide-react";
 import { usePatchLead } from "../_lib/use-patch-lead";
+import { useDeleteLead } from "../_lib/use-delete-lead";
 import { relativeTime } from "../_lib/relative-time";
 import EditableField from "./EditableField";
 import StatusSelect from "./StatusSelect";
@@ -64,12 +65,33 @@ export default function LeadDrawer({
   lead,
   onClose,
   onLocalUpdate,
+  onDeleted,
 }: {
   lead: Lead;
   onClose: () => void;
   onLocalUpdate: (patch: Partial<Lead>) => void;
+  onDeleted: () => void;
 }) {
   const { patch } = usePatchLead();
+  const del = useDeleteLead();
+  // Two-tap delete, same pattern as the Kanban card: first tap arms
+  // the confirm row, second tap fires the DELETE. Re-seeded closed
+  // when the drawer switches to a different lead.
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
+  useEffect(() => {
+    setConfirmingDelete(false);
+  }, [lead.id]);
+
+  async function handleDelete() {
+    setError(null);
+    try {
+      await del.mutate(draft.id);
+      onDeleted();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+      setConfirmingDelete(false);
+    }
+  }
 
   // Internal mirror so optimistic edits feel instant. Re-seeded
   // whenever the lead's id changes (i.e. user clicked a
@@ -388,6 +410,45 @@ export default function LeadDrawer({
           <section>
             <p className="eyebrow mb-3">Activity</p>
             <ActivityTimeline leadId={draft.id} />
+          </section>
+
+          {/* Danger zone — two-tap delete */}
+          <section className="pt-4 border-t border-bone/[0.06]">
+            {!confirmingDelete ? (
+              <button
+                type="button"
+                onClick={() => setConfirmingDelete(true)}
+                className="inline-flex items-center gap-2 text-[12.5px] text-bone/40 hover:text-rust tracking-wide transition-colors"
+              >
+                <Trash2 className="w-3.5 h-3.5" strokeWidth={1.75} />
+                Delete lead
+              </button>
+            ) : (
+              <div className="rounded-xl border border-rust/40 bg-rust/[0.05] p-4 flex flex-wrap items-center gap-3">
+                <span className="text-[13px] text-bone/80 font-light flex-1 min-w-[180px]">
+                  Permanently delete{" "}
+                  <span className="text-bone font-medium">{draft.name}</span>?
+                  Activity history goes with it. If this address is still in a
+                  future Matrix export, it will re-import as a fresh lead.
+                </span>
+                <button
+                  type="button"
+                  onClick={handleDelete}
+                  disabled={del.pending}
+                  className="px-4 py-2 rounded-full bg-rust text-bone text-[12.5px] font-semibold tracking-wide hover:opacity-90 transition-opacity disabled:opacity-50"
+                >
+                  {del.pending ? "Deleting…" : "Yes, delete"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setConfirmingDelete(false)}
+                  disabled={del.pending}
+                  className="text-[12px] text-bone/50 hover:text-bone/80 transition-colors tracking-wide"
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
           </section>
 
           {/* Meta footer */}

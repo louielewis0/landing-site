@@ -386,6 +386,10 @@ export default function LeadsTableClient() {
                   ),
                 )
               }
+              onDeleted={() => {
+                setLeads((cur) => cur.filter((l) => l.id !== selectedLeadId));
+                selectLead(selectedLeadId); // toggles ?lead= off → drawer closes
+              }}
             />
           );
         })()}
