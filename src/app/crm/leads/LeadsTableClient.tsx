@@ -12,6 +12,7 @@ import {
 } from "@/lib/lead-shape";
 import AddLeadPanel from "./AddLeadPanel";
 import DncScrubber from "./DncScrubber";
+import ImportPanel from "./ImportPanel";
 import Filters, { makeEmptyFilters, type FilterState } from "./Filters";
 import LeadsTable from "./LeadsTable";
 import LeadDrawer from "./LeadDrawer";
@@ -323,6 +324,10 @@ export default function LeadsTableClient() {
           onClose={() => setShowAddPanel(false)}
         />
       )}
+
+      <ImportPanel
+        onImported={(imported) => setLeads((cur) => [...imported, ...cur])}
+      />
 
       <DncScrubber onScrubbed={handleScrubbed} />
 
