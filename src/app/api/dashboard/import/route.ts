@@ -126,29 +126,80 @@ export async function POST(req: NextRequest) {
   }
 
   const rows = parseDelimited(csv);
-  if (rows.length < 2) {
+  if (!rows.length) {
     return NextResponse.json(
-      { error: "Couldn't find a header row plus data rows in that paste." },
+      { error: "Couldn't find any rows in that paste." },
       { status: 400 }
     );
   }
 
   const headers = rows[0].map((h) => h.trim().toLowerCase());
-  const cAddr = findCol(headers, "address");
+  let cAddr = findCol(headers, "address");
+  let cMls = findCol(headers, "mls #", "mls#", "mls number", "mls");
+  let cStat = findCol(headers, "stat", "status");
+  let cTy = findCol(headers, "ty", "type", "prop type");
+  let cCity = findCol(headers, "city");
+  let cZip = findCol(headers, "zip", "postal");
+  let cCounty = findCol(headers, "county");
+  let cPrice = findCol(headers, "current price", "list price", "price");
+  let cDom = findCol(headers, "dom", "days on market", "cdom");
+  let dataRows = rows.slice(1);
+
   if (cAddr === -1) {
+    // No header row — infer columns from the shape of the data itself.
+    // Handles headerless pastes and copy/paste straight off the Matrix
+    // results grid. Every row is treated as data.
+    const width = Math.max(...rows.map((r) => r.length));
+    const frac = (test: (v: string) => boolean, exclude: number[] = []) => {
+      let best = -1;
+      let bestScore = 0;
+      for (let i = 0; i < width; i++) {
+        if (exclude.includes(i)) continue;
+        let hits = 0;
+        for (const r of rows) if (test((r[i] ?? "").trim())) hits++;
+        const score = hits / rows.length;
+        if (score > bestScore) {
+          bestScore = score;
+          best = i;
+        }
+      }
+      return bestScore >= 0.5 ? best : -1;
+    };
+
+    cAddr = frac((v) => /^\d+\s+[A-Za-z]/.test(v));
+    if (cAddr === -1) {
+      return NextResponse.json(
+        {
+          error: `Couldn't find an Address column (no header row, and no column looks like street addresses). First row seen: ${rows[0].join(" | ")}`,
+        },
+        { status: 400 }
+      );
+    }
+    cMls = frac((v) => /^\d{8,}$/.test(v), [cAddr]);
+    cStat = frac((v) => /^[A-Z]{3,6}$/.test(v), [cAddr, cMls]);
+    cTy = frac((v) => /^[A-Z]{2}$/.test(v), [cAddr, cMls, cStat]);
+    cPrice = frac((v) => /\$\s?\d/.test(v), [cAddr, cMls, cStat, cTy]);
+    cDom = frac((v) => /\d+\/\d+/.test(v) && !/\$/.test(v), [cAddr, cMls, cStat, cTy, cPrice]);
+    const MI_COUNTIES = new Set([
+      "oakland", "macomb", "wayne", "livingston", "washtenaw",
+      "genesee", "lapeer", "st. clair", "st clair", "monroe", "shiawassee",
+    ]);
+    cCounty = frac((v) => MI_COUNTIES.has(v.toLowerCase()), [cAddr, cMls, cStat, cTy, cPrice, cDom]);
+    // City: first remaining column that's mostly letters/spaces
+    cCity = frac(
+      (v) => v.length > 2 && /^[A-Za-z][A-Za-z .'-]+$/.test(v),
+      [cAddr, cMls, cStat, cTy, cPrice, cDom, cCounty]
+    );
+    cZip = frac((v) => /^\d{5}(-\d{4})?$/.test(v), [cAddr, cMls, cStat, cTy, cPrice, cDom, cCounty, cCity]);
+    dataRows = rows;
+  }
+
+  if (!dataRows.length) {
     return NextResponse.json(
-      { error: `No Address column found. Headers seen: ${rows[0].join(" | ")}` },
+      { error: "Found a header row but no listing rows under it." },
       { status: 400 }
     );
   }
-  const cMls = findCol(headers, "mls #", "mls#", "mls number", "mls");
-  const cStat = findCol(headers, "stat", "status");
-  const cTy = findCol(headers, "ty", "type", "prop type");
-  const cCity = findCol(headers, "city");
-  const cZip = findCol(headers, "zip", "postal");
-  const cCounty = findCol(headers, "county");
-  const cPrice = findCol(headers, "current price", "list price", "price");
-  const cDom = findCol(headers, "dom", "days on market", "cdom");
 
   // Existing leads for dedupe — address + message (message carries MLS #)
   const admin = getSupabaseAdmin();
@@ -172,7 +223,7 @@ export async function POST(req: NextRequest) {
   let duplicates = 0;
   let invalid = 0;
 
-  for (const r of rows.slice(1)) {
+  for (const r of dataRows) {
     const rawAddr = (r[cAddr] ?? "").trim();
     if (!rawAddr) {
       invalid++;
@@ -241,7 +292,7 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({
     report: {
-      rows: rows.length - 1,
+      rows: dataRows.length,
       imported: insertedLeads.length,
       duplicates,
       invalid,
