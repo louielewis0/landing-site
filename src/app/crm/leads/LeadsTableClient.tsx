@@ -14,6 +14,7 @@ import AddLeadPanel from "./AddLeadPanel";
 import DncScrubber from "./DncScrubber";
 import ImportPanel from "./ImportPanel";
 import Filters, { makeEmptyFilters, type FilterState } from "./Filters";
+import TraceTargets from "./TraceTargets";
 import LeadsTable from "./LeadsTable";
 import LeadDrawer from "./LeadDrawer";
 
@@ -327,6 +328,14 @@ export default function LeadsTableClient() {
 
       <ImportPanel
         onImported={(imported) => setLeads((cur) => [...imported, ...cur])}
+        onUpdated={(updated) => {
+          const byId = new Map(updated.map((l) => [l.id, l]));
+          setLeads((cur) => cur.map((l) => byId.get(l.id) ?? l));
+        }}
+      />
+
+      <TraceTargets
+        leads={leads}
         onUpdated={(updated) => {
           const byId = new Map(updated.map((l) => [l.id, l]));
           setLeads((cur) => cur.map((l) => byId.get(l.id) ?? l));
