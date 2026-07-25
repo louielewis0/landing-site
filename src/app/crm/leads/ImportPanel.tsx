@@ -21,14 +21,17 @@ import type { Lead } from "@/lib/lead-shape";
 export type ImportReport = {
   rows: number;
   imported: number;
+  updated?: number;
   duplicates: number;
   invalid: number;
 };
 
 export default function ImportPanel({
   onImported,
+  onUpdated,
 }: {
   onImported: (leads: Lead[]) => void;
+  onUpdated: (leads: Lead[]) => void;
 }) {
   const passcode = usePasscode();
   const fileRef = useRef<HTMLInputElement>(null);
@@ -55,16 +58,17 @@ export default function ImportPanel({
     setErr(null);
     setReport(null);
     try {
-      const data = await apiFetch<{ report: ImportReport; leads: Lead[] }>(
-        passcode,
-        "/import",
-        {
-          method: "POST",
-          body: JSON.stringify({ csv: input }),
-        },
-      );
+      const data = await apiFetch<{
+        report: ImportReport;
+        leads: Lead[];
+        updatedLeads?: Lead[];
+      }>(passcode, "/import", {
+        method: "POST",
+        body: JSON.stringify({ csv: input }),
+      });
       setReport(data.report);
       if (data.leads.length) onImported(data.leads);
+      if (data.updatedLeads?.length) onUpdated(data.updatedLeads);
     } catch (e) {
       setErr(e instanceof Error ? e.message : "Import failed");
     } finally {
@@ -81,11 +85,13 @@ export default function ImportPanel({
             Import expireds from an MLS export
           </h2>
           <p className="text-[13px] text-bone/55 mt-2 font-light max-w-2xl">
-            Paste (or pick) the CSV export from the EXPIREDS DAILY search or
-            the 0-365 backlog pull. Each row becomes a{" "}
+            Paste (or pick) a Matrix export <em>or</em> a skip-trace results
+            file. New addresses become{" "}
             <span className="text-[var(--gold-soft)]">source: Expired</span>{" "}
-            seller lead due for follow-up today. Already-imported rows are
-            skipped automatically, so re-running the same file is safe.
+            seller leads due today. Rows matching an existing lead fill in
+            its missing <span className="text-[var(--gold-soft)]">phone</span>{" "}
+            and owner name instead of duplicating — so BatchSkipTracing
+            results drop straight in. Re-running any file is safe.
           </p>
         </div>
         <button
@@ -146,9 +152,10 @@ export default function ImportPanel({
       )}
 
       {report && (
-        <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="mt-5 grid grid-cols-2 sm:grid-cols-5 gap-3">
           <ImportTile label="Rows in file" value={report.rows} />
           <ImportTile label="Imported" value={report.imported} accent />
+          <ImportTile label="Enriched (phone/name)" value={report.updated ?? 0} accent />
           <ImportTile label="Duplicates skipped" value={report.duplicates} />
           <ImportTile label="Invalid rows" value={report.invalid} danger />
         </div>

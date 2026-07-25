@@ -327,6 +327,10 @@ export default function LeadsTableClient() {
 
       <ImportPanel
         onImported={(imported) => setLeads((cur) => [...imported, ...cur])}
+        onUpdated={(updated) => {
+          const byId = new Map(updated.map((l) => [l.id, l]));
+          setLeads((cur) => cur.map((l) => byId.get(l.id) ?? l));
+        }}
       />
 
       <DncScrubber onScrubbed={handleScrubbed} />

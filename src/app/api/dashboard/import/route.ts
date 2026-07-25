@@ -143,6 +143,13 @@ export async function POST(req: NextRequest) {
   let cCounty = findCol(headers, "county");
   let cPrice = findCol(headers, "current price", "list price", "price");
   let cDom = findCol(headers, "dom", "days on market", "cdom");
+  // Skip-trace enrichment columns (BatchSkipTracing/REISkip result files):
+  // phone + owner name. When a row matches an existing lead, these fill
+  // in the blanks instead of the row counting as a plain duplicate.
+  let cPhone = findCol(headers, "phone", "mobile", "cell");
+  const cFirst = findCol(headers, "first name", "firstname");
+  const cLast = findCol(headers, "last name", "lastname");
+  const cName = findCol(headers, "owner name", "full name", "contact name", "name");
   let dataRows = rows.slice(1);
 
   if (cAddr === -1) {
@@ -191,6 +198,15 @@ export async function POST(req: NextRequest) {
       [cAddr, cMls, cStat, cTy, cPrice, cDom, cCounty]
     );
     cZip = frac((v) => /^\d{5}(-\d{4})?$/.test(v), [cAddr, cMls, cStat, cTy, cPrice, cDom, cCounty, cCity]);
+    cPhone = frac(
+      (v) => {
+        const d = v.replace(/\D/g, "");
+        const tenDigit = d.length === 10 || (d.length === 11 && d.startsWith("1"));
+        // require formatting punctuation so bare MLS-style digit runs don't false-match
+        return tenDigit && /[-() .]/.test(v.trim());
+      },
+      [cAddr, cMls, cStat, cTy, cPrice, cDom, cCounty, cCity, cZip]
+    );
     dataRows = rows;
   }
 
@@ -201,25 +217,47 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Existing leads for dedupe — address + message (message carries MLS #)
+  // Existing leads for dedupe + enrichment. Address and MLS # (carried
+  // in message) both key back to the lead so a matched row can fill in
+  // a missing phone / placeholder name instead of just counting as dupe.
   const admin = getSupabaseAdmin();
   const { data: existing, error: selErr } = await admin
     .from("leads")
-    .select("id, address, message");
+    .select("id, address, message, phone, name");
   if (selErr) {
     return NextResponse.json({ error: selErr.message }, { status: 500 });
   }
-  const seenAddr = new Set<string>();
-  const seenMls = new Set<string>();
-  for (const l of existing ?? []) {
+  type ExistingLead = { id: string; address: string | null; message: string | null; phone: string | null; name: string };
+  const byAddr = new Map<string, ExistingLead>();
+  const byMls = new Map<string, ExistingLead>();
+  for (const l of (existing ?? []) as ExistingLead[]) {
     const na = normAddr(l.address);
-    if (na) seenAddr.add(na);
+    if (na && !byAddr.has(na)) byAddr.set(na, l);
     const mlsMatches = (l.message ?? "").match(/MLS #(\w+)/g) ?? [];
-    for (const m of mlsMatches) seenMls.add(m.replace("MLS #", ""));
+    for (const m of mlsMatches) byMls.set(m.replace("MLS #", ""), l);
   }
+
+  const formatPhone = (raw: string): string | null => {
+    let d = raw.replace(/\D/g, "");
+    if (d.length === 11 && d.startsWith("1")) d = d.slice(1);
+    if (d.length !== 10) return null;
+    return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+  };
+  const rowName = (r: string[]): string | null => {
+    if (cFirst !== -1 && cLast !== -1) {
+      const n = `${(r[cFirst] ?? "").trim()} ${(r[cLast] ?? "").trim()}`.trim();
+      return n.length > 1 ? n : null;
+    }
+    if (cName !== -1) {
+      const n = (r[cName] ?? "").trim();
+      return n.length > 1 ? n : null;
+    }
+    return null;
+  };
 
   const today = new Date().toISOString().slice(0, 10);
   const inserts: Record<string, string | null>[] = [];
+  const enrichments = new Map<string, { phone?: string; name?: string }>();
   let duplicates = 0;
   let invalid = 0;
 
@@ -231,12 +269,28 @@ export async function POST(req: NextRequest) {
     }
     const mls = cMls !== -1 ? (r[cMls] ?? "").trim() : "";
     const na = normAddr(rawAddr);
-    if ((mls && seenMls.has(mls)) || (na && seenAddr.has(na))) {
+    const matched = (mls && byMls.get(mls)) || (na && byAddr.get(na)) || null;
+    if (matched && !matched.id) {
+      // matched a row inserted earlier in this same file — plain dupe
       duplicates++;
       continue;
     }
-    if (mls) seenMls.add(mls);
-    if (na) seenAddr.add(na);
+    if (matched) {
+      // Enrichment pass: fill blanks on the existing lead from this row.
+      const patch: { phone?: string; name?: string } = enrichments.get(matched.id) ?? {};
+      const phone = cPhone !== -1 ? formatPhone(r[cPhone] ?? "") : null;
+      if (phone && !matched.phone && !patch.phone) patch.phone = phone;
+      const nm = rowName(r);
+      if (nm && matched.name.startsWith("Owner —") && !patch.name) patch.name = nm;
+      if (patch.phone || patch.name) {
+        enrichments.set(matched.id, patch);
+      } else {
+        duplicates++;
+      }
+      continue;
+    }
+    if (mls) byMls.set(mls, { id: "", address: rawAddr, message: null, phone: null, name: "" });
+    if (na) byAddr.set(na, { id: "", address: rawAddr, message: null, phone: null, name: "" });
 
     const city = cCity !== -1 ? (r[cCity] ?? "").trim() : "";
     const zip = cZip !== -1 ? (r[cZip] ?? "").trim() : "";
@@ -290,13 +344,35 @@ export async function POST(req: NextRequest) {
     insertedLeads.push(...((data ?? []) as unknown as Lead[]));
   }
 
+  // Apply enrichments (phone / name fill-ins on existing leads)
+  const updatedLeads: Lead[] = [];
+  for (const [id, patch] of enrichments) {
+    const { data, error } = await admin
+      .from("leads")
+      .update(patch)
+      .eq("id", id)
+      .select(LEAD_COLUMNS)
+      .single();
+    if (error) {
+      return NextResponse.json(
+        {
+          error: `Imported ${insertedLeads.length}, but enrichment failed after ${updatedLeads.length} updates: ${error.message}`,
+        },
+        { status: 500 }
+      );
+    }
+    updatedLeads.push(data as unknown as Lead);
+  }
+
   return NextResponse.json({
     report: {
       rows: dataRows.length,
       imported: insertedLeads.length,
+      updated: updatedLeads.length,
       duplicates,
       invalid,
     },
     leads: insertedLeads,
+    updatedLeads,
   });
 }
