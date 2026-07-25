@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, UserPlus, AlertCircle, Trash2 } from "lucide-react";
+import { X, UserPlus, AlertCircle, Trash2, PhoneOutgoing } from "lucide-react";
+import { usePasscode } from "../gate";
+import { apiFetch } from "../_lib/api-client";
 import { usePatchLead } from "../_lib/use-patch-lead";
 import { useDeleteLead } from "../_lib/use-delete-lead";
 import { relativeTime } from "../_lib/relative-time";
@@ -74,6 +76,41 @@ export default function LeadDrawer({
 }) {
   const { patch } = usePatchLead();
   const del = useDeleteLead();
+  const passcode = usePasscode();
+
+  // Skip-trace state. Reset when the drawer moves to another lead.
+  const [tracing, setTracing] = useState(false);
+  const [traceMsg, setTraceMsg] = useState<string | null>(null);
+  useEffect(() => {
+    setTracing(false);
+    setTraceMsg(null);
+  }, [lead.id]);
+
+  async function handleTrace() {
+    setTracing(true);
+    setTraceMsg(null);
+    setError(null);
+    try {
+      const data = await apiFetch<{
+        lead: Lead;
+        phones: { number: string; type?: string }[];
+        used: number;
+        cap: number;
+      }>(passcode, "/trace", {
+        method: "POST",
+        body: JSON.stringify({ leadId: draft.id }),
+      });
+      setDraft((d) => ({ ...d, phone: data.lead.phone, updated_at: data.lead.updated_at }));
+      onLocalUpdate({ phone: data.lead.phone, updated_at: data.lead.updated_at });
+      setTraceMsg(
+        `Found ${data.phones.length} number${data.phones.length === 1 ? "" : "s"} · search ${data.used}/${data.cap} used`,
+      );
+    } catch (e) {
+      setTraceMsg(e instanceof Error ? e.message : String(e));
+    } finally {
+      setTracing(false);
+    }
+  }
   // Two-tap delete, same pattern as the Kanban card: first tap arms
   // the confirm row, second tap fires the DELETE. Re-seeded closed
   // when the drawer switches to a different lead.
@@ -297,6 +334,24 @@ export default function LeadDrawer({
                 placeholder="No phone"
                 onSave={(v) => saveField("phone", v as string | null)}
               />
+              {!draft.phone && (
+                <div className="pl-1 pb-1">
+                  <button
+                    type="button"
+                    onClick={handleTrace}
+                    disabled={tracing}
+                    className="inline-flex items-center gap-2 text-[12px] text-[var(--gold-soft)] hover:text-[var(--gold)] tracking-wide transition-colors disabled:opacity-50"
+                  >
+                    <PhoneOutgoing className="w-3.5 h-3.5" strokeWidth={1.75} />
+                    {tracing ? "Tracing…" : "Find phone (skip trace)"}
+                  </button>
+                </div>
+              )}
+              {traceMsg && (
+                <p className="pl-1 pb-1 text-[11.5px] text-bone/55 font-light">
+                  {traceMsg}
+                </p>
+              )}
               <EditableField
                 label="Email"
                 value={draft.email ?? ""}
