@@ -109,7 +109,7 @@ export async function POST(req: NextRequest) {
   const admin = getSupabaseAdmin();
   const { data: lead, error: leadErr } = await admin
     .from("leads")
-    .select("id, name, address, phone")
+    .select("id, name, address, phone, email")
     .eq("id", leadId)
     .single();
   if (leadErr || !lead) {
@@ -222,9 +222,24 @@ export async function POST(req: NextRequest) {
   phones.sort((a, b) => score(b) - score(a));
   const best = phones[0];
 
+  // Validated email rides along free in the same response (person.emails).
+  let email: string | null = null;
+  const person = (apiJson as { person?: { emails?: unknown } }).person;
+  if (person && Array.isArray(person.emails)) {
+    for (const e of person.emails as Record<string, unknown>[]) {
+      if (typeof e?.email === "string" && e.email.includes("@") && e.isValidated !== false) {
+        email = e.email;
+        break;
+      }
+    }
+  }
+
+  const updatePayload: { phone: string; email?: string } = { phone: best.number };
+  if (email && !lead.email) updatePayload.email = email;
+
   const { data: updated, error: updErr } = await admin
     .from("leads")
-    .update({ phone: best.number })
+    .update(updatePayload)
     .eq("id", lead.id)
     .select(LEAD_COLUMNS)
     .single();
@@ -241,7 +256,7 @@ export async function POST(req: NextRequest) {
     type: "note",
     body: `${TRACE_MARKER} best ${best.number}${best.type ? ` (${best.type})` : ""}${
       others ? ` · also: ${others}` : ""
-    }`,
+    }${email ? ` · email: ${email}` : ""}`,
   });
 
   return NextResponse.json({
