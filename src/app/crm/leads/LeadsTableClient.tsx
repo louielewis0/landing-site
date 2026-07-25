@@ -126,23 +126,41 @@ export default function LeadsTableClient() {
     });
   }, [leads, filters]);
 
-  // Row selection updates ?lead=<id> in the URL. 2E's drawer
-  // subscribes to that param to pop in. Until then, the URL
-  // change + row highlight is the only visible side-effect.
-  const selectLead = useCallback(
-    (id: string) => {
+  // Drawer open/close is LOCAL state — instant, no server round-trip.
+  // The ?lead=<id> URL param is synced in the background (so deep
+  // links and back/forward still work) but the drawer never waits on
+  // the router: a stale client after a fresh deploy used to make
+  // router.push fail silently, which read as "the X does nothing."
+  const [openLeadId, setOpenLeadId] = useState<string | null>(null);
+  useEffect(() => {
+    // External URL changes (deep link, back/forward) drive the drawer.
+    setOpenLeadId(selectedLeadId);
+  }, [selectedLeadId]);
+
+  const syncUrl = useCallback(
+    (id: string | null, method: "push" | "replace") => {
       const params = new URLSearchParams(searchParams);
-      if (selectedLeadId === id) {
-        params.delete("lead");
-      } else {
-        params.set("lead", id);
-      }
-      router.push(
+      if (id) params.set("lead", id);
+      else params.delete("lead");
+      router[method](
         `${pathname}${params.toString() ? `?${params.toString()}` : ""}`,
         { scroll: false },
       );
     },
-    [pathname, router, searchParams, selectedLeadId],
+    [pathname, router, searchParams],
+  );
+
+  const selectLead = useCallback(
+    (id: string) => {
+      const next = openLeadId === id ? null : id;
+      setOpenLeadId(next); // drawer reacts NOW
+      try {
+        syncUrl(next, next ? "push" : "replace"); // URL catches up
+      } catch {
+        // URL sync is cosmetic — never let it block the drawer.
+      }
+    },
+    [openLeadId, syncUrl],
   );
 
   // Status-pill cycle (legacy four-status flow). Same semantics
@@ -374,34 +392,34 @@ export default function LeadsTableClient() {
         leads={visible}
         loading={result.status === "loading"}
         totalCount={leads.length}
-        selectedId={selectedLeadId}
+        selectedId={openLeadId}
         onSelect={selectLead}
         onCycleStatus={cycleStatus}
         onToggleScrubbed={toggleScrubbed}
       />
 
-      {/* Drawer mounts when ?lead=<id> matches a known row. If the
-          param refers to an id we don't have locally (e.g. a stale
+      {/* Drawer mounts when local openLeadId matches a known row. If
+          it refers to an id we don't have locally (e.g. a stale
           bookmark for a deleted lead), the drawer stays closed and
           the URL param is harmless. */}
-      {selectedLeadId &&
+      {openLeadId &&
         (() => {
-          const selectedLead = leads.find((l) => l.id === selectedLeadId);
+          const selectedLead = leads.find((l) => l.id === openLeadId);
           if (!selectedLead) return null;
           return (
             <LeadDrawer
               lead={selectedLead}
-              onClose={() => selectLead(selectedLeadId)}
+              onClose={() => selectLead(openLeadId)}
               onLocalUpdate={(p) =>
                 setLeads((cur) =>
                   cur.map((l) =>
-                    l.id === selectedLeadId ? { ...l, ...p } : l,
+                    l.id === openLeadId ? { ...l, ...p } : l,
                   ),
                 )
               }
               onDeleted={() => {
-                setLeads((cur) => cur.filter((l) => l.id !== selectedLeadId));
-                selectLead(selectedLeadId); // toggles ?lead= off → drawer closes
+                setLeads((cur) => cur.filter((l) => l.id !== openLeadId));
+                selectLead(openLeadId); // toggles drawer closed + cleans URL
               }}
             />
           );
