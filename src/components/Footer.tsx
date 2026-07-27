@@ -102,6 +102,7 @@ export default function Footer() {
           </FooterCol>
 
           <FooterCol title="Resources">
+            <li><a href="/best-metro-detroit-suburbs" className="hover:text-bone transition-colors">Best Metro Detroit Suburbs (2026)</a></li>
             <li><a href="/#lead-magnet" className="hover:text-bone transition-colors">Free Home Valuation</a></li>
             <li><a href="/#about" className="hover:text-bone transition-colors">About Us</a></li>
             <li><a href="/#contact" className="hover:text-bone transition-colors">Contact</a></li>

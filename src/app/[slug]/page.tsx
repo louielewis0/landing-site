@@ -84,11 +84,6 @@ export default async function CityLandingPage({ params }: Props) {
       postalCode: "48098",
       addressCountry: "US",
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "5.0",
-      reviewCount: "50",
-    },
   };
 
   const breadcrumbSchema = {
@@ -648,6 +643,15 @@ export default async function CityLandingPage({ params }: Props) {
                 </Reveal>
               ))}
             </div>
+            <Reveal delay={2}>
+              <a
+                href="/best-metro-detroit-suburbs"
+                className="inline-flex items-center gap-2 mt-8 text-[13px] text-bone/55 hover:text-[var(--gold-soft)] transition-colors duration-500"
+              >
+                Not sure which city fits? Compare all seven in our ranked 2026 guide
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </Reveal>
           </div>
         </section>
 
