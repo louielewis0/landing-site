@@ -17,7 +17,7 @@ export const company = {
   phone: "(248) 568-6081",
   phoneTel: "+12485686081",
   email: "realestatemarketmedia@gmail.com",
-  address: "2032 E Square Lake Rd, Suite 400A, Troy, MI",
+  address: "2032 E Square Lake Rd, Suite 400A, Troy, MI 48085",
 
   googleMapsEmbed:
     "https://maps.google.com/maps?q=2032%20E%20Square%20Lake%20Rd%20Suite%20400A%20Troy%20MI&t=&z=15&ie=UTF8&iwloc=&output=embed",

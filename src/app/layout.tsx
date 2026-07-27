@@ -69,7 +69,7 @@ const jsonLd = {
     streetAddress: "2032 E Square Lake Rd Suite 400A",
     addressLocality: company.city,
     addressRegion: company.state,
-    postalCode: "48098",
+    postalCode: "48085",
     addressCountry: "US",
   },
   areaServed: [

@@ -81,7 +81,7 @@ export default async function CityLandingPage({ params }: Props) {
       streetAddress: "2032 E Square Lake Rd Suite 400A",
       addressLocality: "Troy",
       addressRegion: "MI",
-      postalCode: "48098",
+      postalCode: "48085",
       addressCountry: "US",
     },
   };
