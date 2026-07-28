@@ -81,12 +81,17 @@ export default function TodayQueue({ leads }: { leads: Lead[] }) {
       l.status !== "new",
   );
 
+  // "Last touch" = real personal contact when we have it (call/text/
+  // email activity), falling back to record update for legacy rows.
+  const lastTouch = (l: Lead) =>
+    l.last_contact_at ?? l.updated_at ?? l.created_at;
+
   const slipping = leads.filter(
     (l) =>
       l.is_active === true &&
       l.follow_up_date !== today &&
       l.is_overdue_followup !== true &&
-      new Date(l.updated_at ?? l.created_at).getTime() < fourteenDaysAgo,
+      new Date(lastTouch(l)).getTime() < fourteenDaysAgo,
   );
 
   const queues: QueueDef[] = [
@@ -125,15 +130,18 @@ export default function TodayQueue({ leads }: { leads: Lead[] }) {
       hint: "active leads with nothing scheduled — the silent pipeline killer",
       icon: CircleDashed,
       rows: noNextStep,
-      right: (l) => ({ text: `last touch ${relativeTime(l.updated_at ?? l.created_at)}` }),
+      right: (l) =>
+        l.last_contact_at
+          ? { text: `contacted ${relativeTime(l.last_contact_at)}` }
+          : { text: "never contacted", urgent: true },
     },
     {
       key: "slipping",
       title: "Slipping away",
-      hint: "active but untouched 14+ days",
+      hint: "active but not contacted in 14+ days",
       icon: TrendingDown,
       rows: slipping,
-      right: (l) => ({ text: `idle ${relativeTime(l.updated_at ?? l.created_at)}` }),
+      right: (l) => ({ text: `idle ${relativeTime(lastTouch(l))}` }),
     },
   ];
 

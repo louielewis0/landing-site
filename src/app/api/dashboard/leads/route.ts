@@ -29,7 +29,8 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { data, error } = await getSupabaseAdmin()
+  const admin = getSupabaseAdmin();
+  const { data, error } = await admin
     .from("leads_v")
     .select(LEADS_V_COLUMNS)
     .order("created_at", { ascending: false });
@@ -37,7 +38,32 @@ export async function GET(req: NextRequest) {
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
-  return NextResponse.json({ leads: data ?? [] });
+
+  // Attach last_contact_at — the newest call/text/email activity per
+  // lead (notes and meetings deliberately excluded: logging a note is
+  // not contacting someone, same rule FUB uses so agents can't game
+  // "last touched"). Computed here rather than a schema migration:
+  // one indexed query, reduced to a first-seen map since rows come
+  // back newest-first.
+  const { data: contacts, error: cErr } = await admin
+    .from("activities")
+    .select("lead_id, created_at")
+    .in("type", ["call", "text", "email"])
+    .order("created_at", { ascending: false })
+    .limit(5000);
+  if (cErr) {
+    return NextResponse.json({ error: cErr.message }, { status: 500 });
+  }
+  const lastContact = new Map<string, string>();
+  for (const a of contacts ?? []) {
+    if (!lastContact.has(a.lead_id)) lastContact.set(a.lead_id, a.created_at);
+  }
+  const leads = (data ?? []).map((l) => ({
+    ...l,
+    last_contact_at: lastContact.get(l.id) ?? null,
+  }));
+
+  return NextResponse.json({ leads });
 }
 
 // Field whitelist for the manual-entry form. Anything outside this set

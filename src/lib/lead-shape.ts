@@ -55,6 +55,11 @@ export type Lead = {
   dnc_scrubbed: boolean;
   do_not_call: boolean;
 
+  // Computed by GET /api/dashboard/leads: newest call/text/email
+  // activity timestamp (notes/meetings excluded — logging a note is
+  // not contacting someone). Null = never personally contacted.
+  last_contact_at?: string | null;
+
   // View-only fields populated when the row comes from leads_v
   // (which the GET /api/dashboard/leads route reads from as of
   // Phase 2A commit 3). Kept optional so consumers reading from

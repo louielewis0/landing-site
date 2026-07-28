@@ -85,5 +85,28 @@ export async function POST(
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
-  return NextResponse.json({ activity: data });
+
+  // Self-clearing queues (FUB's "unactioned" mechanic): logging a real
+  // contact attempt on a never-touched lead advances it out of `new`
+  // so it drops off the Respond Now queue without a manual status
+  // click. Notes/meetings don't count as contact.
+  let leadStatus: string | null = null;
+  if (type === "call" || type === "text" || type === "email") {
+    const { data: lead } = await getSupabaseAdmin()
+      .from("leads")
+      .select("id, status")
+      .eq("id", id)
+      .single();
+    if (lead?.status === "new") {
+      const { data: updated } = await getSupabaseAdmin()
+        .from("leads")
+        .update({ status: "attempted" })
+        .eq("id", id)
+        .select("status")
+        .single();
+      leadStatus = updated?.status ?? null;
+    }
+  }
+
+  return NextResponse.json({ activity: data, leadStatus });
 }

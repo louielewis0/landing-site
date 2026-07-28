@@ -222,7 +222,14 @@ export default function LeadDrawer({
               </p>
               <p className="text-[11px] text-bone/45 mt-1 tracking-wide">
                 {draft.source ?? "—"} · created{" "}
-                {relativeTime(draft.created_at)}
+                {relativeTime(draft.created_at)} ·{" "}
+                {draft.last_contact_at ? (
+                  <span className="text-bone/60">
+                    last contacted {relativeTime(draft.last_contact_at)}
+                  </span>
+                ) : (
+                  <span className="text-rust/90">never contacted</span>
+                )}
               </p>
             </div>
           </div>
