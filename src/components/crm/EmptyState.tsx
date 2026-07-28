@@ -21,15 +21,15 @@ export default function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="rounded-2xl border border-bone/10 bg-bone/[0.02] py-16 px-8 text-center">
+    <div className="crm-glass rounded-2xl py-16 px-8 text-center">
       {icon && (
-        <div className="w-12 h-12 rounded-full border border-[var(--gold)]/30 bg-[var(--gold)]/5 flex items-center justify-center mx-auto mb-5 text-[var(--gold-soft)]">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[var(--gold)]/15 to-[#A78BFA]/10 border border-white/10 flex items-center justify-center mx-auto mb-5 text-[var(--gold-soft)]">
           {icon}
         </div>
       )}
-      <p className="font-display text-2xl font-light text-bone mb-2">{title}</p>
+      <p className="text-lg font-semibold text-[#f4f5f7] mb-2">{title}</p>
       {description && (
-        <p className="text-bone/55 text-[14px] max-w-md mx-auto mb-6 font-light">
+        <p className="text-white/55 text-[14px] max-w-md mx-auto mb-6">
           {description}
         </p>
       )}

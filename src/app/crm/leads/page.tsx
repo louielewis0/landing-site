@@ -7,11 +7,11 @@ export const metadata: Metadata = { title: "Leads" };
 export default function CrmLeadsPage() {
   return (
     <>
-      <p className="eyebrow mb-3">Leads</p>
-      <h1 className="font-display text-4xl font-light text-bone tracking-tight mb-2">
+      <p className="crm-label text-[var(--gold-soft)] mb-2">Leads</p>
+      <h1 className="text-2xl font-semibold text-[#f4f5f7] tracking-tight mb-2">
         All leads.
       </h1>
-      <p className="text-bone/55 text-[15px] mb-8 max-w-2xl font-light">
+      <p className="text-white/55 text-[14px] mb-8 max-w-2xl">
         Search, filter, scrub, export. Click any row to select it — the
         full editable record + activity timeline opens in 2E. Status
         updates are best done from the{" "}

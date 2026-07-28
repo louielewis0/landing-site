@@ -213,7 +213,7 @@ export default function LeadDrawer({
         style={{ perspective: "1400px" }}
       >
         <aside
-          className="drawer-panel pointer-events-auto relative h-full w-full bg-ink-2/95 backdrop-blur-2xl border-l border-bone/10 shadow-[0_40px_120px_-24px_rgba(0,0,0,0.85),0_0_0_1px_rgba(245,241,234,0.03)] flex flex-col"
+          className="drawer-panel pointer-events-auto relative h-full w-full bg-[#12141A]/95 backdrop-blur-2xl border-l border-white/10 shadow-[0_40px_120px_-24px_rgba(0,0,0,0.85),0_0_0_1px_rgba(245,241,234,0.03)] flex flex-col"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Edge light — a 1px hairline that catches gold near the
@@ -278,7 +278,7 @@ export default function LeadDrawer({
                 </span>
                 <div className="min-w-0">
                   <p
-                    className="font-display text-[27px] font-light text-bone tracking-tight truncate leading-[1.1]"
+                    className="text-[22px] font-semibold text-white/90 tracking-tight truncate leading-[1.1]"
                     style={{
                       transform:
                         "scale(calc(1 - 0.15 * var(--shrink, 0)))",
@@ -287,15 +287,15 @@ export default function LeadDrawer({
                   >
                     {draft.name}
                   </p>
-                  <p className="text-[11px] text-bone/45 mt-1.5 tracking-wide">
+                  <p className="text-[11px] text-white/45 mt-1.5 tracking-wide">
                     {draft.source ?? "—"} · created{" "}
                     {relativeTime(draft.created_at)} ·{" "}
                     {draft.last_contact_at ? (
-                      <span className="text-bone/60">
+                      <span className="text-white/60">
                         last contacted {relativeTime(draft.last_contact_at)}
                       </span>
                     ) : (
-                      <span className="text-rust/90">never contacted</span>
+                      <span className="text-[#FDA4AF]/90">never contacted</span>
                     )}
                   </p>
                 </div>
@@ -304,7 +304,7 @@ export default function LeadDrawer({
                 type="button"
                 onClick={onClose}
                 aria-label="Close drawer"
-                className="text-bone/45 hover:text-bone hover:bg-bone/[0.06] rounded-full p-1.5 transition-colors duration-200 shrink-0"
+                className="text-white/45 hover:text-white/90 hover:bg-white/[0.06] rounded-full p-1.5 transition-colors duration-200 shrink-0"
               >
                 <X className="w-4 h-4" strokeWidth={1.75} />
               </button>
@@ -313,14 +313,14 @@ export default function LeadDrawer({
 
           {/* Error banner */}
           {error && (
-            <div className="mx-6 mt-4 px-3 py-2 rounded-lg border border-rust/40 bg-rust/[0.05] flex items-center gap-2 text-[12.5px] text-rust">
+            <div className="mx-6 mt-4 px-3 py-2 rounded-lg border border-[#FB7185]/40 bg-[#FB7185]/[0.05] flex items-center gap-2 text-[12.5px] text-[#FDA4AF]">
               <AlertCircle className="w-3.5 h-3.5 shrink-0" strokeWidth={1.75} />
               <span className="flex-1">{error}</span>
               <button
                 type="button"
                 onClick={() => setError(null)}
                 aria-label="Dismiss error"
-                className="text-rust/70 hover:text-rust"
+                className="text-[#FDA4AF]/70 hover:text-[#FDA4AF]"
               >
                 ×
               </button>
@@ -334,10 +334,10 @@ export default function LeadDrawer({
           >
           {/* Pipeline controls */}
           <section>
-            <p className="eyebrow mb-3">Pipeline</p>
+            <p className="crm-label text-[var(--gold-soft)] mb-3">Pipeline</p>
             <div className="space-y-3">
               <div className="grid grid-cols-[110px_1fr] gap-3 items-center">
-                <label className="text-[11px] text-bone/45 uppercase tracking-[0.18em]">
+                <label className="text-[11px] text-white/45 uppercase tracking-[0.18em]">
                   Status
                 </label>
                 <StatusSelect
@@ -346,7 +346,7 @@ export default function LeadDrawer({
                 />
               </div>
               <div className="grid grid-cols-[110px_1fr] gap-3 items-center">
-                <label className="text-[11px] text-bone/45 uppercase tracking-[0.18em]">
+                <label className="text-[11px] text-white/45 uppercase tracking-[0.18em]">
                   Priority
                 </label>
                 <PrioritySelect
@@ -363,15 +363,15 @@ export default function LeadDrawer({
                 }
               />
               <div className="grid grid-cols-[110px_1fr] gap-3 items-center">
-                <label className="text-[11px] text-bone/45 uppercase tracking-[0.18em]">
+                <label className="text-[11px] text-white/45 uppercase tracking-[0.18em]">
                   Assigned
                 </label>
                 <div
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-bone/[0.02] border border-bone/10 text-bone/45 text-[13px]"
+                  className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.02] border border-white/10 text-white/45 text-[13px]"
                   title="Agent assignment lands in Phase 3 (Supabase Auth)"
                 >
                   <UserPlus
-                    className="w-3.5 h-3.5 text-bone/35"
+                    className="w-3.5 h-3.5 text-white/35"
                     strokeWidth={1.5}
                   />
                   <span>Unassigned</span>
@@ -396,7 +396,7 @@ export default function LeadDrawer({
 
           {/* Contact */}
           <section>
-            <p className="eyebrow mb-3">Contact</p>
+            <p className="crm-label text-[var(--gold-soft)] mb-3">Contact</p>
             <div className="space-y-1">
               <EditableField
                 label="Name"
@@ -426,7 +426,7 @@ export default function LeadDrawer({
                 </div>
               )}
               {traceMsg && (
-                <p className="pl-1 pb-1 text-[11.5px] text-bone/55 font-light">
+                <p className="pl-1 pb-1 text-[11.5px] text-white/55 font-light">
                   {traceMsg}
                 </p>
               )}
@@ -448,10 +448,10 @@ export default function LeadDrawer({
 
           {/* Property */}
           <section>
-            <p className="eyebrow mb-3">Property</p>
+            <p className="crm-label text-[var(--gold-soft)] mb-3">Property</p>
             <div className="space-y-1">
               <div className="grid grid-cols-[110px_1fr] gap-3 py-1.5 items-center">
-                <label className="text-[11px] text-bone/45 uppercase tracking-[0.18em]">
+                <label className="text-[11px] text-white/45 uppercase tracking-[0.18em]">
                   Type
                 </label>
                 <select
@@ -462,20 +462,20 @@ export default function LeadDrawer({
                       e.target.value || (null as unknown as string),
                     )
                   }
-                  className="w-full px-3 py-2 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone text-[13.5px] focus:outline-none focus:border-[var(--gold)]/60 transition-all appearance-none cursor-pointer"
+                  className="w-full px-3 py-2 rounded-lg bg-white/[0.04] border border-white/15 text-white/90 text-[13.5px] focus:outline-none focus:border-[var(--gold)]/60 transition-all appearance-none cursor-pointer"
                 >
-                  <option value="" className="bg-ink">
+                  <option value="" className="bg-[#12141A]">
                     —
                   </option>
                   {PROPERTY_TYPES.map((p) => (
-                    <option key={p} value={p} className="bg-ink">
+                    <option key={p} value={p} className="bg-[#12141A]">
                       {p}
                     </option>
                   ))}
                 </select>
               </div>
               <div className="grid grid-cols-[110px_1fr] gap-3 py-1.5 items-center">
-                <label className="text-[11px] text-bone/45 uppercase tracking-[0.18em]">
+                <label className="text-[11px] text-white/45 uppercase tracking-[0.18em]">
                   Transaction
                 </label>
                 <select
@@ -486,13 +486,13 @@ export default function LeadDrawer({
                       e.target.value || (null as unknown as string),
                     )
                   }
-                  className="w-full px-3 py-2 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone text-[13.5px] focus:outline-none focus:border-[var(--gold)]/60 transition-all appearance-none cursor-pointer"
+                  className="w-full px-3 py-2 rounded-lg bg-white/[0.04] border border-white/15 text-white/90 text-[13.5px] focus:outline-none focus:border-[var(--gold)]/60 transition-all appearance-none cursor-pointer"
                 >
-                  <option value="" className="bg-ink">
+                  <option value="" className="bg-[#12141A]">
                     —
                   </option>
                   {TRANSACTION_TYPES.map((t) => (
-                    <option key={t} value={t} className="bg-ink">
+                    <option key={t} value={t} className="bg-[#12141A]">
                       {t}
                     </option>
                   ))}
@@ -509,7 +509,7 @@ export default function LeadDrawer({
 
           {/* Intent + classification */}
           <section>
-            <p className="eyebrow mb-3">Details</p>
+            <p className="crm-label text-[var(--gold-soft)] mb-3">Details</p>
             <div className="space-y-1">
               <EditableField
                 label="Intent"
@@ -541,26 +541,26 @@ export default function LeadDrawer({
 
           {/* Activity timeline */}
           <section>
-            <p className="eyebrow mb-3">Activity</p>
+            <p className="crm-label text-[var(--gold-soft)] mb-3">Activity</p>
             <ActivityTimeline leadId={draft.id} />
           </section>
 
           {/* Danger zone — two-tap delete */}
-          <section className="pt-4 border-t border-bone/[0.06]">
+          <section className="pt-4 border-t border-white/[0.06]">
             {!confirmingDelete ? (
               <button
                 type="button"
                 onClick={() => setConfirmingDelete(true)}
-                className="inline-flex items-center gap-2 text-[12.5px] text-bone/40 hover:text-rust tracking-wide transition-colors"
+                className="inline-flex items-center gap-2 text-[12.5px] text-white/40 hover:text-[#FDA4AF] tracking-wide transition-colors"
               >
                 <Trash2 className="w-3.5 h-3.5" strokeWidth={1.75} />
                 Delete lead
               </button>
             ) : (
-              <div className="rounded-xl border border-rust/40 bg-rust/[0.05] p-4 flex flex-wrap items-center gap-3">
-                <span className="text-[13px] text-bone/80 font-light flex-1 min-w-[180px]">
+              <div className="rounded-xl border border-[#FB7185]/40 bg-[#FB7185]/[0.05] p-4 flex flex-wrap items-center gap-3">
+                <span className="text-[13px] text-white/80 font-light flex-1 min-w-[180px]">
                   Permanently delete{" "}
-                  <span className="text-bone font-medium">{draft.name}</span>?
+                  <span className="text-white/90 font-medium">{draft.name}</span>?
                   Activity history goes with it. If this address is still in a
                   future Matrix export, it will re-import as a fresh lead.
                 </span>
@@ -568,7 +568,7 @@ export default function LeadDrawer({
                   type="button"
                   onClick={handleDelete}
                   disabled={del.pending}
-                  className="px-4 py-2 rounded-full bg-rust text-bone text-[12.5px] font-semibold tracking-wide hover:opacity-90 transition-opacity disabled:opacity-50"
+                  className="px-4 py-2 rounded-full bg-[#FB7185] text-white/90 text-[12.5px] font-semibold tracking-wide hover:opacity-90 transition-opacity disabled:opacity-50"
                 >
                   {del.pending ? "Deleting…" : "Yes, delete"}
                 </button>
@@ -576,7 +576,7 @@ export default function LeadDrawer({
                   type="button"
                   onClick={() => setConfirmingDelete(false)}
                   disabled={del.pending}
-                  className="text-[12px] text-bone/50 hover:text-bone/80 transition-colors tracking-wide"
+                  className="text-[12px] text-white/50 hover:text-white/80 transition-colors tracking-wide"
                 >
                   Cancel
                 </button>
@@ -585,10 +585,10 @@ export default function LeadDrawer({
           </section>
 
           {/* Meta footer */}
-          <footer className="pt-4 border-t border-bone/[0.06] flex items-center justify-between gap-2 text-[10.5px] text-bone/35 tracking-wide">
+          <footer className="pt-4 border-t border-white/[0.06] flex items-center justify-between gap-2 text-[10.5px] text-white/35 tracking-wide">
             <span>
               Created{" "}
-              <time dateTime={draft.created_at} className="text-bone/55">
+              <time dateTime={draft.created_at} className="text-white/55">
                 {new Date(draft.created_at).toLocaleString(undefined, {
                   month: "short",
                   day: "numeric",
@@ -601,7 +601,7 @@ export default function LeadDrawer({
             {draft.updated_at && (
               <span>
                 Updated{" "}
-                <span className="text-bone/55">
+                <span className="text-white/55">
                   {relativeTime(draft.updated_at)}
                 </span>
               </span>

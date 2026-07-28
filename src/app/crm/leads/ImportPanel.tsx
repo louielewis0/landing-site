@@ -77,14 +77,14 @@ export default function ImportPanel({
   }
 
   return (
-    <section className="rounded-2xl bg-bone/[0.02] border border-bone/10 p-7 mb-6">
+    <section className="rounded-2xl bg-white/[0.02] border border-white/10 p-7 mb-6">
       <div className="flex items-start justify-between mb-5 flex-wrap gap-3">
         <div>
-          <p className="eyebrow mb-2">Matrix import</p>
-          <h2 className="font-display text-2xl font-light text-bone tracking-tight">
+          <p className="crm-label text-[var(--gold-soft)] mb-2">Matrix import</p>
+          <h2 className="text-lg font-semibold text-[#f4f5f7] tracking-tight">
             Import expireds from an MLS export
           </h2>
-          <p className="text-[13px] text-bone/55 mt-2 font-light max-w-2xl">
+          <p className="text-[13px] text-white/55 mt-2 font-light max-w-2xl">
             Paste (or pick) a Matrix export <em>or</em> a skip-trace results
             file. New addresses become{" "}
             <span className="text-[var(--gold-soft)]">source: Expired</span>{" "}
@@ -97,7 +97,7 @@ export default function ImportPanel({
         <button
           type="button"
           onClick={() => fileRef.current?.click()}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-bone/20 hover:border-[var(--gold)]/60 text-bone/80 hover:text-bone text-[13px] tracking-wide transition-all"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 hover:border-[var(--gold)]/60 text-white/80 hover:text-white/90 text-[13px] tracking-wide transition-all"
         >
           <FileUp className="w-4 h-4" strokeWidth={1.75} />
           {fileName ?? "Pick .csv file"}
@@ -119,14 +119,14 @@ export default function ImportPanel({
         }}
         placeholder={`Paste the Matrix export here (header row + listings), e.g.:\nMLS #,Stat,Ty,Address,City,County,Price,DOM\n20261049557,UWTH,RS,14027 Hobart Avenue,Warren,Macomb,"$150,000",N/23/23`}
         rows={6}
-        className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/30 font-mono text-[13px] focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] resize-y transition-all"
+        className="w-full px-4 py-3.5 rounded-lg bg-white/[0.04] border border-white/15 text-white/90 placeholder-white/30 font-mono text-[13px] focus:outline-none focus:border-[var(--gold)]/60 focus:bg-white/[0.07] resize-y transition-all"
       />
 
       <div className="flex flex-wrap items-center gap-3 mt-4">
         <button
           onClick={runImport}
           disabled={importing || !input.trim()}
-          className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[13px] tracking-wide transition-all duration-500 disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-[#0A0B0F] font-semibold text-[13px] tracking-wide transition-all duration-500 disabled:opacity-50"
         >
           {importing ? "Importing…" : "Import leads"}
         </button>
@@ -138,14 +138,14 @@ export default function ImportPanel({
             setErr(null);
             if (fileRef.current) fileRef.current.value = "";
           }}
-          className="text-[12px] text-bone/45 hover:text-bone/70 transition-colors tracking-wide"
+          className="text-[12px] text-white/45 hover:text-white/70 transition-colors tracking-wide"
         >
           Clear
         </button>
       </div>
 
       {err && (
-        <div className="mt-4 text-[13px] text-rust flex items-center gap-2">
+        <div className="mt-4 text-[13px] text-[#FDA4AF] flex items-center gap-2">
           <AlertCircle className="w-4 h-4" strokeWidth={1.75} />
           {err}
         </div>
@@ -176,19 +176,19 @@ function ImportTile({
   danger?: boolean;
 }) {
   return (
-    <div className="rounded-xl border border-bone/10 bg-bone/[0.03] px-4 py-3">
+    <div className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
       <div
-        className={`font-display text-2xl font-light ${
+        className={`crm-num text-xl font-semibold ${
           danger && value > 0
-            ? "text-rust"
+            ? "text-[#FDA4AF]"
             : accent
               ? "text-[var(--gold-soft)]"
-              : "text-bone"
+              : "text-white/90"
         }`}
       >
         {value}
       </div>
-      <div className="text-[11px] text-bone/50 tracking-wide mt-0.5">{label}</div>
+      <div className="text-[11px] text-white/50 tracking-wide mt-0.5">{label}</div>
     </div>
   );
 }

@@ -37,11 +37,11 @@ export default function CrmLayout({
 }) {
   return (
     <CrmGate>
-      <div className="min-h-screen atmosphere grain vignette relative flex">
+      <div className="min-h-screen crm-mesh relative flex">
         <Sidebar />
         <div className="flex-1 min-w-0 flex flex-col">
           <Topbar />
-          <main className="flex-1 px-6 py-8 max-w-7xl w-full">{children}</main>
+          <main className="flex-1 px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-7xl w-full">{children}</main>
         </div>
       </div>
     </CrmGate>

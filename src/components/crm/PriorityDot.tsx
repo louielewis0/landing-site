@@ -6,16 +6,16 @@ import type { Priority } from "@/lib/lead-shape";
  * leads table (2D), and the lead-detail header (2E) so the
  * hot/warm/cold rank is scannable at a glance.
  *
- * Color encoding stays inside the brand palette (gold-soft → gold
- * → bone faded) instead of borrowing red/yellow/green — the
- * marketing site's gold gradient is the brand and Phase 2 doesn't
- * introduce new hues. "Hot" gets a faint outer halo so it stands
- * out against "warm" without changing hue.
+ * Color encoding uses the CRM design system's semantic accents
+ * (rose / amber / sky) so temperature reads instantly. "Hot" gets
+ * a faint outer halo so it stands out at row-scan speed.
  */
+/* Semantic temperature colors (CRM design system): hot reads as
+   urgent at a glance instead of blending into the gold accents. */
 const STYLES: Record<Priority, string> = {
-  hot:  "bg-[var(--gold-soft)] shadow-[0_0_0_3px_rgba(217,185,104,0.18)]",
-  warm: "bg-[var(--gold)]",
-  cold: "bg-bone/30",
+  hot:  "bg-[#FB7185] shadow-[0_0_0_3px_rgba(251,113,133,0.2)]",
+  warm: "bg-[#FBBF24]",
+  cold: "bg-[#38BDF8]/60",
 };
 
 export default function PriorityDot({ priority }: { priority: Priority }) {

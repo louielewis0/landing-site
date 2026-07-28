@@ -185,14 +185,14 @@ export default function TraceTargets({
   const selectedCount = ranked.filter((r) => selected.has(r.lead.id)).length;
 
   return (
-    <section className="rounded-2xl bg-bone/[0.02] border border-bone/10 p-7 mb-6">
+    <section className="rounded-2xl bg-white/[0.02] border border-white/10 p-7 mb-6">
       <div className="flex items-start justify-between mb-5 flex-wrap gap-3">
         <div>
-          <p className="eyebrow mb-2">Top targets</p>
-          <h2 className="font-display text-2xl font-light text-bone tracking-tight">
+          <p className="crm-label text-[var(--gold-soft)] mb-2">Top targets</p>
+          <h2 className="text-lg font-semibold text-[#f4f5f7] tracking-tight">
             Best leads without a phone number
           </h2>
-          <p className="text-[13px] text-bone/55 mt-2 font-light max-w-2xl">
+          <p className="text-[13px] text-white/55 mt-2 font-light max-w-2xl">
             Ranked by commission potential × how fast the listing died ×
             freshness — with a penalty for luxury lottery tickets everyone
             chases. Tick the ones worth a skip-trace search, then trace them
@@ -202,7 +202,7 @@ export default function TraceTargets({
         <button
           onClick={traceSelected}
           disabled={running || selectedCount === 0}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[13px] tracking-wide transition-all duration-500 disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-[#0A0B0F] font-semibold text-[13px] tracking-wide transition-all duration-500 disabled:opacity-50"
         >
           <PhoneOutgoing className="w-4 h-4" strokeWidth={1.75} />
           {running
@@ -211,7 +211,7 @@ export default function TraceTargets({
         </button>
       </div>
 
-      <ul className="divide-y divide-bone/[0.06]">
+      <ul className="divide-y divide-white/[0.06]">
         {visible.map(({ lead, score, reasons, needsName }) => (
           <li key={lead.id} className="py-3 flex items-start gap-4">
             <input
@@ -223,12 +223,12 @@ export default function TraceTargets({
               aria-label={`Select ${lead.name}`}
             />
             <div
-              className={`w-11 h-11 rounded-xl border flex items-center justify-center font-display text-[17px] shrink-0 ${
+              className={`w-11 h-11 rounded-xl border flex items-center justify-center text-[15px] font-semibold shrink-0 ${
                 score >= 70
                   ? "border-[var(--gold)]/50 text-[var(--gold-soft)]"
                   : score >= 45
-                    ? "border-bone/20 text-bone/80"
-                    : "border-bone/10 text-bone/40"
+                    ? "border-white/20 text-white/80"
+                    : "border-white/10 text-white/40"
               }`}
               title="Lead score (0–100)"
             >
@@ -236,7 +236,7 @@ export default function TraceTargets({
             </div>
             <div className={`flex-1 min-w-0 ${needsName ? "opacity-55" : ""}`}>
               <div className="flex items-baseline gap-3 flex-wrap">
-                <span className="text-[14px] text-bone font-medium truncate">
+                <span className="text-[14px] text-white/90 font-medium truncate">
                   {lead.name}
                 </span>
                 {lead.budget_range && (
@@ -245,10 +245,10 @@ export default function TraceTargets({
                   </span>
                 )}
               </div>
-              <p className="text-[12px] text-bone/50 font-light truncate">
+              <p className="text-[12px] text-white/50 font-light truncate">
                 {lead.address ?? "no address"}
               </p>
-              <p className="text-[11.5px] text-bone/45 font-light mt-0.5">
+              <p className="text-[11.5px] text-white/45 font-light mt-0.5">
                 {reasons.join(" · ")}
               </p>
               {rowMsg[lead.id] && (
@@ -258,7 +258,7 @@ export default function TraceTargets({
               )}
             </div>
             <Crosshair
-              className="w-3.5 h-3.5 text-bone/20 mt-2 shrink-0"
+              className="w-3.5 h-3.5 text-white/20 mt-2 shrink-0"
               strokeWidth={1.5}
             />
           </li>
@@ -268,14 +268,14 @@ export default function TraceTargets({
       {ranked.length > 12 && (
         <button
           onClick={() => setShowAll((v) => !v)}
-          className="mt-3 text-[12px] text-bone/45 hover:text-bone/70 transition-colors tracking-wide"
+          className="mt-3 text-[12px] text-white/45 hover:text-white/70 transition-colors tracking-wide"
         >
           {showAll ? "Show top 12 only" : `Show all ${ranked.length}`}
         </button>
       )}
 
       {summary && (
-        <div className="mt-4 text-[13px] text-bone/70 flex items-center gap-2">
+        <div className="mt-4 text-[13px] text-white/70 flex items-center gap-2">
           <AlertCircle className="w-4 h-4 text-[var(--gold-soft)]" strokeWidth={1.75} />
           {summary}
         </div>

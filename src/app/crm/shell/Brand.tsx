@@ -12,8 +12,8 @@ import { company } from "@/lib/config";
  */
 export default function Brand() {
   return (
-    <div className="flex items-center gap-3 px-5 py-5 border-b border-bone/10">
-      <div className="rounded-lg p-1 bg-bone/95 shrink-0">
+    <div className="flex items-center gap-3 px-5 py-5 border-b border-white/[0.07]">
+      <div className="rounded-xl p-1 bg-gradient-to-br from-white/95 to-white/85 shrink-0 shadow-[0_2px_8px_rgba(0,0,0,0.3)]">
         <Image
           src="/logo.png"
           alt={company.name}
@@ -24,10 +24,10 @@ export default function Brand() {
         />
       </div>
       <div className="leading-tight">
-        <span className="block font-display font-light text-[15px] tracking-tight text-bone">
+        <span className="block font-semibold text-[14px] tracking-tight text-[#f4f5f7]">
           {company.shortName}
         </span>
-        <span className="block text-[10px] tracking-[0.32em] uppercase text-[var(--gold-soft)] mt-0.5">
+        <span className="block text-[10px] tracking-[0.28em] uppercase text-[var(--gold-soft)] mt-0.5">
           CRM
         </span>
       </div>

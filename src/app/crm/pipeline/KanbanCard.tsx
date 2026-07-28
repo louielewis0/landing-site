@@ -72,7 +72,7 @@ export default function KanbanCard({
     if (fu && fu < today) {
       nextChip = {
         text: `overdue · ${new Date(fu + "T12:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric" })}`,
-        cls: "border-rust/50 bg-rust/[0.1] text-rust",
+        cls: "border-[#FB7185]/50 bg-[#FB7185]/[0.1] text-[#FDA4AF]",
       };
     } else if (fu === today) {
       nextChip = {
@@ -82,12 +82,12 @@ export default function KanbanCard({
     } else if (fu) {
       nextChip = {
         text: `next · ${new Date(fu + "T12:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric" })}`,
-        cls: "border-bone/15 text-bone/50",
+        cls: "border-white/15 text-white/50",
       };
     } else {
       nextChip = {
         text: "no next step",
-        cls: "border-dashed border-bone/25 text-bone/40",
+        cls: "border-dashed border-white/25 text-white/40",
       };
     }
   }
@@ -120,12 +120,12 @@ export default function KanbanCard({
       <div
         ref={setNodeRef}
         style={style}
-        className="rounded-xl border border-rust/40 bg-rust/[0.07] p-3 backdrop-blur-xl select-none"
+        className="rounded-xl border border-[#FB7185]/40 bg-[#FB7185]/[0.08] p-3 backdrop-blur-xl select-none"
       >
-        <p className="text-[12.5px] text-bone font-medium mb-1.5">
+        <p className="text-[12.5px] text-white/90 font-semibold mb-1.5">
           Delete this lead?
         </p>
-        <p className="text-[11px] text-bone/55 mb-3">
+        <p className="text-[11px] text-white/55 mb-3">
           Permanent. Activities cascade.
         </p>
         <div className="flex gap-2">
@@ -134,7 +134,7 @@ export default function KanbanCard({
             onClick={confirmDelete}
             onPointerDown={(e) => e.stopPropagation()}
             disabled={deleting}
-            className="flex-1 px-2.5 py-1.5 rounded-md bg-rust hover:bg-rust/80 text-white text-[11.5px] font-semibold tracking-wide transition-colors disabled:opacity-60"
+            className="flex-1 px-2.5 py-1.5 rounded-lg bg-[#FB7185] hover:bg-[#F43F5E] text-[#1a0a0e] text-[11.5px] font-semibold tracking-wide transition-colors duration-150 disabled:opacity-60"
           >
             {deleting ? "Deleting…" : "Yes, delete"}
           </button>
@@ -143,7 +143,7 @@ export default function KanbanCard({
             onClick={cancelConfirm}
             onPointerDown={(e) => e.stopPropagation()}
             disabled={deleting}
-            className="px-2.5 py-1.5 rounded-md border border-bone/20 text-bone/75 hover:text-bone hover:border-bone/35 text-[11.5px] font-medium transition-colors disabled:opacity-60"
+            className="px-2.5 py-1.5 rounded-lg border border-white/20 text-white/75 hover:text-white hover:border-white/35 text-[11.5px] font-medium transition-colors duration-150 disabled:opacity-60"
           >
             Cancel
           </button>
@@ -158,10 +158,10 @@ export default function KanbanCard({
       style={style}
       {...(interactive ? listeners : {})}
       {...(interactive ? attributes : {})}
-      className={`group relative rounded-xl border p-3 backdrop-blur-xl cursor-grab active:cursor-grabbing select-none transition-colors duration-150 touch-none ${
+      className={`group relative rounded-xl border p-3 backdrop-blur-xl cursor-grab active:cursor-grabbing select-none transition-all duration-150 touch-none ${
         isDragging
           ? "border-[var(--gold)]/50 bg-[var(--gold)]/[0.08] shadow-[0_10px_30px_-12px_rgba(0,0,0,0.6)]"
-          : "border-bone/10 bg-ink-3/70 hover:border-bone/20 hover:bg-ink-3/85"
+          : "border-white/[0.08] bg-[#181B22]/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_2px_8px_rgba(0,0,0,0.25)] hover:border-white/[0.16] hover:-translate-y-px"
       }`}
     >
       {/* Trash button — hidden until hover/focus, suppresses pointer-
@@ -171,35 +171,35 @@ export default function KanbanCard({
         onClick={startConfirm}
         onPointerDown={(e) => e.stopPropagation()}
         aria-label="Delete lead"
-        className="absolute top-1.5 right-1.5 p-1 rounded-md text-bone/35 hover:text-rust hover:bg-rust/10 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-200"
+        className="absolute top-1.5 right-1.5 p-1 rounded-md text-white/35 hover:text-[#FB7185] hover:bg-[#FB7185]/10 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-150"
       >
         <Trash2 className="w-3 h-3" strokeWidth={2} />
       </button>
 
       <div className="flex items-center gap-2 mb-2 pr-5">
         <PriorityDot priority={lead.priority} />
-        <p className="text-[13px] text-bone font-medium truncate flex-1">
+        <p className="text-[13px] text-white/90 font-medium truncate flex-1">
           {lead.name}
         </p>
         {lead.is_hot_active && (
           <Flame
-            className="w-3 h-3 text-[var(--gold-soft)] shrink-0"
+            className="w-3 h-3 text-[#FB7185] shrink-0"
             strokeWidth={2}
           />
         )}
         {lead.is_overdue_followup && (
           <Clock
-            className="w-3 h-3 text-[var(--gold-deep)] shrink-0"
+            className="w-3 h-3 text-[#FBBF24] shrink-0"
             strokeWidth={2}
           />
         )}
       </div>
       {meta && (
-        <p className="text-[11px] text-bone/45 mb-2 truncate">{meta}</p>
+        <p className="text-[11px] text-white/45 mb-2 truncate">{meta}</p>
       )}
       <div className="flex items-center justify-between gap-2">
         <StatusPill status={lead.status} />
-        <span className="text-[10px] text-bone/35 tabular-nums whitespace-nowrap">
+        <span className="text-[10px] text-white/35 crm-num whitespace-nowrap">
           {relativeTime(lastActivity)}
         </span>
       </div>

@@ -35,46 +35,44 @@ export default function SourceBreakdown({ leads }: { leads: Lead[] }) {
   const max = visible.length > 0 ? visible[0][1] : 1;
 
   return (
-    <section className="rounded-2xl border border-bone/10 bg-bone/[0.02] backdrop-blur-xl overflow-hidden">
-      <header className="flex items-center justify-between px-6 py-4 border-b border-bone/10">
+    <section className="crm-glass rounded-2xl overflow-hidden">
+      <header className="flex items-center justify-between px-6 py-4 border-b border-white/[0.07]">
         <div>
-          <p className="eyebrow mb-1">Leads by Source</p>
-          <p className="text-bone/55 text-[13px] font-light">
-            where they came from
-          </p>
+          <p className="crm-label text-[var(--gold-soft)] mb-1">Leads by Source</p>
+          <p className="text-white/50 text-[13px]">where they came from</p>
         </div>
-        <p className="text-[12px] text-bone/45 tracking-wide">
+        <p className="text-[12px] text-white/45 tracking-wide crm-num">
           {total} total
         </p>
       </header>
 
       {visible.length === 0 ? (
-        <div className="px-6 py-10 text-center text-bone/45 text-[14px]">
+        <div className="px-6 py-10 text-center text-white/45 text-[14px]">
           No source data yet.
         </div>
       ) : (
-        <ul className="divide-y divide-bone/[0.06]">
+        <ul className="divide-y divide-white/[0.055]">
           {visible.map(([source, count]) => {
             const pct = total > 0 ? Math.round((count / total) * 100) : 0;
             const barPct = max > 0 ? (count / max) * 100 : 0;
             return (
               <li
                 key={source}
-                className="flex items-center gap-4 px-6 py-3 hover:bg-bone/[0.02] transition-colors duration-200"
+                className="flex items-center gap-4 px-6 py-3 hover:bg-white/[0.025] transition-colors duration-150"
               >
-                <span className="w-32 text-[13px] text-bone/65 truncate">
+                <span className="w-32 text-[13px] text-white/65 truncate">
                   {source}
                 </span>
-                <div className="flex-1 h-2 bg-bone/[0.05] rounded-full overflow-hidden">
+                <div className="flex-1 h-2 bg-white/[0.06] rounded-full overflow-hidden">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-[var(--gold-deep)] to-[var(--gold-soft)]"
+                    className="h-full rounded-full bg-gradient-to-r from-[var(--gold)] via-[var(--gold-soft)] to-[#A78BFA]"
                     style={{ width: `${barPct}%` }}
                   />
                 </div>
-                <span className="w-10 text-right text-[13px] text-bone tabular-nums">
+                <span className="w-10 text-right text-[13px] text-white/85 crm-num">
                   {count}
                 </span>
-                <span className="w-12 text-right text-[12px] text-bone/45 tabular-nums">
+                <span className="w-12 text-right text-[12px] text-white/45 crm-num">
                   {pct}%
                 </span>
               </li>

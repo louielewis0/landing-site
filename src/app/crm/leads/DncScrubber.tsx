@@ -68,15 +68,15 @@ export default function DncScrubber({
   return (
     <>
       {/* Compliance reminder — paired with the scrubber */}
-      <div className="rounded-2xl bg-bone/[0.03] border border-[var(--gold)]/25 p-6 mb-6 relative overflow-hidden">
+      <div className="rounded-2xl bg-white/[0.03] border border-[var(--gold)]/25 p-6 mb-6 relative overflow-hidden">
         <span className="absolute -top-px left-8 right-8 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/60 to-transparent" />
         <div className="flex gap-4">
           <TriangleAlert
             className="w-5 h-5 text-[var(--gold-soft)] flex-shrink-0 mt-0.5"
             strokeWidth={1.5}
           />
-          <div className="text-[13.5px] text-bone/75 font-light leading-relaxed">
-            <span className="text-bone font-medium">Compliance reminder.</span>{" "}
+          <div className="text-[13.5px] text-white/75 font-light leading-relaxed">
+            <span className="text-white/90 font-medium">Compliance reminder.</span>{" "}
             Federal DNC scrub alone is not enough. Cell phones cannot be
             autodialed under TCPA even when DNC-clear —{" "}
             <span className="text-[var(--gold-soft)]">manual dial only</span>.
@@ -85,17 +85,17 @@ export default function DncScrubber({
         </div>
       </div>
 
-      <section className="rounded-2xl bg-bone/[0.02] border border-bone/10 p-7 mb-8">
+      <section className="rounded-2xl bg-white/[0.02] border border-white/10 p-7 mb-8">
         <div className="flex items-start justify-between mb-5 flex-wrap gap-3">
           <div>
-            <p className="eyebrow mb-2">DNC scrubber</p>
-            <h2 className="font-display text-2xl font-light text-bone tracking-tight">
+            <p className="crm-label text-[var(--gold-soft)] mb-2">DNC scrubber</p>
+            <h2 className="text-lg font-semibold text-[#f4f5f7] tracking-tight">
               Paste DNC list (248 / 586 / 313)
             </h2>
-            <p className="text-[13px] text-bone/55 mt-2 font-light max-w-2xl">
+            <p className="text-[13px] text-white/55 mt-2 font-light max-w-2xl">
               Paste numbers from the federal DNC registry download. We strip
               formatting and match by 10-digit number. Matches get flagged{" "}
-              <span className="text-rust">DO NOT CALL</span>; everything else
+              <span className="text-[#FDA4AF]">DO NOT CALL</span>; everything else
               is marked{" "}
               <span className="text-[var(--gold-soft)]">clear to call</span>.
             </p>
@@ -107,14 +107,14 @@ export default function DncScrubber({
           onChange={(e) => setInput(e.target.value)}
           placeholder={`Paste numbers, one per line or comma-separated. Any format works:\n2485551234\n(586) 555-9876\n+1 313 555 4242`}
           rows={6}
-          className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/30 font-mono text-[13px] focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] resize-y transition-all"
+          className="w-full px-4 py-3.5 rounded-lg bg-white/[0.04] border border-white/15 text-white/90 placeholder-white/30 font-mono text-[13px] focus:outline-none focus:border-[var(--gold)]/60 focus:bg-white/[0.07] resize-y transition-all"
         />
 
         <div className="flex flex-wrap items-center gap-3 mt-4">
           <button
             onClick={runScrub}
             disabled={scrubbing || !input.trim()}
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[13px] tracking-wide transition-all duration-500 disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-[#0A0B0F] font-semibold text-[13px] tracking-wide transition-all duration-500 disabled:opacity-50"
           >
             {scrubbing ? "Scrubbing…" : "Run DNC scrub"}
           </button>
@@ -124,14 +124,14 @@ export default function DncScrubber({
               setReport(null);
               setErr(null);
             }}
-            className="text-[12px] text-bone/45 hover:text-bone/70 transition-colors tracking-wide"
+            className="text-[12px] text-white/45 hover:text-white/70 transition-colors tracking-wide"
           >
             Clear
           </button>
         </div>
 
         {err && (
-          <div className="mt-4 text-[13px] text-rust flex items-center gap-2">
+          <div className="mt-4 text-[13px] text-[#FDA4AF] flex items-center gap-2">
             <AlertCircle className="w-4 h-4" strokeWidth={1.75} />
             {err}
           </div>
@@ -166,16 +166,16 @@ function ReportTile({
   danger?: boolean;
 }) {
   const valueColor = danger
-    ? "text-rust"
+    ? "text-[#FDA4AF]"
     : accent
       ? "text-[var(--gold-soft)]"
-      : "text-bone";
+      : "text-white/90";
   return (
-    <div className="rounded-xl bg-bone/[0.04] border border-bone/10 px-4 py-3">
-      <div className="text-[9.5px] text-bone/45 uppercase tracking-[0.22em] mb-1">
+    <div className="rounded-xl bg-white/[0.04] border border-white/10 px-4 py-3">
+      <div className="text-[9.5px] text-white/45 uppercase tracking-[0.22em] mb-1">
         {label}
       </div>
-      <div className={`font-display text-xl font-light ${valueColor}`}>
+      <div className={`crm-num text-lg font-semibold ${valueColor}`}>
         {value}
       </div>
     </div>

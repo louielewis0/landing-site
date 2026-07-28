@@ -47,10 +47,10 @@ export default function StatusSelect({
     <select
       value={value}
       onChange={(e) => onChange(e.target.value as LeadStatus)}
-      className="w-full px-3 py-2 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone text-[13.5px] focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all appearance-none cursor-pointer"
+      className="w-full px-3 py-2 rounded-lg bg-white/[0.04] border border-white/15 text-white/90 text-[13.5px] focus:outline-none focus:border-[var(--gold)]/60 focus:bg-white/[0.07] transition-all appearance-none cursor-pointer"
     >
       {STATUS_OPTIONS.map((s) => (
-        <option key={s} value={s} className="bg-ink">
+        <option key={s} value={s} className="bg-[#12141A]">
           {STATUS_LABELS[s]}
         </option>
       ))}

@@ -346,20 +346,20 @@ export default function LeadsTableClient() {
 
   if (result.status === "error") {
     return (
-      <div className="rounded-2xl border border-rust/40 bg-rust/[0.05] p-8 text-center">
-        <div className="w-12 h-12 rounded-full border border-rust/40 bg-rust/10 flex items-center justify-center mx-auto mb-4 text-rust">
+      <div className="crm-glass !border-[#FB7185]/30 rounded-2xl p-8 text-center">
+        <div className="w-12 h-12 rounded-2xl border border-[#FB7185]/30 bg-[#FB7185]/10 flex items-center justify-center mx-auto mb-4 text-[#FB7185]">
           <AlertCircle className="w-5 h-5" strokeWidth={1.5} />
         </div>
-        <p className="font-display text-2xl font-light text-bone mb-2">
+        <p className="text-lg font-semibold text-[#f4f5f7] mb-2">
           Couldn&apos;t load leads.
         </p>
-        <p className="text-bone/55 text-[14px] mb-6 font-light">
+        <p className="text-white/55 text-[14px] mb-6">
           {result.error}
         </p>
         <button
           type="button"
           onClick={result.reload}
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink text-[13px] font-semibold tracking-wide transition-all duration-400"
+          className="crm-btn crm-btn-primary"
         >
           <RefreshCw className="w-4 h-4" strokeWidth={2} />
           Retry
@@ -392,22 +392,22 @@ export default function LeadsTableClient() {
             key={key}
             type="button"
             onClick={() => setView(key)}
-            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] tracking-wide transition-all border ${
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-[13px] tracking-wide transition-all duration-150 border ${
               view === key
-                ? "bg-[var(--gold)] text-ink font-semibold border-transparent"
-                : "text-bone/60 hover:text-bone border-bone/15 hover:border-bone/30"
+                ? "bg-gradient-to-br from-[#D9B968] to-[#C8A24C] text-[#0A0B0F] font-semibold border-transparent shadow-[0_2px_12px_rgba(200,162,76,0.25)]"
+                : "text-white/60 hover:text-white/90 border-white/[0.11] hover:border-white/25 bg-white/[0.03] hover:bg-white/[0.06]"
             }`}
           >
             {label}
             <span
-              className={`text-[11px] px-1.5 py-0.5 rounded-full ${
-                view === key ? "bg-ink/15" : "bg-bone/[0.06]"
+              className={`text-[11px] px-1.5 py-0.5 rounded-full crm-num ${
+                view === key ? "bg-black/15" : "bg-white/[0.07]"
               }`}
             >
               {count}
             </span>
             {key === "inbound" && newInboundCount > 0 && (
-              <span className="text-[10px] uppercase tracking-[0.14em] px-1.5 py-0.5 rounded-full bg-rust/80 text-bone">
+              <span className="text-[10px] uppercase tracking-[0.12em] px-1.5 py-0.5 rounded-full bg-[#FB7185] text-[#1a0a0e] font-semibold">
                 {newInboundCount} new
               </span>
             )}
@@ -417,27 +417,27 @@ export default function LeadsTableClient() {
 
       {/* Inbound pulse — answers "are we getting website leads?" at a glance */}
       {view === "inbound" && latestInbound.length > 0 && (
-        <div className="rounded-2xl bg-bone/[0.02] border border-bone/10 p-5 mb-6">
-          <p className="eyebrow mb-3">Latest inbound</p>
+        <div className="crm-glass rounded-2xl p-5 mb-6">
+          <p className="crm-label text-[var(--gold-soft)] mb-3">Latest inbound</p>
           <ul className="space-y-1.5">
             {latestInbound.map((l) => (
               <li key={l.id} className="flex items-baseline gap-3 text-[13.5px]">
                 <button
                   type="button"
                   onClick={() => selectLead(l.id)}
-                  className="text-bone font-medium hover:text-[var(--gold-soft)] transition-colors truncate"
+                  className="text-white/90 font-medium hover:text-[var(--gold-soft)] transition-colors duration-150 truncate"
                 >
                   {l.name}
                 </button>
-                <span className="text-bone/45 font-light truncate">
+                <span className="text-white/45 truncate">
                   {l.intent ?? l.lead_type ?? "—"}
                   {l.source ? ` · ${l.source}` : ""}
                 </span>
-                <span className="ml-auto text-[12px] text-bone/40 shrink-0">
+                <span className="ml-auto text-[12px] text-white/40 shrink-0 crm-num">
                   {relativeTime(l.created_at)}
                 </span>
                 {l.status === "new" && (
-                  <span className="text-[9.5px] uppercase tracking-[0.16em] text-[var(--gold-soft)] shrink-0">
+                  <span className="text-[9.5px] uppercase tracking-[0.14em] px-1.5 py-0.5 rounded-full bg-[#38BDF8]/15 text-[#7DD3FC] border border-[#38BDF8]/30 shrink-0">
                     new
                   </span>
                 )}
@@ -482,13 +482,13 @@ export default function LeadsTableClient() {
       />
 
       {mutErr && (
-        <div className="mb-4 px-4 py-2.5 rounded-lg border border-rust/40 bg-rust/[0.05] flex items-center gap-3 text-[13px] text-rust">
+        <div className="mb-4 px-4 py-2.5 rounded-xl border border-[#FB7185]/40 bg-[#FB7185]/[0.07] backdrop-blur-xl flex items-center gap-3 text-[13px] text-[#FDA4AF]">
           <AlertCircle className="w-4 h-4 shrink-0" strokeWidth={1.75} />
           <span className="flex-1">{mutErr}</span>
           <button
             type="button"
             onClick={() => setMutErr(null)}
-            className="text-rust/70 hover:text-rust transition-colors duration-200"
+            className="text-[#FDA4AF]/70 hover:text-[#FDA4AF] transition-colors duration-150"
             aria-label="Dismiss error"
           >
             ×

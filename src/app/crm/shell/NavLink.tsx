@@ -39,17 +39,17 @@ export default function NavLink({
   return (
     <Link
       href={href}
-      className={`group relative flex items-center gap-3 px-5 py-2.5 text-[14px] tracking-tight transition-colors duration-300 border-l-2 ${
+      className={`group relative flex items-center gap-3 px-3 py-2 rounded-xl text-[13.5px] font-medium tracking-tight transition-all duration-150 ${
         isActive
-          ? "text-bone bg-[var(--gold)]/10 border-[var(--gold)]"
-          : "text-bone/55 hover:text-bone hover:bg-bone/[0.03] border-transparent"
+          ? "text-[#f4f5f7] bg-gradient-to-r from-[var(--gold)]/[0.14] to-white/[0.04] border border-[var(--gold)]/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
+          : "text-white/55 hover:text-white/90 hover:bg-white/[0.05] border border-transparent"
       }`}
     >
       <span
-        className={`transition-colors duration-300 ${
+        className={`transition-colors duration-150 ${
           isActive
             ? "text-[var(--gold-soft)]"
-            : "text-bone/45 group-hover:text-bone/75"
+            : "text-white/40 group-hover:text-white/70"
         }`}
       >
         {icon}

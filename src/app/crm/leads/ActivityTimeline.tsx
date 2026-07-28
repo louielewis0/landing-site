@@ -89,7 +89,7 @@ export default function ActivityTimeline({ leadId }: { leadId: string }) {
   return (
     <div>
       {/* Composer */}
-      <div className="rounded-xl border border-bone/10 bg-bone/[0.02] p-3 mb-3">
+      <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3 mb-3">
         <div className="flex flex-wrap gap-1.5 mb-2.5">
           {ACTIVITY_TYPES.map((t) => {
             const isActive = type === t;
@@ -101,7 +101,7 @@ export default function ActivityTimeline({ leadId }: { leadId: string }) {
                 className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border text-[10.5px] font-semibold tracking-[0.16em] uppercase transition-colors duration-200 ${
                   isActive
                     ? "border-[var(--gold)]/50 bg-[var(--gold)]/12 text-[var(--gold-soft)]"
-                    : "border-bone/10 bg-transparent text-bone/45 hover:border-bone/25 hover:text-bone/75"
+                    : "border-white/10 bg-transparent text-white/45 hover:border-white/25 hover:text-white/75"
                 }`}
               >
                 {typeIcon(t, "w-3 h-3")}
@@ -115,7 +115,7 @@ export default function ActivityTimeline({ leadId }: { leadId: string }) {
           onChange={(e) => setBody(e.target.value)}
           placeholder={`Log a ${TYPE_LABELS[type].toLowerCase()}…`}
           rows={2}
-          className="w-full px-3 py-2 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone text-[13.5px] placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all resize-y"
+          className="w-full px-3 py-2 rounded-lg bg-white/[0.04] border border-white/15 text-white/90 text-[13.5px] placeholder-white/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-white/[0.07] transition-all resize-y"
           onKeyDown={(e) => {
             if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
               e.preventDefault();
@@ -124,21 +124,21 @@ export default function ActivityTimeline({ leadId }: { leadId: string }) {
           }}
         />
         <div className="flex items-center justify-between mt-2">
-          <span className="text-[10px] text-bone/35">
+          <span className="text-[10px] text-white/35">
             ⌘ + Enter to log
           </span>
           <button
             type="button"
             onClick={submit}
             disabled={creator.pending || !body.trim()}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink text-[11.5px] font-semibold tracking-wide transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-[#0A0B0F] text-[11.5px] font-semibold tracking-wide transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Send className="w-3 h-3" strokeWidth={2.25} />
             {creator.pending ? "Logging…" : "Log activity"}
           </button>
         </div>
         {error && (
-          <div className="mt-2 text-[12px] text-rust flex items-center gap-1.5">
+          <div className="mt-2 text-[12px] text-[#FDA4AF] flex items-center gap-1.5">
             <AlertCircle className="w-3.5 h-3.5" strokeWidth={1.75} />
             {error}
           </div>
@@ -147,17 +147,17 @@ export default function ActivityTimeline({ leadId }: { leadId: string }) {
 
       {/* Timeline */}
       {result.status === "loading" && (
-        <p className="text-bone/45 text-[13px] py-4 text-center">
+        <p className="text-white/45 text-[13px] py-4 text-center">
           Loading activity…
         </p>
       )}
       {result.status === "error" && (
-        <p className="text-rust text-[13px] py-4 text-center">
+        <p className="text-[#FDA4AF] text-[13px] py-4 text-center">
           Couldn&apos;t load activity: {result.error}
         </p>
       )}
       {result.status === "ready" && result.activities.length === 0 && (
-        <p className="text-bone/35 text-[12.5px] py-4 text-center font-light">
+        <p className="text-white/35 text-[12.5px] py-4 text-center font-light">
           No activity logged yet.
         </p>
       )}
@@ -174,7 +174,7 @@ export default function ActivityTimeline({ leadId }: { leadId: string }) {
 
 function ActivityRow({ activity }: { activity: Activity }) {
   return (
-    <li className="flex gap-3 p-3 rounded-lg border border-bone/[0.06] bg-bone/[0.015]">
+    <li className="flex gap-3 p-3 rounded-lg border border-white/[0.06] bg-white/[0.015]">
       <div className="w-7 h-7 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/25 flex items-center justify-center text-[var(--gold-soft)] shrink-0">
         {typeIcon(activity.type, "w-3.5 h-3.5")}
       </div>
@@ -183,16 +183,16 @@ function ActivityRow({ activity }: { activity: Activity }) {
           <span className="text-[10.5px] uppercase tracking-[0.18em] text-[var(--gold-soft)]">
             {TYPE_LABELS[activity.type]}
           </span>
-          <span className="text-[10.5px] text-bone/45 tabular-nums">
+          <span className="text-[10.5px] text-white/45 tabular-nums">
             {relativeTime(activity.created_at)}
           </span>
         </div>
         {activity.body && (
-          <p className="text-[13px] text-bone/80 whitespace-pre-wrap break-words">
+          <p className="text-[13px] text-white/80 whitespace-pre-wrap break-words">
             {activity.body}
           </p>
         )}
-        <p className="text-[10.5px] text-bone/35 mt-1.5">
+        <p className="text-[10.5px] text-white/35 mt-1.5">
           by you
         </p>
       </div>
