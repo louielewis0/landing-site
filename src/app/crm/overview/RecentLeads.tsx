@@ -24,17 +24,15 @@ export default function RecentLeads({ leads }: { leads: Lead[] }) {
     .slice(0, 6);
 
   return (
-    <section className="rounded-2xl border border-bone/10 bg-bone/[0.02] backdrop-blur-xl overflow-hidden">
-      <header className="flex items-center justify-between px-6 py-4 border-b border-bone/10">
+    <section className="crm-glass rounded-2xl overflow-hidden">
+      <header className="flex items-center justify-between px-6 py-4 border-b border-white/[0.07]">
         <div>
-          <p className="eyebrow mb-1">Recent Leads</p>
-          <p className="text-bone/55 text-[13px] font-light">
-            newest arrivals
-          </p>
+          <p className="crm-label text-[var(--gold-soft)] mb-1">Recent Leads</p>
+          <p className="text-white/50 text-[13px]">newest arrivals</p>
         </div>
         <Link
           href="/crm/leads"
-          className="text-[12px] text-bone/55 hover:text-bone tracking-wide inline-flex items-center gap-1 transition-colors duration-300"
+          className="text-[12px] font-medium text-white/55 hover:text-white tracking-wide inline-flex items-center gap-1 transition-colors duration-150"
         >
           View all <ChevronRight className="w-3 h-3" strokeWidth={1.75} />
         </Link>
@@ -49,26 +47,26 @@ export default function RecentLeads({ leads }: { leads: Lead[] }) {
           />
         </div>
       ) : (
-        <ul className="divide-y divide-bone/[0.06]">
+        <ul className="divide-y divide-white/[0.055]">
           {rows.map((lead) => (
             <li key={lead.id}>
               <Link
                 href={`/crm/leads?lead=${lead.id}`}
-                className="group flex items-center gap-3 px-6 py-3.5 hover:bg-bone/[0.03] transition-colors duration-200"
+                className="group flex items-center gap-3 px-6 py-3.5 hover:bg-white/[0.035] transition-colors duration-150"
               >
                 <PriorityDot priority={lead.priority} />
                 <div className="min-w-0 flex-1">
-                  <p className="text-[14px] text-bone truncate">{lead.name}</p>
-                  <p className="text-[12px] text-bone/45 truncate">
+                  <p className="text-[14px] font-medium text-white/90 truncate">{lead.name}</p>
+                  <p className="text-[12px] text-white/45 truncate">
                     {lead.source ?? "—"} ·{" "}
-                    <span className="text-bone/35">
+                    <span className="text-white/35">
                       {relativeTime(lead.created_at)}
                     </span>
                   </p>
                 </div>
                 <StatusPill status={lead.status} />
                 <ChevronRight
-                  className="w-4 h-4 text-bone/25 group-hover:text-bone/55 shrink-0 transition-colors duration-200"
+                  className="w-4 h-4 text-white/25 group-hover:text-white/60 shrink-0 transition-colors duration-150"
                   strokeWidth={1.5}
                 />
               </Link>

@@ -148,11 +148,11 @@ export default function TodayQueue({ leads }: { leads: Lead[] }) {
   const totalWork = queues.reduce((n, q) => n + q.rows.length, 0);
 
   return (
-    <section className="rounded-2xl border border-bone/10 bg-bone/[0.02] backdrop-blur-xl overflow-hidden">
-      <header className="flex items-center justify-between px-6 py-4 border-b border-bone/10">
+    <section className="crm-glass rounded-2xl overflow-hidden">
+      <header className="flex items-center justify-between px-6 py-4 border-b border-white/[0.07] bg-gradient-to-r from-[var(--gold)]/[0.06] to-transparent">
         <div>
-          <p className="eyebrow mb-1">Today&apos;s Work</p>
-          <p className="text-bone/55 text-[13px] font-light">
+          <p className="crm-label text-[var(--gold-soft)] mb-1">Today&apos;s Work</p>
+          <p className="text-white/50 text-[13px]">
             {totalWork === 0
               ? "Queue clear — go find more leads"
               : `${totalWork} action${totalWork === 1 ? "" : "s"} in priority order — work top to bottom`}
@@ -160,7 +160,7 @@ export default function TodayQueue({ leads }: { leads: Lead[] }) {
         </div>
         <Link
           href="/crm/leads"
-          className="text-[12px] text-bone/55 hover:text-bone tracking-wide inline-flex items-center gap-1 transition-colors duration-300"
+          className="text-[12px] font-medium text-white/55 hover:text-white tracking-wide inline-flex items-center gap-1 transition-colors duration-150"
         >
           All leads <ChevronRight className="w-3 h-3" strokeWidth={1.75} />
         </Link>
@@ -175,7 +175,7 @@ export default function TodayQueue({ leads }: { leads: Lead[] }) {
           />
         </div>
       ) : (
-        <div className="divide-y divide-bone/[0.06]">
+        <div className="divide-y divide-white/[0.055]">
           {queues
             .filter((q) => q.rows.length > 0)
             .map((q) => {
@@ -187,13 +187,13 @@ export default function TodayQueue({ leads }: { leads: Lead[] }) {
                       className="w-3.5 h-3.5 text-[var(--gold-soft)] self-center"
                       strokeWidth={1.75}
                     />
-                    <span className="text-[12.5px] text-bone font-medium tracking-wide">
+                    <span className="text-[12.5px] text-white/90 font-semibold tracking-wide">
                       {q.title}
                     </span>
-                    <span className="text-[11.5px] text-bone/45 tabular-nums">
+                    <span className="text-[11.5px] text-white/45 crm-num">
                       {q.rows.length}
                     </span>
-                    <span className="text-[11px] text-bone/35 font-light truncate">
+                    <span className="text-[11px] text-white/35 truncate">
                       — {q.hint}
                     </span>
                   </div>
@@ -204,18 +204,18 @@ export default function TodayQueue({ leads }: { leads: Lead[] }) {
                         <li key={l.id}>
                           <Link
                             href={`/crm/leads?lead=${l.id}`}
-                            className="flex items-center gap-3 rounded-lg px-3 py-2 -mx-3 hover:bg-bone/[0.04] transition-colors duration-150"
+                            className="flex items-center gap-3 rounded-xl px-3 py-2 -mx-3 hover:bg-white/[0.045] transition-colors duration-150"
                           >
                             <PriorityDot priority={l.priority} />
-                            <span className="text-[13px] text-bone truncate">
+                            <span className="text-[13px] font-medium text-white/85 truncate">
                               {l.name}
                             </span>
-                            <span className="text-[11.5px] text-bone/40 font-light truncate">
+                            <span className="text-[11.5px] text-white/40 truncate">
                               {[l.source, l.intent].filter(Boolean).join(" · ")}
                             </span>
                             <span
-                              className={`ml-auto text-[11px] tabular-nums shrink-0 ${
-                                r.urgent ? "text-rust" : "text-bone/45"
+                              className={`ml-auto text-[11px] crm-num shrink-0 ${
+                                r.urgent ? "text-[#FB7185]" : "text-white/45"
                               }`}
                             >
                               {r.text}
@@ -226,7 +226,7 @@ export default function TodayQueue({ leads }: { leads: Lead[] }) {
                     })}
                   </ul>
                   {q.rows.length > 5 && (
-                    <p className="text-[11px] text-bone/35 mt-1.5 pl-3">
+                    <p className="text-[11px] text-white/35 mt-1.5 pl-3">
                       +{q.rows.length - 5} more in Leads
                     </p>
                   )}
