@@ -29,16 +29,18 @@ import PriorityDot from "@/components/crm/PriorityDot";
  * action and does NOT also trigger the row-select.
  */
 
+/* Mirrors StatusPill's semantic hues (CRM design system) so the
+   row pill and the shared pill render statuses identically. */
 const STATUS_STYLES: Record<LeadStatus, string> = {
-  new: "bg-bone/10 text-bone border-bone/20",
-  attempted: "bg-[var(--gold-soft)]/15 text-[var(--gold-soft)] border-[var(--gold-soft)]/35",
-  contacted: "bg-[var(--gold)]/15 text-[var(--gold)] border-[var(--gold)]/40",
-  qualified: "bg-[var(--gold)]/20 text-[var(--gold-soft)] border-[var(--gold)]/45",
-  showing: "bg-[var(--gold)]/25 text-[var(--gold-soft)] border-[var(--gold)]/50",
-  negotiating: "bg-[var(--gold)]/30 text-bone border-[var(--gold)]/55",
-  closed_won: "bg-green-500/15 text-green-400 border-green-500/40",
-  closed_lost: "bg-rust/15 text-rust/80 border-rust/35",
-  dead: "bg-rust/20 text-rust border-rust/40",
+  new: "bg-[#38BDF8]/12 text-[#7DD3FC] border-[#38BDF8]/35",
+  attempted: "bg-[#FBBF24]/12 text-[#FCD34D] border-[#FBBF24]/35",
+  contacted: "bg-[var(--gold)]/15 text-[var(--gold-soft)] border-[var(--gold)]/40",
+  qualified: "bg-[#A78BFA]/14 text-[#C4B5FD] border-[#A78BFA]/40",
+  showing: "bg-[#2DD4BF]/12 text-[#5EEAD4] border-[#2DD4BF]/40",
+  negotiating: "bg-[#FB923C]/14 text-[#FDBA74] border-[#FB923C]/40",
+  closed_won: "bg-[#4ADE80]/14 text-[#86EFAC] border-[#4ADE80]/40",
+  closed_lost: "bg-white/[0.07] text-white/50 border-white/20",
+  dead: "bg-[#FB7185]/12 text-[#FDA4AF] border-[#FB7185]/40",
 };
 
 const STATUS_LABELS: Record<LeadStatus, string> = {
@@ -72,21 +74,21 @@ export default function LeadRow({
   const cyclable = STATUS_CYCLE.includes(lead.status);
 
   const rowBg = selected
-    ? "bg-[var(--gold)]/[0.08] hover:bg-[var(--gold)]/[0.10]"
+    ? "!bg-[var(--gold)]/[0.09] hover:!bg-[var(--gold)]/[0.11]"
     : dnc
-      ? "bg-rust/[0.06] hover:bg-rust/[0.09]"
+      ? "!bg-[#FB7185]/[0.05] hover:!bg-[#FB7185]/[0.08]"
       : striped
-        ? "bg-bone/[0.015] hover:bg-bone/[0.04]"
-        : "hover:bg-bone/[0.03]";
+        ? "bg-white/[0.015]"
+        : "";
 
   return (
     <tr
       onClick={onSelect}
-      className={`border-t border-bone/10 align-top cursor-pointer transition-colors duration-150 ${rowBg} ${
+      className={`align-top cursor-pointer ${rowBg} ${
         selected ? "ring-1 ring-inset ring-[var(--gold)]/35" : ""
       }`}
     >
-      <td className="px-5 py-4 text-bone/60 text-[12.5px] whitespace-nowrap">
+      <td className="px-5 py-4 text-white/55 text-[12.5px] whitespace-nowrap crm-num">
         {new Date(lead.created_at).toLocaleString(undefined, {
           month: "short",
           day: "numeric",
@@ -98,10 +100,10 @@ export default function LeadRow({
       <td className="px-5 py-4">
         <div className="flex items-center gap-2">
           <PriorityDot priority={lead.priority} />
-          <span className="font-medium text-bone">{lead.name}</span>
+          <span className="font-medium text-white/90">{lead.name}</span>
         </div>
         {lead.address && (
-          <div className="flex items-center gap-1.5 text-[12px] text-bone/55 mt-1">
+          <div className="flex items-center gap-1.5 text-[12px] text-white/55 mt-1">
             <MapPin
               className="w-3 h-3 text-[var(--gold-soft)] flex-shrink-0"
               strokeWidth={1.5}
@@ -109,18 +111,18 @@ export default function LeadRow({
             <span className="truncate">{lead.address}</span>
           </div>
         )}
-        <div className="text-[10px] text-bone/40 uppercase tracking-[0.18em] mt-1.5 flex flex-wrap gap-x-3">
+        <div className="text-[10px] text-white/40 uppercase tracking-[0.14em] mt-1.5 flex flex-wrap gap-x-3">
           {lead.source && <span>{lead.source}</span>}
           {lead.property_type && <span>{lead.property_type}</span>}
           {lead.transaction_type && <span>{lead.transaction_type}</span>}
         </div>
       </td>
-      <td className="px-5 py-4 text-bone/75">
+      <td className="px-5 py-4 text-white/75">
         {lead.phone && (
           <a
             href={`tel:${lead.phone}`}
             onClick={(e) => e.stopPropagation()}
-            className="flex items-center gap-2 hover:text-bone transition-colors"
+            className="flex items-center gap-2 hover:text-white transition-colors duration-150"
           >
             <Phone
               className="w-3 h-3 text-[var(--gold-soft)]"
@@ -133,7 +135,7 @@ export default function LeadRow({
           <a
             href={`mailto:${lead.email}`}
             onClick={(e) => e.stopPropagation()}
-            className="flex items-center gap-2 hover:text-bone transition-colors mt-1.5 text-[12.5px] break-all"
+            className="flex items-center gap-2 hover:text-white transition-colors duration-150 mt-1.5 text-[12.5px] break-all"
           >
             <Mail
               className="w-3 h-3 text-[var(--gold-soft)]"
@@ -143,16 +145,16 @@ export default function LeadRow({
           </a>
         )}
       </td>
-      <td className="px-5 py-4 text-bone/70 text-[12.5px]">
+      <td className="px-5 py-4 text-white/70 text-[12.5px]">
         {lead.intent ?? "—"}
       </td>
-      <td className="px-5 py-4 text-bone/65 text-[12.5px] max-w-[260px]">
+      <td className="px-5 py-4 text-white/65 text-[12.5px] max-w-[260px]">
         {lead.message ? (
           <span title={lead.message} className="line-clamp-2">
             {lead.message}
           </span>
         ) : (
-          <span className="text-bone/35">—</span>
+          <span className="text-white/35">—</span>
         )}
       </td>
       <td className="px-5 py-4">
@@ -167,16 +169,16 @@ export default function LeadRow({
               ? "Click to advance status"
               : "Managed in Kanban — drag the card to move"
           }
-          className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-[10.5px] font-semibold uppercase tracking-[0.18em] transition-all ${
+          className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-[10.5px] font-semibold uppercase tracking-[0.14em] transition-all duration-150 ${
             STATUS_STYLES[lead.status]
-          } ${cyclable ? "hover:scale-[1.02]" : "cursor-not-allowed opacity-90"}`}
+          } ${cyclable ? "hover:scale-[1.03] hover:brightness-110" : "cursor-not-allowed opacity-90"}`}
         >
           {STATUS_LABELS[lead.status]}
         </button>
       </td>
       <td className="px-5 py-4">
         {dnc ? (
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-rust/40 bg-rust/15 text-rust text-[10.5px] font-semibold uppercase tracking-[0.18em]">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#FB7185]/40 bg-[#FB7185]/12 text-[#FDA4AF] text-[10.5px] font-semibold uppercase tracking-[0.14em]">
             <Lock className="w-3 h-3" strokeWidth={2} />
             Do Not Call
           </div>
@@ -187,10 +189,10 @@ export default function LeadRow({
               onToggleScrubbed();
             }}
             title="Toggle DNC-scrubbed state"
-            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-[10.5px] font-semibold uppercase tracking-[0.18em] transition-all hover:scale-[1.02] ${
+            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-[10.5px] font-semibold uppercase tracking-[0.14em] transition-all duration-150 hover:scale-[1.03] ${
               lead.dnc_scrubbed
-                ? "border-[var(--gold)]/40 bg-[var(--gold)]/10 text-[var(--gold-soft)]"
-                : "border-bone/20 bg-bone/[0.04] text-bone/55"
+                ? "border-[#2DD4BF]/40 bg-[#2DD4BF]/10 text-[#5EEAD4]"
+                : "border-white/20 bg-white/[0.04] text-white/55"
             }`}
           >
             {lead.dnc_scrubbed ? (

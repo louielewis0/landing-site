@@ -30,18 +30,18 @@ export default function LeadsTable({
   onToggleScrubbed: (lead: Lead) => void;
 }) {
   return (
-    <div className="rounded-2xl border border-bone/10 overflow-hidden">
+    <div className="crm-panel rounded-2xl overflow-hidden">
       <div className="overflow-x-auto">
-        <table className="w-full text-[13.5px]">
+        <table className="w-full text-[13.5px] crm-table">
           <thead>
-            <tr className="bg-bone/[0.03] text-[10px] text-bone/45 uppercase tracking-[0.22em]">
-              <th className="text-left px-5 py-3.5 font-medium">Created</th>
-              <th className="text-left px-5 py-3.5 font-medium">Lead</th>
-              <th className="text-left px-5 py-3.5 font-medium">Contact</th>
-              <th className="text-left px-5 py-3.5 font-medium">Intent</th>
-              <th className="text-left px-5 py-3.5 font-medium">Message</th>
-              <th className="text-left px-5 py-3.5 font-medium">Status</th>
-              <th className="text-left px-5 py-3.5 font-medium">DNC</th>
+            <tr className="bg-white/[0.03] border-b border-white/[0.07]">
+              <th className="px-5 py-3.5">Created</th>
+              <th className="px-5 py-3.5">Lead</th>
+              <th className="px-5 py-3.5">Contact</th>
+              <th className="px-5 py-3.5">Intent</th>
+              <th className="px-5 py-3.5">Message</th>
+              <th className="px-5 py-3.5">Status</th>
+              <th className="px-5 py-3.5">DNC</th>
             </tr>
           </thead>
           <tbody>
@@ -49,7 +49,7 @@ export default function LeadsTable({
               <tr>
                 <td
                   colSpan={7}
-                  className="px-5 py-12 text-center text-bone/45 text-[14px]"
+                  className="px-5 py-12 text-center text-white/45 text-[14px]"
                 >
                   Loading leads…
                 </td>
@@ -59,7 +59,7 @@ export default function LeadsTable({
               <tr>
                 <td
                   colSpan={7}
-                  className="px-5 py-12 text-center text-bone/45 text-[14px]"
+                  className="px-5 py-12 text-center text-white/45 text-[14px]"
                 >
                   {totalCount === 0
                     ? "No leads yet. They'll appear here as people submit forms."
