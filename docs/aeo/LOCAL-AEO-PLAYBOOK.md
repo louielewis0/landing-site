@@ -61,8 +61,14 @@ REMC is currently **absent from every surface** this answer is assembled from.
   legacy office "1977 E Wattles Rd Ste C" still cited (FastExpert "additional
   office", Zillow agent profile); four business-name variants; dead domain
   marketcenterteam.com still indexed under an old name.
-- **Google Business Profile: state unknown** (automated viewing blocked) —
-  first thing to check by hand.
+- **Google Business Profile: EXISTS and is structurally correct** (owner
+  reported 2026-07-27): name exactly "Real Estate Market Center", Knowledge
+  Graph ID `/g/11g_zp9yx0`, category "Real estate agency", address
+  "2032 E Square Lake Rd Ste 400A, Troy, MI 48085" (matches canonical NAP),
+  website marketcenterrealty.com. **Rating 5.0, 29 Google reviews.**
+  Baseline gap: the competitor visible for the target query (Top Agent
+  Realty) claims 1,000+ five-star reviews — review count is REMC's primary
+  prominence deficit, not profile hygiene.
 
 ## 3. Prioritized actions
 
@@ -87,6 +93,12 @@ REMC is currently **absent from every surface** this answer is assembled from.
    volume for AI citations.
 
 ### P0 — review-funnel compliance fix (protects everything else)
+
+> **OWNER DECISION 2026-07-27: keep the star-gated funnel as-is** (5★ → Google,
+> 1–4★ → private feedback only) and the drafted-text flow. Risk was presented
+> (Google policy quoted below) and accepted. Do not change this flow without a
+> new owner decision. Residual risk on record: review filtering / profile
+> action against the 29-review base if detected or reported.
 
 Google's policy, verbatim: merchants may not *"selectively solicit positive
 reviews from customers"* and *"nor should they request that specific content
