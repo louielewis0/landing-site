@@ -72,11 +72,14 @@ export default function CrmGate({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen atmosphere grain vignette flex items-center justify-center px-6 relative overflow-hidden">
-      <form onSubmit={handleSubmit} className="relative w-full max-w-sm text-center">
-        <div className="w-16 h-16 rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/5 flex items-center justify-center mx-auto mb-8">
+    <div className="min-h-screen crm-mesh flex items-center justify-center px-6 relative overflow-hidden">
+      <form
+        onSubmit={handleSubmit}
+        className="relative w-full max-w-sm text-center crm-glass rounded-3xl px-8 py-10"
+      >
+        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--gold-soft)]/20 to-[var(--crm-violet,#A78BFA)]/10 border border-white/10 flex items-center justify-center mx-auto mb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]">
           <svg
-            className="w-7 h-7 text-[var(--gold-soft)]"
+            className="w-6 h-6 text-[var(--gold-soft)]"
             fill="none"
             stroke="currentColor"
             strokeWidth={1.5}
@@ -89,11 +92,11 @@ export default function CrmGate({ children }: { children: React.ReactNode }) {
             />
           </svg>
         </div>
-        <p className="eyebrow mb-3">Internal · Private</p>
-        <h1 className="font-display text-4xl font-light text-bone tracking-tight mb-3">
+        <p className="crm-label mb-2">Internal · Private</p>
+        <h1 className="text-2xl font-semibold text-[#f4f5f7] tracking-tight mb-2">
           CRM
         </h1>
-        <p className="text-[14px] text-bone/45 mb-10 font-light">
+        <p className="text-[14px] text-white/50 mb-8">
           Enter passcode to continue.
         </p>
         <input
@@ -107,19 +110,17 @@ export default function CrmGate({ children }: { children: React.ReactNode }) {
           }}
           placeholder="Enter passcode"
           autoFocus
-          className={`w-full px-5 py-4 rounded-xl bg-bone/[0.04] backdrop-blur-xl border text-center text-bone text-2xl tracking-[0.5em] placeholder-bone/30 placeholder:text-base placeholder:tracking-normal focus:outline-none transition-all duration-500 ${
-            error
-              ? "border-rust"
-              : "border-bone/15 focus:border-[var(--gold)]/60 focus:bg-bone/[0.07]"
+          className={`crm-input text-center !text-2xl tracking-[0.5em] !py-4 placeholder:!text-base placeholder:tracking-normal ${
+            error ? "!border-[var(--color-crm-rose,#FB7185)]" : ""
           }`}
         />
         {error && (
-          <p className="text-[13px] text-rust mt-3">Incorrect passcode.</p>
+          <p className="text-[13px] text-[#FB7185] mt-3">Incorrect passcode.</p>
         )}
         <button
           type="submit"
           disabled={submitting || !code.trim()}
-          className="mt-6 w-full px-6 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500 disabled:opacity-50"
+          className="crm-btn crm-btn-primary mt-6 w-full !py-3.5 text-[14px]"
         >
           {submitting ? "Checking…" : "Unlock"}
         </button>

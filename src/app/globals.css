@@ -16,6 +16,16 @@
   --color-gold-soft: #D9B968;
   --color-gold-deep: #9C7A2E;
   --color-rust: #8C4A1F;
+
+  /* CRM design system — cool-neutral base + semantic accents.
+     Additive: marketing pages never reference these. */
+  --color-crm-bg: #0A0B0F;
+  --color-crm-panel: #12141A;
+  --color-crm-teal: #2DD4BF;
+  --color-crm-violet: #A78BFA;
+  --color-crm-sky: #38BDF8;
+  --color-crm-amber: #FBBF24;
+  --color-crm-rose: #FB7185;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -219,6 +229,158 @@ body {
 .tilt:hover {
   transform: perspective(1200px) translateY(-4px) rotateX(2deg) rotateY(-2deg);
 }
+
+/* ─────────────────────────────────────────────────────────────
+   CRM design system — glassmorphic dashboard components.
+   Scoped by .crm-* prefixes; marketing pages never use these.
+   ───────────────────────────────────────────────────────────── */
+.crm-mesh {
+  background-color: var(--color-crm-bg);
+  background-image:
+    radial-gradient(ellipse 55% 40% at 8% 0%, rgba(200, 162, 76, 0.08), transparent 60%),
+    radial-gradient(ellipse 50% 45% at 95% 12%, rgba(167, 139, 250, 0.07), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 70% 100%, rgba(45, 212, 191, 0.05), transparent 60%);
+  background-attachment: fixed;
+}
+
+/* Frosted card: translucent fill, 1px border, inset top highlight,
+   soft layered shadow. Solid enough for legible data on top. */
+.crm-glass {
+  background: rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* Heavier glass for overlays: drawers, modals, popovers. */
+.crm-glass-heavy {
+  background: rgba(18, 20, 26, 0.86);
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 24px 64px rgba(0, 0, 0, 0.55);
+}
+
+/* Solid panel for dense data (tables): no translucency behind rows. */
+.crm-panel {
+  background: var(--color-crm-panel);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 28px rgba(0, 0, 0, 0.3);
+}
+
+.crm-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #f4f5f7;
+}
+
+.crm-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(244, 245, 247, 0.55);
+}
+
+.crm-num {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Buttons — one system: primary / secondary / destructive. */
+.crm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 0.5rem 1rem;
+  transition: all 160ms var(--ease-soft);
+  cursor: pointer;
+}
+.crm-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.crm-btn:focus-visible {
+  outline: 2px solid rgba(200, 162, 76, 0.7);
+  outline-offset: 2px;
+}
+
+.crm-btn-primary {
+  background: linear-gradient(135deg, #D9B968 0%, #C8A24C 100%);
+  color: #0A0B0F;
+  box-shadow: 0 2px 12px rgba(200, 162, 76, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+.crm-btn-primary:hover:not(:disabled) {
+  box-shadow: 0 4px 20px rgba(200, 162, 76, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+.crm-btn-primary:active:not(:disabled) { transform: translateY(0); }
+
+.crm-btn-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(244, 245, 247, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.crm-btn-secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #f4f5f7;
+}
+
+.crm-btn-destructive {
+  background: rgba(251, 113, 133, 0.12);
+  color: #FB7185;
+  border: 1px solid rgba(251, 113, 133, 0.3);
+}
+.crm-btn-destructive:hover:not(:disabled) {
+  background: rgba(251, 113, 133, 0.2);
+  border-color: rgba(251, 113, 133, 0.5);
+}
+
+/* Inputs — one treatment everywhere. */
+.crm-input {
+  width: 100%;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  color: #f4f5f7;
+  font-size: 14px;
+  padding: 0.5rem 0.875rem;
+  transition: border-color 160ms var(--ease-soft), background 160ms var(--ease-soft), box-shadow 160ms var(--ease-soft);
+}
+.crm-input::placeholder { color: rgba(244, 245, 247, 0.35); }
+.crm-input:focus {
+  outline: none;
+  border-color: rgba(200, 162, 76, 0.6);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 0 3px rgba(200, 162, 76, 0.15);
+}
+.crm-input:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Table system — solid header, hairline rows, quiet hover. */
+.crm-table th {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(244, 245, 247, 0.5);
+  text-align: left;
+}
+.crm-table tbody tr {
+  border-top: 1px solid rgba(255, 255, 255, 0.055);
+  transition: background 120ms var(--ease-soft);
+}
+.crm-table tbody tr:hover { background: rgba(255, 255, 255, 0.035); }
 
 /* ─────────────────────────────────────────────────────────────
    Chrome — selection, scrollbar
