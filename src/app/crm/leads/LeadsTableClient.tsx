@@ -6,6 +6,7 @@ import { AlertCircle, RefreshCw } from "lucide-react";
 import { usePasscode } from "../gate";
 import { useLeads } from "../_lib/use-leads";
 import { apiFetch } from "../_lib/api-client";
+import { relativeTime } from "../_lib/relative-time";
 import {
   STATUS_CYCLE,
   type Lead,
@@ -61,6 +62,40 @@ export default function LeadsTableClient() {
   const [showAddPanel, setShowAddPanel] = useState(false);
   const [mutErr, setMutErr] = useState<string | null>(null);
 
+  // View segmentation: website/inbound leads vs expired prospecting.
+  // The prospecting tools (import / trace / DNC) live ONLY in the
+  // expired tab so inbound leads are never buried under machinery.
+  type LeadView = "inbound" | "expired" | "all";
+  const [view, setView] = useState<LeadView>("inbound");
+  const isExpiredLead = useCallback(
+    (l: Lead) => (l.source ?? "").trim().toLowerCase() === "expired",
+    [],
+  );
+  const inboundLeads = useMemo(
+    () => leads.filter((l) => !isExpiredLead(l)),
+    [leads, isExpiredLead],
+  );
+  const expiredLeads = useMemo(
+    () => leads.filter(isExpiredLead),
+    [leads, isExpiredLead],
+  );
+  const segmented =
+    view === "all" ? leads : view === "expired" ? expiredLeads : inboundLeads;
+  const newInboundCount = useMemo(
+    () => inboundLeads.filter((l) => l.status === "new").length,
+    [inboundLeads],
+  );
+  const latestInbound = useMemo(
+    () =>
+      [...inboundLeads]
+        .sort(
+          (a, b) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+        )
+        .slice(0, 3),
+    [inboundLeads],
+  );
+
   // Read ?lead and ?add from URL on each render — these stay in
   // sync with browser back/forward and external links.
   const selectedLeadId = searchParams.get("lead");
@@ -81,36 +116,36 @@ export default function LeadsTableClient() {
     }
   }, [addParam, pathname, router, searchParams]);
 
-  // Filter-options derived from the actual data so dropdowns
+  // Filter-options derived from the current segment so dropdowns
   // track reality, not a frozen vocabulary.
   const sourceOptions = useMemo(
     () =>
       Array.from(
         new Set(
-          leads
+          segmented
             .map((l) => l.source ?? "")
             .filter((s): s is string => s.trim().length > 0),
         ),
       ).sort(),
-    [leads],
+    [segmented],
   );
   const propertyTypeOptions = useMemo(
     () =>
       Array.from(
         new Set(
-          leads
+          segmented
             .map((l) => l.property_type ?? "")
             .filter((s): s is string => s.trim().length > 0),
         ),
       ).sort(),
-    [leads],
+    [segmented],
   );
 
   // Filtered view — search across name / phone / email, then
   // the four select-based filters.
   const visible = useMemo(() => {
     const q = filters.search.trim().toLowerCase();
-    return leads.filter((l) => {
+    return segmented.filter((l) => {
       if (filters.status !== "all" && l.status !== filters.status) return false;
       if (filters.source !== "all" && l.source !== filters.source) return false;
       if (filters.priority !== "all" && l.priority !== filters.priority)
@@ -124,7 +159,7 @@ export default function LeadsTableClient() {
       const hay = `${l.name} ${l.phone ?? ""} ${l.email ?? ""}`.toLowerCase();
       return hay.includes(q);
     });
-  }, [leads, filters]);
+  }, [segmented, filters]);
 
   // Drawer open/close is LOCAL state — instant, no server round-trip.
   // The ?lead=<id> URL param is synced in the background (so deep
@@ -344,23 +379,96 @@ export default function LeadsTableClient() {
         />
       )}
 
-      <ImportPanel
-        onImported={(imported) => setLeads((cur) => [...imported, ...cur])}
-        onUpdated={(updated) => {
-          const byId = new Map(updated.map((l) => [l.id, l]));
-          setLeads((cur) => cur.map((l) => byId.get(l.id) ?? l));
-        }}
-      />
+      {/* View tabs — inbound first so new website leads are never buried */}
+      <nav className="flex items-center gap-2 mb-6 flex-wrap" aria-label="Lead views">
+        {(
+          [
+            ["inbound", "Website & Inbound", inboundLeads.length],
+            ["expired", "Expired prospecting", expiredLeads.length],
+            ["all", "All leads", leads.length],
+          ] as const
+        ).map(([key, label, count]) => (
+          <button
+            key={key}
+            type="button"
+            onClick={() => setView(key)}
+            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] tracking-wide transition-all border ${
+              view === key
+                ? "bg-[var(--gold)] text-ink font-semibold border-transparent"
+                : "text-bone/60 hover:text-bone border-bone/15 hover:border-bone/30"
+            }`}
+          >
+            {label}
+            <span
+              className={`text-[11px] px-1.5 py-0.5 rounded-full ${
+                view === key ? "bg-ink/15" : "bg-bone/[0.06]"
+              }`}
+            >
+              {count}
+            </span>
+            {key === "inbound" && newInboundCount > 0 && (
+              <span className="text-[10px] uppercase tracking-[0.14em] px-1.5 py-0.5 rounded-full bg-rust/80 text-bone">
+                {newInboundCount} new
+              </span>
+            )}
+          </button>
+        ))}
+      </nav>
 
-      <TraceTargets
-        leads={leads}
-        onUpdated={(updated) => {
-          const byId = new Map(updated.map((l) => [l.id, l]));
-          setLeads((cur) => cur.map((l) => byId.get(l.id) ?? l));
-        }}
-      />
+      {/* Inbound pulse — answers "are we getting website leads?" at a glance */}
+      {view === "inbound" && latestInbound.length > 0 && (
+        <div className="rounded-2xl bg-bone/[0.02] border border-bone/10 p-5 mb-6">
+          <p className="eyebrow mb-3">Latest inbound</p>
+          <ul className="space-y-1.5">
+            {latestInbound.map((l) => (
+              <li key={l.id} className="flex items-baseline gap-3 text-[13.5px]">
+                <button
+                  type="button"
+                  onClick={() => selectLead(l.id)}
+                  className="text-bone font-medium hover:text-[var(--gold-soft)] transition-colors truncate"
+                >
+                  {l.name}
+                </button>
+                <span className="text-bone/45 font-light truncate">
+                  {l.intent ?? l.lead_type ?? "—"}
+                  {l.source ? ` · ${l.source}` : ""}
+                </span>
+                <span className="ml-auto text-[12px] text-bone/40 shrink-0">
+                  {relativeTime(l.created_at)}
+                </span>
+                {l.status === "new" && (
+                  <span className="text-[9.5px] uppercase tracking-[0.16em] text-[var(--gold-soft)] shrink-0">
+                    new
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
-      <DncScrubber onScrubbed={handleScrubbed} />
+      {/* Prospecting machinery lives ONLY in the expired tab */}
+      {view === "expired" && (
+        <>
+          <ImportPanel
+            onImported={(imported) => setLeads((cur) => [...imported, ...cur])}
+            onUpdated={(updated) => {
+              const byId = new Map(updated.map((l) => [l.id, l]));
+              setLeads((cur) => cur.map((l) => byId.get(l.id) ?? l));
+            }}
+          />
+
+          <TraceTargets
+            leads={expiredLeads}
+            onUpdated={(updated) => {
+              const byId = new Map(updated.map((l) => [l.id, l]));
+              setLeads((cur) => cur.map((l) => byId.get(l.id) ?? l));
+            }}
+          />
+
+          <DncScrubber onScrubbed={handleScrubbed} />
+        </>
+      )}
 
       <Filters
         state={filters}
