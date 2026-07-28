@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import { checkDashboardAuth } from "@/lib/dashboard-auth";
-import { LEAD_COLUMNS, LEADS_V_COLUMNS } from "@/lib/lead-shape";
+import { LEAD_COLUMNS, LEADS_V_COLUMNS, type Lead } from "@/lib/lead-shape";
 
 /**
  * GET  /api/dashboard/leads  → list all leads, newest first
@@ -55,10 +55,11 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: cErr.message }, { status: 500 });
   }
   const lastContact = new Map<string, string>();
-  for (const a of contacts ?? []) {
+  for (const a of (contacts ?? []) as { lead_id: string; created_at: string }[]) {
     if (!lastContact.has(a.lead_id)) lastContact.set(a.lead_id, a.created_at);
   }
-  const leads = (data ?? []).map((l) => ({
+  const rows = (data ?? []) as unknown as Lead[];
+  const leads = rows.map((l) => ({
     ...l,
     last_contact_at: lastContact.get(l.id) ?? null,
   }));
