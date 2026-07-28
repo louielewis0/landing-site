@@ -19,16 +19,19 @@ import type { LeadStatus } from "@/lib/lead-shape";
  * dead).
  */
 
+/* Semantic hue per stage (CRM design system): cool → warm as the
+   lead moves down-funnel, green for won, muted/rose for lost/dead.
+   One hue per status so states differentiate at a glance. */
 const STATUS_STYLES: Record<LeadStatus, string> = {
-  new:          "bg-bone/10 text-bone border-bone/20",
-  attempted:    "bg-[var(--gold-soft)]/15 text-[var(--gold-soft)] border-[var(--gold-soft)]/35",
-  contacted:    "bg-[var(--gold)]/15 text-[var(--gold)] border-[var(--gold)]/40",
-  qualified:    "bg-[var(--gold)]/20 text-[var(--gold-soft)] border-[var(--gold)]/45",
-  showing:      "bg-[var(--gold)]/25 text-[var(--gold-soft)] border-[var(--gold)]/50",
-  negotiating:  "bg-[var(--gold)]/30 text-bone border-[var(--gold)]/55",
-  closed_won:   "bg-green-500/15 text-green-400 border-green-500/40",
-  closed_lost:  "bg-rust/15 text-rust/80 border-rust/35",
-  dead:         "bg-rust/20 text-rust border-rust/40",
+  new:          "bg-[#38BDF8]/12 text-[#7DD3FC] border-[#38BDF8]/35",
+  attempted:    "bg-[#FBBF24]/12 text-[#FCD34D] border-[#FBBF24]/35",
+  contacted:    "bg-[var(--gold)]/15 text-[var(--gold-soft)] border-[var(--gold)]/40",
+  qualified:    "bg-[#A78BFA]/14 text-[#C4B5FD] border-[#A78BFA]/40",
+  showing:      "bg-[#2DD4BF]/12 text-[#5EEAD4] border-[#2DD4BF]/40",
+  negotiating:  "bg-[#FB923C]/14 text-[#FDBA74] border-[#FB923C]/40",
+  closed_won:   "bg-[#4ADE80]/14 text-[#86EFAC] border-[#4ADE80]/40",
+  closed_lost:  "bg-white/[0.07] text-white/50 border-white/20",
+  dead:         "bg-[#FB7185]/12 text-[#FDA4AF] border-[#FB7185]/40",
 };
 
 const STATUS_LABELS: Record<LeadStatus, string> = {

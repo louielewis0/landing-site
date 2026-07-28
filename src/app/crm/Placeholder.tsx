@@ -17,21 +17,19 @@ export default function Placeholder({
   items: string[];
 }) {
   return (
-    <div className="rounded-2xl border border-bone/10 bg-ink-3/60 p-8 backdrop-blur-xl">
+    <div className="crm-glass rounded-2xl p-6 sm:p-8">
       <div className="flex items-baseline gap-3 mb-6">
-        <span className="text-[11px] tracking-[0.32em] uppercase text-[var(--gold-soft)]">
+        <span className="crm-label text-[var(--gold-soft)]">
           Coming in {phase}
         </span>
         <span className="block w-10 h-px bg-[var(--gold)]/40" />
       </div>
-      <h2 className="font-display text-2xl font-light text-bone mb-5">
-        {title}
-      </h2>
-      <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-[14px] text-bone/65">
+      <h2 className="crm-title mb-5">{title}</h2>
+      <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-[14px] text-white/65">
         {items.map((item) => (
           <li
             key={item}
-            className="rounded-lg border border-bone/10 bg-bone/[0.02] px-4 py-3"
+            className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3"
           >
             {item}
           </li>

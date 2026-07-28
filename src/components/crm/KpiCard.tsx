@@ -1,13 +1,12 @@
 /**
- * KPI tile for the overview surface (Phase 2B). Glass card on
- * the cinematic backdrop — bone/[0.03] fill, bone/10 border,
- * generous padding, large display number, optional delta line
- * and lead icon.
+ * KPI tile for the overview surface (Phase 2B). Frosted-glass card
+ * on the CRM mesh backdrop — crm-glass fill, generous padding,
+ * large tabular-nums numeral, optional delta line and lead icon.
  *
  * `emphasis="highlight"` swaps the panel to a gold-tinted variant
  * for the surface's most-important metric (e.g. Hot Leads,
  * Overdue Follow-ups) so a scanner can find the anchor at a
- * glance. Idle cards stay bone-tinted.
+ * glance. Idle cards stay neutral glass.
  *
  * Icon is taken as a pre-rendered JSX node (not a component
  * reference) so the card composes cleanly across server and
@@ -30,29 +29,27 @@ export default function KpiCard({
 }) {
   return (
     <div
-      className={`rounded-2xl border p-6 backdrop-blur-xl transition-colors duration-300 ${
+      className={`crm-glass rounded-2xl p-5 sm:p-6 transition-all duration-150 hover:-translate-y-0.5 ${
         emphasis === "highlight"
-          ? "bg-[var(--gold)]/[0.06] border-[var(--gold)]/30 hover:bg-[var(--gold)]/[0.10]"
-          : "bg-bone/[0.03] border-bone/10 hover:bg-bone/[0.05]"
+          ? "!bg-[linear-gradient(135deg,rgba(200,162,76,0.12),rgba(167,139,250,0.05))] !border-[var(--gold)]/30"
+          : "hover:!bg-white/[0.06]"
       }`}
     >
       <div className="flex items-start justify-between mb-3">
-        <p className="text-[11px] tracking-[0.24em] uppercase text-bone/45">
-          {label}
-        </p>
+        <p className="crm-label">{label}</p>
         {icon && (
           <span
             className={
               emphasis === "highlight"
                 ? "text-[var(--gold-soft)]"
-                : "text-bone/35"
+                : "text-white/35"
             }
           >
             {icon}
           </span>
         )}
       </div>
-      <p className="font-display text-4xl font-light text-bone tracking-tight">
+      <p className="crm-num text-3xl font-semibold text-[#f4f5f7]">
         {value}
       </p>
       {delta && (
@@ -60,7 +57,7 @@ export default function KpiCard({
           className={`mt-2 text-[12px] ${
             emphasis === "highlight"
               ? "text-[var(--gold-soft)]"
-              : "text-bone/55"
+              : "text-white/55"
           }`}
         >
           {delta}
