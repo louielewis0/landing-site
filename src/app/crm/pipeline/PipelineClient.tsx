@@ -151,7 +151,7 @@ export default function PipelineClient() {
         {PIPELINE_STAGES.map((s) => (
           <div
             key={s.stage}
-            className="w-[280px] h-[440px] shrink-0 rounded-2xl border border-bone/10 bg-bone/[0.02] animate-pulse"
+            className="w-[280px] h-[440px] shrink-0 rounded-2xl border border-white/[0.08] bg-white/[0.03] animate-pulse"
           />
         ))}
       </div>
@@ -160,20 +160,20 @@ export default function PipelineClient() {
 
   if (result.status === "error") {
     return (
-      <div className="rounded-2xl border border-rust/40 bg-rust/[0.05] p-8 text-center">
-        <div className="w-12 h-12 rounded-full border border-rust/40 bg-rust/10 flex items-center justify-center mx-auto mb-4 text-rust">
+      <div className="crm-glass !border-[#FB7185]/30 rounded-2xl p-8 text-center">
+        <div className="w-12 h-12 rounded-2xl border border-[#FB7185]/30 bg-[#FB7185]/10 flex items-center justify-center mx-auto mb-4 text-[#FB7185]">
           <AlertCircle className="w-5 h-5" strokeWidth={1.5} />
         </div>
-        <p className="font-display text-2xl font-light text-bone mb-2">
+        <p className="text-lg font-semibold text-[#f4f5f7] mb-2">
           Couldn&apos;t load pipeline.
         </p>
-        <p className="text-bone/55 text-[14px] mb-6 font-light">
+        <p className="text-white/55 text-[14px] mb-6">
           {result.error}
         </p>
         <button
           type="button"
           onClick={result.reload}
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink text-[13px] font-semibold tracking-wide transition-all duration-400"
+          className="crm-btn crm-btn-primary"
         >
           <RefreshCw className="w-4 h-4" strokeWidth={2} />
           Retry
@@ -193,13 +193,13 @@ export default function PipelineClient() {
   return (
     <div>
       {error && (
-        <div className="mb-4 px-4 py-2.5 rounded-lg border border-rust/40 bg-rust/[0.05] flex items-center gap-3 text-[13px] text-rust">
+        <div className="mb-4 px-4 py-2.5 rounded-xl border border-[#FB7185]/40 bg-[#FB7185]/[0.07] backdrop-blur-xl flex items-center gap-3 text-[13px] text-[#FDA4AF]">
           <AlertCircle className="w-4 h-4 shrink-0" strokeWidth={1.75} />
           <span className="flex-1">{error}</span>
           <button
             type="button"
             onClick={() => setError(null)}
-            className="text-rust/70 hover:text-rust transition-colors duration-200"
+            className="text-[#FDA4AF]/70 hover:text-[#FDA4AF] transition-colors duration-150"
             aria-label="Dismiss error"
           >
             <X className="w-3.5 h-3.5" strokeWidth={2} />

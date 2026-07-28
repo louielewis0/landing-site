@@ -61,35 +61,35 @@ export default function Column({
   return (
     <div
       ref={setNodeRef}
-      className={`flex flex-col w-[280px] shrink-0 rounded-2xl border backdrop-blur-xl transition-colors duration-200 ${
+      className={`flex flex-col w-[280px] shrink-0 rounded-2xl border backdrop-blur-xl transition-all duration-150 ${
         isOver
-          ? "border-[var(--gold)]/45 bg-[var(--gold)]/[0.06]"
+          ? "border-[var(--gold)]/50 bg-[var(--gold)]/[0.07] shadow-[0_0_0_3px_rgba(200,162,76,0.12)]"
           : isTerminal
-            ? "border-bone/[0.06] bg-bone/[0.01]"
-            : "border-bone/10 bg-bone/[0.02]"
+            ? "border-white/[0.05] bg-white/[0.015]"
+            : "border-white/[0.09] bg-white/[0.035] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
       }`}
     >
-      <header className="px-4 py-3 border-b border-bone/[0.06]">
+      <header className="px-4 py-3 border-b border-white/[0.06]">
         <div className="flex items-baseline justify-between mb-0.5">
           <p
-            className={`text-[11px] tracking-[0.24em] uppercase ${
-              isTerminal ? "text-bone/35" : "text-[var(--gold-soft)]"
+            className={`crm-label ${
+              isTerminal ? "!text-white/35" : "!text-[var(--gold-soft)]"
             }`}
           >
             {label}
           </p>
-          <span className="text-[12px] text-bone tabular-nums">
+          <span className="text-[12px] text-white/85 crm-num">
             {leads.length}
             {valueLabel && (
-              <span className="text-bone/45 ml-1.5">· {valueLabel}</span>
+              <span className="text-white/45 ml-1.5">· {valueLabel}</span>
             )}
           </span>
         </div>
-        <p className="text-[11px] text-bone/40 font-light">{description}</p>
+        <p className="text-[11px] text-white/40">{description}</p>
       </header>
       <div className="flex-1 p-3 space-y-2 overflow-y-auto min-h-[120px] max-h-[calc(100vh-280px)]">
         {leads.length === 0 ? (
-          <p className="text-center text-[11px] text-bone/25 py-6 tracking-wide">
+          <p className="text-center text-[11px] text-white/25 py-6 tracking-wide">
             drop leads here
           </p>
         ) : (
