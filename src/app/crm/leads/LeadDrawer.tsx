@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { X, UserPlus, AlertCircle, Trash2, PhoneOutgoing } from "lucide-react";
 import { usePasscode } from "../gate";
 import { apiFetch } from "../_lib/api-client";
@@ -182,85 +182,156 @@ export default function LeadDrawer({
 
   const lostClass = draft.status === "closed_lost" || draft.status === "dead";
 
+  // Scroll parallax: --shrink (0→1 over the first 90px of body
+  // scroll) condenses the serif name and dims the key-light. Direct
+  // DOM mutation — no re-render per scroll frame, transforms only.
+  const headerRef = useRef<HTMLElement>(null);
+  function onBodyScroll(e: React.UIEvent<HTMLDivElement>) {
+    const s = Math.min(1, e.currentTarget.scrollTop / 90);
+    headerRef.current?.style.setProperty("--shrink", s.toFixed(3));
+  }
+
   return (
     <>
-      {/* Backdrop */}
+      {/* Backdrop — cinematic vignette: darker at the edges so the
+          panel reads as the lit object in a dim room. */}
       <div
-        className="fixed inset-0 z-40 bg-ink/65 backdrop-blur-sm"
+        className="fixed inset-0 z-40"
         onClick={onClose}
-        style={{ animation: "drawerFade 220ms cubic-bezier(0.16, 1, 0.3, 1)" }}
+        style={{
+          animation: "drawerFade 260ms cubic-bezier(0.16, 1, 0.3, 1)",
+          background:
+            "radial-gradient(120% 120% at 70% 50%, rgba(10,9,8,0.55) 0%, rgba(10,9,8,0.82) 100%)",
+          backdropFilter: "blur(3px)",
+        }}
       />
 
-      {/* Drawer panel */}
-      <aside
-        className="fixed inset-y-0 right-0 z-50 w-full sm:w-[520px] bg-ink-2/95 backdrop-blur-2xl border-l border-bone/10 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] flex flex-col"
-        style={{
-          animation: "drawerSlide 280ms cubic-bezier(0.16, 1, 0.3, 1)",
-        }}
-        onClick={(e) => e.stopPropagation()}
+      {/* Perspective stage — gives the panel a real z-axis to arrive
+          through. One-time entrance; conveys "opening", then inert. */}
+      <div
+        className="fixed inset-y-0 right-0 z-50 w-full sm:w-[540px] pointer-events-none"
+        style={{ perspective: "1400px" }}
       >
-        {/* Inline keyframes — co-located so this drawer is the only
-            owner. Slide + fade enter together. */}
-        <style>{`
-          @keyframes drawerSlide {
-            from { transform: translateX(40px); opacity: 0; }
-            to   { transform: translateX(0); opacity: 1; }
-          }
-          @keyframes drawerFade {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-          }
-        `}</style>
+        <aside
+          className="drawer-panel pointer-events-auto relative h-full w-full bg-ink-2/95 backdrop-blur-2xl border-l border-bone/10 shadow-[0_40px_120px_-24px_rgba(0,0,0,0.85),0_0_0_1px_rgba(245,241,234,0.03)] flex flex-col"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Edge light — a 1px hairline that catches gold near the
+              top, like light falling on the panel's spine. */}
+          <span
+            aria-hidden
+            className="absolute inset-y-0 left-0 w-px"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(217,185,104,0.55) 0%, rgba(217,185,104,0.12) 22%, rgba(245,241,234,0.06) 60%, transparent 100%)",
+            }}
+          />
 
-        {/* Header */}
-        <header className="flex items-center justify-between px-6 py-4 border-b border-bone/10 shrink-0">
-          <div className="flex items-center gap-3 min-w-0">
-            <PriorityDot priority={draft.priority} />
-            <div className="min-w-0">
-              <p className="font-display text-[20px] font-light text-bone tracking-tight truncate leading-none">
-                {draft.name}
-              </p>
-              <p className="text-[11px] text-bone/45 mt-1 tracking-wide">
-                {draft.source ?? "—"} · created{" "}
-                {relativeTime(draft.created_at)} ·{" "}
-                {draft.last_contact_at ? (
-                  <span className="text-bone/60">
-                    last contacted {relativeTime(draft.last_contact_at)}
-                  </span>
-                ) : (
-                  <span className="text-rust/90">never contacted</span>
-                )}
-              </p>
+          <style>{`
+            .drawer-panel {
+              animation: drawerCine 420ms cubic-bezier(0.16, 1, 0.3, 1);
+              transform-origin: right center;
+            }
+            @keyframes drawerCine {
+              0%   { transform: translateX(56px) rotateY(-5deg); opacity: 0; }
+              60%  { opacity: 1; }
+              100% { transform: translateX(0) rotateY(0deg); opacity: 1; }
+            }
+            @keyframes drawerFade {
+              from { opacity: 0; }
+              to   { opacity: 1; }
+            }
+            @keyframes sectionRise {
+              from { transform: translateY(14px); opacity: 0; }
+              to   { transform: translateY(0); opacity: 1; }
+            }
+            .drawer-body > * {
+              animation: sectionRise 360ms cubic-bezier(0.16, 1, 0.3, 1) both;
+            }
+            .drawer-body > *:nth-child(1) { animation-delay: 40ms; }
+            .drawer-body > *:nth-child(2) { animation-delay: 90ms; }
+            .drawer-body > *:nth-child(3) { animation-delay: 140ms; }
+            .drawer-body > *:nth-child(4) { animation-delay: 190ms; }
+            .drawer-body > *:nth-child(5) { animation-delay: 240ms; }
+            .drawer-body > *:nth-child(6) { animation-delay: 280ms; }
+            .drawer-glow {
+              background: radial-gradient(80% 130% at 20% 0%, rgba(200,162,76,0.10) 0%, rgba(200,162,76,0.03) 45%, transparent 75%);
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .drawer-panel, .drawer-body > * { animation: none !important; }
+            }
+          `}</style>
+
+          {/* Header — serif name under a soft gold key-light; the
+              hairline below fades like the panels elsewhere in the CRM. */}
+          <header ref={headerRef} className="relative shrink-0 px-6 pt-5 pb-4">
+            <span
+              aria-hidden
+              className="drawer-glow absolute inset-0 pointer-events-none"
+              style={{ opacity: "calc(1 - 0.8 * var(--shrink, 0))" }}
+            />
+            <span className="absolute -bottom-px left-6 right-6 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/40 to-transparent" />
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex items-start gap-3 min-w-0">
+                <span className="mt-2.5">
+                  <PriorityDot priority={draft.priority} />
+                </span>
+                <div className="min-w-0">
+                  <p
+                    className="font-display text-[27px] font-light text-bone tracking-tight truncate leading-[1.1]"
+                    style={{
+                      transform:
+                        "scale(calc(1 - 0.15 * var(--shrink, 0)))",
+                      transformOrigin: "left center",
+                    }}
+                  >
+                    {draft.name}
+                  </p>
+                  <p className="text-[11px] text-bone/45 mt-1.5 tracking-wide">
+                    {draft.source ?? "—"} · created{" "}
+                    {relativeTime(draft.created_at)} ·{" "}
+                    {draft.last_contact_at ? (
+                      <span className="text-bone/60">
+                        last contacted {relativeTime(draft.last_contact_at)}
+                      </span>
+                    ) : (
+                      <span className="text-rust/90">never contacted</span>
+                    )}
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="Close drawer"
+                className="text-bone/45 hover:text-bone hover:bg-bone/[0.06] rounded-full p-1.5 transition-colors duration-200 shrink-0"
+              >
+                <X className="w-4 h-4" strokeWidth={1.75} />
+              </button>
             </div>
-          </div>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close drawer"
-            className="text-bone/45 hover:text-bone hover:bg-bone/[0.06] rounded-full p-1.5 transition-colors duration-200"
+          </header>
+
+          {/* Error banner */}
+          {error && (
+            <div className="mx-6 mt-4 px-3 py-2 rounded-lg border border-rust/40 bg-rust/[0.05] flex items-center gap-2 text-[12.5px] text-rust">
+              <AlertCircle className="w-3.5 h-3.5 shrink-0" strokeWidth={1.75} />
+              <span className="flex-1">{error}</span>
+              <button
+                type="button"
+                onClick={() => setError(null)}
+                aria-label="Dismiss error"
+                className="text-rust/70 hover:text-rust"
+              >
+                ×
+              </button>
+            </div>
+          )}
+
+          {/* Body */}
+          <div
+            className="drawer-body flex-1 overflow-y-auto px-6 py-5 space-y-6"
+            onScroll={onBodyScroll}
           >
-            <X className="w-4 h-4" strokeWidth={1.75} />
-          </button>
-        </header>
-
-        {/* Error banner */}
-        {error && (
-          <div className="mx-6 mt-4 px-3 py-2 rounded-lg border border-rust/40 bg-rust/[0.05] flex items-center gap-2 text-[12.5px] text-rust">
-            <AlertCircle className="w-3.5 h-3.5 shrink-0" strokeWidth={1.75} />
-            <span className="flex-1">{error}</span>
-            <button
-              type="button"
-              onClick={() => setError(null)}
-              aria-label="Dismiss error"
-              className="text-rust/70 hover:text-rust"
-            >
-              ×
-            </button>
-          </div>
-        )}
-
-        {/* Body */}
-        <div className="flex-1 overflow-y-auto px-6 py-5 space-y-6">
           {/* Pipeline controls */}
           <section>
             <p className="eyebrow mb-3">Pipeline</p>
@@ -536,8 +607,9 @@ export default function LeadDrawer({
               </span>
             )}
           </footer>
-        </div>
-      </aside>
+          </div>
+        </aside>
+      </div>
     </>
   );
 }
