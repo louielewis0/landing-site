@@ -1,4 +1,4 @@
-import { Users, TrendingUp, Activity, Flame, Clock, CheckCircle } from "lucide-react";
+import { Zap, TrendingUp, DollarSign, Flame, Clock, Landmark } from "lucide-react";
 import KpiCard from "@/components/crm/KpiCard";
 import type { Lead } from "@/lib/lead-shape";
 
@@ -22,24 +22,45 @@ export default function KpiGrid({ leads }: { leads: Lead[] }) {
   const now = new Date();
   const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
 
-  const total = leads.length;
   const newThisWeek = leads.filter(
     (l) => new Date(l.created_at) >= sevenDaysAgo
+  ).length;
+  const uncontactedInbound = leads.filter(
+    (l) =>
+      l.status === "new" &&
+      (l.source ?? "").trim().toLowerCase() !== "expired",
   ).length;
   const active = leads.filter((l) => l.is_active === true).length;
   const hot = leads.filter((l) => l.is_hot_active === true).length;
   const overdue = leads.filter((l) => l.is_overdue_followup === true).length;
-  const closedWon = leads.filter((l) => l.status === "closed_won").length;
 
-  const pctActive = total > 0 ? Math.round((active / total) * 100) : 0;
-  const pctHot = active > 0 ? Math.round((hot / active) * 100) : 0;
+  // Pipeline dollars: sum of parseable budget_range over the active
+  // pipeline. Est. GCI at 3% — leading indicator of revenue, which
+  // beats raw lead counts (total-lead count is the canonical vanity
+  // metric for a small brokerage).
+  const pipelineValue = leads.reduce((sum, l) => {
+    if (l.is_active !== true) return sum;
+    const m = (l.budget_range ?? "").match(/\$?\s?([\d,]+)/);
+    if (!m) return sum;
+    const n = parseInt(m[1].replace(/,/g, ""), 10);
+    return Number.isFinite(n) && n > 10_000 ? sum + n : sum;
+  }, 0);
+  const estGci = Math.round(pipelineValue * 0.03);
+  const money = (n: number) =>
+    n >= 1_000_000
+      ? `$${(n / 1_000_000).toFixed(1)}M`
+      : n >= 1_000
+        ? `$${Math.round(n / 1_000)}K`
+        : `$${n}`;
 
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
       <KpiCard
-        label="Total Leads"
-        value={total}
-        icon={<Users className="w-4 h-4" strokeWidth={1.5} />}
+        label="Respond Now"
+        value={uncontactedInbound}
+        delta={uncontactedInbound > 0 ? "uncontacted inbound" : "inbox clear"}
+        icon={<Zap className="w-4 h-4" strokeWidth={1.5} />}
+        emphasis={uncontactedInbound > 0 ? "highlight" : "default"}
       />
       <KpiCard
         label="New This Week"
@@ -48,15 +69,9 @@ export default function KpiGrid({ leads }: { leads: Lead[] }) {
         icon={<TrendingUp className="w-4 h-4" strokeWidth={1.5} />}
       />
       <KpiCard
-        label="Active Pipeline"
-        value={active}
-        delta={total > 0 ? `${pctActive}% of total` : undefined}
-        icon={<Activity className="w-4 h-4" strokeWidth={1.5} />}
-      />
-      <KpiCard
         label="Hot Leads"
         value={hot}
-        delta={active > 0 ? `${pctHot}% of active` : undefined}
+        delta={active > 0 ? `of ${active} active` : undefined}
         icon={<Flame className="w-4 h-4" strokeWidth={1.5} />}
         emphasis="highlight"
       />
@@ -68,10 +83,16 @@ export default function KpiGrid({ leads }: { leads: Lead[] }) {
         emphasis={overdue > 0 ? "highlight" : "default"}
       />
       <KpiCard
-        label="Closed Won"
-        value={closedWon}
-        delta="deals closed"
-        icon={<CheckCircle className="w-4 h-4" strokeWidth={1.5} />}
+        label="Pipeline Value"
+        value={money(pipelineValue)}
+        delta={`${active} active lead${active === 1 ? "" : "s"}`}
+        icon={<DollarSign className="w-4 h-4" strokeWidth={1.5} />}
+      />
+      <KpiCard
+        label="Est. GCI in Play"
+        value={money(estGci)}
+        delta="at 3% listing side"
+        icon={<Landmark className="w-4 h-4" strokeWidth={1.5} />}
       />
     </section>
   );

@@ -3,7 +3,7 @@
 import { AlertCircle, RefreshCw } from "lucide-react";
 import { useLeads } from "../_lib/use-leads";
 import KpiGrid from "./KpiGrid";
-import NeedsAttention from "./NeedsAttention";
+import TodayQueue from "./TodayQueue";
 import RecentLeads from "./RecentLeads";
 import SourceBreakdown from "./SourceBreakdown";
 
@@ -75,12 +75,12 @@ export default function OverviewClient() {
     <div className="space-y-6">
       <KpiGrid leads={leads} />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <NeedsAttention leads={leads} />
-        <RecentLeads leads={leads} />
-      </div>
+      <TodayQueue leads={leads} />
 
-      <SourceBreakdown leads={leads} />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <RecentLeads leads={leads} />
+        <SourceBreakdown leads={leads} />
+      </div>
     </div>
   );
 }

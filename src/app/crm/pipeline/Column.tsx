@@ -42,6 +42,22 @@ export default function Column({
 }) {
   const { setNodeRef, isOver } = useDroppable({ id: stage });
 
+  // Stage value: sum of parseable budget_range figures. Real
+  // brokerage boards show dollars per column — count alone hides
+  // that one $800k lead outweighs five $150k ones.
+  const stageValue = leads.reduce((sum, l) => {
+    const m = (l.budget_range ?? "").match(/\$?\s?([\d,]+)/);
+    if (!m) return sum;
+    const n = parseInt(m[1].replace(/,/g, ""), 10);
+    return Number.isFinite(n) && n > 10_000 ? sum + n : sum;
+  }, 0);
+  const valueLabel =
+    stageValue >= 1_000_000
+      ? `$${(stageValue / 1_000_000).toFixed(1)}M`
+      : stageValue >= 1_000
+        ? `$${Math.round(stageValue / 1_000)}K`
+        : null;
+
   return (
     <div
       ref={setNodeRef}
@@ -64,6 +80,9 @@ export default function Column({
           </p>
           <span className="text-[12px] text-bone tabular-nums">
             {leads.length}
+            {valueLabel && (
+              <span className="text-bone/45 ml-1.5">· {valueLabel}</span>
+            )}
           </span>
         </div>
         <p className="text-[11px] text-bone/40 font-light">{description}</p>
@@ -74,7 +93,15 @@ export default function Column({
             drop leads here
           </p>
         ) : (
-          leads.map((lead) => (
+          // Self-prioritizing column: soonest next-activity first,
+          // overdue on top, nothing-scheduled last (Pipedrive sort).
+          [...leads]
+            .sort((a, b) =>
+              (a.follow_up_date ?? "9999-12-31").localeCompare(
+                b.follow_up_date ?? "9999-12-31",
+              ),
+            )
+            .map((lead) => (
             <KanbanCard
               key={lead.id}
               lead={lead}

@@ -57,6 +57,41 @@ export default function KanbanCard({
     .filter((v): v is string => Boolean(v))
     .join(" · ");
 
+  // Next-activity chip (Pipedrive pattern): every card answers
+  // "what's next and when" at a glance. Red = overdue, gold = due
+  // today, grey = scheduled, dashed hollow = nothing scheduled (the
+  // silent pipeline-killer state).
+  const today = new Date().toISOString().slice(0, 10);
+  const fu = lead.follow_up_date;
+  const isTerminalCard =
+    lead.status === "closed_won" ||
+    lead.status === "closed_lost" ||
+    lead.status === "dead";
+  let nextChip: { text: string; cls: string } | null = null;
+  if (!isTerminalCard) {
+    if (fu && fu < today) {
+      nextChip = {
+        text: `overdue · ${new Date(fu + "T12:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric" })}`,
+        cls: "border-rust/50 bg-rust/[0.1] text-rust",
+      };
+    } else if (fu === today) {
+      nextChip = {
+        text: "due today",
+        cls: "border-[var(--gold)]/50 bg-[var(--gold)]/[0.08] text-[var(--gold-soft)]",
+      };
+    } else if (fu) {
+      nextChip = {
+        text: `next · ${new Date(fu + "T12:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric" })}`,
+        cls: "border-bone/15 text-bone/50",
+      };
+    } else {
+      nextChip = {
+        text: "no next step",
+        cls: "border-dashed border-bone/25 text-bone/40",
+      };
+    }
+  }
+
   // While confirming we deliberately omit listeners/attributes so the
   // confirmation buttons receive clicks normally.
   const interactive = !confirming;
@@ -168,6 +203,15 @@ export default function KanbanCard({
           {relativeTime(lastActivity)}
         </span>
       </div>
+      {nextChip && (
+        <div className="mt-2">
+          <span
+            className={`inline-block px-2 py-0.5 rounded-md border text-[10px] tracking-wide ${nextChip.cls}`}
+          >
+            {nextChip.text}
+          </span>
+        </div>
+      )}
 
     </div>
   );
