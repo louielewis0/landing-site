@@ -40,7 +40,7 @@ import {
  *      collapses to a one-line summary so the page scans.
  *
  * Cinematic styling pulled from existing /crm primitives only —
- * `eyebrow`, `font-display`, `bg-bone/[0.04]` glass surfaces, gold
+ * `eyebrow`, `font-display`, `bg-white/[0.04]` glass surfaces, gold
  * accents, atmosphere/grain inherited from the layout.
  */
 export default function PlaybookClient() {
@@ -79,12 +79,12 @@ export default function PlaybookClient() {
   return (
     <div className="space-y-10">
       {error && (
-        <div className="rounded-xl bg-rust/10 border border-rust/30 px-5 py-4 text-[14px] text-rust flex items-start gap-3">
+        <div className="rounded-xl bg-[#FB7185]/10 border border-[#FB7185]/30 px-5 py-4 text-[14px] text-[#FDA4AF] flex items-start gap-3">
           <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
           <div>
             <div className="font-medium">Playbook hiccup.</div>
-            <div className="text-rust/80 text-[13px] mt-1">{error}</div>
-            <div className="text-bone/45 text-[12px] mt-2">
+            <div className="text-[#FDA4AF]/80 text-[13px] mt-1">{error}</div>
+            <div className="text-white/45 text-[12px] mt-2">
               Confirm the migration in{" "}
               <code>supabase/playbook_migration.sql</code> has been run.
             </div>
@@ -170,20 +170,20 @@ function StatCard({
   accent?: boolean;
   icon?: React.ReactNode;
 }) {
-  const valueColor = accent ? "text-[var(--gold-soft)]" : "text-bone";
+  const valueColor = accent ? "text-[var(--gold-soft)]" : "text-white/90";
   return (
-    <div className="rounded-2xl bg-bone/[0.03] border border-bone/10 px-5 py-5">
-      <div className="text-[10px] text-bone/45 uppercase tracking-[0.22em] mb-2">
+    <div className="rounded-2xl bg-white/[0.03] border border-white/10 px-5 py-5">
+      <div className="text-[10px] text-white/45 uppercase tracking-[0.22em] mb-2">
         {label}
       </div>
       <div
-        className={`font-display text-2xl sm:text-3xl font-light tracking-tight flex items-center gap-2 ${valueColor}`}
+        className={`crm-num text-xl sm:text-2xl font-semibold tracking-tight flex items-center gap-2 ${valueColor}`}
       >
         {value}
         {icon}
       </div>
       {sub && (
-        <div className="text-[11.5px] text-bone/45 mt-2 font-light">{sub}</div>
+        <div className="text-[11.5px] text-white/45 mt-2 font-light">{sub}</div>
       )}
     </div>
   );
@@ -220,32 +220,32 @@ function ConversationLogger({
   const pct = Math.min(100, Math.round((weekCount / target) * 100));
 
   return (
-    <section className="relative rounded-2xl bg-bone/[0.04] border border-bone/15 p-7 overflow-hidden">
+    <section className="relative rounded-2xl bg-white/[0.04] border border-white/15 p-7 overflow-hidden">
       <span className="absolute -top-px left-8 right-8 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/50 to-transparent" />
 
       <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
         <div>
-          <p className="eyebrow mb-2">Headline KPI</p>
-          <h2 className="font-display text-2xl font-light text-bone tracking-tight">
+          <p className="crm-label text-[var(--gold-soft)] mb-2">Headline KPI</p>
+          <h2 className="text-lg font-semibold text-[#f4f5f7] tracking-tight">
             Conversations started this week
           </h2>
-          <p className="text-[13px] text-bone/55 mt-1.5 font-light max-w-lg">
+          <p className="text-[13px] text-white/55 mt-1.5 font-light max-w-lg">
             With someone who could buy, sell, or refer. Target {target}/week.
             Log each one as it happens — bagel route, BNI, sphere message,
             anywhere.
           </p>
         </div>
         <div className="text-right">
-          <div className="font-display text-3xl font-light text-[var(--gold-soft)] tracking-tight">
-            {weekCount} <span className="text-bone/40 text-2xl">/ {target}</span>
+          <div className="crm-num text-2xl font-semibold text-[var(--gold-soft)] tracking-tight">
+            {weekCount} <span className="text-white/40 text-2xl">/ {target}</span>
           </div>
-          <div className="text-[11px] text-bone/45 uppercase tracking-[0.18em] mt-1">
+          <div className="text-[11px] text-white/45 uppercase tracking-[0.18em] mt-1">
             this week
           </div>
         </div>
       </div>
 
-      <div className="h-1.5 rounded-full bg-bone/[0.08] overflow-hidden mb-6">
+      <div className="h-1.5 rounded-full bg-white/[0.08] overflow-hidden mb-6">
         <div
           className="h-full bg-[var(--gold)] transition-all duration-700"
           style={{ width: `${pct}%` }}
@@ -258,7 +258,7 @@ function ConversationLogger({
           value={note}
           onChange={(e) => setNote(e.target.value)}
           placeholder="Optional note (who, where) — e.g. 'James at BNI Troy'"
-          className="flex-1 px-4 py-3 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 text-[13.5px] focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
+          className="flex-1 px-4 py-3 rounded-lg bg-white/[0.04] border border-white/15 text-white/90 placeholder-white/35 text-[13.5px] focus:outline-none focus:border-[var(--gold)]/60 focus:bg-white/[0.07] transition-all"
           onKeyDown={(e) => {
             if (e.key === "Enter") submit();
           }}
@@ -267,7 +267,7 @@ function ConversationLogger({
           type="button"
           onClick={submit}
           disabled={submitting}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[13px] tracking-wide transition-all duration-500 disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-[#0A0B0F] font-semibold text-[13px] tracking-wide transition-all duration-500 disabled:opacity-50"
         >
           <PlusCircle className="w-4 h-4" strokeWidth={2} />
           {submitting ? "Logging…" : "Log conversation"}
@@ -276,33 +276,33 @@ function ConversationLogger({
 
       {recent.length > 0 && (
         <div className="mt-6">
-          <p className="text-[10px] text-bone/45 uppercase tracking-[0.22em] mb-3">
+          <p className="text-[10px] text-white/45 uppercase tracking-[0.22em] mb-3">
             Recent
           </p>
           <ul className="space-y-2">
             {recent.map((c) => (
               <li
                 key={c.id}
-                className="flex items-start gap-3 text-[13px] text-bone/70 group"
+                className="flex items-start gap-3 text-[13px] text-white/70 group"
               >
                 <MessageSquare
                   className="w-3.5 h-3.5 text-[var(--gold-soft)] mt-1 flex-shrink-0"
                   strokeWidth={1.5}
                 />
                 <span className="flex-1">
-                  <span className="text-bone/45">
+                  <span className="text-white/45">
                     {new Date(c.started_at).toLocaleDateString(undefined, {
                       month: "short",
                       day: "numeric",
                     })}
                     {" · "}
                   </span>
-                  {c.note ?? <em className="text-bone/40">no note</em>}
+                  {c.note ?? <em className="text-white/40">no note</em>}
                 </span>
                 <button
                   type="button"
                   onClick={() => onUndo(c.id)}
-                  className="text-[11px] text-bone/35 hover:text-bone/70 transition-colors opacity-0 group-hover:opacity-100 inline-flex items-center gap-1"
+                  className="text-[11px] text-white/35 hover:text-white/70 transition-colors opacity-0 group-hover:opacity-100 inline-flex items-center gap-1"
                   title="Undo"
                 >
                   <Undo2 className="w-3 h-3" />
@@ -355,19 +355,19 @@ function PhaseSection({
           >
             Phase {phase.id} · Days {phase.dayStart}–{phase.dayEnd}
           </p>
-          <h2 className="font-display text-3xl font-light text-bone tracking-tight">
+          <h2 className="crm-num text-2xl font-semibold text-white/90 tracking-tight">
             {phase.title}
           </h2>
-          <p className="text-[13.5px] text-bone/55 mt-1.5 font-light max-w-2xl">
+          <p className="text-[13.5px] text-white/55 mt-1.5 font-light max-w-2xl">
             {phase.subtitle}
           </p>
         </div>
         <div className="text-right">
-          <div className="font-display text-xl font-light text-bone">
+          <div className="text-base font-semibold text-[#f4f5f7]">
             {phaseDone}{" "}
-            <span className="text-bone/40">/ {phaseTasks.length}</span>
+            <span className="text-white/40">/ {phaseTasks.length}</span>
           </div>
-          <div className="text-[10px] text-bone/45 uppercase tracking-[0.22em] mt-1">
+          <div className="text-[10px] text-white/45 uppercase tracking-[0.22em] mt-1">
             {phasePct}% done
           </div>
         </div>
@@ -418,10 +418,10 @@ function DayCard({
     <div
       className={`rounded-2xl border transition-colors duration-300 ${
         isToday
-          ? "border-[var(--gold)]/40 bg-bone/[0.04]"
+          ? "border-[var(--gold)]/40 bg-white/[0.04]"
           : allDone
-            ? "border-bone/10 bg-bone/[0.015] opacity-80"
-            : "border-bone/10 bg-bone/[0.02]"
+            ? "border-white/10 bg-white/[0.015] opacity-80"
+            : "border-white/10 bg-white/[0.02]"
       }`}
     >
       <button
@@ -436,7 +436,7 @@ function DayCard({
                 ? "border-[var(--gold)] bg-[var(--gold)]/15 text-[var(--gold-soft)]"
                 : allDone
                   ? "border-[var(--gold)]/40 bg-[var(--gold)]/5 text-[var(--gold-soft)]"
-                  : "border-bone/15 text-bone/55"
+                  : "border-white/15 text-white/55"
             }`}
           >
             {String(day).padStart(2, "0")}
@@ -447,7 +447,7 @@ function DayCard({
                 className={`text-[10px] uppercase tracking-[0.22em] ${
                   isToday
                     ? "text-[var(--gold-soft)]"
-                    : "text-bone/45"
+                    : "text-white/45"
                 }`}
               >
                 Day {day}
@@ -455,24 +455,24 @@ function DayCard({
                 {isPast && allDone && " · done"}
               </span>
             </div>
-            <div className="text-[13.5px] text-bone/75 truncate font-light">
+            <div className="text-[13.5px] text-white/75 truncate font-light">
               {dayTasks[0].title}
               {dayTasks.length > 1 && (
-                <span className="text-bone/45 ml-2">
+                <span className="text-white/45 ml-2">
                   +{dayTasks.length - 1} more
                 </span>
               )}
             </div>
           </div>
         </div>
-        <div className="text-[11px] text-bone/45 flex-shrink-0">
+        <div className="text-[11px] text-white/45 flex-shrink-0">
           {dayTasks.filter((t) => completedIds.has(t.id)).length}/
           {dayTasks.length}
         </div>
       </button>
 
       {expanded && (
-        <div className="px-5 pb-5 pt-1 border-t border-bone/10">
+        <div className="px-5 pb-5 pt-1 border-t border-white/10">
           <ul className="space-y-3 mt-3">
             {dayTasks.map((task) => (
               <TaskItem
@@ -521,7 +521,7 @@ function TaskItem({
           />
         ) : (
           <Circle
-            className="w-5 h-5 text-bone/40 hover:text-bone/70 transition-colors"
+            className="w-5 h-5 text-white/40 hover:text-white/70 transition-colors"
             strokeWidth={2}
           />
         )}
@@ -530,14 +530,14 @@ function TaskItem({
         <div
           className={`text-[14px] leading-relaxed transition-colors ${
             isComplete
-              ? "text-bone/45 line-through decoration-bone/30"
-              : "text-bone/85"
+              ? "text-white/45 line-through decoration-bone/30"
+              : "text-white/85"
           }`}
         >
           {task.title}
         </div>
         {task.note && (
-          <div className="text-[12px] text-bone/45 mt-1.5 leading-relaxed italic font-light">
+          <div className="text-[12px] text-white/45 mt-1.5 leading-relaxed italic font-light">
             {task.note}
           </div>
         )}

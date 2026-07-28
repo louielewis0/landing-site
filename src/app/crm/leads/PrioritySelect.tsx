@@ -16,7 +16,7 @@ const PRIORITY_OPTIONS: Priority[] = ["hot", "warm", "cold"];
 const ACTIVE_STYLES: Record<Priority, string> = {
   hot: "bg-[var(--gold-soft)]/20 text-[var(--gold-soft)] border-[var(--gold-soft)]/55",
   warm: "bg-[var(--gold)]/15 text-[var(--gold)] border-[var(--gold)]/45",
-  cold: "bg-bone/[0.08] text-bone/85 border-bone/25",
+  cold: "bg-white/[0.08] text-white/85 border-white/25",
 };
 
 export default function PrioritySelect({
@@ -38,7 +38,7 @@ export default function PrioritySelect({
             className={`py-2 text-[10.5px] font-semibold tracking-[0.18em] uppercase rounded-lg border transition-all duration-200 ${
               isActive
                 ? ACTIVE_STYLES[p]
-                : "bg-bone/[0.02] text-bone/45 border-bone/10 hover:border-bone/25 hover:text-bone/70"
+                : "bg-white/[0.02] text-white/45 border-white/10 hover:border-white/25 hover:text-white/70"
             }`}
           >
             {p}

@@ -109,16 +109,16 @@ export default function AddLeadPanel({
   }
 
   return (
-    <section className="relative rounded-2xl bg-bone/[0.04] backdrop-blur-2xl border border-bone/15 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.5)] p-7 mb-8">
+    <section className="relative rounded-2xl bg-white/[0.04] backdrop-blur-2xl border border-white/15 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.5)] p-7 mb-8">
       <span className="absolute -top-px left-8 right-8 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/50 to-transparent" />
 
       <div className="flex items-start justify-between mb-6 gap-3">
         <div>
-          <p className="eyebrow mb-2">Add lead</p>
-          <h2 className="font-display text-2xl font-light text-bone tracking-tight">
+          <p className="crm-label text-[var(--gold-soft)] mb-2">Add lead</p>
+          <h2 className="text-lg font-semibold text-[#f4f5f7] tracking-tight">
             Manual entry
           </h2>
-          <p className="text-[13px] text-bone/55 mt-2 font-light max-w-2xl">
+          <p className="text-[13px] text-white/55 mt-2 font-light max-w-2xl">
             Enter FSBOs, expireds, circle prospects, or referrals. Source
             defaults to whatever you pick — use it to tell cold leads apart
             from inbound form leads.
@@ -127,7 +127,7 @@ export default function AddLeadPanel({
         <button
           type="button"
           onClick={onClose}
-          className="text-bone/40 hover:text-bone/80 transition-colors duration-200"
+          className="text-white/40 hover:text-white/80 transition-colors duration-200"
           aria-label="Close add-lead panel"
         >
           <X className="w-4 h-4" strokeWidth={1.5} />
@@ -143,34 +143,34 @@ export default function AddLeadPanel({
             onChange={(e) => setName(e.target.value)}
             placeholder="Full name *"
             autoFocus
-            className="px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
+            className="px-4 py-3.5 rounded-lg bg-white/[0.04] border border-white/15 text-white/90 placeholder-white/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-white/[0.07] transition-all"
           />
           <input
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="Phone"
-            className="px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
+            className="px-4 py-3.5 rounded-lg bg-white/[0.04] border border-white/15 text-white/90 placeholder-white/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-white/[0.07] transition-all"
           />
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email (optional)"
-            className="px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
+            className="px-4 py-3.5 rounded-lg bg-white/[0.04] border border-white/15 text-white/90 placeholder-white/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-white/[0.07] transition-all"
           />
           <input
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder="Property address"
-            className="px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
+            className="px-4 py-3.5 rounded-lg bg-white/[0.04] border border-white/15 text-white/90 placeholder-white/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-white/[0.07] transition-all"
           />
         </div>
 
         <div className="grid sm:grid-cols-2 gap-3">
           <div>
-            <label className="block text-[10px] text-bone/45 uppercase tracking-[0.22em] mb-2">
+            <label className="block text-[10px] text-white/45 uppercase tracking-[0.22em] mb-2">
               I&rsquo;m looking to
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -181,8 +181,8 @@ export default function AddLeadPanel({
                   onClick={() => setIntent(val)}
                   className={`py-2.5 text-[10px] font-semibold tracking-[0.14em] uppercase rounded-full border transition-all duration-400 ${
                     intent === val
-                      ? "bg-[var(--gold)] text-ink border-[var(--gold)]"
-                      : "bg-transparent text-bone/65 border-bone/20 hover:border-bone/40 hover:text-bone"
+                      ? "bg-[var(--gold)] text-[#0A0B0F] border-[var(--gold)]"
+                      : "bg-transparent text-white/65 border-white/20 hover:border-white/40 hover:text-white/90"
                   }`}
                 >
                   {val}
@@ -192,20 +192,20 @@ export default function AddLeadPanel({
           </div>
 
           <div>
-            <label className="block text-[10px] text-bone/45 uppercase tracking-[0.22em] mb-2">
+            <label className="block text-[10px] text-white/45 uppercase tracking-[0.22em] mb-2">
               Source *
             </label>
             <select
               required
               value={source}
               onChange={(e) => setSource(e.target.value as SourceOption)}
-              className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone text-[13.5px] font-medium focus:outline-none focus:border-[var(--gold)]/60 transition-all appearance-none cursor-pointer"
+              className="w-full px-4 py-3.5 rounded-lg bg-white/[0.04] border border-white/15 text-white/90 text-[13.5px] font-medium focus:outline-none focus:border-[var(--gold)]/60 transition-all appearance-none cursor-pointer"
             >
-              <option value="" disabled className="bg-ink">
+              <option value="" disabled className="bg-[#12141A]">
                 Choose source…
               </option>
               {SOURCE_OPTIONS.map((s) => (
-                <option key={s} value={s} className="bg-ink">
+                <option key={s} value={s} className="bg-[#12141A]">
                   {s}
                 </option>
               ))}
@@ -218,21 +218,21 @@ export default function AddLeadPanel({
           onChange={(e) => setNotes(e.target.value)}
           placeholder="Notes — listing details, prior contact, motivation, anything worth remembering"
           rows={3}
-          className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] resize-y transition-all"
+          className="w-full px-4 py-3.5 rounded-lg bg-white/[0.04] border border-white/15 text-white/90 placeholder-white/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-white/[0.07] resize-y transition-all"
         />
 
         <div className="flex flex-wrap items-center gap-3 pt-1">
           <button
             type="submit"
             disabled={saving || !name.trim()}
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[13px] tracking-wide transition-all duration-500 disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-[#0A0B0F] font-semibold text-[13px] tracking-wide transition-all duration-500 disabled:opacity-50"
           >
             {saving ? "Saving…" : "Save lead"}
           </button>
           <button
             type="button"
             onClick={clear}
-            className="text-[12px] text-bone/45 hover:text-bone/70 transition-colors tracking-wide"
+            className="text-[12px] text-white/45 hover:text-white/70 transition-colors tracking-wide"
           >
             Clear
           </button>
@@ -245,7 +245,7 @@ export default function AddLeadPanel({
         </div>
 
         {err && (
-          <div className="text-[13px] text-rust flex items-center gap-2">
+          <div className="text-[13px] text-[#FDA4AF] flex items-center gap-2">
             <AlertCircle className="w-4 h-4" strokeWidth={1.75} />
             {err}
           </div>

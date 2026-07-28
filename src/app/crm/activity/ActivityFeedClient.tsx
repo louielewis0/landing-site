@@ -106,13 +106,13 @@ export default function ActivityFeedClient() {
 
   if (error) {
     return (
-      <div className="rounded-2xl border border-rust/40 bg-rust/[0.05] p-8 text-center">
-        <AlertCircle className="w-5 h-5 text-rust mx-auto mb-3" strokeWidth={1.5} />
-        <p className="text-bone/70 text-[14px] mb-4 font-light">{error}</p>
+      <div className="rounded-2xl border border-[#FB7185]/40 bg-[#FB7185]/[0.05] p-8 text-center">
+        <AlertCircle className="w-5 h-5 text-[#FDA4AF] mx-auto mb-3" strokeWidth={1.5} />
+        <p className="text-white/70 text-[14px] mb-4 font-light">{error}</p>
         <button
           type="button"
           onClick={() => setReloadKey((k) => k + 1)}
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink text-[13px] font-semibold tracking-wide transition-all"
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-[#0A0B0F] text-[13px] font-semibold tracking-wide transition-all"
         >
           <RefreshCw className="w-4 h-4" strokeWidth={2} />
           Retry
@@ -127,7 +127,7 @@ export default function ActivityFeedClient() {
         {Array.from({ length: 6 }).map((_, i) => (
           <div
             key={i}
-            className="rounded-2xl border border-bone/10 bg-bone/[0.02] h-[64px] animate-pulse"
+            className="rounded-2xl border border-white/10 bg-white/[0.02] h-[64px] animate-pulse"
           />
         ))}
       </div>
@@ -143,8 +143,8 @@ export default function ActivityFeedClient() {
           onClick={() => setTypeFilter("all")}
           className={`px-4 py-2 rounded-full text-[12.5px] tracking-wide transition-all border ${
             typeFilter === "all"
-              ? "bg-[var(--gold)] text-ink font-semibold border-transparent"
-              : "text-bone/60 hover:text-bone border-bone/15"
+              ? "bg-[var(--gold)] text-[#0A0B0F] font-semibold border-transparent"
+              : "text-white/60 hover:text-white/90 border-white/15"
           }`}
         >
           All
@@ -158,8 +158,8 @@ export default function ActivityFeedClient() {
               onClick={() => setTypeFilter(t)}
               className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[12.5px] tracking-wide transition-all border ${
                 typeFilter === t
-                  ? "bg-[var(--gold)] text-ink font-semibold border-transparent"
-                  : "text-bone/60 hover:text-bone border-bone/15"
+                  ? "bg-[var(--gold)] text-[#0A0B0F] font-semibold border-transparent"
+                  : "text-white/60 hover:text-white/90 border-white/15"
               }`}
             >
               <Icon className="w-3.5 h-3.5" strokeWidth={1.75} />
@@ -170,7 +170,7 @@ export default function ActivityFeedClient() {
       </div>
 
       {filtered.length === 0 ? (
-        <div className="rounded-2xl border border-bone/10 bg-bone/[0.02] p-10">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-10">
           <EmptyState
             icon={<StickyNote className="w-5 h-5" strokeWidth={1.5} />}
             title="No activity yet."
@@ -181,22 +181,22 @@ export default function ActivityFeedClient() {
         <div className="space-y-8">
           {groups.map((g) => (
             <section key={g.day}>
-              <p className="eyebrow mb-3">{g.day}</p>
-              <ul className="rounded-2xl border border-bone/10 bg-bone/[0.02] divide-y divide-bone/[0.06] overflow-hidden">
+              <p className="crm-label text-[var(--gold-soft)] mb-3">{g.day}</p>
+              <ul className="rounded-2xl border border-white/10 bg-white/[0.02] divide-y divide-white/[0.06] overflow-hidden">
                 {g.items.map((r) => {
                   const Icon = TYPE_META[r.type]?.icon ?? StickyNote;
                   return (
                     <li key={r.id}>
                       <Link
                         href={`/crm/leads?lead=${r.lead_id}`}
-                        className="flex items-start gap-4 px-6 py-4 hover:bg-bone/[0.03] transition-colors duration-200"
+                        className="flex items-start gap-4 px-6 py-4 hover:bg-white/[0.03] transition-colors duration-200"
                       >
-                        <span className="w-8 h-8 rounded-lg border border-bone/15 bg-bone/[0.03] flex items-center justify-center shrink-0 mt-0.5 text-bone/60">
+                        <span className="w-8 h-8 rounded-lg border border-white/15 bg-white/[0.03] flex items-center justify-center shrink-0 mt-0.5 text-white/60">
                           <Icon className="w-3.5 h-3.5" strokeWidth={1.75} />
                         </span>
                         <span className="flex-1 min-w-0">
                           <span className="flex items-baseline gap-2 flex-wrap">
-                            <span className="text-[13.5px] text-bone font-medium capitalize">
+                            <span className="text-[13.5px] text-white/90 font-medium capitalize">
                               {r.type}
                             </span>
                             <span className="text-[13px] text-[var(--gold-soft)] truncate">
@@ -204,12 +204,12 @@ export default function ActivityFeedClient() {
                             </span>
                           </span>
                           {r.body && (
-                            <span className="block text-[12.5px] text-bone/55 font-light mt-0.5 line-clamp-2">
+                            <span className="block text-[12.5px] text-white/55 font-light mt-0.5 line-clamp-2">
                               {r.body}
                             </span>
                           )}
                         </span>
-                        <span className="text-[11.5px] text-bone/40 shrink-0 mt-1">
+                        <span className="text-[11.5px] text-white/40 shrink-0 mt-1">
                           {relativeTime(r.created_at)}
                         </span>
                       </Link>
