@@ -154,6 +154,37 @@ export default async function CityLandingPage({ params }: Props) {
               <span><DollarSign className="w-4 h-4" /> $100M+ closed sales</span>
               <span><MapPin className="w-4 h-4" /> {page.city} specialist</span>
             </div>
+
+            {/* City media panel — licensed luxury photography, parallax */}
+            <div className="hero-media">
+              <div
+                className="media-layer"
+                data-speed="0.25"
+                style={{
+                  backgroundImage: `linear-gradient(180deg, rgba(22,24,29,0) 50%, rgba(22,24,29,0.65) 100%), url('/areas/${page.slug}.jpg')`,
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  display: "flex",
+                  alignItems: "flex-end",
+                  padding: "24px 30px",
+                  color: "#fff",
+                  zIndex: 2,
+                }}
+              >
+                <div>
+                  <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.18em", opacity: 0.75 }}>
+                    Area guide
+                  </div>
+                  <div style={{ fontSize: 20, fontWeight: 600, letterSpacing: "-0.02em", marginTop: 4 }}>
+                    {page.city}, Michigan
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -562,7 +593,7 @@ export default async function CityLandingPage({ params }: Props) {
             data-speed="0.4"
             style={{
               backgroundImage:
-                "linear-gradient(120deg, rgba(22,24,29,0.95), rgba(22,24,29,0.8)), radial-gradient(ellipse 70% 60% at 75% 30%, #23262e 0%, transparent 65%), linear-gradient(180deg, #1b1e24 0%, #16181d 100%)",
+                "linear-gradient(120deg, rgba(22,24,29,0.92), rgba(22,24,29,0.72)), url('/areas/kitchen.jpg')",
             }}
           />
           <div className="container cta-inner">

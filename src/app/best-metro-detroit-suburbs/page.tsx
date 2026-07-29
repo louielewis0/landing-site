@@ -355,7 +355,7 @@ export default function BestSuburbsGuidePage() {
             data-speed="0.4"
             style={{
               backgroundImage:
-                "linear-gradient(120deg, rgba(22,24,29,0.95), rgba(22,24,29,0.8)), radial-gradient(ellipse 70% 60% at 60% 40%, #23262e 0%, transparent 65%), linear-gradient(180deg, #1b1e24 0%, #16181d 100%)",
+                "linear-gradient(120deg, rgba(22,24,29,0.92), rgba(22,24,29,0.72)), url('/areas/cta-interior.jpg')",
             }}
           />
           <div className="container" style={{ position: "relative", zIndex: 2, maxWidth: 720, textAlign: "center" }}>

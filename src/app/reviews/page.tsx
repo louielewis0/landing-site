@@ -105,7 +105,7 @@ export default function ReviewPage() {
             data-speed="0.4"
             style={{
               backgroundImage:
-                "linear-gradient(120deg, rgba(22,24,29,0.95), rgba(22,24,29,0.8)), radial-gradient(ellipse 70% 60% at 50% 40%, #23262e 0%, transparent 65%), linear-gradient(180deg, #1b1e24 0%, #16181d 100%)",
+                "linear-gradient(120deg, rgba(22,24,29,0.92), rgba(22,24,29,0.72)), url('/areas/modern-white.jpg')",
             }}
           />
           <div className="container" style={{ position: "relative", zIndex: 2, maxWidth: 720, textAlign: "center" }}>

@@ -66,7 +66,7 @@ export default function Hero() {
             data-speed="0.25"
             style={{
               backgroundImage:
-                "radial-gradient(ellipse 70% 80% at 30% 30%, rgba(217,118,47,0.28), transparent 60%), radial-gradient(ellipse 60% 70% at 75% 70%, rgba(240,161,92,0.22), transparent 65%), linear-gradient(160deg, #23262e 0%, #16181d 70%)",
+                "linear-gradient(180deg, rgba(22,24,29,0) 45%, rgba(22,24,29,0.72) 100%), url('/hero-home.jpg')",
             }}
           />
           <div

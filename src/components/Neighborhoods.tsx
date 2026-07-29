@@ -22,12 +22,6 @@ function getAreaHref(cityName: string): string {
  * production); drop real neighborhood photos into /public/areas/ and
  * swap the backgrounds when ready. Links and copy unchanged.
  */
-const GRADIENTS = [
-  "radial-gradient(ellipse 90% 70% at 30% 20%, #262a33 0%, transparent 60%), linear-gradient(160deg, #1d2026 0%, #16181d 100%)",
-  "radial-gradient(ellipse 80% 60% at 70% 30%, #23262e 0%, transparent 65%), linear-gradient(200deg, #1d2026 0%, #121419 100%)",
-  "radial-gradient(ellipse 85% 65% at 50% 15%, #282c35 0%, transparent 60%), linear-gradient(180deg, #1b1e24 0%, #16181d 100%)",
-  "radial-gradient(ellipse 75% 60% at 25% 70%, #24282f 0%, transparent 60%), linear-gradient(140deg, #1d2026 0%, #16181d 100%)",
-];
 
 export default function Neighborhoods() {
   return (
@@ -42,15 +36,13 @@ export default function Neighborhoods() {
           </p>
         </div>
         <div className="areas-grid">
-          {areas.map((name, i) => (
+          {areas.map((name) => (
             <a key={name} href={getAreaHref(name)} className="area-card reveal">
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: GRADIENTS[i % GRADIENTS.length],
-                  transition: "transform .6s ease",
-                }}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`/areas/${getAreaHref(name).replace("/", "") || "troy-real-estate-agent"}.jpg`}
+                alt={`Luxury home — ${name}, MI`}
+                loading="lazy"
               />
               <div className="area-card-txt">
                 <small>Area Guide</small>
