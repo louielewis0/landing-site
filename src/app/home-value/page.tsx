@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import FloatingCTA from "@/components/FloatingCTA";
+import SiteShell from "@/components/site/SiteShell";
 import { company } from "@/lib/config";
 import HomeValueForm from "./HomeValueForm";
 
@@ -21,68 +19,62 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+/**
+ * Valuation funnel — redesign hero treatment with the form kept above
+ * the fold (right column at desktop, directly under the headline on
+ * mobile). Copy and form logic unchanged.
+ */
 export default function HomeValuePage() {
   return (
-    <>
-      <Header />
-      <main className="flex-1">
-        <section className="relative pt-36 pb-28 atmosphere grain vignette overflow-hidden min-h-[88vh] flex items-center">
-          <div className="absolute inset-0 -z-10 scanline opacity-30 pointer-events-none" />
+    <SiteShell>
+      <main>
+        <section className="s-hero" style={{ height: "auto", minHeight: "100svh", paddingBottom: 80 }}>
+          <div
+            className="hero-layer hero-bg"
+            data-speed="0.35"
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg, rgba(13,19,33,0.4) 0%, rgba(13,19,33,0.6) 55%, rgba(13,19,33,0.95) 100%), radial-gradient(ellipse 80% 60% at 20% 25%, #24344f 0%, transparent 60%), linear-gradient(180deg, #182338 0%, #131c2e 100%)",
+            }}
+          />
+          <div className="hero-layer hero-grid" />
+          <div className="hero-layer hero-glow" data-speed="0.6" />
 
-          <div className="relative max-w-6xl mx-auto px-6 w-full grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            <div className="lg:col-span-5">
-              <div className="fade-up flex items-center gap-3 mb-8">
-                <span className="block w-10 h-px bg-[var(--gold)] opacity-60" />
-                <span className="eyebrow">Free · 24-hour turnaround</span>
-              </div>
-
-              <h1 className="font-display text-[3rem] sm:text-6xl lg:text-[4.25rem] font-light leading-[1.02] mb-7 text-bone tracking-[-0.025em]">
-                <span className="block overflow-hidden">
-                  <span className="block mask-wipe">What&rsquo;s your home</span>
-                </span>
-                <span className="block overflow-hidden">
-                  <span className="block mask-wipe delay-1 italic gold-text">actually worth?</span>
-                </span>
-              </h1>
-
-              <p className="fade-up delay-2 text-[17px] sm:text-lg text-bone/65 leading-[1.65] mb-10 font-light max-w-md">
-                A free, no-obligation market analysis from a local {company.region} broker.
-                Real comps, no algorithm guesswork — back to you within 24 hours.
-              </p>
-
-              <div className="fade-up delay-3 space-y-3 max-w-md">
-                {[
-                  "Comps from the last 90 days on your street",
-                  "Local broker who knows your neighborhood",
-                  "Realistic list-price range, no inflated promises",
-                  "Free, with zero obligation to list",
-                ].map((p) => (
-                  <div key={p} className="flex gap-3 text-[14.5px] text-bone/75 font-light">
-                    <span className="flex-shrink-0 w-5 h-5 rounded-full border border-[var(--gold)]/40 flex items-center justify-center mt-[2px]">
-                      <svg
-                        className="w-3 h-3 text-[var(--gold-soft)]"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2.5}
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          <div className="container hero-content" style={{ paddingTop: 120, paddingBottom: 20 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "0.9fr 1.1fr", gap: 48, alignItems: "center" }} className="hv-cols">
+              <div>
+                <div className="hero-badge">Free · 24-hour turnaround</div>
+                <h1 className="hero-title" style={{ fontSize: "clamp(34px, 4.6vw, 58px)" }}>
+                  What&rsquo;s your home <em>actually worth?</em>
+                </h1>
+                <p className="hero-sub">
+                  A free, no-obligation market analysis from a local{" "}
+                  {company.region} broker. Real comps, no algorithm guesswork —
+                  back to you within 24 hours.
+                </p>
+                <ul className="cta-list">
+                  {[
+                    "Comps from the last 90 days on your street",
+                    "Local broker who knows your neighborhood",
+                    "Realistic list-price range, no inflated promises",
+                    "Free, with zero obligation to list",
+                  ].map((p) => (
+                    <li key={p}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
+                        <path d="M20 6 9 17l-5-5" />
                       </svg>
-                    </span>
-                    {p}
-                  </div>
-                ))}
+                      {p}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
-
-            <div className="lg:col-span-7 fade-up delay-3">
-              <HomeValueForm />
+              <div>
+                <HomeValueForm />
+              </div>
             </div>
           </div>
         </section>
       </main>
-      <Footer />
-      <FloatingCTA />
-    </>
+    </SiteShell>
   );
 }

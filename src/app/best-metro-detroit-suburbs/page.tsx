@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import FloatingCTA from "@/components/FloatingCTA";
-import Reveal from "@/components/motion/Reveal";
+import SiteShell from "@/components/site/SiteShell";
 import { company } from "@/lib/config";
 import { guideMeta, rankedCities, faqs, citations } from "@/lib/best-suburbs-guide";
 import {
@@ -12,8 +9,6 @@ import {
   ChevronRight,
   CalendarDays,
   Landmark,
-  ListOrdered,
-  ScrollText,
 } from "lucide-react";
 
 const BASE = "https://marketcenterrealty.com";
@@ -32,6 +27,12 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Long-form ranked guide — redesign typography treatment (Fraunces
+ * headings on cream, reveal-on-scroll sections, no full parallax hero
+ * per the design brief for content pages). Copy, data, schemas, and
+ * source citations unchanged.
+ */
 export default function BestSuburbsGuidePage() {
   const articleSchema = {
     "@context": "https://schema.org",
@@ -40,16 +41,8 @@ export default function BestSuburbsGuidePage() {
     datePublished: guideMeta.datePublished,
     dateModified: guideMeta.dateModified,
     url: URL,
-    author: {
-      "@type": "Organization",
-      name: company.name,
-      url: BASE,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: company.name,
-      url: BASE,
-    },
+    author: { "@type": "Organization", name: company.name, url: BASE },
+    publisher: { "@type": "Organization", name: company.name, url: BASE },
   };
 
   const itemListSchema = {
@@ -86,105 +79,120 @@ export default function BestSuburbsGuidePage() {
   };
 
   return (
-    <>
-      <Header />
-      <main className="flex-1">
+    <SiteShell>
+      <main style={{ paddingTop: 96 }} className="bg-cream">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-        {/* ── Hero ── */}
-        <section className="relative pt-36 pb-20 atmosphere grain vignette overflow-hidden">
-          <div className="relative max-w-4xl mx-auto px-6">
-            <nav className="flex items-center gap-2 text-[11px] tracking-[0.18em] uppercase text-bone/35 mb-10">
-              <a href="/" className="hover:text-bone/70 transition-colors">Home</a>
+        {/* ── Header ── */}
+        <section className="bg-cream" style={{ padding: "50px 0 60px" }}>
+          <div className="container" style={{ maxWidth: 860 }}>
+            <nav
+              aria-label="Breadcrumb"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                fontSize: 11,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                color: "var(--s-muted)",
+                marginBottom: 34,
+              }}
+            >
+              <a href="/">Home</a>
               <ChevronRight className="w-3 h-3" />
-              <span className="text-bone/65">Best Metro Detroit Suburbs</span>
+              <span style={{ color: "var(--navy)" }}>Best Metro Detroit Suburbs</span>
             </nav>
 
-            <div className="fade-up flex items-center gap-3 mb-7">
-              <span className="block w-10 h-px bg-[var(--gold)] opacity-60" />
-              <span className="eyebrow">
-                <MapPin className="w-3 h-3 inline mr-2 -mt-0.5 text-[var(--gold-soft)]" />
-                Metro Detroit · 2026 Buyer&rsquo;s Guide
-              </span>
+            <div className="s-eyebrow">
+              <MapPin className="w-3 h-3" style={{ marginRight: 2 }} />
+              Metro Detroit · 2026 Buyer&rsquo;s Guide
             </div>
 
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone tracking-tight leading-[1.06] mb-7">
+            <h1 style={{ fontSize: "clamp(32px, 4.4vw, 54px)", lineHeight: 1.12, marginBottom: 22 }}>
               The 7 Best Metro Detroit Suburbs to Buy a Home in 2026, Ranked
             </h1>
 
-            <div className="fade-up delay-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-[12px] text-bone/50 mb-10">
-              <span className="inline-flex items-center gap-2">
-                <CalendarDays className="w-3.5 h-3.5 text-[var(--gold-soft)]" />
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 24px", fontSize: 12.5, color: "var(--s-muted)", marginBottom: 34 }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                <CalendarDays className="w-3.5 h-3.5" style={{ color: "var(--s-gold)" }} />
                 Updated July 27, 2026 · market data through {guideMeta.dataThrough}
               </span>
-              <span className="inline-flex items-center gap-2">
-                <Landmark className="w-3.5 h-3.5 text-[var(--gold-soft)]" />
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                <Landmark className="w-3.5 h-3.5" style={{ color: "var(--s-gold)" }} />
                 By {company.name}, a Troy, MI brokerage
               </span>
             </div>
 
             {/* TL;DR — the direct answer, first */}
-            <Reveal className="rounded-2xl border border-[var(--gold)]/30 bg-[var(--gold)]/5 p-8">
-              <p className="eyebrow mb-4">The short answer</p>
-              <p className="text-[17px] text-bone/85 leading-[1.8] font-light">{guideMeta.shortAnswer}</p>
-            </Reveal>
+            <div
+              className="reveal"
+              style={{
+                borderRadius: "var(--s-radius)",
+                border: "1px solid rgba(217,118,47,0.3)",
+                background: "rgba(217,118,47,0.06)",
+                padding: 30,
+              }}
+            >
+              <div className="s-eyebrow">The short answer</div>
+              <p style={{ fontSize: 16.5, lineHeight: 1.8, color: "var(--s-ink)" }}>{guideMeta.shortAnswer}</p>
+            </div>
           </div>
         </section>
 
         {/* ── Comparison table ── */}
-        <section className="py-16 bg-ink-2 border-y border-bone/10 relative overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-6xl mx-auto px-6">
-            <Reveal>
-              <p className="eyebrow mb-5">Side by side</p>
-            </Reveal>
-            <h2 className="font-display text-3xl sm:text-4xl font-light text-bone tracking-tight mb-3">
-              All seven cities, one table
-            </h2>
-            <p className="text-[13px] text-bone/45 mb-8 font-light max-w-3xl">
-              Two market gauges, both shown: Zillow&rsquo;s typical home value (a smoothed index, June 2026)
-              and Redfin&rsquo;s median sale price (rolling three months ending May 2026). They measure
-              different things and sometimes disagree — where they do, trust the trend only when both agree.
-            </p>
-            <div className="overflow-x-auto rounded-2xl border border-bone/10">
-              <table className="w-full text-left text-[13.5px] min-w-[900px]">
+        <section className="bg-cream-2" style={{ padding: "70px 0" }}>
+          <div className="container">
+            <div className="reveal">
+              <div className="s-eyebrow">Side by side</div>
+              <h2 style={{ fontSize: "clamp(26px, 3.2vw, 38px)", marginBottom: 10 }}>
+                All seven cities, one table
+              </h2>
+              <p style={{ fontSize: 13.5, color: "var(--s-muted)", marginBottom: 26, maxWidth: 760 }}>
+                Two market gauges, both shown: Zillow&rsquo;s typical home value (a smoothed index, June 2026)
+                and Redfin&rsquo;s median sale price (rolling three months ending May 2026). They measure
+                different things and sometimes disagree — where they do, trust the trend only when both agree.
+              </p>
+            </div>
+            <div className="reveal" style={{ overflowX: "auto", borderRadius: "var(--s-radius)", border: "1px solid var(--line)", background: "#fff" }}>
+              <table style={{ width: "100%", textAlign: "left", fontSize: 13.5, minWidth: 900, borderCollapse: "collapse" }}>
                 <thead>
-                  <tr className="border-b border-bone/15 text-[10px] uppercase tracking-[0.18em] text-bone/45">
-                    <th className="px-5 py-4 font-medium">#</th>
-                    <th className="px-5 py-4 font-medium">City</th>
-                    <th className="px-5 py-4 font-medium">Typical home value¹</th>
-                    <th className="px-5 py-4 font-medium">1-yr change¹</th>
-                    <th className="px-5 py-4 font-medium">Median sale price⁴</th>
-                    <th className="px-5 py-4 font-medium">Days on market⁴</th>
-                    <th className="px-5 py-4 font-medium">Population²</th>
-                    <th className="px-5 py-4 font-medium">School district³</th>
+                  <tr style={{ borderBottom: "1px solid var(--line)", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.16em", color: "var(--s-muted)" }}>
+                    <th style={{ padding: "16px 20px", fontWeight: 600 }}>#</th>
+                    <th style={{ padding: "16px 20px", fontWeight: 600 }}>City</th>
+                    <th style={{ padding: "16px 20px", fontWeight: 600 }}>Typical home value¹</th>
+                    <th style={{ padding: "16px 20px", fontWeight: 600 }}>1-yr change¹</th>
+                    <th style={{ padding: "16px 20px", fontWeight: 600 }}>Median sale price⁴</th>
+                    <th style={{ padding: "16px 20px", fontWeight: 600 }}>Days on market⁴</th>
+                    <th style={{ padding: "16px 20px", fontWeight: 600 }}>Population²</th>
+                    <th style={{ padding: "16px 20px", fontWeight: 600 }}>School district³</th>
                   </tr>
                 </thead>
                 <tbody>
                   {rankedCities.map((c) => (
-                    <tr key={c.city} className="border-b border-bone/5 last:border-0 hover:bg-bone/[0.03] transition-colors">
-                      <td className="px-5 py-4 text-[var(--gold-soft)] font-medium">{c.rank}</td>
-                      <td className="px-5 py-4">
-                        <a href={`#${c.city.toLowerCase().replace(/\s+/g, "-")}`} className="text-bone font-medium hover:text-[var(--gold-soft)] transition-colors">
+                    <tr key={c.city} style={{ borderBottom: "1px solid var(--line)" }}>
+                      <td style={{ padding: "16px 20px", color: "var(--s-gold)", fontWeight: 600 }}>{c.rank}</td>
+                      <td style={{ padding: "16px 20px" }}>
+                        <a href={`#${c.city.toLowerCase().replace(/\s+/g, "-")}`} style={{ color: "var(--navy)", fontWeight: 600 }}>
                           {c.city}
                         </a>
-                        <div className="text-[11px] text-bone/40 mt-0.5">{c.bestFor}</div>
+                        <div style={{ fontSize: 11, color: "var(--s-muted)", marginTop: 2 }}>{c.bestFor}</div>
                       </td>
-                      <td className="px-5 py-4 text-bone/80">{c.stats.zhvi}</td>
-                      <td className="px-5 py-4 text-bone/80">{c.stats.zhviYoY}</td>
-                      <td className="px-5 py-4 text-bone/80">{c.stats.medianSale}</td>
-                      <td className="px-5 py-4 text-bone/80">{c.stats.dom}</td>
-                      <td className="px-5 py-4 text-bone/80">{c.stats.population}</td>
-                      <td className="px-5 py-4 text-bone/70">{c.stats.nicheRank}</td>
+                      <td style={{ padding: "16px 20px" }}>{c.stats.zhvi}</td>
+                      <td style={{ padding: "16px 20px" }}>{c.stats.zhviYoY}</td>
+                      <td style={{ padding: "16px 20px" }}>{c.stats.medianSale}</td>
+                      <td style={{ padding: "16px 20px" }}>{c.stats.dom}</td>
+                      <td style={{ padding: "16px 20px" }}>{c.stats.population}</td>
+                      <td style={{ padding: "16px 20px", color: "var(--s-muted)" }}>{c.stats.nicheRank}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="text-[11px] text-bone/35 mt-4 font-light">
+            <p style={{ fontSize: 11, color: "var(--s-muted)", marginTop: 14 }}>
               Superscripts refer to the numbered sources at the end of this page. Populations are 2020 Census
               counts. School column shows the primary district&rsquo;s statewide Niche 2026 rank.
             </p>
@@ -192,53 +200,57 @@ export default function BestSuburbsGuidePage() {
         </section>
 
         {/* ── Ranked cities ── */}
-        <section className="py-24 bg-ink relative overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-4xl mx-auto px-6">
-            <Reveal>
-              <p className="eyebrow mb-5">
-                <ListOrdered className="w-3 h-3 inline mr-2 -mt-0.5 text-[var(--gold-soft)]" />
-                The ranking
-              </p>
-            </Reveal>
-            <div className="space-y-20">
+        <section className="bg-cream" style={{ padding: "90px 0" }}>
+          <div className="container prose-site" style={{ maxWidth: 860 }}>
+            <div className="s-eyebrow reveal">The ranking</div>
+            <div style={{ display: "grid", gap: 70 }}>
               {rankedCities.map((c) => (
-                <article key={c.city} id={c.city.toLowerCase().replace(/\s+/g, "-")} className="scroll-mt-28">
-                  <Reveal>
-                    <div className="flex items-baseline gap-4 mb-2">
-                      <span className="font-display text-5xl font-light gold-text leading-none">{c.rank}</span>
-                      <h2 className="font-display text-3xl sm:text-4xl font-light text-bone tracking-tight">
-                        {c.city}, MI
-                      </h2>
-                    </div>
-                    <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--gold-soft)] mb-6">
-                      {c.bestFor} · {c.county}
-                    </p>
-                  </Reveal>
-                  <Reveal delay={1}>
-                    <p className="text-[17px] text-bone/85 leading-[1.8] font-light mb-6 border-l-2 border-[var(--gold)]/40 pl-5">
-                      {c.answer}
-                    </p>
-                  </Reveal>
-                  <div className="space-y-5 text-[15.5px] text-bone/65 leading-[1.8] font-light mb-7">
-                    {c.paragraphs.map((p, i) => (
-                      <Reveal key={i} delay={((i % 3) + 1) as 1 | 2 | 3}>
-                        <p>{p}</p>
-                      </Reveal>
-                    ))}
-                  </div>
-                  <Reveal delay={2}>
-                    <div className="flex flex-wrap gap-x-6 gap-y-2 text-[12px] text-bone/50 mb-6">
-                      <span>Schools: {c.stats.district}</span>
-                    </div>
-                    <a
-                      href={`/${c.citySlug}`}
-                      className="inline-flex items-center gap-2 text-[13.5px] text-[var(--gold-soft)] hover:text-[var(--gold)] transition-colors"
+                <article key={c.city} id={c.city.toLowerCase().replace(/\s+/g, "-")} style={{ scrollMarginTop: 110 }}>
+                  <div className="reveal" style={{ display: "flex", alignItems: "baseline", gap: 16, marginBottom: 6 }}>
+                    <span
+                      style={{
+                        fontFamily: "var(--font-fraunces), Fraunces, serif",
+                        fontSize: 46,
+                        fontWeight: 600,
+                        color: "var(--s-gold)",
+                        lineHeight: 1,
+                      }}
                     >
-                      Read our full {c.city} buyer &amp; seller guide
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </a>
-                  </Reveal>
+                      {c.rank}
+                    </span>
+                    <h2 style={{ margin: 0, fontSize: "clamp(26px, 3.2vw, 36px)" }}>{c.city}, MI</h2>
+                  </div>
+                  <p className="reveal" style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.18em", color: "var(--s-gold)", fontWeight: 600, marginBottom: 20 }}>
+                    {c.bestFor} · {c.county}
+                  </p>
+                  <div
+                    className="reveal"
+                    style={{
+                      borderRadius: 14,
+                      background: "rgba(217,118,47,0.06)",
+                      border: "1px solid rgba(217,118,47,0.22)",
+                      padding: "18px 22px",
+                      marginBottom: 22,
+                    }}
+                  >
+                    <p style={{ margin: 0, fontSize: 16.5, lineHeight: 1.75, color: "var(--s-ink)" }}>{c.answer}</p>
+                  </div>
+                  {c.paragraphs.map((p, i) => (
+                    <p key={i} className="reveal" style={{ fontSize: 15.5, lineHeight: 1.8, color: "var(--s-ink)" }}>
+                      {p}
+                    </p>
+                  ))}
+                  <div className="reveal" style={{ fontSize: 12.5, color: "var(--s-muted)", margin: "16px 0 10px" }}>
+                    Schools: {c.stats.district}
+                  </div>
+                  <a
+                    href={`/${c.citySlug}`}
+                    className="reveal"
+                    style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "var(--s-gold)", fontWeight: 600 }}
+                  >
+                    Read our full {c.city} buyer &amp; seller guide
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
                 </article>
               ))}
             </div>
@@ -246,95 +258,89 @@ export default function BestSuburbsGuidePage() {
         </section>
 
         {/* ── Methodology ── */}
-        <section className="py-20 bg-ink-2 border-y border-bone/10 relative overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-3xl mx-auto px-6">
-            <Reveal>
-              <p className="eyebrow mb-5">
-                <ScrollText className="w-3 h-3 inline mr-2 -mt-0.5 text-[var(--gold-soft)]" />
-                How we ranked — and who&rsquo;s ranking
-              </p>
-            </Reveal>
-            <div className="space-y-5 text-[15.5px] text-bone/70 leading-[1.85] font-light">
-              <p>
-                We are {company.name}, a residential brokerage headquartered in Troy that has worked all seven
-                of these cities for over 20 years. That means two things: we know these markets house by house,
-                and we are not a neutral party — we ranked our own home city #1. So we built this page to be
-                checkable rather than taking our word for it.
-              </p>
-              <p>
-                The order weighs five factors: school district strength (Niche&rsquo;s 2026 Michigan ranking,
-                plus district-boundary verification against official district and city sources), price
-                accessibility (Zillow&rsquo;s June 2026 typical home value), market momentum (one-year change in
-                that index, cross-checked against Redfin&rsquo;s sale-price and days-on-market data), lifestyle
-                fit (our agents&rsquo; on-the-ground experience — labeled as such wherever it appears), and
-                long-term demand anchors like employment corridors and walkability. The weighting is editorial
-                judgment for a typical family buyer; your priorities may reorder the list, which is why every
-                city entry names what it is best for.
-              </p>
-              <p>
-                What we deliberately did not do: quote any statistic without a source and a date, average two
-                sources that disagree, or fill gaps with estimates. Where our two market sources conflict
-                (Troy, Warren, Bloomfield Hills), we show both numbers and explain the gap. Where we could not
-                verify something from a primary source — like post-2020 population estimates — we used the
-                verifiable figure and said so. Populations are therefore 2020 Census counts, and Niche ranks
-                are quoted as Niche&rsquo;s opinion, not the state&rsquo;s.
-              </p>
-              <p>
-                This page was last reviewed on July 27, 2026, and we update it as Zillow and Redfin publish new
-                monthly data.
-              </p>
-            </div>
+        <section className="bg-cream-2" style={{ padding: "80px 0" }}>
+          <div className="container prose-site" style={{ maxWidth: 800 }}>
+            <div className="s-eyebrow reveal">How we ranked — and who&rsquo;s ranking</div>
+            <p className="reveal">
+              We are {company.name}, a residential brokerage headquartered in Troy that has worked all seven
+              of these cities for over 20 years. That means two things: we know these markets house by house,
+              and we are not a neutral party — we ranked our own home city #1. So we built this page to be
+              checkable rather than taking our word for it.
+            </p>
+            <p className="reveal">
+              The order weighs five factors: school district strength (Niche&rsquo;s 2026 Michigan ranking,
+              plus district-boundary verification against official district and city sources), price
+              accessibility (Zillow&rsquo;s June 2026 typical home value), market momentum (one-year change in
+              that index, cross-checked against Redfin&rsquo;s sale-price and days-on-market data), lifestyle
+              fit (our agents&rsquo; on-the-ground experience — labeled as such wherever it appears), and
+              long-term demand anchors like employment corridors and walkability. The weighting is editorial
+              judgment for a typical family buyer; your priorities may reorder the list, which is why every
+              city entry names what it is best for.
+            </p>
+            <p className="reveal">
+              What we deliberately did not do: quote any statistic without a source and a date, average two
+              sources that disagree, or fill gaps with estimates. Where our two market sources conflict
+              (Troy, Warren, Bloomfield Hills), we show both numbers and explain the gap. Where we could not
+              verify something from a primary source — like post-2020 population estimates — we used the
+              verifiable figure and said so. Populations are therefore 2020 Census counts, and Niche ranks
+              are quoted as Niche&rsquo;s opinion, not the state&rsquo;s.
+            </p>
+            <p className="reveal">
+              This page was last reviewed on July 27, 2026, and we update it as Zillow and Redfin publish new
+              monthly data.
+            </p>
           </div>
         </section>
 
         {/* ── FAQ ── */}
-        <section className="py-24 atmosphere relative overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-4xl mx-auto px-6">
-            <Reveal>
-              <p className="eyebrow mb-5">FAQ</p>
-            </Reveal>
-            <h2 className="font-display text-4xl sm:text-5xl font-light text-bone leading-[1.06] mb-12">
-              Common questions, answered directly
-            </h2>
-            <div className="space-y-3">
+        <section className="bg-cream" style={{ padding: "90px 0" }}>
+          <div className="container" style={{ maxWidth: 860 }}>
+            <div className="sec-head reveal">
+              <div className="s-eyebrow">FAQ</div>
+              <h2>Common questions, answered directly</h2>
+            </div>
+            <div style={{ display: "grid", gap: 12 }}>
               {faqs.map((f) => (
-                <Reveal
-                  key={f.question}
-                  as="details"
-                  className="group rounded-2xl bg-bone/[0.03] border border-bone/10 overflow-hidden hover:border-[var(--gold)]/35 transition-colors duration-500"
-                >
-                  <summary className="flex items-center justify-between p-7 cursor-pointer text-[16px] font-medium text-bone leading-snug list-none [&::-webkit-details-marker]:hidden">
+                <details key={f.question} className="service-card reveal" style={{ padding: 0, overflow: "hidden" }}>
+                  <summary
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "22px 26px",
+                      cursor: "pointer",
+                      fontSize: 15.5,
+                      fontWeight: 600,
+                      color: "var(--navy)",
+                      listStyle: "none",
+                    }}
+                  >
                     {f.question}
-                    <ChevronRight className="w-4 h-4 text-[var(--gold-soft)] flex-shrink-0 ml-4 group-open:rotate-90 transition-transform duration-500" />
+                    <ChevronRight className="w-4 h-4" style={{ color: "var(--s-gold)", flexShrink: 0, marginLeft: 14 }} />
                   </summary>
-                  <div className="px-7 pb-7 text-bone/65 leading-[1.8] -mt-1 text-[14.5px] font-light">
+                  <div style={{ padding: "0 26px 24px", color: "var(--s-muted)", fontSize: 14.5, lineHeight: 1.8 }}>
                     {f.answer}
                   </div>
-                </Reveal>
+                </details>
               ))}
             </div>
           </div>
         </section>
 
         {/* ── Sources ── */}
-        <section className="py-16 bg-ink relative overflow-hidden border-t border-bone/10">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-3xl mx-auto px-6">
-            <Reveal>
-              <p className="eyebrow mb-6">Sources</p>
-            </Reveal>
-            <ol className="space-y-4 text-[13px] text-bone/55 font-light list-none">
+        <section className="bg-cream-2" style={{ padding: "70px 0" }}>
+          <div className="container" style={{ maxWidth: 800 }}>
+            <div className="s-eyebrow reveal">Sources</div>
+            <ol style={{ display: "grid", gap: 16, fontSize: 13, color: "var(--s-muted)", listStyle: "none", padding: 0 }}>
               {citations.map((s) => (
-                <li key={s.id} className="flex gap-3">
-                  <span className="text-[var(--gold-soft)] flex-shrink-0">{s.id}.</span>
+                <li key={s.id} className="reveal" style={{ display: "flex", gap: 12 }}>
+                  <span style={{ color: "var(--s-gold)", flexShrink: 0, fontWeight: 600 }}>{s.id}.</span>
                   <span>
-                    <a href={s.url} target="_blank" rel="noopener noreferrer" className="underline decoration-bone/20 underline-offset-4 hover:text-bone transition-colors">
+                    <a href={s.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline", textUnderlineOffset: 4 }}>
                       {s.label}
                     </a>
-                    <span className="text-bone/35"> — accessed {s.accessed}.</span>
-                    {s.note && <span className="block text-bone/40 mt-1">{s.note}</span>}
+                    <span> — accessed {s.accessed}.</span>
+                    {s.note && <span style={{ display: "block", marginTop: 4 }}>{s.note}</span>}
                   </span>
                 </li>
               ))}
@@ -342,49 +348,38 @@ export default function BestSuburbsGuidePage() {
           </div>
         </section>
 
-        {/* ── CTA ── */}
-        <section className="relative py-28 atmosphere overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
+        {/* ── CTA banner ── */}
+        <section className="cta-banner">
           <div
-            aria-hidden
-            className="absolute inset-0 -z-10 opacity-50"
+            className="cta-bg"
+            data-speed="0.4"
             style={{
-              background:
-                "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(200,162,76,0.18), transparent 60%)",
+              backgroundImage:
+                "linear-gradient(120deg, rgba(19,28,46,0.95), rgba(19,28,46,0.8)), radial-gradient(ellipse 70% 60% at 60% 40%, #24344f 0%, transparent 65%), linear-gradient(180deg, #1a2740 0%, #131c2e 100%)",
             }}
           />
-          <div className="relative max-w-2xl mx-auto px-6 text-center">
-            <h2 className="font-display text-4xl sm:text-5xl font-light text-bone leading-[1.05] mb-6">
-              <span className="italic gold-text">Narrowed it to two or three?</span>
+          <div className="container" style={{ position: "relative", zIndex: 2, maxWidth: 720, textAlign: "center" }}>
+            <h2 className="reveal" style={{ color: "#fff", fontSize: "clamp(28px, 3.8vw, 44px)", marginBottom: 18 }}>
+              Narrowed it to two or three?
             </h2>
-            <Reveal delay={1}>
-              <p className="text-[17px] text-bone/65 mb-10 leading-relaxed font-light">
-                Talk it through with an agent who closes in all seven of these cities. We&rsquo;ll tell you
-                which one actually fits your budget, commute, and school priorities — including when the answer
-                isn&rsquo;t Troy.
-              </p>
-            </Reveal>
-            <Reveal delay={2} className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a
-                href="/#contact"
-                className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
-              >
+            <p className="reveal" style={{ color: "rgba(255,255,255,0.7)", fontSize: 16, marginBottom: 36 }}>
+              Talk it through with an agent who closes in all seven of these cities. We&rsquo;ll tell you
+              which one actually fits your budget, commute, and school priorities — including when the answer
+              isn&rsquo;t Troy.
+            </p>
+            <div className="reveal" style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+              <a href="/#contact" className="btn btn-gold">
                 Ask us which city fits you
-                <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
+                <ArrowRight className="w-4 h-4" />
               </a>
-              <a
-                href={`tel:${company.phoneTel}`}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-bone/25 text-bone hover:border-bone/60 hover:bg-bone/5 font-medium text-[14px] tracking-wide transition-all duration-500"
-              >
-                <Phone className="w-4 h-4 text-[var(--gold-soft)]" />
+              <a href={`tel:${company.phoneTel}`} className="btn btn-outline">
+                <Phone className="w-4 h-4" />
                 {company.phone}
               </a>
-            </Reveal>
+            </div>
           </div>
         </section>
       </main>
-      <Footer />
-      <FloatingCTA />
-    </>
+    </SiteShell>
   );
 }

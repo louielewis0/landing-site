@@ -1,25 +1,17 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import FloatingCTA from "@/components/FloatingCTA";
-import Reveal from "@/components/motion/Reveal";
+import SiteShell from "@/components/site/SiteShell";
 import { company } from "@/lib/config";
 import { Star, Phone } from "lucide-react";
 import StarGate from "./StarGate";
 
 /**
- * /reviews — rating-gated capture surface.
+ * /reviews — rating-gated capture surface, redesign treatment.
  *
  * The Google review URL is NEVER hardcoded on this page (or referenced
- * anywhere in the client bundle). All three previously-public
- * "Leave a Google review" buttons are gone. The single entry point is
- * the <StarGate> client component in the hero: 5★ → server route
- * hands back the URL → same-tab nav. 1–4★ → private feedback form →
- * POST to public.public_feedback.
- *
- * The "How it works" and bottom "Thank you for choosing" sections
- * retain the cinematic styling but their CTAs now scroll back to the
- * star picker (id="rating") instead of linking to Google. There is no
+ * anywhere in the client bundle). The single entry point remains the
+ * <StarGate> client component: 5★ → server route hands back the URL →
+ * same-tab nav. 1–4★ → private feedback form → public.public_feedback.
+ * All CTAs anchor back to the star picker (id="rating"); there is no
  * Google href anywhere on this page.
  */
 export const metadata: Metadata = {
@@ -29,149 +21,113 @@ export const metadata: Metadata = {
 
 export default function ReviewPage() {
   return (
-    <>
-      <Header />
-      <main className="flex-1">
-        {/* Hero */}
-        <section className="relative pt-44 pb-28 atmosphere grain vignette overflow-hidden">
-          <div className="relative max-w-2xl mx-auto px-6 text-center">
-            <div className="fade-up flex items-center justify-center gap-3 mb-10">
-              <span className="block w-10 h-px bg-[var(--gold)] opacity-60" />
-              <span className="eyebrow">
-                <Star className="w-3 h-3 inline mr-2 -mt-0.5 text-[var(--gold-soft)]" fill="currentColor" />
-                Trusted by hundreds
-              </span>
-              <span className="block w-10 h-px bg-[var(--gold)] opacity-60" />
+    <SiteShell>
+      <main>
+        {/* Hero + gated star picker */}
+        <section className="s-hero s-hero-short" style={{ height: "auto", minHeight: 620, paddingBottom: 70 }}>
+          <div
+            className="hero-layer hero-bg"
+            data-speed="0.35"
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg, rgba(13,19,33,0.4) 0%, rgba(13,19,33,0.6) 55%, rgba(13,19,33,0.95) 100%), radial-gradient(ellipse 80% 60% at 50% 20%, #24344f 0%, transparent 60%), linear-gradient(180deg, #182338 0%, #131c2e 100%)",
+            }}
+          />
+          <div className="hero-layer hero-grid" />
+          <div className="hero-layer hero-glow" data-speed="0.6" />
+          <div className="container hero-content" style={{ textAlign: "center", alignItems: "center", paddingTop: 130 }}>
+            <div className="hero-badge" style={{ margin: "0 auto 28px" }}>
+              <Star className="w-3.5 h-3.5" style={{ color: "var(--s-gold-light)" }} fill="currentColor" />
+              Trusted by hundreds
             </div>
-
-            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-light text-bone leading-[1.02] mb-7">
-              <span className="block overflow-hidden">
-                <span className="block mask-wipe">Your feedback</span>
-              </span>
-              <span className="block overflow-hidden">
-                <span className="block mask-wipe delay-1 italic gold-text">means everything.</span>
-              </span>
+            <h1 className="hero-title" style={{ margin: "0 auto", fontSize: "clamp(36px, 5vw, 64px)" }}>
+              Your feedback <em>means everything.</em>
             </h1>
-
-            <p className="fade-up delay-2 text-[17px] text-bone/60 leading-relaxed max-w-md mx-auto mb-12 font-light">
+            <p className="hero-sub" style={{ margin: "24px auto 40px" }}>
               If we helped you buy, sell, or invest in {company.region}, we&rsquo;d
               love to hear how it went.
             </p>
-
-            {/* The single gated entry point — interactive stars, branching
-                inside the component based on rating. No Google link in the
-                surrounding markup. */}
-            <StarGate />
+            <div style={{ maxWidth: 560, margin: "0 auto", width: "100%" }}>
+              <StarGate />
+            </div>
           </div>
         </section>
 
         {/* How it works */}
-        <section className="py-28 bg-ink relative overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-4xl mx-auto px-6">
-            <div className="text-center mb-16">
-              <Reveal>
-                <p className="eyebrow mb-5">How it works</p>
-              </Reveal>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04]">
-                <span className="block overflow-hidden">
-                  <Reveal variant="mask" className="block">Three quick steps.</Reveal>
-                </span>
-              </h2>
+        <section className="sec-pad bg-cream">
+          <div className="container" style={{ maxWidth: 900 }}>
+            <div className="sec-head reveal" style={{ margin: "0 auto 56px", textAlign: "center", maxWidth: 640 }}>
+              <div className="s-eyebrow" style={{ justifyContent: "center" }}>How it works</div>
+              <h2>Three quick steps.</h2>
             </div>
-
-            <div className="grid sm:grid-cols-3 gap-10">
+            <div className="testi-grid">
               {[
-                {
-                  num: "01",
-                  title: "Pick your rating",
-                  desc: "Tap the stars that match your experience.",
-                },
-                {
-                  num: "02",
-                  title: "Share your experience",
-                  desc: "A few words — what stood out, what didn't.",
-                },
-                {
-                  num: "03",
-                  title: "We read every one.",
-                  desc: "Honest feedback shapes how we show up next time.",
-                },
-              ].map((s, i) => (
-                <Reveal key={s.num} delay={((i % 3) + 1) as 1 | 2 | 3} className="text-center">
-                  <div className="w-14 h-14 rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/5 flex items-center justify-center mx-auto mb-5">
-                    <span className="font-display text-xl font-light text-[var(--gold-soft)]">
-                      {s.num}
-                    </span>
+                { num: "01", title: "Pick your rating", desc: "Tap the stars that match your experience." },
+                { num: "02", title: "Share your experience", desc: "A few words — what stood out, what didn't." },
+                { num: "03", title: "We read every one.", desc: "Honest feedback shapes how we show up next time." },
+              ].map((s) => (
+                <div key={s.num} className="testi-card reveal" style={{ textAlign: "center" }}>
+                  <div
+                    style={{
+                      width: 54,
+                      height: 54,
+                      borderRadius: "50%",
+                      background: "var(--cream-2)",
+                      color: "var(--s-gold)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      margin: "0 auto 18px",
+                      fontFamily: "var(--font-fraunces), Fraunces, serif",
+                      fontSize: 19,
+                      fontWeight: 600,
+                    }}
+                  >
+                    {s.num}
                   </div>
-                  <h3 className="font-display text-[1.4rem] font-light text-bone mb-2 tracking-tight">{s.title}</h3>
-                  <p className="text-[14px] text-bone/55 leading-relaxed font-light max-w-xs mx-auto">{s.desc}</p>
-                </Reveal>
+                  <h3 style={{ fontSize: 20, marginBottom: 8 }}>{s.title}</h3>
+                  <p style={{ fontSize: 14, color: "var(--s-muted)" }}>{s.desc}</p>
+                </div>
               ))}
             </div>
-
-            {/* Was: anchor to Google. Now: anchor back to the star picker. */}
-            <Reveal delay={3} className="text-center mt-16">
-              <a
-                href="#rating"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
-              >
+            <div className="areas-more reveal">
+              <a href="#rating" className="btn btn-gold" style={{ padding: "13px 26px", fontSize: 14 }}>
                 Rate your experience
               </a>
-            </Reveal>
+            </div>
           </div>
         </section>
 
         {/* Appreciation + Contact */}
-        <section className="relative py-28 atmosphere overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
+        <section className="cta-banner">
           <div
-            aria-hidden
-            className="absolute inset-0 -z-10 opacity-50"
+            className="cta-bg"
+            data-speed="0.4"
             style={{
-              background:
-                "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(200,162,76,0.18), transparent 60%)",
+              backgroundImage:
+                "linear-gradient(120deg, rgba(19,28,46,0.95), rgba(19,28,46,0.8)), radial-gradient(ellipse 70% 60% at 50% 40%, #24344f 0%, transparent 65%), linear-gradient(180deg, #1a2740 0%, #131c2e 100%)",
             }}
           />
-          <div className="relative max-w-2xl mx-auto px-6 text-center">
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.05] mb-6">
-              <span className="block overflow-hidden">
-                <Reveal variant="mask" className="block">Thank you for choosing</Reveal>
-              </span>
-              <span className="block overflow-hidden">
-                <Reveal variant="mask" delay={1} className="block italic gold-text">{company.name}.</Reveal>
-              </span>
+          <div className="container" style={{ position: "relative", zIndex: 2, maxWidth: 720, textAlign: "center" }}>
+            <h2 className="reveal" style={{ color: "#fff", fontSize: "clamp(28px, 3.8vw, 44px)", marginBottom: 18 }}>
+              Thank you for choosing {company.name}.
             </h2>
-            <Reveal delay={2}>
-              <p className="text-bone/60 text-[17px] leading-relaxed mb-12 font-light">
-                We don&rsquo;t take your trust for granted. Every review — good or
-                constructive — helps us serve {company.region} better.
-              </p>
-            </Reveal>
-
-            {/* Was: a duplicate Google link next to the Call button. Now:
-                an anchor back to the gated star picker. The Call button
-                stays — it's a direct phone CTA and was always fine. */}
-            <Reveal delay={3} className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a
-                href={`tel:${company.phoneTel}`}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-bone/25 text-bone hover:border-bone/60 hover:bg-bone/5 font-medium text-[14px] tracking-wide transition-all duration-500"
-              >
-                <Phone className="w-4 h-4 text-[var(--gold-soft)]" />
+            <p className="reveal" style={{ color: "rgba(255,255,255,0.7)", fontSize: 16, marginBottom: 36 }}>
+              We don&rsquo;t take your trust for granted. Every review — good or
+              constructive — helps us serve {company.region} better.
+            </p>
+            <div className="reveal" style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+              <a href={`tel:${company.phoneTel}`} className="btn btn-outline">
+                <Phone className="w-4 h-4" />
                 Call {company.phone}
               </a>
-              <a
-                href="#rating"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
-              >
+              <a href="#rating" className="btn btn-gold">
                 Rate your experience
               </a>
-            </Reveal>
+            </div>
           </div>
         </section>
       </main>
-      <Footer />
-      <FloatingCTA />
-    </>
+    </SiteShell>
   );
 }

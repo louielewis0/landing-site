@@ -742,3 +742,8 @@ body {
   .site-theme .hero-form-col { display: none; }
   .site-theme .s-hero { height: auto; min-height: 100svh; padding-bottom: 90px; }
 }
+
+/* Home-value hero columns */
+@media (max-width: 1080px) {
+  .site-theme .hv-cols { grid-template-columns: 1fr !important; gap: 30px !important; }
+}

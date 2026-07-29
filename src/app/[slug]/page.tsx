@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import FloatingCTA from "@/components/FloatingCTA";
-import Reveal from "@/components/motion/Reveal";
+import SiteShell from "@/components/site/SiteShell";
 import { company } from "@/lib/config";
 import { getCityPage, getAllCitySlugs, cityPages } from "@/lib/city-pages";
 import {
   Phone,
   MapPin,
-  TrendingUp,
   Clock,
   Users,
   GraduationCap,
@@ -17,8 +13,7 @@ import {
   Star,
   CheckCircle2,
   DollarSign,
-  Home,
-  Key,
+  TrendingUp,
   BarChart3,
   ChevronRight,
 } from "lucide-react";
@@ -45,6 +40,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `https://marketcenterrealty.com/${page.slug}`,
     },
   };
+}
+
+/** City hero backgrounds — layered navy gradients varied per slug so
+ *  adjacent city pages don't feel identical. Swap for real
+ *  neighborhood photos in /public/areas/<slug>.jpg when available. */
+function heroBackground(slug: string): string {
+  const seeds = [
+    "radial-gradient(ellipse 80% 60% at 20% 25%, #24344f 0%, transparent 60%), radial-gradient(ellipse 70% 55% at 85% 75%, #1a2740 0%, transparent 65%)",
+    "radial-gradient(ellipse 75% 65% at 75% 20%, #2a3c5c 0%, transparent 60%), radial-gradient(ellipse 65% 50% at 15% 80%, #1c2942 0%, transparent 65%)",
+    "radial-gradient(ellipse 85% 60% at 50% 15%, #253a55 0%, transparent 62%), radial-gradient(ellipse 60% 55% at 90% 85%, #1a2740 0%, transparent 60%)",
+  ];
+  const i = slug.length % seeds.length;
+  return `linear-gradient(180deg, rgba(13,19,33,0.35) 0%, rgba(13,19,33,0.55) 55%, rgba(13,19,33,0.95) 100%), ${seeds[i]}, linear-gradient(180deg, #182338 0%, #131c2e 100%)`;
 }
 
 export default async function CityLandingPage({ params }: Props) {
@@ -96,366 +104,295 @@ export default async function CityLandingPage({ params }: Props) {
   };
 
   return (
-    <>
-      <Header />
-      <main className="flex-1">
+    <SiteShell>
+      <main>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-        {/* ── Hero ── */}
-        <section className="relative pt-36 pb-28 atmosphere grain vignette overflow-hidden">
-          <div className="relative max-w-6xl mx-auto px-6">
-            <nav className="flex items-center gap-2 text-[11px] tracking-[0.18em] uppercase text-bone/35 mb-10">
-              <a href="/" className="hover:text-bone/70 transition-colors">Home</a>
+        {/* ── Hero (parallax) ── */}
+        <section className="s-hero s-hero-short">
+          <div
+            className="hero-layer hero-bg"
+            data-speed="0.35"
+            style={{ backgroundImage: heroBackground(page.slug) }}
+          />
+          <div className="hero-layer hero-grid" />
+          <div className="hero-layer hero-glow" data-speed="0.6" />
+          <div className="container hero-content">
+            <nav
+              aria-label="Breadcrumb"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                fontSize: 11,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.5)",
+                marginBottom: 26,
+              }}
+            >
+              <a href="/" style={{ color: "rgba(255,255,255,0.6)" }}>Home</a>
               <ChevronRight className="w-3 h-3" />
-              <span className="text-bone/65">{page.city} Real Estate</span>
+              <span style={{ color: "rgba(255,255,255,0.85)" }}>{page.city} Real Estate</span>
             </nav>
-
-            <div className="max-w-4xl">
-              <div className="fade-up flex items-center gap-3 mb-7">
-                <span className="block w-10 h-px bg-[var(--gold)] opacity-60" />
-                <span className="eyebrow">
-                  <MapPin className="w-3 h-3 inline mr-2 -mt-0.5 text-[var(--gold-soft)]" />
-                  {page.city}, {page.state} · {page.county}
-                </span>
-              </div>
-
-              <h1 className="font-display text-5xl sm:text-6xl lg:text-[5rem] font-light text-bone tracking-tight leading-[1.04] mb-7">
-                <span className="block overflow-hidden">
-                  <span className="block mask-wipe">{page.headline}</span>
-                </span>
-              </h1>
-
-              <p className="fade-up delay-2 text-[17px] sm:text-lg text-bone/60 max-w-2xl leading-[1.7] mb-10 font-light">
-                {page.subheadline}
-              </p>
-
-              <div className="fade-up delay-3 flex flex-col sm:flex-row gap-3 mb-14">
-                <a
-                  href="/#lead-magnet"
-                  className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
-                >
-                  Request your valuation
-                  <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
-                </a>
-                <a
-                  href={`tel:${company.phoneTel}`}
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-bone/25 text-bone hover:border-bone/60 hover:bg-bone/5 font-medium text-[14px] tracking-wide transition-all duration-500"
-                >
-                  <Phone className="w-4 h-4 text-[var(--gold-soft)]" />
-                  {company.phone}
-                </a>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {[
-                  { v: "20+", l: "Years experience", Icon: Clock },
-                  { v: "$100M+", l: "Closed sales", Icon: DollarSign },
-                  { v: "500+", l: "Homes sold", Icon: Home },
-                  { v: page.city, l: "Specialist", Icon: MapPin },
-                ].map((b, i) => (
-                  <Reveal key={b.l} delay={((i % 4) + 1) as 1 | 2 | 3 | 4} className="flex items-center gap-3 px-4 py-3.5 rounded-xl bg-bone/[0.03] border border-bone/10">
-                    <b.Icon className="w-4 h-4 text-[var(--gold-soft)] flex-shrink-0" strokeWidth={1.5} />
-                    <div>
-                      <div className="font-display text-[15px] font-light text-bone leading-none">{b.v}</div>
-                      <div className="text-[10px] text-bone/45 mt-1 uppercase tracking-[0.18em]">{b.l}</div>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
+            <div className="hero-badge">
+              <MapPin className="w-3.5 h-3.5" style={{ color: "var(--s-gold-light)" }} />
+              {page.city}, {page.state} · {page.county}
+            </div>
+            <h1 className="hero-title">{page.headline}</h1>
+            <p className="hero-sub">{page.subheadline}</p>
+            <div className="hero-ctas">
+              <a href="/home-value" className="btn btn-gold">
+                Request your valuation <ArrowRight className="w-4 h-4" />
+              </a>
+              <a href={`tel:${company.phoneTel}`} className="btn btn-outline">
+                <Phone className="w-4 h-4" />
+                {company.phone}
+              </a>
+            </div>
+            <div className="hero-badges">
+              <span><Clock className="w-4 h-4" /> 20+ years experience</span>
+              <span><DollarSign className="w-4 h-4" /> $100M+ closed sales</span>
+              <span><MapPin className="w-4 h-4" /> {page.city} specialist</span>
             </div>
           </div>
         </section>
 
-        {/* ── Market Stats Bar ── */}
-        <section className="bg-ink-2 border-y border-bone/10 relative overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-6xl mx-auto px-6 py-12">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-6">
+        {/* ── Market stats band ── */}
+        <section className="stats-band">
+          <div className="container">
+            <div className="stats-grid cols-4" style={{ gridTemplateColumns: "repeat(5, 1fr)" }}>
               {[
                 { Icon: DollarSign, value: page.medianPrice, label: "Median Price" },
                 { Icon: TrendingUp, value: page.priceChange, label: "Price Trend" },
                 { Icon: Clock, value: page.avgDaysOnMarket, label: "Days on Market" },
                 { Icon: Users, value: page.population, label: "Population" },
                 { Icon: GraduationCap, value: page.topSchoolDistrict.split("—")[0].trim(), label: "Schools" },
-              ].map((s, i) => (
-                <Reveal key={s.label} delay={((i % 4) + 1) as 1 | 2 | 3 | 4}>
-                  <div className="flex items-center gap-2 mb-2">
-                    <s.Icon className="w-3.5 h-3.5 text-[var(--gold-soft)]" strokeWidth={1.5} />
-                    <span className="text-[10px] text-bone/45 uppercase tracking-[0.22em]">{s.label}</span>
+              ].map((s) => (
+                <div key={s.label}>
+                  <div className="stat-num" style={{ fontSize: "clamp(20px, 2.4vw, 30px)" }}>
+                    <span className="accent">{s.value}</span>
                   </div>
-                  <div className="font-display text-2xl font-light text-bone tracking-tight">{s.value}</div>
-                </Reveal>
+                  <div className="stat-label">{s.label}</div>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
         {/* ── Intro ── */}
-        <section className="py-24 bg-ink relative overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-3xl mx-auto px-6">
-            <div className="space-y-6 text-[17px] text-bone/70 leading-[1.85] font-light">
+        <section className="sec-pad bg-cream" style={{ paddingBottom: 60 }}>
+          <div className="container" style={{ maxWidth: 820 }}>
+            <div className="prose-site">
               {page.introParagraphs.map((p, i) => (
-                <Reveal key={i} delay={((i % 3) + 1) as 1 | 2 | 3}>
-                  <p>{p}</p>
-                </Reveal>
+                <p key={i} className="reveal" style={{ fontSize: 17, lineHeight: 1.85 }}>
+                  {p}
+                </p>
               ))}
             </div>
           </div>
         </section>
 
         {/* ── For Buyers ── */}
-        <section className="py-28 atmosphere relative overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-6xl mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-16 items-start">
-              <div>
-                <Reveal>
-                  <p className="eyebrow mb-5">
-                    <Key className="w-3 h-3 inline mr-2 -mt-0.5 text-[var(--gold-soft)]" />
-                    For Buyers
-                  </p>
-                </Reveal>
-                <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-8">
-                  <span className="block overflow-hidden">
-                    <Reveal variant="mask" className="block">{page.buyerHeadline}</Reveal>
-                  </span>
+        <section className="sec-pad bg-cream" style={{ paddingTop: 60 }}>
+          <div className="container">
+            <div className="about-grid" style={{ gridTemplateColumns: "1.05fr 0.95fr", alignItems: "start" }}>
+              <div className="reveal">
+                <div className="s-eyebrow">For Buyers</div>
+                <h2 style={{ fontSize: "clamp(28px, 3.6vw, 44px)", lineHeight: 1.15, marginBottom: 22 }}>
+                  {page.buyerHeadline}
                 </h2>
-                <div className="space-y-5 text-bone/65 text-[16px] leading-[1.75] font-light">
+                <div className="prose-site">
                   {page.buyerParagraphs.map((p, i) => (
-                    <Reveal key={i} delay={((i % 3) + 1) as 1 | 2 | 3}>
-                      <p>{p}</p>
-                    </Reveal>
+                    <p key={i} style={{ color: "var(--s-muted)", fontSize: 16 }}>{p}</p>
                   ))}
                 </div>
               </div>
-              <div className="space-y-3 lg:mt-20">
-                {page.buyerPoints.map((point, i) => (
-                  <Reveal
-                    key={point}
-                    delay={((i % 3) + 1) as 1 | 2 | 3}
-                    className="flex gap-3 p-4 rounded-xl bg-bone/[0.03] border border-bone/10 hover:border-[var(--gold)]/30 transition-all duration-500"
-                  >
-                    <CheckCircle2 className="w-5 h-5 text-[var(--gold-soft)] flex-shrink-0 mt-0.5" strokeWidth={1.5} />
-                    <span className="text-[14.5px] text-bone/75 font-light">{point}</span>
-                  </Reveal>
+              <div style={{ display: "grid", gap: 12 }}>
+                {page.buyerPoints.map((point) => (
+                  <div key={point} className="service-card reveal" style={{ padding: "18px 22px", display: "flex", gap: 12, alignItems: "flex-start" }}>
+                    <CheckCircle2 className="w-5 h-5" style={{ color: "var(--s-gold)", flexShrink: 0, marginTop: 2 }} strokeWidth={1.75} />
+                    <span style={{ fontSize: 14.5 }}>{point}</span>
+                  </div>
                 ))}
-                <Reveal delay={3}>
-                  <a
-                    href="/#contact"
-                    className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[13px] tracking-wide transition-all duration-500 mt-6"
-                  >
-                    Start your home search <ArrowRight className="w-4 h-4" />
-                  </a>
-                </Reveal>
+                <a href="/#contact" className="btn btn-navy reveal" style={{ justifyContent: "center", marginTop: 10 }}>
+                  Start your home search <ArrowRight className="w-4 h-4" />
+                </a>
               </div>
             </div>
           </div>
         </section>
 
         {/* ── For Sellers ── */}
-        <section className="py-28 bg-ink relative overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-6xl mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-16 items-start">
-              <div className="lg:order-2">
-                <Reveal>
-                  <p className="eyebrow mb-5">
-                    <TrendingUp className="w-3 h-3 inline mr-2 -mt-0.5 text-[var(--gold-soft)]" />
-                    For Sellers
-                  </p>
-                </Reveal>
-                <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-8">
-                  <span className="block overflow-hidden">
-                    <Reveal variant="mask" className="block">{page.sellerHeadline}</Reveal>
-                  </span>
+        <section className="sec-pad bg-cream-2">
+          <div className="container">
+            <div className="about-grid" style={{ gridTemplateColumns: "0.95fr 1.05fr", alignItems: "start" }}>
+              <div style={{ display: "grid", gap: 12 }} className="order-cards">
+                {page.sellerPoints.map((point) => (
+                  <div key={point} className="service-card reveal" style={{ padding: "18px 22px", display: "flex", gap: 12, alignItems: "flex-start" }}>
+                    <CheckCircle2 className="w-5 h-5" style={{ color: "var(--s-gold)", flexShrink: 0, marginTop: 2 }} strokeWidth={1.75} />
+                    <span style={{ fontSize: 14.5 }}>{point}</span>
+                  </div>
+                ))}
+                <a href="/home-value" className="btn btn-gold reveal" style={{ justifyContent: "center", marginTop: 10 }}>
+                  Request your valuation <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+              <div className="reveal">
+                <div className="s-eyebrow">For Sellers</div>
+                <h2 style={{ fontSize: "clamp(28px, 3.6vw, 44px)", lineHeight: 1.15, marginBottom: 22 }}>
+                  {page.sellerHeadline}
                 </h2>
-                <div className="space-y-5 text-bone/65 text-[16px] leading-[1.75] font-light">
+                <div className="prose-site">
                   {page.sellerParagraphs.map((p, i) => (
-                    <Reveal key={i} delay={((i % 3) + 1) as 1 | 2 | 3}>
-                      <p>{p}</p>
-                    </Reveal>
+                    <p key={i} style={{ color: "var(--s-muted)", fontSize: 16 }}>{p}</p>
                   ))}
                 </div>
-              </div>
-              <div className="space-y-3 lg:order-1 lg:mt-20">
-                {page.sellerPoints.map((point, i) => (
-                  <Reveal
-                    key={point}
-                    delay={((i % 3) + 1) as 1 | 2 | 3}
-                    className="flex gap-3 p-4 rounded-xl bg-bone/[0.03] border border-bone/10 hover:border-[var(--gold)]/30 transition-all duration-500"
-                  >
-                    <CheckCircle2 className="w-5 h-5 text-[var(--gold-soft)] flex-shrink-0 mt-0.5" strokeWidth={1.5} />
-                    <span className="text-[14.5px] text-bone/75 font-light">{point}</span>
-                  </Reveal>
-                ))}
-                <Reveal delay={3}>
-                  <a
-                    href="/#lead-magnet"
-                    className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[13px] tracking-wide transition-all duration-500 mt-6"
-                  >
-                    Request your valuation <ArrowRight className="w-4 h-4" />
-                  </a>
-                </Reveal>
               </div>
             </div>
           </div>
         </section>
 
         {/* ── Market Trend ── */}
-        <section className="py-20 bg-ink-2 border-y border-bone/10 relative overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-3xl mx-auto px-6">
-            <Reveal className="flex items-start gap-5">
-              <div className="w-12 h-12 rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/5 flex items-center justify-center flex-shrink-0">
-                <BarChart3 className="w-5 h-5 text-[var(--gold-soft)]" strokeWidth={1.5} />
+        <section className="stats-band" style={{ padding: "56px 0" }}>
+          <div className="container" style={{ maxWidth: 860 }}>
+            <div className="reveal" style={{ display: "flex", gap: 20, alignItems: "flex-start" }}>
+              <div
+                style={{
+                  width: 48,
+                  height: 48,
+                  borderRadius: 12,
+                  background: "rgba(255,255,255,0.08)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "var(--s-gold-light)",
+                  flexShrink: 0,
+                }}
+              >
+                <BarChart3 className="w-5 h-5" strokeWidth={1.75} />
               </div>
               <div>
-                <p className="eyebrow mb-3">{page.city} Market Outlook</p>
-                <p className="text-[17px] text-bone/75 leading-[1.8] font-light">{page.marketTrend}</p>
+                <div className="s-eyebrow" style={{ color: "var(--s-gold-light)" }}>
+                  {page.city} Market Outlook
+                </div>
+                <p style={{ color: "rgba(255,255,255,0.8)", fontSize: 16.5, lineHeight: 1.8 }}>
+                  {page.marketTrend}
+                </p>
               </div>
-            </Reveal>
+            </div>
           </div>
         </section>
 
         {/* ── Neighborhoods ── */}
-        <section className="py-28 bg-ink relative overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-6xl mx-auto px-6">
-            <Reveal>
-              <p className="eyebrow mb-5">Neighborhoods</p>
-            </Reveal>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-12">
-              <span className="block overflow-hidden">
-                <Reveal variant="mask" className="block">Where to buy in {page.city}.</Reveal>
-              </span>
-            </h2>
-            <div className="grid sm:grid-cols-2 gap-5">
-              {page.neighborhoods.map((n, i) => (
-                <Reveal
-                  key={n.name}
-                  delay={((i % 3) + 1) as 1 | 2 | 3}
-                  className="group rounded-2xl border border-bone/10 bg-gradient-to-b from-bone/[0.03] to-transparent p-8 hover:border-[var(--gold)]/40 hover:from-bone/[0.06] transition-all duration-700 tilt"
-                >
-                  <h3 className="font-display text-[1.5rem] font-light text-bone mb-3 group-hover:text-[var(--gold-soft)] transition-colors duration-500">{n.name}</h3>
-                  <p className="text-[14.5px] text-bone/60 leading-[1.7] font-light">{n.description}</p>
-                </Reveal>
+        <section className="sec-pad bg-cream">
+          <div className="container">
+            <div className="sec-head reveal">
+              <div className="s-eyebrow">Neighborhoods</div>
+              <h2>Where to buy in {page.city}.</h2>
+            </div>
+            <div className="services-grid" style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
+              {page.neighborhoods.map((n) => (
+                <div key={n.name} className="service-card reveal">
+                  <h3 style={{ fontSize: 20 }}>{n.name}</h3>
+                  <p style={{ fontSize: 14.5, marginTop: 6 }}>{n.description}</p>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
         {/* ── Why Choose Us ── */}
-        <section className="py-28 atmosphere relative overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-4xl mx-auto px-6">
-            <Reveal>
-              <p className="eyebrow mb-5">Why us</p>
-            </Reveal>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-12">
-              <span className="block overflow-hidden">
-                <Reveal variant="mask" className="block">Why {page.city} clients</Reveal>
-              </span>
-              <span className="block overflow-hidden">
-                <Reveal variant="mask" delay={1} className="block italic gold-text">choose us.</Reveal>
-              </span>
-            </h2>
-            <div className="space-y-4">
-              {page.whyChooseUs.map((item, i) => (
-                <Reveal
-                  key={item.title}
-                  delay={((i % 3) + 1) as 1 | 2 | 3}
-                  className="flex gap-5 p-7 rounded-2xl bg-bone/[0.04] border border-bone/10 hover:border-[var(--gold)]/35 transition-all duration-700"
-                >
-                  <CheckCircle2 className="w-5 h-5 text-[var(--gold-soft)] flex-shrink-0 mt-1" strokeWidth={1.5} />
+        <section className="sec-pad bg-cream-2">
+          <div className="container" style={{ maxWidth: 900 }}>
+            <div className="sec-head reveal">
+              <div className="s-eyebrow">Why us</div>
+              <h2>Why {page.city} clients choose us.</h2>
+            </div>
+            <div style={{ display: "grid", gap: 14 }}>
+              {page.whyChooseUs.map((item) => (
+                <div key={item.title} className="service-card reveal" style={{ display: "flex", gap: 18, alignItems: "flex-start", padding: "26px 28px" }}>
+                  <CheckCircle2 className="w-5 h-5" style={{ color: "var(--s-gold)", flexShrink: 0, marginTop: 3 }} strokeWidth={1.75} />
                   <div>
-                    <h3 className="font-display text-[1.4rem] font-light text-bone mb-2 leading-tight">{item.title}</h3>
-                    <p className="text-bone/65 leading-relaxed text-[14.5px] font-light">{item.description}</p>
+                    <h3 style={{ fontSize: 19, marginBottom: 6 }}>{item.title}</h3>
+                    <p style={{ fontSize: 14.5 }}>{item.description}</p>
                   </div>
-                </Reveal>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
         {/* ── Testimonial ── */}
-        <section className="relative py-28 bg-ink overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div
-            aria-hidden
-            className="absolute inset-0 -z-10 opacity-40"
-            style={{
-              background:
-                "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(200,162,76,0.10), transparent 60%)",
-            }}
-          />
-          <div className="relative max-w-3xl mx-auto px-6 text-center">
-            <Reveal>
-              <div className="flex justify-center gap-1.5 mb-8">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} className="w-6 h-6 text-[var(--gold)]" fill="currentColor" strokeWidth={0} />
-                ))}
-              </div>
-            </Reveal>
-            <Reveal delay={1}>
-              <blockquote className="font-display text-2xl sm:text-3xl text-bone leading-[1.4] mb-8 italic font-light">
-                &ldquo;{page.testimonial.quote}&rdquo;
-              </blockquote>
-            </Reveal>
-            <Reveal delay={2}>
-              <div className="text-bone/55 text-[13px] tracking-[0.06em]">
-                <span className="font-medium text-bone">{page.testimonial.name}</span>
-                <span className="mx-2">—</span>
-                {page.testimonial.context}
-              </div>
-            </Reveal>
+        <section className="stats-band" style={{ padding: "90px 0" }}>
+          <div className="container" style={{ maxWidth: 760, textAlign: "center" }}>
+            <div className="reveal" style={{ display: "flex", justifyContent: "center", gap: 6, marginBottom: 26 }}>
+              {[1, 2, 3, 4, 5].map((i) => (
+                <Star key={i} className="w-5 h-5" style={{ color: "var(--s-gold-light)" }} fill="currentColor" strokeWidth={0} />
+              ))}
+            </div>
+            <blockquote
+              className="reveal"
+              style={{
+                fontFamily: "var(--font-fraunces), Fraunces, serif",
+                fontSize: "clamp(22px, 2.8vw, 30px)",
+                color: "#fff",
+                lineHeight: 1.45,
+                marginBottom: 24,
+              }}
+            >
+              &ldquo;{page.testimonial.quote}&rdquo;
+            </blockquote>
+            <div className="reveal" style={{ color: "rgba(255,255,255,0.6)", fontSize: 13 }}>
+              <span style={{ color: "#fff", fontWeight: 600 }}>{page.testimonial.name}</span>
+              <span style={{ margin: "0 8px" }}>·</span>
+              {page.testimonial.context}
+            </div>
           </div>
         </section>
 
         {/* ── Local Insight ── */}
-        <section className="py-20 bg-ink-2 relative overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-3xl mx-auto px-6">
-            <Reveal className="rounded-2xl bg-bone/[0.03] border border-bone/10 p-9">
-              <p className="eyebrow mb-4">Local insight</p>
-              <p className="text-[17px] text-bone/75 leading-[1.85] font-light">{page.localInsight}</p>
-            </Reveal>
+        <section className="sec-pad bg-cream" style={{ padding: "80px 0" }}>
+          <div className="container" style={{ maxWidth: 860 }}>
+            <div className="service-card reveal" style={{ padding: 36 }}>
+              <div className="s-eyebrow">Local insight</div>
+              <p style={{ fontSize: 16.5, lineHeight: 1.85, color: "var(--s-ink)" }}>{page.localInsight}</p>
+            </div>
           </div>
         </section>
 
         {/* ── FAQ ── */}
-        <section className="py-28 atmosphere relative overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-4xl mx-auto px-6">
-            <Reveal>
-              <p className="eyebrow mb-5">FAQ</p>
-            </Reveal>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-12">
-              <span className="block overflow-hidden">
-                <Reveal variant="mask" className="block">{page.city} real-estate</Reveal>
-              </span>
-              <span className="block overflow-hidden">
-                <Reveal variant="mask" delay={1} className="block italic gold-text">questions.</Reveal>
-              </span>
-            </h2>
-            <div className="space-y-3">
-              {page.faqs.map((f, i) => (
-                <Reveal
-                  key={f.question}
-                  delay={((i % 3) + 1) as 1 | 2 | 3}
-                  as="details"
-                  className="group rounded-2xl bg-bone/[0.03] border border-bone/10 overflow-hidden hover:border-[var(--gold)]/35 transition-colors duration-500"
-                >
-                  <summary className="flex items-center justify-between p-7 cursor-pointer text-[16px] font-medium text-bone leading-snug list-none [&::-webkit-details-marker]:hidden">
+        <section className="sec-pad bg-cream-2">
+          <div className="container" style={{ maxWidth: 900 }}>
+            <div className="sec-head reveal">
+              <div className="s-eyebrow">FAQ</div>
+              <h2>{page.city} real-estate questions.</h2>
+            </div>
+            <div style={{ display: "grid", gap: 12 }}>
+              {page.faqs.map((f) => (
+                <details key={f.question} className="service-card reveal" style={{ padding: 0, overflow: "hidden" }}>
+                  <summary
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "22px 26px",
+                      cursor: "pointer",
+                      fontSize: 15.5,
+                      fontWeight: 600,
+                      color: "var(--navy)",
+                      listStyle: "none",
+                    }}
+                  >
                     {f.question}
-                    <ChevronRight className="w-4 h-4 text-[var(--gold-soft)] flex-shrink-0 ml-4 group-open:rotate-90 transition-transform duration-500" />
+                    <ChevronRight className="w-4 h-4" style={{ color: "var(--s-gold)", flexShrink: 0, marginLeft: 14 }} />
                   </summary>
-                  <div className="px-7 pb-7 text-bone/65 leading-[1.8] -mt-1 text-[14.5px] font-light">
+                  <div style={{ padding: "0 26px 24px", color: "var(--s-muted)", fontSize: 14.5, lineHeight: 1.8 }}>
                     {f.answer}
                   </div>
-                </Reveal>
+                </details>
               ))}
             </div>
           </div>
@@ -463,45 +400,31 @@ export default async function CityLandingPage({ params }: Props) {
 
         {/* ── Schools Deep Dive (optional) ── */}
         {page.schoolsDeepDive && (
-          <section className="py-28 bg-ink relative overflow-hidden">
-            <div className="absolute inset-0 grain pointer-events-none" />
-            <div className="relative max-w-4xl mx-auto px-6">
-              <Reveal>
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/5 flex items-center justify-center">
-                    <GraduationCap className="w-5 h-5 text-[var(--gold-soft)]" strokeWidth={1.5} />
-                  </div>
-                  <p className="eyebrow">Schools</p>
-                </div>
-              </Reveal>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-10">
-                <span className="block overflow-hidden">
-                  <Reveal variant="mask" className="block">{page.schoolsDeepDive.title}</Reveal>
-                </span>
-              </h2>
-              <div className="space-y-5 text-[17px] text-bone/70 leading-[1.85] mb-12 font-light">
+          <section className="sec-pad bg-cream">
+            <div className="container" style={{ maxWidth: 900 }}>
+              <div className="sec-head reveal">
+                <div className="s-eyebrow">Schools</div>
+                <h2>{page.schoolsDeepDive.title}</h2>
+              </div>
+              <div className="prose-site" style={{ marginBottom: 34 }}>
                 {page.schoolsDeepDive.paragraphs.map((p, i) => (
-                  <Reveal key={i} delay={((i % 3) + 1) as 1 | 2 | 3}>
-                    <p>{p}</p>
-                  </Reveal>
+                  <p key={i} className="reveal">{p}</p>
                 ))}
               </div>
-              <div className="space-y-3">
-                {page.schoolsDeepDive.schools.map((s, i) => (
-                  <Reveal
-                    key={s.name}
-                    delay={((i % 3) + 1) as 1 | 2 | 3}
-                    className="flex gap-5 p-6 rounded-2xl bg-bone/[0.03] border border-bone/10 hover:border-[var(--gold)]/30 transition-all duration-500"
-                  >
-                    <GraduationCap className="w-5 h-5 text-[var(--gold-soft)] flex-shrink-0 mt-1" strokeWidth={1.5} />
+              <div style={{ display: "grid", gap: 12 }}>
+                {page.schoolsDeepDive.schools.map((s) => (
+                  <div key={s.name} className="service-card reveal" style={{ display: "flex", gap: 16, alignItems: "flex-start", padding: "20px 24px" }}>
+                    <GraduationCap className="w-5 h-5" style={{ color: "var(--s-gold)", flexShrink: 0, marginTop: 3 }} strokeWidth={1.75} />
                     <div>
-                      <div className="flex items-baseline gap-3 flex-wrap">
-                        <h3 className="font-display text-[1.3rem] font-light text-bone">{s.name}</h3>
-                        <span className="text-[10px] text-[var(--gold-soft)] uppercase tracking-[0.18em]">{s.grades}</span>
+                      <div style={{ display: "flex", gap: 12, alignItems: "baseline", flexWrap: "wrap" }}>
+                        <h3 style={{ fontSize: 18 }}>{s.name}</h3>
+                        <span style={{ fontSize: 10, color: "var(--s-gold)", textTransform: "uppercase", letterSpacing: "0.14em", fontWeight: 600 }}>
+                          {s.grades}
+                        </span>
                       </div>
-                      <p className="text-[14px] text-bone/55 mt-1.5 font-light">{s.note}</p>
+                      <p style={{ fontSize: 14, marginTop: 4 }}>{s.note}</p>
                     </div>
-                  </Reveal>
+                  </div>
                 ))}
               </div>
             </div>
@@ -510,27 +433,15 @@ export default async function CityLandingPage({ params }: Props) {
 
         {/* ── Market Deep Dive (optional) ── */}
         {page.marketDeepDive && (
-          <section className="relative py-28 atmosphere overflow-hidden">
-            <div className="absolute inset-0 grain pointer-events-none" />
-            <div className="relative max-w-4xl mx-auto px-6">
-              <Reveal>
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/5 flex items-center justify-center">
-                    <BarChart3 className="w-5 h-5 text-[var(--gold-soft)]" strokeWidth={1.5} />
-                  </div>
-                  <p className="eyebrow">Deep Dive</p>
-                </div>
-              </Reveal>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-10">
-                <span className="block overflow-hidden">
-                  <Reveal variant="mask" className="block">{page.marketDeepDive.title}</Reveal>
-                </span>
-              </h2>
-              <div className="space-y-5 text-[17px] text-bone/70 leading-[1.85] font-light">
+          <section className="sec-pad bg-cream-2">
+            <div className="container" style={{ maxWidth: 860 }}>
+              <div className="sec-head reveal">
+                <div className="s-eyebrow">Deep Dive</div>
+                <h2>{page.marketDeepDive.title}</h2>
+              </div>
+              <div className="prose-site">
                 {page.marketDeepDive.paragraphs.map((p, i) => (
-                  <Reveal key={i} delay={((i % 3) + 1) as 1 | 2 | 3}>
-                    <p>{p}</p>
-                  </Reveal>
+                  <p key={i} className="reveal">{p}</p>
                 ))}
               </div>
             </div>
@@ -539,34 +450,34 @@ export default async function CityLandingPage({ params }: Props) {
 
         {/* ── Lifestyle (optional) ── */}
         {page.lifestyleHighlights && (
-          <section className="py-28 bg-ink relative overflow-hidden">
-            <div className="absolute inset-0 grain pointer-events-none" />
-            <div className="relative max-w-6xl mx-auto px-6">
-              <Reveal>
-                <p className="eyebrow mb-5">Lifestyle</p>
-              </Reveal>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-12">
-                <span className="block overflow-hidden">
-                  <Reveal variant="mask" className="block">{page.lifestyleHighlights.title}</Reveal>
-                </span>
-              </h2>
-              <div className="grid sm:grid-cols-2 gap-5">
-                {page.lifestyleHighlights.categories.map((cat, i) => (
-                  <Reveal
-                    key={cat.name}
-                    delay={((i % 3) + 1) as 1 | 2 | 3}
-                    className="rounded-2xl bg-bone/[0.03] border border-bone/10 p-8 hover:border-[var(--gold)]/30 transition-colors duration-500"
-                  >
-                    <h3 className="font-display text-[1.5rem] font-light text-bone mb-5">{cat.name}</h3>
-                    <ul className="space-y-3">
+          <section className="sec-pad bg-cream">
+            <div className="container">
+              <div className="sec-head reveal">
+                <div className="s-eyebrow">Lifestyle</div>
+                <h2>{page.lifestyleHighlights.title}</h2>
+              </div>
+              <div className="services-grid" style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
+                {page.lifestyleHighlights.categories.map((cat) => (
+                  <div key={cat.name} className="service-card reveal">
+                    <h3 style={{ fontSize: 20, marginBottom: 14 }}>{cat.name}</h3>
+                    <ul style={{ listStyle: "none", display: "grid", gap: 10, padding: 0 }}>
                       {cat.items.map((item) => (
-                        <li key={item} className="flex gap-3 text-[14px] text-bone/65 font-light">
-                          <span className="w-1 h-1 rounded-full bg-[var(--gold-soft)] mt-2.5 flex-shrink-0" />
+                        <li key={item} style={{ display: "flex", gap: 10, fontSize: 14, color: "var(--s-muted)" }}>
+                          <span
+                            style={{
+                              width: 4,
+                              height: 4,
+                              borderRadius: "50%",
+                              background: "var(--s-gold)",
+                              marginTop: 8,
+                              flexShrink: 0,
+                            }}
+                          />
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
-                  </Reveal>
+                  </div>
                 ))}
               </div>
             </div>
@@ -575,41 +486,21 @@ export default async function CityLandingPage({ params }: Props) {
 
         {/* ── Additional Testimonials (optional) ── */}
         {page.additionalTestimonials && page.additionalTestimonials.length > 0 && (
-          <section className="py-28 atmosphere relative overflow-hidden">
-            <div className="absolute inset-0 grain pointer-events-none" />
-            <div className="relative max-w-6xl mx-auto px-6">
-              <Reveal>
-                <p className="eyebrow mb-5">More {page.city} reviews</p>
-              </Reveal>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.04] mb-12">
-                <span className="block overflow-hidden">
-                  <Reveal variant="mask" className="block">What {page.city} clients say.</Reveal>
-                </span>
-              </h2>
-              <div className="grid md:grid-cols-2 gap-5">
-                {page.additionalTestimonials.map((t, i) => (
-                  <Reveal
-                    key={t.name}
-                    delay={((i % 3) + 1) as 1 | 2 | 3}
-                    as="figure"
-                    className="rounded-2xl bg-bone/[0.04] border border-bone/10 p-9 hover:border-[var(--gold)]/35 transition-all duration-700 tilt relative"
-                  >
-                    <span className="font-display absolute top-5 right-7 text-6xl text-[var(--gold)]/15 leading-none select-none">
-                      &ldquo;
-                    </span>
-                    <div className="flex gap-1 mb-5">
-                      {[1, 2, 3, 4, 5].map((i) => (
-                        <Star key={i} className="w-3.5 h-3.5 text-[var(--gold-soft)]" fill="currentColor" strokeWidth={0} />
-                      ))}
+          <section className="sec-pad bg-cream-2">
+            <div className="container">
+              <div className="sec-head reveal">
+                <div className="s-eyebrow">More {page.city} reviews</div>
+                <h2>What {page.city} clients say.</h2>
+              </div>
+              <div className="testi-grid" style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
+                {page.additionalTestimonials.map((t) => (
+                  <div key={t.name} className="testi-card reveal">
+                    <div className="stars">★★★★★</div>
+                    <p className="testi-quote">&ldquo;{t.quote}&rdquo;</p>
+                    <div className="testi-who">
+                      <b>{t.name}</b> · {t.context}
                     </div>
-                    <blockquote className="font-display text-bone text-[1.25rem] leading-[1.5] mb-6 italic font-light">
-                      &ldquo;{t.quote}&rdquo;
-                    </blockquote>
-                    <figcaption className="pt-5 border-t border-bone/10 text-sm">
-                      <div className="font-medium text-bone">{t.name}</div>
-                      <div className="text-bone/45 text-[11px] uppercase tracking-[0.18em] mt-1.5">{t.context}</div>
-                    </figcaption>
-                  </Reveal>
+                  </div>
                 ))}
               </div>
             </div>
@@ -617,87 +508,90 @@ export default async function CityLandingPage({ params }: Props) {
         )}
 
         {/* ── Related Cities ── */}
-        <section className="py-20 bg-ink-2 relative overflow-hidden border-t border-bone/10">
-          <div className="absolute inset-0 grain pointer-events-none" />
-          <div className="relative max-w-6xl mx-auto px-6">
-            <Reveal>
-              <p className="eyebrow mb-3">Also serving</p>
-            </Reveal>
-            <h2 className="font-display text-3xl font-light text-bone tracking-tight mb-8">
-              Explore more {company.region} communities
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-              {otherCities.map((c, i) => (
-                <Reveal
+        <section className="stats-band" style={{ padding: "70px 0" }}>
+          <div className="container">
+            <div className="reveal">
+              <div className="s-eyebrow" style={{ color: "var(--s-gold-light)" }}>Also serving</div>
+              <h2 style={{ color: "#fff", fontSize: "clamp(24px, 3vw, 32px)", marginBottom: 28 }}>
+                Explore more {company.region} communities
+              </h2>
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
+                gap: 12,
+              }}
+            >
+              {otherCities.map((c) => (
+                <a
                   key={c.slug}
-                  delay={((i % 4) + 1) as 1 | 2 | 3 | 4}
-                  as="a"
-                  className="group flex items-center justify-between px-5 py-4 rounded-xl bg-bone/[0.03] border border-bone/10 hover:border-[var(--gold)]/40 hover:bg-bone/[0.06] transition-all duration-500"
+                  href={`/${c.slug}`}
+                  className="reveal"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "16px 18px",
+                    borderRadius: 12,
+                    background: "rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    color: "#fff",
+                  }}
                 >
-                  <a href={`/${c.slug}`} className="absolute inset-0 z-10" aria-label={c.city} />
                   <div>
-                    <div className="font-medium text-bone text-[14px] group-hover:text-[var(--gold-soft)] transition-colors duration-500">{c.city}</div>
-                    <div className="text-[10px] text-bone/40 uppercase tracking-[0.18em] mt-1">{c.medianPrice}</div>
+                    <div style={{ fontSize: 14, fontWeight: 600 }}>{c.city}</div>
+                    <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "0.14em", marginTop: 3 }}>
+                      {c.medianPrice}
+                    </div>
                   </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-[var(--gold-soft)] group-hover:translate-x-1 transition-transform duration-500" />
-                </Reveal>
+                  <ArrowRight className="w-3.5 h-3.5" style={{ color: "var(--s-gold-light)" }} />
+                </a>
               ))}
             </div>
-            <Reveal delay={2}>
-              <a
-                href="/best-metro-detroit-suburbs"
-                className="inline-flex items-center gap-2 mt-8 text-[13px] text-bone/55 hover:text-[var(--gold-soft)] transition-colors duration-500"
-              >
+            <div className="reveal" style={{ marginTop: 26 }}>
+              <a href="/best-metro-detroit-suburbs" style={{ color: "rgba(255,255,255,0.65)", fontSize: 13, display: "inline-flex", alignItems: "center", gap: 8 }}>
                 Not sure which city fits? Compare all seven in our ranked 2026 guide
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
-            </Reveal>
+            </div>
           </div>
         </section>
 
-        {/* ── CTA ── */}
-        <section className="relative py-32 atmosphere overflow-hidden">
-          <div className="absolute inset-0 grain pointer-events-none" />
+        {/* ── Standard valuation CTA banner (parallax) ── */}
+        <section className="cta-banner">
           <div
-            aria-hidden
-            className="absolute inset-0 -z-10 opacity-50"
+            className="cta-bg"
+            data-speed="0.4"
             style={{
-              background:
-                "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(200,162,76,0.18), transparent 60%)",
+              backgroundImage:
+                "linear-gradient(120deg, rgba(19,28,46,0.95), rgba(19,28,46,0.8)), radial-gradient(ellipse 70% 60% at 75% 30%, #24344f 0%, transparent 65%), linear-gradient(180deg, #1a2740 0%, #131c2e 100%)",
             }}
           />
-          <div className="relative max-w-2xl mx-auto px-6 text-center">
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-light text-bone leading-[1.05] mb-6">
-              <span className="block overflow-hidden">
-                <Reveal variant="mask" className="block italic gold-text">{page.ctaHeadline}</Reveal>
-              </span>
-            </h2>
-            <Reveal delay={1}>
-              <p className="text-[17px] text-bone/65 mb-10 leading-relaxed font-light">
-                {page.ctaSubheadline}
+          <div className="container cta-inner">
+            <div className="reveal">
+              <div className="s-eyebrow" style={{ color: "var(--s-gold-light)" }}>
+                Free · 24-hour turnaround
+              </div>
+              <h2>{page.ctaHeadline}</h2>
+              <p>{page.ctaSubheadline}</p>
+            </div>
+            <div className="cta-card reveal">
+              <h3>A real broker, in 24 hours.</h3>
+              <p>
+                No algorithm, no instant lowball — a local Troy broker reviews
+                your property and sends a real number back.
               </p>
-            </Reveal>
-            <Reveal delay={2} className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a
-                href="/#lead-magnet"
-                className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
-              >
-                Request your valuation
-                <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
+              <a href="/home-value" className="btn btn-gold" style={{ width: "100%", justifyContent: "center" }}>
+                Request your valuation →
               </a>
-              <a
-                href={`tel:${company.phoneTel}`}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-bone/25 text-bone hover:border-bone/60 hover:bg-bone/5 font-medium text-[14px] tracking-wide transition-all duration-500"
-              >
-                <Phone className="w-4 h-4 text-[var(--gold-soft)]" />
-                Call now
-              </a>
-            </Reveal>
+              <p className="form-note">
+                or call <a href={`tel:${company.phoneTel}`} style={{ color: "var(--s-gold-light)" }}>{company.phone}</a>
+              </p>
+            </div>
           </div>
         </section>
       </main>
-      <Footer />
-      <FloatingCTA />
-    </>
+    </SiteShell>
   );
 }
