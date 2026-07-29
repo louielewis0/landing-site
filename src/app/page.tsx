@@ -1,4 +1,4 @@
-import Header from "@/components/Header";
+import SiteShell from "@/components/site/SiteShell";
 import Hero from "@/components/Hero";
 import TrustBadges from "@/components/TrustBadges";
 import LeadCards from "@/components/LeadCards";
@@ -8,14 +8,11 @@ import Services from "@/components/Services";
 import About from "@/components/About";
 import Neighborhoods from "@/components/Neighborhoods";
 import ContactForm from "@/components/ContactForm";
-import Footer from "@/components/Footer";
-import FloatingCTA from "@/components/FloatingCTA";
 
 export default function Home() {
   return (
-    <>
-      <Header />
-      <main className="flex-1">
+    <SiteShell>
+      <main>
         <Hero />
         <TrustBadges />
         <LeadCards />
@@ -26,8 +23,6 @@ export default function Home() {
         <Neighborhoods />
         <ContactForm />
       </main>
-      <Footer />
-      <FloatingCTA />
-    </>
+    </SiteShell>
   );
 }
