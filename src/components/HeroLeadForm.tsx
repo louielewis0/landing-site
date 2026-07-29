@@ -6,9 +6,9 @@ import { supabase } from "@/lib/supabase";
 type Intent = "buy" | "sell" | "invest" | "other";
 
 /**
- * Hero lead-capture form. Submission logic unchanged (Supabase leads
- * insert, source tag). Restyled to the redesign's glass card (the
- * prototype's .cta-card treatment on navy).
+ * Lead-capture card. Submission logic unchanged (Supabase leads
+ * insert, source tag). Styled as a clean white card for the light
+ * Tiny-Villa-reference design.
  */
 export default function HeroLeadForm({ source = "hero" }: { source?: string }) {
   const [name, setName] = useState("");
@@ -44,19 +44,19 @@ export default function HeroLeadForm({ source = "hero" }: { source?: string }) {
 
   if (status === "ok") {
     return (
-      <div className="cta-card" style={{ textAlign: "center" }}>
+      <div className="lead-card" style={{ textAlign: "center" }}>
         <div
           style={{
             width: 56,
             height: 56,
             borderRadius: "50%",
-            background: "rgba(217,118,47,0.18)",
-            border: "1px solid rgba(240,161,92,0.4)",
+            background: "rgba(217,118,47,0.12)",
+            border: "1px solid rgba(217,118,47,0.35)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             margin: "0 auto 18px",
-            color: "var(--s-gold-light)",
+            color: "var(--s-gold)",
           }}
         >
           <svg width="26" height="26" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,29 +64,15 @@ export default function HeroLeadForm({ source = "hero" }: { source?: string }) {
           </svg>
         </div>
         <h3>Request received.</h3>
-        <p>{message}</p>
+        <p style={{ color: "var(--s-muted)", fontSize: 14.5 }}>{message}</p>
       </div>
     );
   }
 
-  const inputStyle: React.CSSProperties = {
-    width: "100%",
-    padding: "14px 16px",
-    borderRadius: 10,
-    border: "1px solid rgba(255,255,255,0.15)",
-    background: "rgba(255,255,255,0.04)",
-    color: "#fff",
-    fontFamily: "inherit",
-    fontSize: 14,
-  };
-
   return (
-    <form onSubmit={handleSubmit} className="cta-card" style={{ textAlign: "left" }}>
-      <div className="s-eyebrow" style={{ color: "var(--s-gold-light)" }}>
-        A real conversation
-      </div>
-      <h3 style={{ textAlign: "left" }}>Tell us your move.</h3>
-      <p style={{ textAlign: "left", marginBottom: 20 }}>
+    <form onSubmit={handleSubmit} className="lead-card">
+      <h3>Tell us your move.</h3>
+      <p style={{ color: "var(--s-muted)", fontSize: 13.5, marginBottom: 20 }}>
         A real broker reaches out — usually within the hour.
       </p>
 
@@ -107,17 +93,14 @@ export default function HeroLeadForm({ source = "hero" }: { source?: string }) {
               padding: "10px 0",
               fontSize: 11,
               fontWeight: 600,
-              letterSpacing: "0.14em",
+              letterSpacing: "0.12em",
               textTransform: "uppercase",
               borderRadius: 100,
               cursor: "pointer",
               transition: "all .3s",
-              border:
-                intent === val
-                  ? "1px solid var(--s-gold)"
-                  : "1px solid rgba(255,255,255,0.2)",
-              background: intent === val ? "var(--s-gold)" : "transparent",
-              color: intent === val ? "#fff" : "rgba(255,255,255,0.65)",
+              border: intent === val ? "1px solid var(--navy)" : "1px solid var(--line)",
+              background: intent === val ? "var(--navy)" : "transparent",
+              color: intent === val ? "#fff" : "var(--s-muted)",
             }}
           >
             {label}
@@ -132,7 +115,6 @@ export default function HeroLeadForm({ source = "hero" }: { source?: string }) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Full name"
-          style={inputStyle}
         />
         <input
           type="email"
@@ -140,14 +122,12 @@ export default function HeroLeadForm({ source = "hero" }: { source?: string }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
-          style={inputStyle}
         />
         <input
           type="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           placeholder="Phone"
-          style={inputStyle}
         />
         <button
           type="submit"
@@ -160,7 +140,7 @@ export default function HeroLeadForm({ source = "hero" }: { source?: string }) {
       </div>
 
       {status === "error" && (
-        <p style={{ color: "#fca5a5", fontSize: 13, textAlign: "center", marginTop: 10 }}>
+        <p style={{ color: "#c0392b", fontSize: 13, textAlign: "center", marginTop: 10 }}>
           {message}
         </p>
       )}

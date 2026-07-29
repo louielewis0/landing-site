@@ -34,7 +34,7 @@ export default function HomeValuePage() {
             data-speed="0.35"
             style={{
               backgroundImage:
-                "linear-gradient(180deg, rgba(13,19,33,0.4) 0%, rgba(13,19,33,0.6) 55%, rgba(13,19,33,0.95) 100%), radial-gradient(ellipse 80% 60% at 20% 25%, #24344f 0%, transparent 60%), linear-gradient(180deg, #182338 0%, #131c2e 100%)",
+                "radial-gradient(ellipse 70% 50% at 80% 0%, rgba(217,118,47,0.10), transparent 60%), linear-gradient(180deg, #fafaf8 0%, #f1efea 100%)",
             }}
           />
           <div className="hero-layer hero-grid" />

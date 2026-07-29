@@ -1,5 +1,6 @@
 import SiteShell from "@/components/site/SiteShell";
 import Hero from "@/components/Hero";
+import HeroLeadForm from "@/components/HeroLeadForm";
 import TrustBadges from "@/components/TrustBadges";
 import LeadCards from "@/components/LeadCards";
 import Testimonials from "@/components/Testimonials";
@@ -15,6 +16,12 @@ export default function Home() {
       <main>
         <Hero />
         <TrustBadges />
+        {/* Quick capture — white card, centered, right under the stats band */}
+        <section className="bg-cream" style={{ padding: "90px 0" }}>
+          <div className="container" style={{ maxWidth: 560 }}>
+            <HeroLeadForm />
+          </div>
+        </section>
         <LeadCards />
         <Testimonials />
         <LeadMagnet />

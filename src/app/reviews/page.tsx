@@ -30,7 +30,7 @@ export default function ReviewPage() {
             data-speed="0.35"
             style={{
               backgroundImage:
-                "linear-gradient(180deg, rgba(13,19,33,0.4) 0%, rgba(13,19,33,0.6) 55%, rgba(13,19,33,0.95) 100%), radial-gradient(ellipse 80% 60% at 50% 20%, #24344f 0%, transparent 60%), linear-gradient(180deg, #182338 0%, #131c2e 100%)",
+                "radial-gradient(ellipse 70% 50% at 80% 0%, rgba(217,118,47,0.10), transparent 60%), linear-gradient(180deg, #fafaf8 0%, #f1efea 100%)",
             }}
           />
           <div className="hero-layer hero-grid" />
@@ -105,7 +105,7 @@ export default function ReviewPage() {
             data-speed="0.4"
             style={{
               backgroundImage:
-                "linear-gradient(120deg, rgba(19,28,46,0.95), rgba(19,28,46,0.8)), radial-gradient(ellipse 70% 60% at 50% 40%, #24344f 0%, transparent 65%), linear-gradient(180deg, #1a2740 0%, #131c2e 100%)",
+                "linear-gradient(120deg, rgba(22,24,29,0.95), rgba(22,24,29,0.8)), radial-gradient(ellipse 70% 60% at 50% 40%, #23262e 0%, transparent 65%), linear-gradient(180deg, #1b1e24 0%, #16181d 100%)",
             }}
           />
           <div className="container" style={{ position: "relative", zIndex: 2, maxWidth: 720, textAlign: "center" }}>

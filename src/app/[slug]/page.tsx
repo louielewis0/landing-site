@@ -46,13 +46,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
  *  adjacent city pages don't feel identical. Swap for real
  *  neighborhood photos in /public/areas/<slug>.jpg when available. */
 function heroBackground(slug: string): string {
-  const seeds = [
-    "radial-gradient(ellipse 80% 60% at 20% 25%, #24344f 0%, transparent 60%), radial-gradient(ellipse 70% 55% at 85% 75%, #1a2740 0%, transparent 65%)",
-    "radial-gradient(ellipse 75% 65% at 75% 20%, #2a3c5c 0%, transparent 60%), radial-gradient(ellipse 65% 50% at 15% 80%, #1c2942 0%, transparent 65%)",
-    "radial-gradient(ellipse 85% 60% at 50% 15%, #253a55 0%, transparent 62%), radial-gradient(ellipse 60% 55% at 90% 85%, #1a2740 0%, transparent 60%)",
-  ];
+  const seeds = [""];
   const i = slug.length % seeds.length;
-  return `linear-gradient(180deg, rgba(13,19,33,0.35) 0%, rgba(13,19,33,0.55) 55%, rgba(13,19,33,0.95) 100%), ${seeds[i]}, linear-gradient(180deg, #182338 0%, #131c2e 100%)`;
+  void seeds; void slug;
+  return "radial-gradient(ellipse 70% 50% at 80% 0%, rgba(217,118,47,0.10), transparent 60%), linear-gradient(180deg, #fafaf8 0%, #f1efea 100%)";
 }
 
 export default async function CityLandingPage({ params }: Props) {
@@ -129,13 +126,13 @@ export default async function CityLandingPage({ params }: Props) {
                 fontSize: 11,
                 letterSpacing: "0.16em",
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.5)",
+                color: "var(--s-muted)",
                 marginBottom: 26,
               }}
             >
-              <a href="/" style={{ color: "rgba(255,255,255,0.6)" }}>Home</a>
+              <a href="/" style={{ color: "var(--s-muted)" }}>Home</a>
               <ChevronRight className="w-3 h-3" />
-              <span style={{ color: "rgba(255,255,255,0.85)" }}>{page.city} Real Estate</span>
+              <span style={{ color: "var(--navy)" }}>{page.city} Real Estate</span>
             </nav>
             <div className="hero-badge">
               <MapPin className="w-3.5 h-3.5" style={{ color: "var(--s-gold-light)" }} />
@@ -147,7 +144,7 @@ export default async function CityLandingPage({ params }: Props) {
               <a href="/home-value" className="btn btn-gold">
                 Request your valuation <ArrowRight className="w-4 h-4" />
               </a>
-              <a href={`tel:${company.phoneTel}`} className="btn btn-outline">
+              <a href={`tel:${company.phoneTel}`} className="btn btn-ghost">
                 <Phone className="w-4 h-4" />
                 {company.phone}
               </a>
@@ -565,7 +562,7 @@ export default async function CityLandingPage({ params }: Props) {
             data-speed="0.4"
             style={{
               backgroundImage:
-                "linear-gradient(120deg, rgba(19,28,46,0.95), rgba(19,28,46,0.8)), radial-gradient(ellipse 70% 60% at 75% 30%, #24344f 0%, transparent 65%), linear-gradient(180deg, #1a2740 0%, #131c2e 100%)",
+                "linear-gradient(120deg, rgba(22,24,29,0.95), rgba(22,24,29,0.8)), radial-gradient(ellipse 70% 60% at 75% 30%, #23262e 0%, transparent 65%), linear-gradient(180deg, #1b1e24 0%, #16181d 100%)",
             }}
           />
           <div className="container cta-inner">
