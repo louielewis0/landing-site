@@ -774,3 +774,55 @@ body {
 @media (max-width: 640px) {
   .site-theme .hero-media { aspect-ratio: 4/3; margin-top: 40px; border-radius: 20px; }
 }
+
+/* ── Video hero (opening screen) ── */
+.site-theme .video-hero {
+  position: relative; height: 100svh; min-height: 560px; overflow: hidden; background: var(--navy);
+}
+.site-theme .video-hero-media {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+}
+.site-theme .video-hero-shade {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(22,24,29,0.42) 0%, rgba(22,24,29,0) 26%),
+    linear-gradient(0deg, rgba(22,24,29,0.5) 0%, rgba(22,24,29,0) 30%),
+    radial-gradient(120% 90% at 50% 50%, rgba(22,24,29,0) 55%, rgba(22,24,29,0.28) 100%);
+}
+.site-theme .video-hero-logo {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  padding: 24px; z-index: 3;
+}
+.site-theme .video-hero-logo img {
+  width: min(46vw, 380px); height: auto;
+  filter: drop-shadow(0 10px 40px rgba(22,24,29,0.55)) drop-shadow(0 2px 8px rgba(22,24,29,0.4));
+  animation: heroLogoIn 1400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes heroLogoIn {
+  from { opacity: 0; transform: translateY(18px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.site-theme .video-hero-cue { color: rgba(255,255,255,0.75); }
+.site-theme .video-hero-cue .line { background: linear-gradient(180deg, rgba(255,255,255,.8), transparent); }
+@media (max-width: 640px) {
+  .site-theme .video-hero-logo img { width: 72vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-theme .video-hero-logo img { animation: none; }
+}
+
+/* Nav over the video: white text until scrolled */
+.nav-over-video #site-nav:not(.scrolled) .s-logo,
+.nav-over-video #site-nav:not(.scrolled) .nav-links a,
+.nav-over-video #site-nav:not(.scrolled) .nav-phone { color: #fff; }
+.nav-over-video #site-nav:not(.scrolled) .burger span { background: #fff; }
+
+/* ── Hero3D pinned corridor ── */
+.site-theme .hero3d { position: relative; height: 100svh; overflow: hidden; background: var(--cream); }
+.site-theme .hero3d-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.site-theme .hero3d-act {
+  position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; padding: 0 24px;
+  pointer-events: none; transition: opacity .45s ease, transform .45s ease;
+}
+.site-theme .hero3d-act .hero-ctas, .site-theme .hero3d-act a { pointer-events: auto; }

@@ -9,9 +9,18 @@ import SiteMotion from "./SiteMotion";
  * the shared nav, footer, and GSAP motion orchestrator. The theme is
  * scoped to this subtree so the CRM's dark system is untouched.
  */
-export default function SiteShell({ children }: { children: React.ReactNode }) {
+export default function SiteShell({
+  children,
+  navOnDark = false,
+}: {
+  children: React.ReactNode;
+  /** White nav text while un-scrolled — for pages opening on video/dark media. */
+  navOnDark?: boolean;
+}) {
   return (
-    <div className={`site-theme ${fraunces.variable} ${inter.variable}`}>
+    <div
+      className={`site-theme ${fraunces.variable} ${inter.variable} ${navOnDark ? "nav-over-video" : ""}`}
+    >
       <SiteNav />
       {children}
       <SiteFooter />

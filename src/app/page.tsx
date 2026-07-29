@@ -1,5 +1,6 @@
 import SiteShell from "@/components/site/SiteShell";
-import Hero from "@/components/Hero";
+import VideoHero from "@/components/site/VideoHero";
+import Hero3D from "@/components/site/Hero3D";
 import HeroLeadForm from "@/components/HeroLeadForm";
 import TrustBadges from "@/components/TrustBadges";
 import LeadCards from "@/components/LeadCards";
@@ -12,9 +13,10 @@ import ContactForm from "@/components/ContactForm";
 
 export default function Home() {
   return (
-    <SiteShell>
+    <SiteShell navOnDark>
       <main>
-        <Hero />
+        <VideoHero />
+        <Hero3D />
         <TrustBadges />
         {/* Quick capture — white card, centered, right under the stats band */}
         <section className="bg-cream" style={{ padding: "90px 0" }}>
