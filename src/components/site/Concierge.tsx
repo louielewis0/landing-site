@@ -13,6 +13,7 @@ import { company } from "@/lib/config";
 type Msg = { role: "user" | "assistant"; content: string };
 
 const STORE_KEY = "remc-concierge";
+const TEASER_KEY = "remc-concierge-teased";
 const GREETING =
   "Hi, I'm Maya with Real Estate Market Center! Ask me anything about buying or selling in Metro Detroit, or just tell me what you're looking for.";
 const CHIPS = ["I'm thinking of selling", "I'm looking to buy", "What's my home worth?"];
@@ -23,6 +24,7 @@ export default function Concierge() {
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
+  const [teaser, setTeaser] = useState(false);
   const bodyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -31,6 +33,40 @@ export default function Concierge() {
       if (saved) setMsgs(JSON.parse(saved));
     } catch {}
   }, []);
+
+  // Proactive teaser: fires once per session, on first scroll past the
+  // hero or after 8s on page, whichever comes first. Never fires if the
+  // visitor has already chatted this session.
+  useEffect(() => {
+    let done = false;
+    try {
+      if (sessionStorage.getItem(TEASER_KEY) || sessionStorage.getItem(STORE_KEY)) return;
+    } catch {}
+    const fire = () => {
+      if (done) return;
+      done = true;
+      try {
+        sessionStorage.setItem(TEASER_KEY, "1");
+      } catch {}
+      setTeaser(true);
+      cleanup();
+    };
+    const onScroll = () => {
+      if (window.scrollY > 450) fire();
+    };
+    const timer = window.setTimeout(fire, 8000);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    const cleanup = () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
+    };
+    return cleanup;
+  }, []);
+
+  function openChat() {
+    setTeaser(false);
+    setOpen(true);
+  }
 
   useEffect(() => {
     try {
@@ -172,8 +208,62 @@ export default function Concierge() {
         }
         .conc-foot button:disabled { opacity: .45; cursor: default; }
         .conc-note { font-size: 11px; color: var(--s-muted, #757a83); text-align: center; padding: 0 12px 10px; background: #fff; }
-        @media (max-width: 560px) { .conc-panel { right: 16px; bottom: 90px; } .conc-bubble { bottom: 20px; right: 20px; } }
+        .conc-teaser {
+          position: fixed; bottom: 94px; right: 26px; z-index: 94;
+          width: min(300px, calc(100vw - 40px));
+          background: #fff; border: 1px solid var(--line, #e7e4dd);
+          border-radius: 18px; border-bottom-right-radius: 6px;
+          box-shadow: 0 22px 50px -16px rgba(22,24,29,0.3);
+          padding: 14px 14px 12px; cursor: pointer;
+          display: flex; gap: 11px; align-items: flex-start;
+          animation: concIn .35s cubic-bezier(.22,1,.36,1);
+        }
+        @media (prefers-reduced-motion: reduce) { .conc-teaser { animation: none; } }
+        .conc-teaser img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+        .conc-teaser b { display: block; font-size: 13px; color: var(--navy); margin-bottom: 2px; }
+        .conc-teaser p { font-size: 13.5px; line-height: 1.5; color: var(--s-ink, #23262d); margin: 0; }
+        .conc-teaser .tclose {
+          position: absolute; top: -9px; left: -9px; width: 24px; height: 24px;
+          border-radius: 50%; border: 1px solid var(--line, #e7e4dd);
+          background: #fff; color: var(--s-muted, #757a83); font-size: 14px;
+          line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center;
+          box-shadow: 0 4px 10px rgba(22,24,29,0.12);
+        }
+        .conc-badge {
+          position: absolute; top: -3px; right: -3px; width: 19px; height: 19px;
+          border-radius: 50%; background: var(--s-gold, #d9762f); color: #fff;
+          font-size: 11.5px; font-weight: 700; display: flex; align-items: center;
+          justify-content: center; border: 2px solid var(--cream, #fafaf8);
+        }
+        @media (max-width: 560px) { .conc-panel { right: 16px; bottom: 90px; } .conc-bubble { bottom: 20px; right: 20px; } .conc-teaser { right: 16px; bottom: 88px; } }
       `}</style>
+
+      {teaser && !open && (
+        <div
+          className="conc-teaser"
+          role="button"
+          tabIndex={0}
+          onClick={openChat}
+          onKeyDown={(e) => e.key === "Enter" && openChat()}
+        >
+          <button
+            className="tclose"
+            aria-label="Dismiss"
+            onClick={(e) => {
+              e.stopPropagation();
+              setTeaser(false);
+            }}
+          >
+            ×
+          </button>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/concierge-avatar.jpg" alt="" />
+          <div>
+            <b>Maya</b>
+            <p>Hi! Curious what your home&rsquo;s worth, or what&rsquo;s on the market? I can help right now.</p>
+          </div>
+        </div>
+      )}
 
       {open && (
         <div className="conc-panel" role="dialog" aria-label="Chat with our concierge">
@@ -258,8 +348,9 @@ export default function Concierge() {
       <button
         className="conc-bubble"
         aria-label={open ? "Close chat" : "Chat with us"}
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => (open ? setOpen(false) : openChat())}
       >
+        {teaser && !open && <span className="conc-badge">1</span>}
         {open ? (
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
             <path d="M6 6l12 12M18 6L6 18" />
