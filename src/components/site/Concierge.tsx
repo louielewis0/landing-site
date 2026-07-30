@@ -40,7 +40,9 @@ export default function Concierge() {
   useEffect(() => {
     let done = false;
     try {
-      if (sessionStorage.getItem(TEASER_KEY) || sessionStorage.getItem(STORE_KEY)) return;
+      if (sessionStorage.getItem(TEASER_KEY)) return;
+      const saved = sessionStorage.getItem(STORE_KEY);
+      if (saved && JSON.parse(saved).length > 0) return;
     } catch {}
     const fire = () => {
       if (done) return;
@@ -70,7 +72,9 @@ export default function Concierge() {
 
   useEffect(() => {
     try {
-      sessionStorage.setItem(STORE_KEY, JSON.stringify(msgs.slice(-40)));
+      if (msgs.length > 0) {
+        sessionStorage.setItem(STORE_KEY, JSON.stringify(msgs.slice(-40)));
+      }
     } catch {}
     bodyRef.current?.scrollTo({ top: bodyRef.current.scrollHeight });
   }, [msgs, open, busy]);
