@@ -1,10 +1,11 @@
 import Image from "next/image";
 
 /**
- * VideoHero — the opening screen: full-bleed aerial footage of
- * waterfront estates (Mixkit free commercial license, self-hosted at
- * /public/hero-video.mp4, audio stripped, ~4MB faststart) with the
- * transparent-cutout brokerage logo floating over it. Autoplay muted
+ * VideoHero — the opening screen: full-bleed aerial footage of a
+ * lake-estate on a wooded peninsula (Mixkit free commercial license,
+ * self-hosted at /public/hero-video.mp4, trimmed to 14s, audio
+ * stripped, ~2.6MB faststart) with the embossed 3D brokerage logo
+ * (black background flood-filled to transparency) floating over it. Autoplay muted
  * loop with a poster frame so the first paint is instant and mobile
  * data stays sane. A soft top/bottom vignette keeps the white nav
  * and scroll cue legible over the water.
@@ -26,10 +27,10 @@ export default function VideoHero() {
       <div className="video-hero-shade" aria-hidden />
       <div className="video-hero-logo">
         <Image
-          src="/logo-transparent.png"
+          src="/mcr-logo-3d.png"
           alt="Real Estate Market Center"
-          width={867}
-          height={868}
+          width={1202}
+          height={1202}
           priority
         />
       </div>
