@@ -14,7 +14,7 @@ type Msg = { role: "user" | "assistant"; content: string };
 
 const STORE_KEY = "remc-concierge";
 const GREETING =
-  "Hi — I'm the Market Center concierge. Ask me anything about buying or selling in Metro Detroit, or tell me what you're looking for.";
+  "Hi, I'm Maya with Real Estate Market Center! Ask me anything about buying or selling in Metro Detroit — or just tell me what you're looking for.";
 const CHIPS = ["I'm thinking of selling", "I'm looking to buy", "What's my home worth?"];
 const MAX_USER_TURNS = 20;
 
@@ -115,10 +115,23 @@ export default function Concierge() {
         @keyframes concIn { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
         @media (prefers-reduced-motion: reduce) { .conc-panel { animation: none; } }
         .conc-head {
-          background: var(--navy); color: #fff; padding: 16px 18px;
+          background: var(--navy); color: #fff; padding: 14px 18px;
           display: flex; align-items: center; gap: 12px;
         }
-        .conc-head .dot { width: 9px; height: 9px; border-radius: 50%; background: #6fcf85; flex-shrink: 0; }
+        .conc-avatar {
+          width: 42px; height: 42px; border-radius: 50%; object-fit: cover;
+          border: 2px solid rgba(255,255,255,0.35); flex-shrink: 0;
+        }
+        .conc-head .avatar-wrap { position: relative; flex-shrink: 0; }
+        .conc-head .dot {
+          position: absolute; bottom: 1px; right: 1px;
+          width: 10px; height: 10px; border-radius: 50%; background: #6fcf85;
+          border: 2px solid var(--navy);
+        }
+        .conc-msg-row { display: flex; gap: 8px; align-items: flex-end; }
+        .conc-msg-row .mini-avatar {
+          width: 26px; height: 26px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+        }
         .conc-head b { font-size: 14.5px; font-weight: 600; letter-spacing: .01em; }
         .conc-head span { display: block; font-size: 12px; opacity: .65; margin-top: 1px; }
         .conc-head button {
@@ -165,17 +178,25 @@ export default function Concierge() {
       {open && (
         <div className="conc-panel" role="dialog" aria-label="Chat with our concierge">
           <div className="conc-head">
-            <span className="dot" aria-hidden />
+            <span className="avatar-wrap">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="conc-avatar" src="/concierge-avatar.jpg" alt="Maya" />
+              <span className="dot" aria-hidden />
+            </span>
             <div>
-              <b>Market Center Concierge</b>
-              <span>Typically replies in seconds</span>
+              <b>Maya</b>
+              <span>Real Estate Market Center · Online</span>
             </div>
             <button aria-label="Close chat" onClick={() => setOpen(false)}>
               ×
             </button>
           </div>
           <div className="conc-body" ref={bodyRef}>
-            <div className="conc-msg a">{GREETING}</div>
+            <div className="conc-msg-row">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="mini-avatar" src="/concierge-avatar.jpg" alt="" />
+              <div className="conc-msg a">{GREETING}</div>
+            </div>
             {msgs.length === 0 && (
               <div className="conc-chips">
                 {CHIPS.map((c) => (
@@ -185,16 +206,28 @@ export default function Concierge() {
                 ))}
               </div>
             )}
-            {msgs.map((m, i) => (
-              <div key={i} className={`conc-msg ${m.role === "user" ? "u" : "a"}`}>
-                {m.content}
-              </div>
-            ))}
+            {msgs.map((m, i) =>
+              m.role === "user" ? (
+                <div key={i} className="conc-msg u">
+                  {m.content}
+                </div>
+              ) : (
+                <div key={i} className="conc-msg-row">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className="mini-avatar" src="/concierge-avatar.jpg" alt="" />
+                  <div className="conc-msg a">{m.content}</div>
+                </div>
+              ),
+            )}
             {busy && (
-              <div className="conc-msg a conc-typing" aria-label="Concierge is typing">
-                <i />
-                <i />
-                <i />
+              <div className="conc-msg-row" aria-label="Maya is typing">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="mini-avatar" src="/concierge-avatar.jpg" alt="" />
+                <div className="conc-msg a conc-typing">
+                  <i />
+                  <i />
+                  <i />
+                </div>
               </div>
             )}
           </div>
@@ -218,7 +251,7 @@ export default function Concierge() {
               </svg>
             </button>
           </form>
-          <div className="conc-note">AI assistant — a licensed broker follows up personally.</div>
+          <div className="conc-note">Maya is our AI assistant — a licensed broker follows up personally.</div>
         </div>
       )}
 
