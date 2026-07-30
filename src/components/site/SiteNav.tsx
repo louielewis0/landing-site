@@ -37,7 +37,8 @@ export default function SiteNav() {
     <>
       <nav id="site-nav" className={scrolled ? "scrolled" : ""}>
         <div className="container">
-          <Link href="/" className="s-logo">
+          {/* Mark only — the hero carries the full wordmark */}
+          <Link href="/" className="s-logo" aria-label={company.name}>
             <span className="s-logo-mark">
               <Image
                 src="/logo.png"
@@ -48,7 +49,6 @@ export default function SiteNav() {
                 style={{ objectFit: "contain" }}
               />
             </span>
-            {company.name}
           </Link>
           <div className="nav-links">
             {links.map((l) => (
