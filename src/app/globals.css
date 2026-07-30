@@ -827,3 +827,18 @@ body {
   pointer-events: none; transition: opacity .45s ease, transform .45s ease;
 }
 .site-theme .hero3d-act .hero-ctas, .site-theme .hero3d-act a { pointer-events: auto; }
+
+/* Valuation analyzing spinner */
+.site-theme .val-spin {
+  width: 52px; height: 52px; margin: 0 auto; border-radius: 50%;
+  border: 3px solid var(--cream-2); border-top-color: var(--s-gold);
+  animation: valspin 0.9s linear infinite;
+}
+@keyframes valspin { to { transform: rotate(360deg); } }
+
+/* CTA on the video hero */
+.site-theme .video-hero-cta {
+  position: absolute; left: 50%; bottom: 96px; transform: translateX(-50%);
+  z-index: 4; white-space: nowrap;
+  animation: heroLogoIn 1400ms cubic-bezier(0.16, 1, 0.3, 1) 500ms both;
+}

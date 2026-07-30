@@ -1,427 +1,338 @@
 "use client";
 
-import { useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { useEffect, useRef, useState } from "react";
 
 /**
- * Multi-step seller-lead capture for /home-value.
+ * Instant-valuation funnel.
  *
- * Architecture notes:
- * - Single client component, three steps held in `step` state.
- * - Submits via the existing anon Supabase client. Anon RLS on
- *   public.leads allows INSERT only (post crm_phase1b.sql); reads/edits
- *   happen in /crm under the service-role route handlers, so this
- *   stays a pure write path.
- * - Source convention (kebab-case, stable forever): "home-valuation-tool".
- *   lead_type = "Inbound" (prospecting strategy axis).
- *   intent = "sell" (this tool is seller-only).
- *   status/dnc_scrubbed/priority/do_not_call fall through to column
- *   defaults — don't fight the DB defaults from the client.
- * - No fake AVM. The success state is honest: confirms a human broker
- *   will follow up within 24 hours. We do not fabricate a dollar figure.
+ * Step 1 — address. Step 2 — contact gate (the lead moment). Then
+ * POST /api/valuation: the lead is inserted server-side (source
+ * "instant-valuation" → lands in /crm immediately), RentCast's AVM
+ * runs live, and the estimate reveals with a count-up. If the AVM is
+ * unavailable the flow degrades to "broker valuation within 24h" —
+ * the lead is captured either way.
  */
 
-type Step = 1 | 2 | 3;
+type Estimate = { value: number; low: number; high: number; comps: number };
 
-type FormState = {
-  // Step 1 — address (all required)
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-  // Step 2 — home details (all optional)
-  beds: string;
-  baths: string;
-  sqft: string;
-  yearBuilt: string;
-  // Step 3 — contact (all required, this is the gate)
-  name: string;
-  email: string;
-  phone: string;
-};
-
-const INITIAL: FormState = {
-  street: "",
-  city: "",
-  state: "MI",
-  zip: "",
-  beds: "",
-  baths: "",
-  sqft: "",
-  yearBuilt: "",
-  name: "",
-  email: "",
-  phone: "",
-};
+const fmt = (n: number) => "$" + n.toLocaleString("en-US");
 
 export default function HomeValueForm() {
-  const [step, setStep] = useState<Step>(1);
-  const [form, setForm] = useState<FormState>(INITIAL);
-  const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
+  const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(1); // 4=result 5=pending
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [zip, setZip] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [err, setErr] = useState("");
+  const [estimate, setEstimate] = useState<Estimate | null>(null);
+  const [shown, setShown] = useState(0);
+  const rafRef = useRef(0);
 
-  function update<K extends keyof FormState>(key: K, value: FormState[K]) {
-    setForm((f) => ({ ...f, [key]: value }));
-  }
+  // Count-up reveal for the big number
+  useEffect(() => {
+    if (step !== 4 || !estimate) return;
+    const start = performance.now();
+    const dur = 1400;
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - start) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setShown(Math.round(estimate.value * eased));
+      if (p < 1) rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [step, estimate]);
 
-  function canAdvanceStep1() {
-    return (
-      form.street.trim().length > 0 &&
-      form.city.trim().length > 0 &&
-      form.state.trim().length > 0 &&
-      /^\d{5}$/.test(form.zip.trim())
-    );
-  }
-
-  function canSubmit() {
-    return (
-      form.name.trim().length > 0 &&
-      form.email.trim().length > 0 &&
-      form.phone.trim().length > 0
-    );
-  }
-
-  function buildAddress() {
-    return `${form.street.trim()}, ${form.city.trim()}, ${form.state.trim()} ${form.zip.trim()}`;
-  }
-
-  /**
-   * Builds the agent-readable notes payload that lands in leads.message.
-   * Optional fields are omitted entirely so the agent's view stays clean.
-   */
-  function buildMessage() {
-    const lines: string[] = [];
-    lines.push("Home valuation request");
-    lines.push("");
-    lines.push(`Property: ${buildAddress()}`);
-
-    const details: string[] = [];
-    if (form.beds.trim()) details.push(`Beds: ${form.beds.trim()}`);
-    if (form.baths.trim()) details.push(`Baths: ${form.baths.trim()}`);
-    if (form.sqft.trim()) details.push(`Square footage: ${form.sqft.trim()}`);
-    if (form.yearBuilt.trim()) details.push(`Year built: ${form.yearBuilt.trim()}`);
-    if (details.length) {
-      lines.push("");
-      lines.push("Home details:");
-      details.forEach((d) => lines.push(`  • ${d}`));
-    }
-    lines.push("");
-    lines.push("Submitted via /home-value");
-    return lines.join("\n");
-  }
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!canSubmit()) return;
-    setStatus("loading");
+  async function submit() {
     setErr("");
-
-    const { error } = await supabase.from("leads").insert({
-      name: form.name.trim(),
-      email: form.email.trim(),
-      phone: form.phone.trim(),
-      intent: "sell",
-      source: "home-valuation-tool",
-      lead_type: "Inbound",
-      address: buildAddress(),
-      message: buildMessage(),
-      // status, dnc_scrubbed, priority, do_not_call → column defaults
-    });
-
-    if (error) {
-      setStatus("error");
-      setErr(error.message);
-      return;
+    setStep(3);
+    try {
+      const res = await fetch("/api/valuation", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ name, email, phone, address, city, zip, intent: "sell" }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setErr(data.error ?? "Something went wrong — call us instead.");
+        setStep(2);
+        return;
+      }
+      if (data.estimate) {
+        setEstimate(data.estimate);
+        setStep(4);
+      } else {
+        setStep(5);
+      }
+    } catch {
+      setStep(5);
     }
-    setStatus("ok");
   }
 
-  /* ── Success state ────────────────────────────────────────────────── */
-  if (status === "ok") {
+  const input: React.CSSProperties = {
+    width: "100%",
+    padding: "15px 16px",
+    borderRadius: 12,
+    border: "1px solid var(--line)",
+    background: "var(--cream)",
+    color: "var(--s-ink)",
+    fontFamily: "inherit",
+    fontSize: 15,
+  };
+
+  /* ── Step 3: analyzing ── */
+  if (step === 3) {
     return (
-      <div className="relative rounded-2xl p-10 sm:p-12 bg-bone/[0.06] backdrop-blur-2xl border border-bone/15 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] text-center">
-        <span className="absolute -top-px left-8 right-8 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/50 to-transparent" />
-        <div className="w-14 h-14 rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 text-[var(--gold-soft)] flex items-center justify-center mx-auto mb-6">
-          <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <p className="eyebrow mb-3">Request received</p>
-        <h3 className="font-display text-3xl sm:text-4xl font-light text-bone mb-4 tracking-tight">
-          Thanks, {form.name.split(" ")[0] || "there"}.
-        </h3>
-        <p className="text-bone/70 text-[15px] sm:text-base font-light leading-relaxed max-w-md mx-auto">
-          Based on current <span className="text-bone">{form.city}</span> market activity,
-          one of our local agents will send your personalized home valuation within{" "}
-          <span className="text-[var(--gold-soft)]">24 hours</span>.
-        </p>
-        <p className="text-[12.5px] text-bone/45 mt-6 font-light">
-          No algorithm guesswork — a real broker will review your property and reach out.
+      <div className="lead-card" style={{ textAlign: "center", padding: "54px 34px" }}>
+        <div className="val-spin" aria-hidden />
+        <h3 style={{ marginTop: 22 }}>Analyzing {address}…</h3>
+        <p style={{ color: "var(--s-muted)", fontSize: 14 }}>
+          Pulling recorded sales, comparing nearby homes, weighing recent
+          market movement.
         </p>
       </div>
     );
   }
 
-  /* ── Form (steps 1–3) ─────────────────────────────────────────────── */
-  return (
-    <form
-      onSubmit={handleSubmit}
-      className="relative rounded-2xl p-7 sm:p-9 bg-bone/[0.06] backdrop-blur-2xl border border-bone/15 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] space-y-6"
-    >
-      <span className="absolute -top-px left-8 right-8 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/50 to-transparent" />
-
-      {/* Header + progress */}
-      <div>
-        <div className="flex items-center justify-between mb-3">
-          <p className="eyebrow">Step {step} of 3</p>
-          <p className="text-[11px] text-bone/45 tracking-[0.18em] uppercase">
-            {step === 1 && "Property"}
-            {step === 2 && "Home details"}
-            {step === 3 && "Your info"}
-          </p>
+  /* ── Step 4: instant estimate ── */
+  if (step === 4 && estimate) {
+    const pct = Math.max(
+      4,
+      Math.min(96, ((estimate.value - estimate.low) / (estimate.high - estimate.low)) * 100)
+    );
+    return (
+      <div className="lead-card" style={{ textAlign: "center", padding: "44px 34px" }}>
+        <div className="s-eyebrow" style={{ justifyContent: "center" }}>
+          Estimated market value
         </div>
-        <div className="flex gap-1.5">
-          {([1, 2, 3] as const).map((n) => (
+        <div
+          style={{
+            fontSize: "clamp(44px, 7vw, 64px)",
+            fontWeight: 650,
+            letterSpacing: "-0.03em",
+            color: "var(--navy)",
+            fontVariantNumeric: "tabular-nums",
+            lineHeight: 1.1,
+          }}
+        >
+          {fmt(shown)}
+        </div>
+        <div style={{ margin: "26px 0 8px" }}>
+          <div
+            style={{
+              position: "relative",
+              height: 6,
+              borderRadius: 100,
+              background: "var(--cream-2)",
+            }}
+          >
             <span
-              key={n}
-              className={`block h-[3px] flex-1 rounded-full transition-all duration-500 ${
-                n <= step ? "bg-[var(--gold)]" : "bg-bone/15"
-              }`}
+              style={{
+                position: "absolute",
+                left: `${pct}%`,
+                top: -5,
+                width: 16,
+                height: 16,
+                borderRadius: "50%",
+                background: "var(--s-gold)",
+                transform: "translateX(-50%)",
+                boxShadow: "0 4px 12px rgba(217,118,47,0.5)",
+              }}
             />
-          ))}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              fontSize: 13,
+              color: "var(--s-muted)",
+              marginTop: 10,
+              fontVariantNumeric: "tabular-nums",
+            }}
+          >
+            <span>{fmt(estimate.low)}</span>
+            <span>{fmt(estimate.high)}</span>
+          </div>
         </div>
+        {estimate.comps > 0 && (
+          <p style={{ fontSize: 13.5, color: "var(--s-muted)" }}>
+            Based on {estimate.comps} comparable recorded sales near you.
+          </p>
+        )}
+        <div
+          style={{
+            margin: "20px 0 0",
+            padding: "16px 18px",
+            borderRadius: 14,
+            background: "rgba(217,118,47,0.07)",
+            border: "1px solid rgba(217,118,47,0.25)",
+            fontSize: 14,
+            color: "var(--s-ink)",
+            textAlign: "left",
+          }}
+        >
+          <b>What happens next:</b> a licensed broker reviews your property
+          against live MLS data and sends your verified range within 24
+          hours — automated estimates can miss upgrades, condition, and
+          street-level demand.
+        </div>
+        <p className="form-note">
+          Automated estimate — not an appraisal or broker price opinion.
+        </p>
+      </div>
+    );
+  }
+
+  /* ── Step 5: pending (no AVM available) ── */
+  if (step === 5) {
+    return (
+      <div className="lead-card" style={{ textAlign: "center", padding: "44px 34px" }}>
+        <div className="s-eyebrow" style={{ justifyContent: "center" }}>
+          Request received
+        </div>
+        <h3>Your valuation is being prepared.</h3>
+        <p style={{ color: "var(--s-muted)", fontSize: 14.5 }}>
+          A licensed broker is running your property against live MLS
+          comps. Expect your number within 24 hours — usually much sooner.
+        </p>
+      </div>
+    );
+  }
+
+  /* ── Steps 1 & 2 ── */
+  return (
+    <div className="lead-card">
+      <div style={{ display: "flex", gap: 8, marginBottom: 18 }}>
+        {[1, 2].map((s) => (
+          <span
+            key={s}
+            style={{
+              height: 4,
+              flex: 1,
+              borderRadius: 100,
+              background: step >= s ? "var(--s-gold)" : "var(--cream-2)",
+              transition: "background .3s",
+            }}
+          />
+        ))}
       </div>
 
-      {/* Step 1 — Address */}
-      {step === 1 && (
-        <div className="space-y-4">
-          <div>
-            <h3 className="font-display text-2xl sm:text-3xl font-light text-bone tracking-tight">
-              Where&rsquo;s the property?
-            </h3>
-            <p className="text-[13.5px] text-bone/55 mt-2 font-light">
-              We&rsquo;ll pull comps from the last 90 days on your street.
-            </p>
-          </div>
-
-          <input
-            type="text"
-            required
-            value={form.street}
-            onChange={(e) => update("street", e.target.value)}
-            placeholder="Street address"
-            autoComplete="street-address"
-            className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_auto] gap-3">
+      {step === 1 ? (
+        <>
+          <h3>Where&rsquo;s the property?</h3>
+          <p style={{ color: "var(--s-muted)", fontSize: 13.5, marginBottom: 18 }}>
+            Instant estimate, powered by recorded-sale data.
+          </p>
+          <div style={{ display: "grid", gap: 12 }}>
             <input
-              type="text"
-              required
-              value={form.city}
-              onChange={(e) => update("city", e.target.value)}
-              placeholder="City"
-              autoComplete="address-level2"
-              className="px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
+              style={input}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="Street address — e.g. 2032 E Square Lake Rd"
+              autoComplete="street-address"
             />
-            <input
-              type="text"
-              required
-              maxLength={2}
-              value={form.state}
-              onChange={(e) => update("state", e.target.value.toUpperCase())}
-              placeholder="State"
-              autoComplete="address-level1"
-              className="px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all w-full sm:w-20 text-center uppercase"
-            />
-            <input
-              type="text"
-              required
-              inputMode="numeric"
-              pattern="[0-9]{5}"
-              maxLength={5}
-              value={form.zip}
-              onChange={(e) => update("zip", e.target.value.replace(/\D/g, ""))}
-              placeholder="ZIP"
-              autoComplete="postal-code"
-              className="px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all w-full sm:w-28 text-center"
-            />
-          </div>
-
-          <div className="pt-2 flex justify-end">
+            <div style={{ display: "grid", gridTemplateColumns: "1.4fr 0.8fr", gap: 12 }}>
+              <input
+                style={input}
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="City"
+                autoComplete="address-level2"
+              />
+              <input
+                style={input}
+                value={zip}
+                onChange={(e) => setZip(e.target.value)}
+                placeholder="ZIP"
+                inputMode="numeric"
+                autoComplete="postal-code"
+              />
+            </div>
             <button
               type="button"
-              onClick={() => setStep(2)}
-              disabled={!canAdvanceStep1()}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500 disabled:opacity-40"
+              className="btn btn-gold"
+              style={{ width: "100%", justifyContent: "center" }}
+              onClick={() => {
+                if (!address.trim() || !city.trim()) {
+                  setErr("Enter the street address and city.");
+                  return;
+                }
+                setErr("");
+                setStep(2);
+              }}
             >
-              Continue →
+              See my home&rsquo;s value →
             </button>
           </div>
-        </div>
-      )}
-
-      {/* Step 2 — Home details (optional) */}
-      {step === 2 && (
-        <div className="space-y-4">
-          <div>
-            <h3 className="font-display text-2xl sm:text-3xl font-light text-bone tracking-tight">
-              A few quick details.
-            </h3>
-            <p className="text-[13.5px] text-bone/55 mt-2 font-light">
-              All optional — helps the broker give you a more accurate number. Skip
-              anything you&rsquo;d rather not say.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-[10px] text-bone/45 uppercase tracking-[0.22em] mb-1.5">
-                Beds
-              </label>
-              <input
-                type="number"
-                inputMode="numeric"
-                min={0}
-                max={20}
-                value={form.beds}
-                onChange={(e) => update("beds", e.target.value)}
-                placeholder="3"
-                className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
-              />
-            </div>
-            <div>
-              <label className="block text-[10px] text-bone/45 uppercase tracking-[0.22em] mb-1.5">
-                Baths
-              </label>
-              <input
-                type="number"
-                inputMode="decimal"
-                step="0.5"
-                min={0}
-                max={20}
-                value={form.baths}
-                onChange={(e) => update("baths", e.target.value)}
-                placeholder="2"
-                className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
-              />
-            </div>
-            <div>
-              <label className="block text-[10px] text-bone/45 uppercase tracking-[0.22em] mb-1.5">
-                Square footage
-              </label>
-              <input
-                type="number"
-                inputMode="numeric"
-                min={0}
-                value={form.sqft}
-                onChange={(e) => update("sqft", e.target.value)}
-                placeholder="2,000"
-                className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
-              />
-            </div>
-            <div>
-              <label className="block text-[10px] text-bone/45 uppercase tracking-[0.22em] mb-1.5">
-                Year built
-              </label>
-              <input
-                type="number"
-                inputMode="numeric"
-                min={1800}
-                max={new Date().getFullYear() + 1}
-                value={form.yearBuilt}
-                onChange={(e) => update("yearBuilt", e.target.value)}
-                placeholder="1995"
-                className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
-              />
-            </div>
-          </div>
-
-          <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
+        </>
+      ) : (
+        <>
+          <h3>Where should we send the full report?</h3>
+          <p style={{ color: "var(--s-muted)", fontSize: 13.5, marginBottom: 18 }}>
+            Your estimate appears instantly — the broker-verified report
+            follows within 24 hours.
+          </p>
+          <div style={{ display: "grid", gap: 12 }}>
+            <input
+              style={input}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Full name"
+              autoComplete="name"
+            />
+            <input
+              style={input}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              type="email"
+              autoComplete="email"
+            />
+            <input
+              style={input}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="Phone"
+              type="tel"
+              autoComplete="tel"
+            />
+            <button
+              type="button"
+              className="btn btn-gold"
+              style={{ width: "100%", justifyContent: "center" }}
+              onClick={() => {
+                if (!name.trim() || (!email.trim() && !phone.trim())) {
+                  setErr("Name plus an email or phone, and the number is yours.");
+                  return;
+                }
+                submit();
+              }}
+            >
+              Reveal my estimate →
+            </button>
             <button
               type="button"
               onClick={() => setStep(1)}
-              className="text-[13px] text-bone/55 hover:text-bone transition-colors tracking-wide"
+              style={{
+                background: "none",
+                border: "none",
+                color: "var(--s-muted)",
+                fontSize: 13,
+                cursor: "pointer",
+              }}
             >
-              ← Back
-            </button>
-            <button
-              type="button"
-              onClick={() => setStep(3)}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500"
-            >
-              Continue →
+              ← Back to address
             </button>
           </div>
-        </div>
+        </>
       )}
 
-      {/* Step 3 — Contact */}
-      {step === 3 && (
-        <div className="space-y-4">
-          <div>
-            <h3 className="font-display text-2xl sm:text-3xl font-light text-bone tracking-tight">
-              Where should we send it?
-            </h3>
-            <p className="text-[13.5px] text-bone/55 mt-2 font-light">
-              A real broker reaches out — usually within the hour.
-            </p>
-          </div>
-
-          <input
-            type="text"
-            required
-            value={form.name}
-            onChange={(e) => update("name", e.target.value)}
-            placeholder="Full name"
-            autoComplete="name"
-            className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
-          />
-          <input
-            type="email"
-            required
-            value={form.email}
-            onChange={(e) => update("email", e.target.value)}
-            placeholder="Email"
-            autoComplete="email"
-            className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
-          />
-          <input
-            type="tel"
-            required
-            value={form.phone}
-            onChange={(e) => update("phone", e.target.value)}
-            placeholder="Phone"
-            autoComplete="tel"
-            className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
-          />
-
-          <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
-            <button
-              type="button"
-              onClick={() => setStep(2)}
-              disabled={status === "loading"}
-              className="text-[13px] text-bone/55 hover:text-bone transition-colors tracking-wide disabled:opacity-50"
-            >
-              ← Back
-            </button>
-            <button
-              type="submit"
-              disabled={status === "loading" || !canSubmit()}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-500 disabled:opacity-50"
-            >
-              {status === "loading" ? "Sending…" : "Get my valuation →"}
-            </button>
-          </div>
-
-          {status === "error" && (
-            <p className="text-sm text-rust text-center">{err}</p>
-          )}
-
-          <p className="text-[11px] text-bone/40 text-center pt-1 tracking-wide">
-            Your info stays with us. Never shared, never sold.
-          </p>
-        </div>
+      {err && (
+        <p style={{ color: "#c0392b", fontSize: 13, textAlign: "center", marginTop: 12 }}>{err}</p>
       )}
-    </form>
+      <p className="form-note">Your info stays with us. Never shared, never sold.</p>
+    </div>
   );
 }
