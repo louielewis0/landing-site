@@ -14,7 +14,7 @@ type Msg = { role: "user" | "assistant"; content: string };
 
 const STORE_KEY = "remc-concierge";
 const GREETING =
-  "Hi, I'm Maya with Real Estate Market Center! Ask me anything about buying or selling in Metro Detroit — or just tell me what you're looking for.";
+  "Hi, I'm Maya with Real Estate Market Center! Ask me anything about buying or selling in Metro Detroit, or just tell me what you're looking for.";
 const CHIPS = ["I'm thinking of selling", "I'm looking to buy", "What's my home worth?"];
 const MAX_USER_TURNS = 20;
 
@@ -251,7 +251,7 @@ export default function Concierge() {
               </svg>
             </button>
           </form>
-          <div className="conc-note">Maya is our AI assistant — a licensed broker follows up personally.</div>
+          <div className="conc-note">Maya is our virtual assistant. A licensed broker follows up personally.</div>
         </div>
       )}
 
