@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { company } from "@/lib/config";
 
 /**
@@ -37,19 +36,13 @@ export default function SiteNav() {
     <>
       <nav id="site-nav" className={scrolled ? "scrolled" : ""}>
         <div className="container">
-          {/* Mark only — the hero carries the full wordmark */}
-          <Link href="/" className="s-logo" aria-label={company.name}>
-            <span className="s-logo-mark">
-              <Image
-                src="/logo.png"
-                alt={company.name}
-                width={26}
-                height={26}
-                priority
-                style={{ objectFit: "contain" }}
-              />
-            </span>
-          </Link>
+          {/* No logo in the nav — the hero owns the brand. Invisible
+              home link keeps the corner clickable + accessible. */}
+          <Link
+            href="/"
+            aria-label={company.name}
+            style={{ width: 34, height: 34, display: "block" }}
+          />
           <div className="nav-links">
             {links.map((l) => (
               <Link key={l.label} href={l.href}>
