@@ -2,6 +2,7 @@ import { fraunces, inter } from "@/lib/site-fonts";
 import SiteNav from "./SiteNav";
 import SiteFooter from "./SiteFooter";
 import SiteMotion from "./SiteMotion";
+import Concierge from "./Concierge";
 
 /**
  * Wrapper for every PUBLIC page (never /crm): applies the .site-theme
@@ -24,6 +25,7 @@ export default function SiteShell({
       <SiteNav />
       {children}
       <SiteFooter />
+      <Concierge />
       <SiteMotion />
     </div>
   );
