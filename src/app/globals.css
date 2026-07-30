@@ -795,10 +795,15 @@ body {
 }
 .site-theme .video-hero-logo img {
   width: min(48vw, 420px); height: auto;
-  /* dark embossed mark: faint light halo lifts it off the water,
-     soft ground shadow keeps the 3D read */
-  filter: drop-shadow(0 0 34px rgba(255,255,255,0.3)) drop-shadow(0 14px 34px rgba(22,24,29,0.5));
-  animation: heroLogoIn 1400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  /* dark embossed mark: luminous halo lifts it off the footage,
+     soft ground shadow keeps the 3D read; halo breathes gently */
+  filter: drop-shadow(0 0 26px rgba(255,255,255,0.5)) drop-shadow(0 0 70px rgba(255,244,224,0.35)) drop-shadow(0 14px 34px rgba(22,24,29,0.5));
+  animation: heroLogoIn 1400ms cubic-bezier(0.16, 1, 0.3, 1) both,
+             logoGlow 4.5s ease-in-out 1.4s infinite alternate;
+}
+@keyframes logoGlow {
+  from { filter: drop-shadow(0 0 26px rgba(255,255,255,0.5)) drop-shadow(0 0 70px rgba(255,244,224,0.35)) drop-shadow(0 14px 34px rgba(22,24,29,0.5)); }
+  to   { filter: drop-shadow(0 0 34px rgba(255,255,255,0.7)) drop-shadow(0 0 95px rgba(255,244,224,0.5)) drop-shadow(0 14px 34px rgba(22,24,29,0.5)); }
 }
 @keyframes heroLogoIn {
   from { opacity: 0; transform: translateY(18px) scale(0.96); }
@@ -811,6 +816,7 @@ body {
 }
 @media (prefers-reduced-motion: reduce) {
   .site-theme .video-hero-logo img { animation: none; }
+  .site-theme .video-hero-logo img { filter: drop-shadow(0 0 26px rgba(255,255,255,0.5)) drop-shadow(0 14px 34px rgba(22,24,29,0.5)); }
 }
 
 /* Nav over the video: white text until scrolled */
