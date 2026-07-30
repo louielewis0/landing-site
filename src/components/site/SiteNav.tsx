@@ -5,14 +5,15 @@ import Link from "next/link";
 import { company } from "@/lib/config";
 
 /**
- * Fixed site nav — transparent over the hero, blurred cream once
- * scrolled 60px (prototype behavior). Mobile: burger → dropdown card.
- * Also owns the back-to-top button (shows past 700px).
+ * Fixed site nav — minimal by design (user request): a centered
+ * Home Valuation capsule and the phone number in a pill, nothing else.
+ * Transparent frosted-white over the hero video, cream once scrolled.
+ * Section navigation lives in the footer. Also owns the back-to-top
+ * button (shows past 700px).
  */
 export default function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [showTop, setShowTop] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -23,14 +24,6 @@ export default function SiteNav() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const links = [
-    { label: "Services", href: "/#services" },
-    { label: "Areas", href: "/#areas" },
-    { label: "About", href: "/#about" },
-    { label: "Reviews", href: "/reviews" },
-    { label: "Contact", href: "/#contact" },
-  ];
 
   return (
     <>
@@ -48,37 +41,11 @@ export default function SiteNav() {
             <b>Home Valuation</b>
             <span>Free instant estimate</span>
           </Link>
-          <div className="nav-right">
-            <a href={`tel:${company.phoneTel}`} className="nav-phone-pill">
-              {company.phone}
-            </a>
-            <button
-              className="burger"
-              aria-label="Menu"
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen((v) => !v)}
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
-          </div>
+          <a href={`tel:${company.phoneTel}`} className="nav-phone-pill">
+            {company.phone}
+          </a>
         </div>
       </nav>
-
-      {menuOpen && (
-        <div className="mobile-menu site-theme" onClick={() => setMenuOpen(false)}>
-          {links.map((l) => (
-            <Link key={l.label} href={l.href}>
-              {l.label}
-            </Link>
-          ))}
-          <a href={`tel:${company.phoneTel}`}>Call {company.phone}</a>
-          <Link href="/home-value" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
-            Request valuation →
-          </Link>
-        </div>
-      )}
 
       <button
         className={`back-to-top ${showTop ? "show" : ""}`}
