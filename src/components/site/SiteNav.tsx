@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { company } from "@/lib/config";
 
 /**
@@ -29,13 +30,16 @@ export default function SiteNav() {
     <>
       <nav id="site-nav" className={scrolled ? "scrolled" : ""}>
         <div className="container">
-          {/* No logo in the nav — the hero owns the brand. Invisible
-              home link keeps the corner clickable + accessible. */}
-          <Link
-            href="/"
-            aria-label={company.name}
-            style={{ width: 34, height: 34, display: "block" }}
-          />
+          {/* Small 3D logo, top left — home button on every page. */}
+          <Link href="/" aria-label={`${company.name} home`} className="nav-logo">
+            <Image
+              src="/mcr-logo-color-3d.png"
+              alt=""
+              width={46}
+              height={46}
+              priority
+            />
+          </Link>
           {/* Centered valuation capsule — the nav's single CTA. */}
           <Link href="/home-value" className="nav-val-cta">
             <b>Home Valuation</b>

@@ -503,6 +503,15 @@ body {
 .site-theme .s-logo-mark svg { width: 18px; height: 18px; }
 .site-theme .nav-right { display: flex; align-items: center; gap: 16px; }
 
+/* Small 3D logo home button, top left */
+.site-theme .nav-logo { display: flex; align-items: center; flex-shrink: 0; }
+.site-theme .nav-logo img {
+  width: 46px; height: 46px; object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(22,24,29,0.3));
+  transition: transform .3s cubic-bezier(.2,.9,.3,1);
+}
+.site-theme .nav-logo:hover img { transform: scale(1.08); }
+
 /* Centered valuation capsule — the nav's single CTA */
 .site-theme .nav-val-cta {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
@@ -753,11 +762,11 @@ body {
   .site-theme .services-grid, .site-theme .areas-grid { grid-template-columns: 1fr 1fr; }
   .site-theme .foot-grid { grid-template-columns: 1fr; }
   .site-theme .container { padding: 0 20px; }
-  /* Tiny screens: capsule flows inline (no absolute centering) so the
-     two pills share the row without overlapping. */
+  /* Tiny screens: capsule flows inline (no absolute centering) so
+     logo + pills share the row without overlapping. */
   .site-theme .nav-val-cta { position: static; transform: none; }
   .site-theme #site-nav .container { gap: 8px; }
-  .site-theme #site-nav .container > a[aria-label] { display: none !important; }
+  .site-theme .nav-logo img { width: 36px; height: 36px; }
 }
 
 /* Hero two-column (content + lead form) */
