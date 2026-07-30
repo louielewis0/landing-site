@@ -27,10 +27,10 @@ export default function VideoHero() {
       <div className="video-hero-shade" aria-hidden />
       <div className="video-hero-logo">
         <Image
-          src="/mcr-logo-3d.png"
+          src="/mcr-logo-color-3d.png"
           alt="Real Estate Market Center"
-          width={1202}
-          height={1202}
+          width={1156}
+          height={1156}
           priority
         />
       </div>
