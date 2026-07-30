@@ -43,20 +43,15 @@ export default function SiteNav() {
             aria-label={company.name}
             style={{ width: 34, height: 34, display: "block" }}
           />
-          <div className="nav-links">
-            {links.map((l) => (
-              <Link key={l.label} href={l.href}>
-                {l.label}
-              </Link>
-            ))}
-          </div>
+          {/* Centered valuation capsule — the nav's single CTA. */}
+          <Link href="/home-value" className="nav-val-cta">
+            <b>Home Valuation</b>
+            <span>Free instant estimate</span>
+          </Link>
           <div className="nav-right">
-            <a href={`tel:${company.phoneTel}`} className="nav-phone">
+            <a href={`tel:${company.phoneTel}`} className="nav-phone-pill">
               {company.phone}
             </a>
-            <Link href="/home-value" className="nav-cta">
-              Home valuation
-            </Link>
             <button
               className="burger"
               aria-label="Menu"

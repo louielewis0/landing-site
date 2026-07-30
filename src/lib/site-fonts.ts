@@ -1,4 +1,4 @@
-import { Fraunces, Inter } from "next/font/google";
+import { Fraunces, Inter, Manrope } from "next/font/google";
 
 /**
  * Public-site font pair (parallax redesign). Loaded here — NOT in the
@@ -16,5 +16,13 @@ export const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+/** Clean geometric sans for the nav CTAs (user-requested). */
+export const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });

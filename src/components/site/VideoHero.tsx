@@ -34,15 +34,6 @@ export default function VideoHero() {
           priority
         />
       </div>
-      <a href="/home-value" className="video-hero-cta">
-        <span className="cta-copy">
-          <b>What&rsquo;s your home worth?</b>
-          <span>Free instant estimate</span>
-        </span>
-        <span className="cta-arrow" aria-hidden>
-          &rarr;
-        </span>
-      </a>
       <div className="scroll-cue video-hero-cue">
         <span>Scroll</span>
         <span className="line" />
