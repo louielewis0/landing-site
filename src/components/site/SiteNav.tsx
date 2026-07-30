@@ -54,12 +54,8 @@ export default function SiteNav() {
             <a href={`tel:${company.phoneTel}`} className="nav-phone">
               {company.phone}
             </a>
-            <Link
-              href="/home-value"
-              className="btn btn-gold"
-              style={{ padding: "11px 22px", fontSize: 13 }}
-            >
-              Request valuation
+            <Link href="/home-value" className="nav-cta">
+              Home valuation
             </Link>
             <button
               className="burger"
