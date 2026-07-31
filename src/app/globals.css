@@ -1174,3 +1174,18 @@ body {
   .site-theme .t-hero-full .t-hero-copy { left: 20px; right: 20px; bottom: 26px; }
   .nav-over-video .t-nav { padding: 20px 20px 0; }
 }
+
+/* Home-value page (template treatment) */
+.site-theme .t-hv {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center;
+  padding-top: 72px; padding-bottom: 100px; min-height: calc(100svh - 90px);
+}
+.site-theme .t-hv h1 {
+  margin: 0 0 22px; font-weight: 300; font-size: clamp(38px, 4.6vw, 64px);
+  line-height: 1.02; letter-spacing: -0.03em; text-transform: uppercase;
+}
+.site-theme .t-hv h1 span { font-weight: 500; }
+.site-theme .t-hv-sub { margin: 0 0 34px; font-size: 16px; line-height: 1.75; color: rgba(25,26,28,0.65); max-width: 460px; }
+@media (max-width: 980px) {
+  .site-theme .t-hv { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; min-height: 0; }
+}

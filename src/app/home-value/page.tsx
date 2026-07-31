@@ -20,58 +20,43 @@ export const metadata: Metadata = {
 };
 
 /**
- * Valuation funnel — redesign hero treatment with the form kept above
- * the fold (right column at desktop, directly under the headline on
- * mobile). Copy and form logic unchanged.
+ * Valuation funnel — template design system (t- classes): bone
+ * ground, Space Grotesk uppercase display, numbered hairline rows,
+ * form card right. Copy and form logic unchanged.
  */
 export default function HomeValuePage() {
   return (
     <SiteShell>
       <main>
-        <section className="s-hero" style={{ height: "auto", minHeight: "100svh", paddingBottom: 80 }}>
-          <div
-            className="hero-layer hero-bg"
-            data-speed="0.35"
-            style={{
-              backgroundImage:
-                "radial-gradient(ellipse 70% 50% at 80% 0%, rgba(217,118,47,0.10), transparent 60%), linear-gradient(180deg, #fafaf8 0%, #f1efea 100%)",
-            }}
-          />
-          <div className="hero-layer hero-grid" />
-          <div className="hero-layer hero-glow" data-speed="0.6" />
-
-          <div className="container hero-content" style={{ paddingTop: 120, paddingBottom: 20 }}>
-            <div style={{ display: "grid", gridTemplateColumns: "0.9fr 1.1fr", gap: 48, alignItems: "center" }} className="hv-cols">
-              <div>
-                <div className="hero-badge">Free · 24-hour turnaround</div>
-                <h1 className="hero-title" style={{ fontSize: "clamp(34px, 4.6vw, 58px)" }}>
-                  What&rsquo;s your home <em>actually worth?</em>
-                </h1>
-                <p className="hero-sub">
-                  A free, no-obligation market analysis from a local{" "}
-                  {company.region} broker. Real comps, no algorithm guesswork —
-                  back to you within 24 hours.
-                </p>
-                <ul className="cta-list">
-                  {[
-                    "Comps from the last 90 days on your street",
-                    "Local broker who knows your neighborhood",
-                    "Realistic list-price range, no inflated promises",
-                    "Free, with zero obligation to list",
-                  ].map((p) => (
-                    <li key={p}>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
-                        <path d="M20 6 9 17l-5-5" />
-                      </svg>
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <HomeValueForm />
-              </div>
+        <section className="t-wrap t-hv">
+          <div>
+            <div className="t-eyebrow">Free &middot; Instant estimate</div>
+            <h1>
+              What&rsquo;s your home
+              <br />
+              <span>actually worth?</span>
+            </h1>
+            <p className="t-hv-sub">
+              An instant estimate built on recorded sales, then a
+              broker-verified number from a local {company.region} team that
+              knows your street &mdash; within 24 hours, no obligation.
+            </p>
+            <div className="t-about-rows">
+              {[
+                "Instant estimate from recorded-sale data",
+                "Comps from the last 90 days on your street",
+                "Broker-verified range within 24 hours",
+                "Free, with zero obligation to list",
+              ].map((p, i) => (
+                <div key={p}>
+                  <span className="t-num">0{i + 1}</span>
+                  <span>{p}</span>
+                </div>
+              ))}
             </div>
+          </div>
+          <div>
+            <HomeValueForm />
           </div>
         </section>
       </main>
