@@ -41,6 +41,15 @@ const highlights = [
   "New Haven schools, 0.3-acre lot in Strathmore Sub",
 ];
 
+const PHOTOS = [
+  { src: "/listing/hastings/1.jpg", alt: "Front exterior — brick colonial with covered entry and two-car garage" },
+  { src: "/listing/hastings/2.jpg", alt: "Updated kitchen with granite counters and stainless appliances" },
+  { src: "/listing/hastings/3.jpg", alt: "Open living room with fireplace" },
+  { src: "/listing/hastings/4.jpg", alt: "Dining area with doorwall to the backyard patio" },
+  { src: "/listing/hastings/5.jpg", alt: "Spacious bedroom with natural light" },
+  { src: "/listing/hastings/6.jpg", alt: "Finished basement with rec and gym space" },
+];
+
 const inquiryMail = `mailto:${company.email}?subject=${encodeURIComponent(
   "Inquiry: 56291 Hastings, Macomb Twp (MLS #20261057937)"
 )}&body=${encodeURIComponent(
@@ -64,6 +73,20 @@ export default function HastingsListing() {
             <a href={inquiryMail} className="t-pill-ghost">
               Request info
             </a>
+          </div>
+
+          {/* Photo gallery — the actual Hastings house */}
+          <div className="t-gallery">
+            {PHOTOS.map((p, i) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={p.src}
+                src={p.src}
+                alt={p.alt}
+                loading={i === 0 ? "eager" : "lazy"}
+                className={i === 0 ? "t-gallery-hero" : ""}
+              />
+            ))}
           </div>
 
           <div className="t-stats-grid t-listing-facts" style={{ marginTop: 52 }}>
