@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <SiteShell>
-      <main className="bg-cream" style={{ paddingTop: 130, paddingBottom: 90 }}>
+      <main className="bg-cream" style={{ paddingTop: 40, paddingBottom: 90 }}>
         <div className="container prose-site" style={{ maxWidth: 780 }}>
           <div className="s-eyebrow">Legal</div>
           <h1 style={{ fontSize: "clamp(30px, 4vw, 46px)", marginBottom: 8 }}>Privacy Policy</h1>

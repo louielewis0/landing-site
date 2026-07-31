@@ -80,7 +80,7 @@ export default function BestSuburbsGuidePage() {
 
   return (
     <SiteShell>
-      <main style={{ paddingTop: 96 }} className="bg-cream">
+      <main style={{ paddingTop: 24 }} className="bg-cream">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />

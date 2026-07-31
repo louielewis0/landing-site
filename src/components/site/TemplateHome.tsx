@@ -73,7 +73,7 @@ const CARDS = [
   {
     href: "/listing/5040-patrick-road",
     img: "/areas/west-bloomfield-real-estate-agent.jpg",
-    tag: "For Sale",
+    tag: "Sold",
     price: "$448,900",
     meta: "4 bd · 3 ba",
     addr: "5040 Patrick Road · W. Bloomfield",
@@ -104,7 +104,7 @@ export function TemplateListings() {
           On the <span>market</span>
         </h2>
         <Link href="/listing/5040-patrick-road" className="t-link-caps">
-          All listings &rarr;
+          Just sold &rarr;
         </Link>
       </div>
       <div className="t-listings-grid">
