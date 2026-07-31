@@ -6,50 +6,50 @@ import Image from "next/image";
 import { company } from "@/lib/config";
 
 /**
- * Fixed site nav — minimal by design (user request): a centered
- * Home Valuation capsule and the phone number in a pill, nothing else.
- * Transparent frosted-white over the hero video, cream once scrolled.
- * Section navigation lives in the footer. Also owns the back-to-top
- * button (shows past 700px).
+ * Template nav (user's "Real Estate Market Center.html" design):
+ * in-flow bone bar — logo + stacked Space Grotesk wordmark, centered
+ * links, phone pill right. Also owns the back-to-top button.
  */
 export default function SiteNav() {
-  const [scrolled, setScrolled] = useState(false);
   const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 60);
-      setShowTop(window.scrollY > 700);
-    };
+    const onScroll = () => setShowTop(window.scrollY > 700);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const links = [
+    { label: "Sell", href: "/home-value" },
+    { label: "Listings", href: "/#listings" },
+    { label: "Team", href: "/#about" },
+    { label: "Reviews", href: "/reviews" },
+    { label: "Contact", href: "/#contact" },
+  ];
+
   return (
     <>
-      <nav id="site-nav" className={scrolled ? "scrolled" : ""}>
-        <div className="container">
-          {/* Small 3D logo, top left — home button on every page. */}
-          <Link href="/" aria-label={`${company.name} home`} className="nav-logo">
-            <Image
-              src="/mcr-logo-color-3d.png"
-              alt=""
-              width={46}
-              height={46}
-              priority
-            />
-          </Link>
-          {/* Centered valuation capsule — the nav's single CTA. */}
-          <Link href="/home-value" className="nav-val-cta">
-            <b>Home Valuation</b>
-            <span>Free instant estimate</span>
-          </Link>
-          <a href={`tel:${company.phoneTel}`} className="nav-phone-pill">
-            Contact Us
-          </a>
-        </div>
-      </nav>
+      <div className="t-nav">
+        <Link href="/" className="t-nav-brand" aria-label={`${company.name} home`}>
+          <Image src="/mcr-logo-color-3d.png" alt="" width={38} height={38} priority />
+          <span className="t-nav-word">
+            Real Estate
+            <br />
+            Market Center
+          </span>
+        </Link>
+        <nav className="t-nav-links">
+          {links.map((l) => (
+            <Link key={l.label} href={l.href}>
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+        <a href={`tel:${company.phoneTel}`} className="t-nav-phone">
+          {company.phone}
+        </a>
+      </div>
 
       <button
         className={`back-to-top ${showTop ? "show" : ""}`}

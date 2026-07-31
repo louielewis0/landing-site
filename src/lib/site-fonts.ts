@@ -1,4 +1,4 @@
-import { Fraunces, Inter, Manrope } from "next/font/google";
+import { Fraunces, Inter, Manrope, Space_Grotesk } from "next/font/google";
 
 /**
  * Public-site font pair (parallax redesign). Loaded here — NOT in the
@@ -19,10 +19,18 @@ export const inter = Inter({
   display: "swap",
 });
 
-/** Clean geometric sans for the nav CTAs (user-requested). */
+/** Body face for the user's template design system. */
 export const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+/** Display face — huge light uppercase headlines (user's template). */
+export const grotesk = Space_Grotesk({
+  variable: "--font-grotesk",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
   display: "swap",
 });

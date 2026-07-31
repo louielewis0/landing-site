@@ -1,4 +1,4 @@
-import { fraunces, inter, manrope } from "@/lib/site-fonts";
+import { fraunces, inter, manrope, grotesk } from "@/lib/site-fonts";
 import SiteNav from "./SiteNav";
 import SiteFooter from "./SiteFooter";
 import SiteMotion from "./SiteMotion";
@@ -20,7 +20,7 @@ export default function SiteShell({
 }) {
   return (
     <div
-      className={`site-theme ${fraunces.variable} ${inter.variable} ${manrope.variable} ${navOnDark ? "nav-over-video" : ""}`}
+      className={`site-theme ${fraunces.variable} ${inter.variable} ${manrope.variable} ${grotesk.variable} ${navOnDark ? "nav-over-video" : ""}`}
     >
       <SiteNav />
       {children}
