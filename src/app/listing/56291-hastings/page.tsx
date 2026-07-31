@@ -47,8 +47,8 @@ const PHOTOS = [
   { src: "/listing/hastings/2.jpg", alt: "Updated kitchen with granite counters and stainless appliances" },
   { src: "/listing/hastings/3.jpg", alt: "Open living room with fireplace" },
   { src: "/listing/hastings/4.jpg", alt: "Dining area with doorwall to the backyard patio" },
-  { src: "/listing/hastings/5.jpg", alt: "Spacious bedroom with natural light" },
-  { src: "/listing/hastings/6.jpg", alt: "Finished basement with rec and gym space" },
+  { src: "/listing/hastings/5.jpg", alt: "Full bathroom with double vanity and marble counters" },
+  { src: "/listing/hastings/6.jpg", alt: "Primary bedroom with vaulted ceiling and large windows" },
 ];
 
 const inquiryMail = `mailto:${company.email}?subject=${encodeURIComponent(
