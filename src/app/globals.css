@@ -1336,3 +1336,46 @@ body {
 }
 .site-theme .sf-done h3 { margin: 0 0 8px; font-weight: 500; font-size: 21px; text-transform: none; }
 .sf-done p { margin: 0; font-size: 14.5px; line-height: 1.6; color: rgba(25,26,28,0.62); }
+
+/* Listing slideshow (detail page) — full photos, no cropping */
+.site-theme .lc { margin-top: 44px; }
+.site-theme .lc-stage {
+  position: relative; width: 100%; aspect-ratio: 16 / 10;
+  background: #10131a; border-radius: 22px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 16px 44px rgba(25,26,28,0.16);
+}
+.site-theme .lc-stage img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.site-theme .lc-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 46px; height: 46px; border-radius: 50%;
+  background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28); color: #fff;
+  font-size: 26px; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: background .25s;
+}
+.site-theme .lc-nav:hover { background: var(--s-gold); border-color: var(--s-gold); }
+.site-theme .lc-prev { left: 16px; }
+.site-theme .lc-next { right: 16px; }
+.site-theme .lc-count {
+  position: absolute; bottom: 14px; right: 16px; padding: 6px 13px; border-radius: 999px;
+  background: rgba(0,0,0,0.45); color: #fff; font-size: 12.5px; font-variant-numeric: tabular-nums;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.site-theme .lc-thumbs {
+  display: flex; gap: 10px; margin-top: 12px; overflow-x: auto; padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+.site-theme .lc-thumbs button {
+  flex: 0 0 auto; width: 96px; height: 66px; border-radius: 12px; overflow: hidden;
+  border: none; padding: 0; cursor: pointer; background: none; opacity: 0.5;
+  outline: 2px solid transparent; transition: opacity .25s, outline-color .25s;
+}
+.site-theme .lc-thumbs button img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.site-theme .lc-thumbs button:hover { opacity: 0.85; }
+.site-theme .lc-thumbs button.on { opacity: 1; outline-color: var(--s-gold); }
+@media (max-width: 720px) {
+  .site-theme .lc-stage { aspect-ratio: 4 / 3; }
+  .site-theme .lc-nav { width: 40px; height: 40px; font-size: 22px; }
+  .site-theme .lc-thumbs button { width: 78px; height: 56px; }
+}

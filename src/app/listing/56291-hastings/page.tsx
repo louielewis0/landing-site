@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SiteShell from "@/components/site/SiteShell";
 import ShowingCTA from "@/components/site/ShowingCTA";
+import ListingCarousel from "@/components/site/ListingCarousel";
 import { company } from "@/lib/config";
 
 const PROPERTY = "56291 Hastings Dr, Macomb Twp";
@@ -75,19 +76,8 @@ export default function HastingsListing() {
             </a>
           </div>
 
-          {/* Photo gallery — the actual Hastings house */}
-          <div className="t-gallery">
-            {PHOTOS.map((p, i) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={p.src}
-                src={p.src}
-                alt={p.alt}
-                loading={i === 0 ? "eager" : "lazy"}
-                className={i === 0 ? "t-gallery-hero" : ""}
-              />
-            ))}
-          </div>
+          {/* Photo slideshow — the actual Hastings house, uncropped */}
+          <ListingCarousel photos={PHOTOS} />
 
           <div className="t-stats-grid t-listing-facts" style={{ marginTop: 52 }}>
             {facts.map((f) => (
