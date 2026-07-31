@@ -1011,7 +1011,7 @@ body {
 .site-theme .t-stat-num {
   font-family: var(--font-grotesk), "Space Grotesk", sans-serif;
   font-weight: 300; font-size: clamp(48px, 5.5vw, 72px); line-height: 1; letter-spacing: -0.03em;
-  color: var(--s-ink);
+  color: var(--s-ink); font-variant-numeric: tabular-nums;
 }
 .site-theme .t-stat-num span { color: var(--s-gold); }
 .site-theme .t-stat-label {

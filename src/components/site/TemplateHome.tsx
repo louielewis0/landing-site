@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { company } from "@/lib/config";
+import CountUpStats from "./CountUpStats";
 
 /**
  * Homepage sections, built 1:1 from the user's template
@@ -45,26 +46,7 @@ export function TemplateStats() {
       <h2>
         Metro Detroit&rsquo;s <span className="t-blue">family-run</span> brokerage.
       </h2>
-      <div className="t-stats-grid">
-        <div>
-          <div className="t-stat-num">
-            20<span>+</span>
-          </div>
-          <div className="t-stat-label">Years in business</div>
-        </div>
-        <div>
-          <div className="t-stat-num">
-            $100M<span>+</span>
-          </div>
-          <div className="t-stat-label">In homes sold</div>
-        </div>
-        <div>
-          <div className="t-stat-num">
-            500<span>+</span>
-          </div>
-          <div className="t-stat-label">Homes closed</div>
-        </div>
-      </div>
+      <CountUpStats />
     </div>
   );
 }
