@@ -53,12 +53,12 @@ export function TemplateStats() {
 
 const CARDS = [
   {
-    href: "/listing/5040-patrick-road",
-    img: "/areas/west-bloomfield-real-estate-agent.jpg",
-    tag: "Sold",
-    price: "$448,900",
-    meta: "4 bd · 3 ba",
-    addr: "5040 Patrick Road · W. Bloomfield",
+    href: "/listing/56291-hastings",
+    img: "/listing/hastings/1.jpg",
+    tag: "For Sale",
+    price: "$520,000",
+    meta: "4 bd · 2.1 ba",
+    addr: "56291 Hastings · Macomb Twp",
   },
   {
     href: "/home-value",
@@ -85,8 +85,8 @@ export function TemplateListings() {
         <h2>
           On the <span>market</span>
         </h2>
-        <Link href="/listing/5040-patrick-road" className="t-link-caps">
-          Just sold &rarr;
+        <Link href="/listing/56291-hastings" className="t-link-caps">
+          View listing &rarr;
         </Link>
       </div>
       <div className="t-listings-grid">
