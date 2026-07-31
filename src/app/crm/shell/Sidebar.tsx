@@ -15,7 +15,6 @@ const NAV = [
   { num: "02", label: "Leads", href: "/crm/leads" },
   { num: "03", label: "Pipeline", href: "/crm/pipeline" },
   { num: "04", label: "Activity", href: "/crm/activity" },
-  { num: "05", label: "Playbook", href: "/crm/playbook" },
 ];
 
 export default function Sidebar() {
