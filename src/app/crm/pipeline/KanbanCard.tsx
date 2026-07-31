@@ -120,7 +120,7 @@ export default function KanbanCard({
       <div
         ref={setNodeRef}
         style={style}
-        className="rounded-xl border border-[#c0392b]/40 bg-white p-3 select-none shadow-[0_2px_8px_rgba(25,26,28,0.06)]"
+        className="rounded-xl border border-[#c0392b]/40 bg-[#ffffff] p-3 select-none shadow-[0_2px_8px_rgba(25,26,28,0.06)]"
       >
         <p className="text-[12.5px] text-white/90 font-semibold mb-1.5">
           Delete this lead?
@@ -160,8 +160,8 @@ export default function KanbanCard({
       {...(interactive ? attributes : {})}
       className={`group relative rounded-xl border p-3 backdrop-blur-xl cursor-grab active:cursor-grabbing select-none transition-all duration-150 touch-none ${
         isDragging
-          ? "border-[var(--gold)]/60 bg-white shadow-[0_10px_30px_-12px_rgba(228,80,30,0.35)]"
-          : "border-[rgba(25,26,28,0.09)] bg-white shadow-[0_2px_8px_rgba(25,26,28,0.06)] hover:border-[var(--gold)] hover:-translate-y-px"
+          ? "border-[var(--gold)]/60 bg-[#ffffff] shadow-[0_10px_30px_-12px_rgba(228,80,30,0.35)]"
+          : "border-[rgba(25,26,28,0.09)] bg-[#ffffff] shadow-[0_2px_8px_rgba(25,26,28,0.06)] hover:border-[var(--gold)] hover:-translate-y-px"
       }`}
     >
       {/* Trash button — hidden until hover/focus, suppresses pointer-
