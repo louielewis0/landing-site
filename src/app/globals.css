@@ -918,7 +918,12 @@ body {
   display: flex; align-items: center; gap: 40px;
 }
 .site-theme .t-nav-brand { display: flex; align-items: center; gap: 11px; flex-shrink: 0; }
-.site-theme .t-nav-brand img { border-radius: 10px; }
+.site-theme .t-nav-brand img {
+  width: 64px; height: 64px; object-fit: contain; border-radius: 0; background: none;
+  filter: drop-shadow(0 4px 12px rgba(22,24,29,0.28));
+  transition: transform .3s cubic-bezier(.2,.9,.3,1);
+}
+.site-theme .t-nav-brand:hover img { transform: scale(1.06); }
 .site-theme .t-nav-word {
   font-family: var(--font-grotesk), "Space Grotesk", sans-serif;
   font-weight: 600; font-size: 13px; letter-spacing: 0.14em;

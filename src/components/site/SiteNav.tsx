@@ -32,12 +32,7 @@ export default function SiteNav() {
     <>
       <div className="t-nav">
         <Link href="/" className="t-nav-brand" aria-label={`${company.name} home`}>
-          <Image src="/mcr-logo-color-3d.png" alt="" width={38} height={38} priority />
-          <span className="t-nav-word">
-            Real Estate
-            <br />
-            Market Center
-          </span>
+          <Image src="/mcr-logo-color-3d.png" alt={company.name} width={64} height={64} priority />
         </Link>
         <nav className="t-nav-links">
           {links.map((l) => (
