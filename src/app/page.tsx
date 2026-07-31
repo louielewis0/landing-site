@@ -10,7 +10,7 @@ import ContactForm from "@/components/ContactForm";
 
 export default function Home() {
   return (
-    <SiteShell>
+    <SiteShell navOnDark>
       <main>
         <TemplateHero />
         <TemplateStats />

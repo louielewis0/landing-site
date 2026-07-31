@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { company } from "@/lib/config";
 
 /**
@@ -11,35 +12,29 @@ import { company } from "@/lib/config";
 
 export function TemplateHero() {
   return (
-    <div className="t-wrap t-hero">
-      <h1>
-        Home,
-        <br />
-        <span>Elevated.</span>
-      </h1>
-      <div className="t-hero-media">
-        <video autoPlay muted loop playsInline preload="metadata" poster="/hero-video-poster.jpg">
-          <source src="/hero-video.mp4" type="video/mp4" />
-        </video>
-        <div className="t-hero-shade" aria-hidden />
-        <div className="t-hero-copy">
-          <div className="t-hero-tag">
-            Live in a home that speaks for itself before you even open the door
-          </div>
-          <Link href="/home-value" className="t-pill">
-            What&rsquo;s My Home Worth?
-          </Link>
-        </div>
-        <div className="t-hero-chip">
-          <div className="t-hero-chip-num">
-            500<span>+</span>
-          </div>
-          <div className="t-hero-chip-sub">
-            families moved across Metro Detroit &mdash; and counting.
-          </div>
-        </div>
+    <section className="t-hero-full">
+      <video autoPlay muted loop playsInline preload="metadata" poster="/hero-video-poster.jpg">
+        <source src="/hero-video.mp4" type="video/mp4" />
+      </video>
+      <div className="t-hero-full-shade" aria-hidden />
+      <div className="t-hero-logo">
+        <Image
+          src="/mcr-logo-color-3d.png"
+          alt={company.name}
+          width={1156}
+          height={1156}
+          priority
+        />
       </div>
-    </div>
+      <div className="t-hero-copy">
+        <div className="t-hero-tag">
+          Live in a home that speaks for itself before you even open the door
+        </div>
+        <Link href="/home-value" className="t-pill">
+          What&rsquo;s My Home Worth?
+        </Link>
+      </div>
+    </section>
   );
 }
 
