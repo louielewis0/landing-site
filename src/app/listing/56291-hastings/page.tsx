@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description:
       "4 Bed | 2.1 Bath | 3,600 sqft finished colonial with updated kitchen, finished basement & stamped-concrete patio.",
     type: "website",
-    images: ["/listing/hastings/1.jpg"],
+    images: ["/listing/hastings/exterior.jpg"],
   },
   robots: { index: true, follow: true },
 };
@@ -43,12 +43,12 @@ const highlights = [
 ];
 
 const PHOTOS = [
-  { src: "/listing/hastings/1.jpg", alt: "Front exterior — brick colonial with covered entry and two-car garage" },
-  { src: "/listing/hastings/2.jpg", alt: "Updated kitchen with granite counters and stainless appliances" },
-  { src: "/listing/hastings/3.jpg", alt: "Open living room with fireplace" },
-  { src: "/listing/hastings/4.jpg", alt: "Dining area with doorwall to the backyard patio" },
-  { src: "/listing/hastings/5.jpg", alt: "Full bathroom with double vanity and marble counters" },
-  { src: "/listing/hastings/6.jpg", alt: "Primary bedroom with vaulted ceiling and large windows" },
+  { src: "/listing/hastings/exterior.jpg", alt: "Front exterior — brick colonial with covered entry and two-car garage" },
+  { src: "/listing/hastings/kitchen.jpg", alt: "Updated kitchen with granite counters and stainless appliances" },
+  { src: "/listing/hastings/living.jpg", alt: "Open living room with fireplace" },
+  { src: "/listing/hastings/dining.jpg", alt: "Dining area with doorwall to the backyard patio" },
+  { src: "/listing/hastings/bathroom.jpg", alt: "Full bathroom with double vanity and marble counters" },
+  { src: "/listing/hastings/bedroom.jpg", alt: "Primary bedroom with vaulted ceiling and large windows" },
 ];
 
 const inquiryMail = `mailto:${company.email}?subject=${encodeURIComponent(
@@ -124,7 +124,7 @@ export default function HastingsListing() {
         <div className="t-wrap t-cta-wrap">
           <div className="t-cta">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/listing/hastings/1.jpg" alt="" loading="lazy" />
+            <img src="/listing/hastings/exterior.jpg" alt="" loading="lazy" />
             <div className="t-cta-shade" aria-hidden />
             <div className="t-cta-copy">
               <h2>

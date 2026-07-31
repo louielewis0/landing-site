@@ -9,7 +9,7 @@ import Link from "next/link";
 const CARDS = [
   {
     href: "/listing/56291-hastings",
-    img: "/listing/hastings/2.jpg",
+    img: "/listing/hastings/kitchen.jpg",
     tag: "For Sale",
     price: "$520,000",
     meta: "4 bd · 2.1 ba",
