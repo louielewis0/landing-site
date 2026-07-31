@@ -1487,3 +1487,8 @@ body {
 .crm-mesh ::-webkit-scrollbar-thumb { background: rgba(25,26,28,0.22); }
 .crm-mesh ::-webkit-scrollbar-thumb:hover { background: #E4501E; }
 .crm-mesh ::selection { background: rgba(228,80,30,0.25); color: #191a1c; }
+
+/* CRM dashboard responsive: stack pipeline + right column on narrow */
+@media (max-width: 1100px) {
+  .crm-mesh .crm-dash-cols { grid-template-columns: 1fr !important; }
+}

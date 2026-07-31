@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import CrmGate from "./gate";
 import Sidebar from "./shell/Sidebar";
-import Topbar from "./shell/Topbar";
 import { manrope, grotesk } from "@/lib/site-fonts";
 
 export const metadata: Metadata = {
@@ -41,8 +40,7 @@ export default function CrmLayout({
       <div className={`min-h-screen crm-mesh relative flex ${manrope.variable} ${grotesk.variable}`}>
         <Sidebar />
         <div className="flex-1 min-w-0 flex flex-col">
-          <Topbar />
-          <main className="flex-1 px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-7xl w-full">{children}</main>
+          <main className="flex-1 w-full" style={{ padding: "30px 36px 48px" }}>{children}</main>
         </div>
       </div>
     </CrmGate>
