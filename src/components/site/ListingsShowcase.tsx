@@ -22,7 +22,7 @@ const HASTINGS_PHOTOS = [
 const CARDS = [
   {
     type: "gallery" as const,
-    img: "/listing/hastings/1.jpg",
+    img: "/listing/hastings/cover.jpg",
     tag: "For Sale",
     price: "$520,000",
     meta: "4 bd · 2.1 ba",
