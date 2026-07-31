@@ -20,15 +20,6 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const PHOTOS = [
-  { src: "/listing/hastings/1.jpg", alt: "Front exterior — brick colonial with covered entry and two-car garage" },
-  { src: "/listing/hastings/2.jpg", alt: "Updated kitchen with granite counters and stainless appliances" },
-  { src: "/listing/hastings/3.jpg", alt: "Open living room with fireplace" },
-  { src: "/listing/hastings/4.jpg", alt: "Dining area with doorwall to the backyard patio" },
-  { src: "/listing/hastings/5.jpg", alt: "Spacious bedroom with natural light" },
-  { src: "/listing/hastings/6.jpg", alt: "Finished basement with rec and gym space" },
-];
-
 const facts = [
   { label: "Bedrooms", value: "4" },
   { label: "Baths", value: "2.1" },
@@ -74,21 +65,7 @@ export default function HastingsListing() {
             </a>
           </div>
 
-          {/* Photo gallery */}
-          <div className="t-gallery">
-            {PHOTOS.map((p, i) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={p.src}
-                src={p.src}
-                alt={p.alt}
-                loading={i === 0 ? "eager" : "lazy"}
-                className={i === 0 ? "t-gallery-hero" : ""}
-              />
-            ))}
-          </div>
-
-          <div className="t-stats-grid t-listing-facts">
+          <div className="t-stats-grid t-listing-facts" style={{ marginTop: 52 }}>
             {facts.map((f) => (
               <div key={f.label}>
                 <div className="t-stat-num" style={{ fontSize: "clamp(26px,3vw,40px)" }}>

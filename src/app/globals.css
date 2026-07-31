@@ -1259,3 +1259,46 @@ body {
   .site-theme .t-gallery img { height: 240px; }
   .site-theme .t-gallery-hero { height: 300px; }
 }
+
+/* Listing photo lightbox (triggered from homepage card) */
+.site-theme .t-card { border: none; padding: 0; cursor: pointer; font: inherit; text-align: left; width: 100%; }
+.t-lb {
+  position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center;
+  background: rgba(15,16,18,0.92); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  padding: 40px 20px 80px; animation: tlbIn .25s ease;
+}
+@keyframes tlbIn { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .t-lb { animation: none; } }
+.t-lb-img {
+  max-width: min(1100px, 94vw); max-height: 82vh; width: auto; height: auto;
+  object-fit: contain; border-radius: 14px; box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+.t-lb-close {
+  position: absolute; top: 20px; right: 24px; width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); color: #fff;
+  font-size: 26px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background .25s;
+}
+.t-lb-close:hover { background: rgba(255,255,255,0.24); }
+.t-lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); color: #fff;
+  font-size: 30px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background .25s;
+}
+.t-lb-nav:hover { background: var(--s-gold); border-color: var(--s-gold); }
+.t-lb-prev { left: 20px; }
+.t-lb-next { right: 20px; }
+.t-lb-bar {
+  position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center;
+  padding: 12px 22px; border-radius: 999px; background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px);
+}
+.t-lb-count { font-size: 13px; color: rgba(255,255,255,0.85); font-variant-numeric: tabular-nums; }
+.t-lb-details { font-size: 13px; font-weight: 600; color: #fff; white-space: nowrap; }
+.t-lb-details:hover { color: var(--s-gold-light); }
+@media (max-width: 720px) {
+  .t-lb-nav { width: 42px; height: 42px; font-size: 24px; }
+  .t-lb-prev { left: 10px; } .t-lb-next { right: 10px; }
+}
