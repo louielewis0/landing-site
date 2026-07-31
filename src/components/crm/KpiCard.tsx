@@ -49,7 +49,7 @@ export default function KpiCard({
           </span>
         )}
       </div>
-      <p className="crm-num text-3xl font-semibold text-[#f4f5f7]">
+      <p className="crm-num text-3xl font-semibold text-[#191a1c]">
         {value}
       </p>
       {delta && (

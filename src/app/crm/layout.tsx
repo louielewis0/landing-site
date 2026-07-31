@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import CrmGate from "./gate";
 import Sidebar from "./shell/Sidebar";
 import Topbar from "./shell/Topbar";
+import { manrope, grotesk } from "@/lib/site-fonts";
 
 export const metadata: Metadata = {
   title: { template: "%s | CRM", default: "CRM" },
@@ -37,7 +38,7 @@ export default function CrmLayout({
 }) {
   return (
     <CrmGate>
-      <div className="min-h-screen crm-mesh relative flex">
+      <div className={`min-h-screen crm-mesh relative flex ${manrope.variable} ${grotesk.variable}`}>
         <Sidebar />
         <div className="flex-1 min-w-0 flex flex-col">
           <Topbar />

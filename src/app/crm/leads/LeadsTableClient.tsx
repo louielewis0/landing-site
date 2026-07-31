@@ -350,7 +350,7 @@ export default function LeadsTableClient() {
         <div className="w-12 h-12 rounded-2xl border border-[#FB7185]/30 bg-[#FB7185]/10 flex items-center justify-center mx-auto mb-4 text-[#FB7185]">
           <AlertCircle className="w-5 h-5" strokeWidth={1.5} />
         </div>
-        <p className="text-lg font-semibold text-[#f4f5f7] mb-2">
+        <p className="text-lg font-semibold text-[#191a1c] mb-2">
           Couldn&apos;t load leads.
         </p>
         <p className="text-white/55 text-[14px] mb-6">

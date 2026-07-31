@@ -24,7 +24,7 @@ export default function Brand() {
         />
       </div>
       <div className="leading-tight">
-        <span className="block font-semibold text-[14px] tracking-tight text-[#f4f5f7]">
+        <span className="block font-semibold text-[14px] tracking-tight text-[#191a1c]">
           {company.shortName}
         </span>
         <span className="block text-[10px] tracking-[0.28em] uppercase text-[var(--gold-soft)] mt-0.5">

@@ -27,7 +27,7 @@ export default function EmptyState({
           {icon}
         </div>
       )}
-      <p className="text-lg font-semibold text-[#f4f5f7] mb-2">{title}</p>
+      <p className="text-lg font-semibold text-[#191a1c] mb-2">{title}</p>
       {description && (
         <p className="text-white/55 text-[14px] max-w-md mx-auto mb-6">
           {description}

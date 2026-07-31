@@ -226,7 +226,7 @@ function ConversationLogger({
       <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
         <div>
           <p className="crm-label text-[var(--gold-soft)] mb-2">Headline KPI</p>
-          <h2 className="text-lg font-semibold text-[#f4f5f7] tracking-tight">
+          <h2 className="text-lg font-semibold text-[#191a1c] tracking-tight">
             Conversations started this week
           </h2>
           <p className="text-[13px] text-white/55 mt-1.5 font-light max-w-lg">
@@ -363,7 +363,7 @@ function PhaseSection({
           </p>
         </div>
         <div className="text-right">
-          <div className="text-base font-semibold text-[#f4f5f7]">
+          <div className="text-base font-semibold text-[#191a1c]">
             {phaseDone}{" "}
             <span className="text-white/40">/ {phaseTasks.length}</span>
           </div>

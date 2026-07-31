@@ -89,7 +89,7 @@ export default function DncScrubber({
         <div className="flex items-start justify-between mb-5 flex-wrap gap-3">
           <div>
             <p className="crm-label text-[var(--gold-soft)] mb-2">DNC scrubber</p>
-            <h2 className="text-lg font-semibold text-[#f4f5f7] tracking-tight">
+            <h2 className="text-lg font-semibold text-[#191a1c] tracking-tight">
               Paste DNC list (248 / 586 / 313)
             </h2>
             <p className="text-[13px] text-white/55 mt-2 font-light max-w-2xl">

@@ -41,7 +41,7 @@ export default function NavLink({
       href={href}
       className={`group relative flex items-center gap-3 px-3 py-2 rounded-xl text-[13.5px] font-medium tracking-tight transition-all duration-150 ${
         isActive
-          ? "text-[#f4f5f7] bg-gradient-to-r from-[var(--gold)]/[0.14] to-white/[0.04] border border-[var(--gold)]/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
+          ? "text-[#191a1c] bg-gradient-to-r from-[var(--gold)]/[0.14] to-white/[0.04] border border-[var(--gold)]/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
           : "text-white/55 hover:text-white/90 hover:bg-white/[0.05] border border-transparent"
       }`}
     >

@@ -93,7 +93,7 @@ export default function CrmGate({ children }: { children: React.ReactNode }) {
           </svg>
         </div>
         <p className="crm-label mb-2">Internal · Private</p>
-        <h1 className="text-2xl font-semibold text-[#f4f5f7] tracking-tight mb-2">
+        <h1 className="text-2xl font-semibold text-[#191a1c] tracking-tight mb-2">
           CRM
         </h1>
         <p className="text-[14px] text-white/50 mb-8">

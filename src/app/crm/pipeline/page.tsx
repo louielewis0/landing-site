@@ -7,7 +7,7 @@ export default function CrmPipelinePage() {
   return (
     <>
       <p className="crm-label text-[var(--gold-soft)] mb-2">Pipeline</p>
-      <h1 className="text-2xl font-semibold text-[#f4f5f7] tracking-tight mb-2">
+      <h1 className="text-2xl font-semibold text-[#191a1c] tracking-tight mb-2">
         Kanban board.
       </h1>
       <p className="text-white/55 text-[14px] mb-8 max-w-2xl">

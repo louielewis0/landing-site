@@ -17,15 +17,16 @@
   --color-gold-deep: #9C7A2E;
   --color-rust: #8C4A1F;
 
-  /* CRM design system — cool-neutral base + semantic accents.
+  /* CRM design system — user's "Market Center CRM.html" template:
+     bone ground, ink text, burnt-orange accent, steel-blue + green.
      Additive: marketing pages never reference these. */
-  --color-crm-bg: #0A0B0F;
-  --color-crm-panel: #12141A;
-  --color-crm-teal: #2DD4BF;
-  --color-crm-violet: #A78BFA;
-  --color-crm-sky: #38BDF8;
-  --color-crm-amber: #FBBF24;
-  --color-crm-rose: #FB7185;
+  --color-crm-bg: #f2efe9;
+  --color-crm-panel: #ffffff;
+  --color-crm-teal: #1d7a4f;
+  --color-crm-violet: #2E5A9C;
+  --color-crm-sky: #2E5A9C;
+  --color-crm-amber: #E4501E;
+  --color-crm-rose: #c0392b;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -1378,3 +1379,111 @@ body {
   .site-theme .lc-nav { width: 40px; height: 40px; font-size: 22px; }
   .site-theme .lc-thumbs button { width: 78px; height: 56px; }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   CRM RE-SKIN — user's "Market Center CRM.html" template.
+   Scoped entirely under .crm-mesh so the public site is untouched.
+   Flips Tailwind's white utilities to ink (via --color-white) and
+   re-skins every crm- component class to the bone / glass system.
+   ════════════════════════════════════════════════════════════════════ */
+.crm-mesh {
+  /* One-line magic: every text-white / bg-white / border-white utility
+     reads var(--color-white); remap it to ink so all dark-theme text
+     becomes dark-on-bone at its own alpha. */
+  --color-white: #191a1c;
+  /* CRM buttons/accents that read the cinematic gold → template orange */
+  --gold: #E4501E;
+  --gold-soft: #f0a15c;
+  --gold-deep: #c9430f;
+
+  background-color: #f2efe9;
+  background-image:
+    radial-gradient(ellipse 55% 40% at 6% 0%, rgba(228,80,30,0.06), transparent 60%),
+    radial-gradient(ellipse 50% 45% at 96% 8%, rgba(46,90,156,0.06), transparent 60%);
+  color: #191a1c;
+  font-family: var(--font-manrope), "Manrope", system-ui, sans-serif;
+}
+.crm-mesh h1, .crm-mesh h2, .crm-mesh h3, .crm-mesh .crm-title {
+  font-family: var(--font-grotesk), "Space Grotesk", sans-serif;
+  color: #191a1c;
+}
+
+/* Frosted cards → white 72% glass on bone */
+.crm-mesh .crm-glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(25, 26, 28, 0.07);
+  box-shadow: 0 4px 18px rgba(25, 26, 28, 0.05);
+}
+.crm-mesh .crm-glass-heavy {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);
+  border: 1px solid rgba(25, 26, 28, 0.1);
+  box-shadow: 0 30px 80px rgba(25, 26, 28, 0.22);
+}
+.crm-mesh .crm-panel {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(25, 26, 28, 0.07);
+  box-shadow: 0 4px 18px rgba(25, 26, 28, 0.05);
+}
+.crm-mesh .crm-title { font-weight: 500; color: #191a1c; }
+.crm-mesh .crm-label { color: rgba(25, 26, 28, 0.45); }
+
+/* Buttons */
+.crm-mesh .crm-btn-primary {
+  background: #E4501E; color: #fff;
+  box-shadow: 0 6px 18px rgba(228, 80, 30, 0.3);
+}
+.crm-mesh .crm-btn-primary:hover:not(:disabled) {
+  background: #c9430f; box-shadow: 0 8px 22px rgba(228, 80, 30, 0.42); transform: translateY(-1px);
+}
+.crm-mesh .crm-btn-secondary {
+  background: rgba(25, 26, 28, 0.04); color: #191a1c; border: 1px solid rgba(25, 26, 28, 0.15);
+}
+.crm-mesh .crm-btn-secondary:hover:not(:disabled) {
+  background: rgba(25, 26, 28, 0.08); border-color: rgba(25, 26, 28, 0.3); color: #191a1c;
+}
+.crm-mesh .crm-btn-destructive {
+  background: rgba(192, 57, 43, 0.1); color: #c0392b; border: 1px solid rgba(192, 57, 43, 0.28);
+}
+.crm-mesh .crm-btn-destructive:hover:not(:disabled) {
+  background: rgba(192, 57, 43, 0.18); border-color: rgba(192, 57, 43, 0.5);
+}
+.crm-mesh .crm-btn:focus-visible { outline: 2px solid rgba(228, 80, 30, 0.7); }
+
+/* Inputs */
+.crm-mesh .crm-input {
+  background: #fff; border: 1px solid rgba(25, 26, 28, 0.15); color: #191a1c;
+}
+.crm-mesh .crm-input::placeholder { color: rgba(25, 26, 28, 0.4); }
+.crm-mesh .crm-input:focus {
+  border-color: rgba(228, 80, 30, 0.6); background: #fff;
+  box-shadow: 0 0 0 3px rgba(228, 80, 30, 0.15);
+}
+
+/* Tables */
+.crm-mesh .crm-table th { color: rgba(25, 26, 28, 0.45); }
+.crm-mesh .crm-table tbody tr { border-top: 1px solid rgba(25, 26, 28, 0.06); }
+.crm-mesh .crm-table tbody tr:hover { background: rgba(25, 26, 28, 0.03); }
+
+/* Native <select> dropdown options (were dark) → white */
+.crm-mesh option { background: #fff; color: #191a1c; }
+
+/* Explicit dark surfaces baked into components → light glass */
+.crm-mesh [class*="bg-[#12141A]"],
+.crm-mesh [class*="bg-[#0A0B0F]"] {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+}
+.crm-mesh [class*="bg-black"] { background-color: rgba(255,255,255,0.9) !important; }
+
+/* Accent chips/dots remapped to the template palette */
+.crm-mesh [class*="bg-[#2DD4BF]"], .crm-mesh [class*="bg-[#4ADE80]"] { background-color: #1d7a4f !important; }
+.crm-mesh [class*="bg-[#A78BFA]"], .crm-mesh [class*="bg-[#38BDF8]"] { background-color: #2E5A9C !important; }
+.crm-mesh [class*="bg-[#FBBF24]"], .crm-mesh [class*="bg-[#FB923C]"] { background-color: #E4501E !important; }
+.crm-mesh [class*="bg-[#FB7185]"] { background-color: #c0392b !important; }
+
+/* CRM-scoped scrollbar + selection on bone */
+.crm-mesh ::-webkit-scrollbar-track { background: #e9e5dc; }
+.crm-mesh ::-webkit-scrollbar-thumb { background: rgba(25,26,28,0.22); }
+.crm-mesh ::-webkit-scrollbar-thumb:hover { background: #E4501E; }
+.crm-mesh ::selection { background: rgba(228,80,30,0.25); color: #191a1c; }
