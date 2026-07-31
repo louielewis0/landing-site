@@ -46,7 +46,7 @@ export default function SiteNav() {
             <span>Free instant estimate</span>
           </Link>
           <a href={`tel:${company.phoneTel}`} className="nav-phone-pill">
-            {company.phone}
+            Contact Us
           </a>
         </div>
       </nav>
