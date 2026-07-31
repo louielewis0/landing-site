@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteShell from "@/components/site/SiteShell";
+import ShowingCTA from "@/components/site/ShowingCTA";
 import { company } from "@/lib/config";
+
+const PROPERTY = "56291 Hastings Dr, Macomb Twp";
 
 export const metadata: Metadata = {
   title: `56291 Hastings, Macomb Twp — $520,000 | 4 Bed Colonial | ${company.name}`,
@@ -57,9 +60,7 @@ export default function HastingsListing() {
           </div>
 
           <div className="t-listing-actions">
-            <a href={`tel:${company.phoneTel}`} className="t-pill t-pill-solid t-pill-dark">
-              Schedule a showing
-            </a>
+            <ShowingCTA property={PROPERTY} label="Schedule a showing" />
             <a href={inquiryMail} className="t-pill-ghost">
               Request info
             </a>
@@ -119,12 +120,10 @@ export default function HastingsListing() {
                 <span>in person?</span>
               </h2>
               <p>
-                Call {company.phone} to book a private showing &mdash; or ask us
-                anything about the home, the street, or the offer process.
+                Book a private showing in a few taps. Tell us when works and a
+                licensed broker confirms your time personally.
               </p>
-              <a href={`tel:${company.phoneTel}`} className="t-pill t-pill-solid">
-                Book a Showing
-              </a>
+              <ShowingCTA property={PROPERTY} />
             </div>
           </div>
         </div>
