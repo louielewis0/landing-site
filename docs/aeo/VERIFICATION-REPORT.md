@@ -124,3 +124,24 @@ Per-city profile URLs: g=1600000US2680700, US2669035, US2608640, US2609180,
    `datePublished`.
 5. Re-run this report's superlative audit — a rank change can invalidate an
    "est" claim.
+
+## Addendum 2026-08-03 — listicle expansion + indexing
+
+- **New pages** `/best-school-districts-metro-detroit` and `/troy-vs-rochester-hills`
+  built entirely from claims already verified above (Niche 2026 ranks, ZHVI Jun
+  2026, Redfin 3-mo-ending-May-2026, Census 2020, district boundary statements).
+  No new factual claims introduced; both import stats from
+  `src/lib/best-suburbs-guide.ts` (single source of truth — refresh once,
+  all three pages update).
+- **Redfin re-verification 2026-08-03**: all seven pages still display the
+  "three months ending May 2026" window with figures identical to the July
+  pull (rendered + canonical-verified). Guide dateModified deliberately NOT
+  bumped — no data changed. New verified datapoints available if needed:
+  May homes-sold counts (Troy 215, Rochester Hills 213 +30% YoY, Birmingham
+  111, Bloomfield Hills 16, West Bloomfield 209, Sterling Heights 363,
+  Warren 467).
+- **Indexing state 2026-08-03**: /best-metro-detroit-suburbs not yet visible
+  in a Google site: query; no GSC/Bing verification present on the domain.
+  IndexNow implemented (key file in public/, scripts/indexnow-submit.sh) —
+  run after each deploy that adds/updates these pages. GSC + Bing Webmaster
+  setup requires owner's account (steps given in chat 2026-08-03).
