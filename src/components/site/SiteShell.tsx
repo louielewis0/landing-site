@@ -3,6 +3,7 @@ import SiteNav from "./SiteNav";
 import SiteFooter from "./SiteFooter";
 import SiteMotion from "./SiteMotion";
 import Concierge from "./Concierge";
+import ValuationPopup from "./ValuationPopup";
 
 /**
  * Wrapper for every PUBLIC page (never /crm): applies the .site-theme
@@ -26,6 +27,7 @@ export default function SiteShell({
       {children}
       <SiteFooter />
       <Concierge />
+      <ValuationPopup />
       <SiteMotion />
     </div>
   );

@@ -1492,3 +1492,47 @@ body {
 @media (max-width: 1100px) {
   .crm-mesh .crm-dash-cols { grid-template-columns: 1fr !important; }
 }
+
+/* Scroll-depth valuation popup */
+.vp-overlay {
+  position: fixed; inset: 0; z-index: 180; display: flex; align-items: center; justify-content: center;
+  background: rgba(15,16,18,0.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  padding: 20px; animation: tlbIn .25s ease;
+}
+.vp-card {
+  position: relative; width: min(460px, 94vw); background: var(--cream, #f2efe9);
+  border-radius: 24px; padding: 40px 36px 32px; text-align: center;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.35);
+  animation: concIn .32s cubic-bezier(.22,1,.36,1);
+}
+@media (prefers-reduced-motion: reduce) { .vp-overlay, .vp-card { animation: none; } }
+.vp-close {
+  position: absolute; top: 14px; right: 16px; width: 36px; height: 36px; border-radius: 50%;
+  background: none; border: none; color: rgba(25,26,28,0.45); font-size: 26px; line-height: 1; cursor: pointer;
+}
+.vp-close:hover { color: #191a1c; }
+.vp-eyebrow {
+  font-family: var(--font-grotesk), "Space Grotesk", sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--s-gold, #E4501E); margin-bottom: 14px;
+}
+.vp-card h3 {
+  margin: 0 0 14px;
+  font-family: var(--font-grotesk), "Space Grotesk", sans-serif;
+  font-weight: 300; font-size: clamp(26px, 5vw, 34px); line-height: 1.1;
+  letter-spacing: -0.02em; text-transform: uppercase; color: #191a1c;
+}
+.vp-card h3 span { font-weight: 500; }
+.vp-card p { margin: 0 0 24px; font-size: 14.5px; line-height: 1.65; color: rgba(25,26,28,0.62); }
+.vp-cta {
+  display: block; width: 100%; padding: 15px 20px; border-radius: 999px;
+  background: var(--s-gold, #E4501E); color: #fff; font-weight: 600; font-size: 15px;
+  letter-spacing: 0.01em; transition: background .25s;
+  box-shadow: 0 8px 22px rgba(228,80,30,0.35);
+}
+.vp-cta:hover { background: #c9430f; color: #fff; }
+.vp-later {
+  margin-top: 14px; background: none; border: none; cursor: pointer;
+  font-size: 13px; color: rgba(25,26,28,0.45); font-family: inherit;
+}
+.vp-later:hover { color: #191a1c; }
