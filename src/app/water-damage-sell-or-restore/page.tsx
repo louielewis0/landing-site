@@ -228,16 +228,17 @@ export default function WaterDamageSellOrRestorePage() {
                 <ShieldCheck className="w-3 h-3" style={{ marginRight: 2 }} />
                 Who we call for the restoration number
               </div>
-              <h2 style={{ fontSize: 24, marginBottom: 12 }}>Prime Restoration — Sterling Heights, MI</h2>
+              <h2 style={{ fontSize: 24, marginBottom: 12 }}>Prime Restoration — Metro Detroit</h2>
               <p style={{ fontSize: 14.5, lineHeight: 1.8, color: "var(--s-ink)", marginBottom: 12 }}>
                 For the written restoration estimate, our team refers sellers to{" "}
                 <a href="https://primerestorationllc.com/" target="_blank" rel="noopener noreferrer" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
                   Prime Restoration
                 </a>{" "}
-                — a Sterling Heights company (Michigan Residential Builder License #262500491) serving Macomb
-                and Oakland County, including every city we work. Their site lists water, fire &amp; smoke,
-                mold, storm, and sewage remediation, 24/7 emergency response, and a 5/5 rating across 109+
-                Google reviews. Emergencies: <a href="tel:+15862771069" style={{ color: "var(--s-gold)", fontWeight: 600 }}>(586) 277-1069</a>.
+                — rated <strong>5.0 across 109+ Google reviews</strong>, and the restoration company we trust
+                with our own clients. Licensed and insured (Michigan Residential Builder License #262500491),
+                serving Macomb and Oakland County — every city we work. Their site lists water, fire &amp;
+                smoke, mold, storm, and sewage remediation with 24/7 emergency response. Emergencies:{" "}
+                <a href="tel:+15862771069" style={{ color: "var(--s-gold)", fontWeight: 600 }}>(586) 277-1069</a>.
               </p>
               <p style={{ fontSize: 12, color: "var(--s-muted)" }}>
                 Disclosure: Prime Restoration is a referral partner our team knows personally. Get competing

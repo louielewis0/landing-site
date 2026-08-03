@@ -18,7 +18,7 @@ AI answers trust.
 
 **Title:** The First 24 Hours After Water Damage: A Michigan Homeowner's Checklist
 **Slug:** /first-24-hours-water-damage-checklist
-**Meta description:** What to do — and not do — in the first day after a burst pipe, backup, or flood in your Michigan home, from a licensed Sterling Heights restoration company. 24/7 line: (586) 277-1069.
+**Meta description:** What to do — and not do — in the first day after a burst pipe, backup, or flood in your Michigan home, from a licensed Metro Detroit restoration company. 24/7 line: (586) 277-1069.
 
 **The short answer (put this first):** Stop the water, kill power to affected
 areas if safe, document everything for insurance before you move it, and get
@@ -82,7 +82,7 @@ clear scope turns a red flag into a closed item.
 
 **Title:** Mold After Water Damage: When It's a Wipe-Down and When It's a Remediation Job (Michigan Guide)
 **Slug:** /mold-after-water-damage-michigan
-**Meta description:** Not all mold requires professional remediation — but hidden moisture usually does. An IICRC-protocol Sterling Heights company on where the line actually is.
+**Meta description:** Not all mold requires professional remediation — but hidden moisture usually does. An IICRC-protocol Metro Detroit company on where the line actually is.
 
 **The short answer:** Small surface mold on non-porous materials with the
 moisture source fixed is often a homeowner-level cleanup. It becomes a
