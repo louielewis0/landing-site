@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { generateReviewOptions } from "@/lib/review-generator";
 import { company } from "@/lib/config";
+import { fraunces, inter, manrope, grotesk } from "@/lib/site-fonts";
 import {
   Star,
   Copy,
@@ -116,33 +117,42 @@ export default function ClientReviewPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0A1429] flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-orange-400 border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen bg-[#f2efe9] flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-[#E4501E] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
   if (notFound) {
     return (
-      <div className="min-h-screen bg-[#0A1429] flex items-center justify-center px-6">
-        <div className="text-center text-white">
-          <h1 className="text-2xl font-bold mb-2">Link not found</h1>
-          <p className="text-white/50">This review link may have expired or is invalid.</p>
+      <div className={`site-theme ${fraunces.variable} ${inter.variable} ${manrope.variable} ${grotesk.variable}`}>
+        <div className="min-h-screen bg-cream flex items-center justify-center px-6">
+          <div className="text-center" style={{ color: "var(--s-ink)" }}>
+            <h1 style={{ fontSize: 26, marginBottom: 8 }}>Link not found</h1>
+            <p style={{ color: "var(--s-muted)" }}>This review link may have expired or is invalid.</p>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0A1429] noise relative overflow-hidden">
-      <div className="absolute inset-0 glow-orange opacity-40" />
-      <div className="absolute inset-0 grid-overlay" />
+    <div className={`site-theme ${fraunces.variable} ${inter.variable} ${manrope.variable} ${grotesk.variable}`}>
+    <div className="min-h-screen bg-cream relative overflow-hidden">
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 45% at 50% 0%, rgba(228,80,30,0.08), transparent 60%)",
+        }}
+      />
 
       <div className="relative flex items-center justify-center min-h-screen px-6 py-16">
         <div className="w-full max-w-lg">
           {/* Logo */}
           <div className="flex justify-center mb-10">
-            <div className="bg-white/95 rounded-2xl p-2">
+            <div className="bg-white rounded-2xl p-2" style={{ border: "1px solid var(--line)", boxShadow: "0 10px 30px -12px rgba(25,26,28,0.15)" }}>
               <Image
                 src="/logo.png"
                 alt={company.name}
@@ -155,11 +165,11 @@ export default function ClientReviewPage() {
 
           {/* Step: Rate */}
           {step === "rate" && (
-            <div className="text-center text-white">
-              <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+            <div className="text-center" style={{ color: "var(--s-ink)" }}>
+              <h1 style={{ fontSize: "clamp(30px, 5vw, 40px)", lineHeight: 1.15, marginBottom: 12 }}>
                 Hi {req?.name?.split(" ")[0]},
               </h1>
-              <p className="text-lg text-white/65 mb-10 leading-relaxed">
+              <p style={{ fontSize: 17, color: "var(--s-muted)", marginBottom: 40, lineHeight: 1.6 }}>
                 How was your experience with {company.name}?
               </p>
 
@@ -173,11 +183,13 @@ export default function ClientReviewPage() {
                     className="transition-transform hover:scale-110 active:scale-95"
                   >
                     <Star
-                      className={`w-14 h-14 sm:w-16 sm:h-16 transition-colors ${
-                        star <= (hoveredStar || selectedRating)
-                          ? "text-orange-400"
-                          : "text-white/15"
-                      }`}
+                      className="w-14 h-14 sm:w-16 sm:h-16 transition-colors"
+                      style={{
+                        color:
+                          star <= (hoveredStar || selectedRating)
+                            ? "var(--s-gold)"
+                            : "rgba(25,26,28,0.15)",
+                      }}
                       fill={star <= (hoveredStar || selectedRating) ? "currentColor" : "none"}
                       strokeWidth={1.5}
                     />
@@ -185,7 +197,7 @@ export default function ClientReviewPage() {
                 ))}
               </div>
 
-              <p className="text-sm text-white/30">
+              <p style={{ fontSize: 13, color: "var(--s-muted)" }}>
                 Tap a star to rate your experience
               </p>
             </div>
@@ -193,17 +205,17 @@ export default function ClientReviewPage() {
 
           {/* Step: 5-star → AI review + Google link */}
           {step === "five-star" && (
-            <div className="text-white">
+            <div style={{ color: "var(--s-ink)" }}>
               <div className="text-center mb-8">
                 <div className="flex justify-center gap-1 mb-4">
                   {[1, 2, 3, 4, 5].map((i) => (
-                    <Star key={i} className="w-8 h-8 text-orange-400" fill="currentColor" strokeWidth={0} />
+                    <Star key={i} className="w-8 h-8" style={{ color: "var(--s-gold)" }} fill="currentColor" strokeWidth={0} />
                   ))}
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">
+                <h2 style={{ fontSize: "clamp(24px, 4vw, 32px)", marginBottom: 8 }}>
                   Thank you!
                 </h2>
-                <p className="text-white/60">
+                <p style={{ color: "var(--s-muted)" }}>
                   We wrote a review you can use — edit it or paste it as-is.
                 </p>
               </div>
@@ -214,25 +226,35 @@ export default function ClientReviewPage() {
                   <button
                     key={i}
                     onClick={() => setSelectedReview(i)}
-                    className={`w-full text-left p-5 rounded-2xl border transition-all ${
-                      selectedReview === i
-                        ? "bg-white/[0.06] border-orange-400/50 shadow-[0_0_30px_-10px_rgba(249,115,22,0.3)]"
-                        : "bg-white/[0.02] border-white/10 hover:border-white/20"
-                    }`}
+                    className="w-full text-left p-5 rounded-2xl transition-all"
+                    style={{
+                      background: "#fff",
+                      border:
+                        selectedReview === i
+                          ? "1px solid rgba(228,80,30,0.55)"
+                          : "1px solid var(--line)",
+                      boxShadow:
+                        selectedReview === i
+                          ? "0 12px 34px -14px rgba(228,80,30,0.35)"
+                          : "0 6px 20px -14px rgba(25,26,28,0.12)",
+                    }}
                   >
                     <div className="flex items-start gap-3">
                       <div
-                        className={`w-5 h-5 rounded-full border-2 flex-shrink-0 mt-0.5 flex items-center justify-center transition-colors ${
-                          selectedReview === i
-                            ? "border-orange-400 bg-orange-400"
-                            : "border-white/30"
-                        }`}
+                        className="w-5 h-5 rounded-full flex-shrink-0 mt-0.5 flex items-center justify-center transition-colors"
+                        style={{
+                          border:
+                            selectedReview === i
+                              ? "2px solid var(--s-gold)"
+                              : "2px solid rgba(25,26,28,0.3)",
+                          background: selectedReview === i ? "var(--s-gold)" : "transparent",
+                        }}
                       >
                         {selectedReview === i && (
                           <Check className="w-3 h-3 text-white" strokeWidth={3} />
                         )}
                       </div>
-                      <p className="text-[15px] text-white/80 leading-relaxed">{r}</p>
+                      <p style={{ fontSize: 15, lineHeight: 1.65, color: "var(--s-ink)" }}>{r}</p>
                     </div>
                   </button>
                 ))}
@@ -241,7 +263,8 @@ export default function ClientReviewPage() {
               {/* Regenerate */}
               <button
                 onClick={regenerate}
-                className="flex items-center gap-2 text-sm text-white/40 hover:text-white/70 transition-colors mx-auto mb-8"
+                className="flex items-center gap-2 mx-auto mb-8 transition-colors"
+                style={{ fontSize: 13, color: "var(--s-muted)" }}
               >
                 <RefreshCw className="w-3.5 h-3.5" />
                 Generate new options
@@ -251,11 +274,12 @@ export default function ClientReviewPage() {
               <div className="space-y-3">
                 <button
                   onClick={copyReview}
-                  className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-base transition-all ${
+                  className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-base transition-all"
+                  style={
                     copied
-                      ? "bg-green-500 text-white"
-                      : "bg-white text-slate-900 hover:bg-white/90"
-                  }`}
+                      ? { background: "#2f9e63", color: "#fff" }
+                      : { background: "var(--navy)", color: "#fff" }
+                  }
                 >
                   {copied ? (
                     <>
@@ -274,7 +298,12 @@ export default function ClientReviewPage() {
                   href={GOOGLE_REVIEW_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white font-semibold text-base shadow-[0_12px_40px_-12px_rgba(249,115,22,0.6)] transition-all hover:scale-[1.01] active:scale-[0.99]"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-base transition-all hover:scale-[1.01] active:scale-[0.99]"
+                  style={{
+                    background: "var(--s-gold)",
+                    color: "#fff",
+                    boxShadow: "0 12px 40px -12px rgba(228,80,30,0.55)",
+                  }}
                 >
                   <MessageSquare className="w-5 h-5" />
                   Paste on Google
@@ -282,7 +311,7 @@ export default function ClientReviewPage() {
                 </a>
               </div>
 
-              <p className="text-xs text-white/30 text-center mt-6">
+              <p className="text-center mt-6" style={{ fontSize: 12, color: "var(--s-muted)" }}>
                 Step 1: Copy the review. Step 2: Click "Paste on Google" → paste it in.
               </p>
             </div>
@@ -290,11 +319,11 @@ export default function ClientReviewPage() {
 
           {/* Step: 1-4 stars → private feedback */}
           {step === "feedback" && (
-            <div className="text-white text-center">
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
+            <div className="text-center" style={{ color: "var(--s-ink)" }}>
+              <h2 style={{ fontSize: "clamp(24px, 4vw, 32px)", marginBottom: 12 }}>
                 We appreciate your honesty.
               </h2>
-              <p className="text-white/60 mb-8">
+              <p style={{ color: "var(--s-muted)", marginBottom: 32 }}>
                 We'd love to know how we can improve. This goes directly to our
                 team — it won't be posted publicly.
               </p>
@@ -304,18 +333,24 @@ export default function ClientReviewPage() {
                 onChange={(e) => setFeedback(e.target.value)}
                 placeholder="What could we have done better?"
                 rows={4}
-                className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/15 text-white placeholder-white/30 focus:outline-none focus:border-orange-400 resize-none transition-all"
+                className="w-full px-5 py-4 rounded-xl resize-none transition-all focus:outline-none"
+                style={{
+                  background: "#fff",
+                  border: "1px solid var(--line)",
+                  color: "var(--s-ink)",
+                }}
               />
 
               <button
                 onClick={submitFeedback}
                 disabled={submitting || !feedback.trim()}
-                className="mt-4 w-full px-6 py-4 rounded-xl bg-white text-slate-900 font-semibold transition-all disabled:opacity-50"
+                className="mt-4 w-full px-6 py-4 rounded-xl font-semibold transition-all disabled:opacity-50"
+                style={{ background: "var(--navy)", color: "#fff" }}
               >
                 {submitting ? "Sending…" : "Send Private Feedback"}
               </button>
 
-              <p className="text-xs text-white/30 mt-4">
+              <p className="mt-4" style={{ fontSize: 12, color: "var(--s-muted)" }}>
                 100% private. A team member will follow up personally.
               </p>
             </div>
@@ -323,21 +358,21 @@ export default function ClientReviewPage() {
 
           {/* Step: Done */}
           {step === "done" && (
-            <div className="text-center text-white">
-              <div className="w-16 h-16 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center mx-auto mb-6">
+            <div className="text-center" style={{ color: "var(--s-ink)" }}>
+              <div
+                className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+                style={{ background: "rgba(47,158,99,0.14)", color: "#2f9e63" }}
+              >
                 <Check className="w-8 h-8" strokeWidth={2.5} />
               </div>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
+              <h2 style={{ fontSize: "clamp(24px, 4vw, 32px)", marginBottom: 12 }}>
                 Thank you, {req?.name?.split(" ")[0]}.
               </h2>
-              <p className="text-white/60 mb-8">
+              <p style={{ color: "var(--s-muted)", marginBottom: 32 }}>
                 Your response has been received. We truly appreciate you taking
                 the time.
               </p>
-              <a
-                href={`tel:${company.phoneTel}`}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 border border-white/15 text-white font-semibold hover:bg-white/15 transition-colors"
-              >
+              <a href={`tel:${company.phoneTel}`} className="btn btn-navy">
                 <Phone className="w-4 h-4" />
                 Call {company.phone}
               </a>
@@ -345,6 +380,7 @@ export default function ClientReviewPage() {
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 }
