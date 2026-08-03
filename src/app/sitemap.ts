@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/best-metro-detroit-suburbs`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/best-school-districts-metro-detroit`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/troy-vs-rochester-hills`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/water-damage-sell-or-restore`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/reviews`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     ...cityPages,
   ];
