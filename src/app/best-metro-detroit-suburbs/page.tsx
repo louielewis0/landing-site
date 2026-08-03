@@ -345,6 +345,16 @@ export default function BestSuburbsGuidePage() {
                 </li>
               ))}
             </ol>
+            <p className="reveal" style={{ fontSize: 13, color: "var(--s-muted)", marginTop: 20 }}>
+              Go deeper:{" "}
+              <a href="/best-school-districts-metro-detroit" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
+                Metro Detroit school districts, ranked with home prices
+              </a>{" "}
+              ·{" "}
+              <a href="/troy-vs-rochester-hills" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
+                Troy vs Rochester Hills, head to head
+              </a>
+            </p>
           </div>
         </section>
 

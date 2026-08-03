@@ -17,6 +17,8 @@ else
   URLS=(
     "https://marketcenterrealty.com/"
     "https://marketcenterrealty.com/best-metro-detroit-suburbs"
+    "https://marketcenterrealty.com/best-school-districts-metro-detroit"
+    "https://marketcenterrealty.com/troy-vs-rochester-hills"
     "https://marketcenterrealty.com/troy-real-estate-agent"
     "https://marketcenterrealty.com/rochester-hills-real-estate-agent"
     "https://marketcenterrealty.com/birmingham-real-estate-agent"

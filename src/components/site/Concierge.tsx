@@ -58,9 +58,18 @@ export default function Concierge() {
     };
     const timer = window.setTimeout(fire, 8000);
     window.addEventListener("scroll", onScroll, { passive: true });
+    // When the centered valuation modal opens, retract Maya's corner
+    // teaser so the two never stack on the same visitor.
+    const onValOpen = () => {
+      done = true;
+      setTeaser(false);
+      cleanup();
+    };
+    window.addEventListener("remc-val-open", onValOpen);
     const cleanup = () => {
       window.clearTimeout(timer);
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("remc-val-open", onValOpen);
     };
     return cleanup;
   }, []);

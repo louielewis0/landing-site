@@ -16,6 +16,7 @@ export default function SiteFooter() {
     { label: "Team", href: "/#about" },
     { label: "Reviews", href: "/reviews" },
     { label: "Best Suburbs Guide", href: "/best-metro-detroit-suburbs" },
+    { label: "School Districts Guide", href: "/best-school-districts-metro-detroit" },
     { label: "Privacy", href: "/privacy" },
   ];
 

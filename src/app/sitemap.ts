@@ -15,6 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: base, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
     { url: `${base}/best-metro-detroit-suburbs`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/best-school-districts-metro-detroit`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/troy-vs-rochester-hills`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/reviews`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     ...cityPages,
   ];

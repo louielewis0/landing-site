@@ -33,6 +33,7 @@ export default function ValuationPopup() {
         try {
           sessionStorage.setItem(KEY, "1");
         } catch {}
+        window.dispatchEvent(new Event("remc-val-open"));
         setOpen(true);
         window.removeEventListener("scroll", onScroll);
       }
