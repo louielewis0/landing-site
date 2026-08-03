@@ -157,10 +157,11 @@ export async function POST(req: NextRequest) {
   try {
     for (let round = 0; round < 3; round++) {
       const response = await client.messages.create({
-        model: "claude-opus-4-8",
+        // Haiku 4.5 — fast + ~5x cheaper than Opus for this Q&A/qualify
+        // chatbot; no adaptive thinking / effort params (unsupported on
+        // Haiku 4.5) and not needed here.
+        model: "claude-haiku-4-5",
         max_tokens: 700,
-        thinking: { type: "adaptive" },
-        output_config: { effort: "low" },
         system: SYSTEM_PROMPT,
         tools: [CAPTURE_LEAD_TOOL],
         messages: convo,
