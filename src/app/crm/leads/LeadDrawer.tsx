@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { X, UserPlus, AlertCircle, Trash2, PhoneOutgoing } from "lucide-react";
+import { X, AlertCircle, Trash2, PhoneOutgoing } from "lucide-react";
 import { usePasscode } from "../gate";
 import { apiFetch } from "../_lib/api-client";
 import { usePatchLead } from "../_lib/use-patch-lead";
@@ -62,6 +62,13 @@ const PROPERTY_TYPES = [
 ] as const;
 
 const TRANSACTION_TYPES = ["buy", "sell", "lease"] as const;
+
+/** snake_case / lowercase → readable Title Case for display. */
+function humanize(s: string): string {
+  return s
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
 
 export default function LeadDrawer({
   lead,
@@ -332,9 +339,9 @@ export default function LeadDrawer({
             className="drawer-body flex-1 overflow-y-auto px-6 py-5 space-y-6"
             onScroll={onBodyScroll}
           >
-          {/* Pipeline controls */}
+          {/* Status + follow-up */}
           <section>
-            <p className="crm-label text-[var(--gold-soft)] mb-3">Pipeline</p>
+            <p className="crm-drawer-sec">Status</p>
             <div className="space-y-3">
               <div className="grid grid-cols-[110px_1fr] gap-3 items-center">
                 <label className="text-[11px] text-white/45 uppercase tracking-[0.18em]">
@@ -362,24 +369,6 @@ export default function LeadDrawer({
                   saveField("follow_up_date", v as string | null)
                 }
               />
-              <div className="grid grid-cols-[110px_1fr] gap-3 items-center">
-                <label className="text-[11px] text-white/45 uppercase tracking-[0.18em]">
-                  Assigned
-                </label>
-                <div
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.02] border border-white/10 text-white/45 text-[13px]"
-                  title="Agent assignment lands in Phase 3 (Supabase Auth)"
-                >
-                  <UserPlus
-                    className="w-3.5 h-3.5 text-white/35"
-                    strokeWidth={1.5}
-                  />
-                  <span>Unassigned</span>
-                  <span className="text-[9.5px] uppercase tracking-[0.18em] text-[var(--gold-soft)]/65 ml-auto">
-                    Phase 3
-                  </span>
-                </div>
-              </div>
               {lostClass && (
                 <EditableField
                   label="Lost reason"
@@ -396,7 +385,7 @@ export default function LeadDrawer({
 
           {/* Contact */}
           <section>
-            <p className="crm-label text-[var(--gold-soft)] mb-3">Contact</p>
+            <p className="crm-drawer-sec">Contact</p>
             <div className="space-y-1">
               <EditableField
                 label="Name"
@@ -448,7 +437,7 @@ export default function LeadDrawer({
 
           {/* Property */}
           <section>
-            <p className="crm-label text-[var(--gold-soft)] mb-3">Property</p>
+            <p className="crm-drawer-sec">Property</p>
             <div className="space-y-1">
               <div className="grid grid-cols-[110px_1fr] gap-3 py-1.5 items-center">
                 <label className="text-[11px] text-white/45 uppercase tracking-[0.18em]">
@@ -469,7 +458,7 @@ export default function LeadDrawer({
                   </option>
                   {PROPERTY_TYPES.map((p) => (
                     <option key={p} value={p} className="bg-[#12141A]">
-                      {p}
+                      {humanize(p)}
                     </option>
                   ))}
                 </select>
@@ -493,7 +482,7 @@ export default function LeadDrawer({
                   </option>
                   {TRANSACTION_TYPES.map((t) => (
                     <option key={t} value={t} className="bg-[#12141A]">
-                      {t}
+                      {humanize(t)}
                     </option>
                   ))}
                 </select>
@@ -509,7 +498,7 @@ export default function LeadDrawer({
 
           {/* Intent + classification */}
           <section>
-            <p className="crm-label text-[var(--gold-soft)] mb-3">Details</p>
+            <p className="crm-drawer-sec">Details</p>
             <div className="space-y-1">
               <EditableField
                 label="Intent"
@@ -524,12 +513,6 @@ export default function LeadDrawer({
                 onSave={(v) => saveField("source", v as string | null)}
               />
               <EditableField
-                label="Lead type"
-                value={draft.lead_type ?? ""}
-                placeholder="—"
-                onSave={(v) => saveField("lead_type", v as string | null)}
-              />
-              <EditableField
                 label="Message"
                 value={draft.message ?? ""}
                 placeholder="Notes, intent details, motivation…"
@@ -541,7 +524,7 @@ export default function LeadDrawer({
 
           {/* Activity timeline */}
           <section>
-            <p className="crm-label text-[var(--gold-soft)] mb-3">Activity</p>
+            <p className="crm-drawer-sec">Activity</p>
             <ActivityTimeline leadId={draft.id} />
           </section>
 

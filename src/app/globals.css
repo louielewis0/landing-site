@@ -1536,3 +1536,13 @@ body {
   font-size: 13px; color: rgba(25,26,28,0.45); font-family: inherit;
 }
 .vp-later:hover { color: #191a1c; }
+
+/* Lead drawer — calm professional section headers (replaces the
+   bright-orange all-caps eyebrow on every section) */
+.crm-mesh .crm-drawer-sec {
+  font-family: var(--font-grotesk), "Space Grotesk", sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(25,26,28,0.4);
+  margin-bottom: 14px; padding-bottom: 10px;
+  border-bottom: 1px solid rgba(25,26,28,0.08);
+}
