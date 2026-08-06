@@ -53,15 +53,14 @@ function fmtMoney(n: number): string {
 }
 
 const DAY = 86400000;
-const startOfToday = () => new Date(new Date().setHours(0, 0, 0, 0)).getTime();
 
-function followUpBucket(l: Lead): "overdue" | "today" | "upcoming" | null {
-  if (!l.follow_up_date) return null;
-  const t = new Date(l.follow_up_date + "T00:00:00").getTime();
-  const today = startOfToday();
-  if (t < today) return "overdue";
-  if (t < today + DAY) return "today";
-  return "upcoming";
+/** "3 days ago" / "yesterday" from an ISO timestamp. */
+function relativeContact(iso: string): string {
+  const days = Math.floor((Date.now() - new Date(iso).getTime()) / DAY);
+  if (days <= 0) return "today";
+  if (days === 1) return "yesterday";
+  if (days < 14) return `${days} days ago`;
+  return `${Math.floor(days / 7)} weeks ago`;
 }
 
 const ACTIVE = new Set(["new", "attempted", "contacted", "qualified", "showing", "negotiating"]);
@@ -84,12 +83,21 @@ export default function TemplateDashboard() {
   const weekAgo = Date.now() - 7 * DAY;
   const newThisWeek = leads.filter((l) => new Date(l.created_at).getTime() > weekAgo);
 
+  // Follow-up = contact recency, not a manual date. A lead needs a
+  // nudge when it's active and either never contacted, or last
+  // texted/called more than STALE_DAYS ago. Logging a text/call
+  // updates last_contact_at, so it drops off here immediately and
+  // only resurfaces if it goes quiet again.
+  const STALE_DAYS = 3;
+  const staleCut = Date.now() - STALE_DAYS * DAY;
   const dueList = active
-    .filter((l) => {
-      const b = followUpBucket(l);
-      return b === "overdue" || b === "today";
-    })
-    .sort((a, b) => (a.follow_up_date! < b.follow_up_date! ? -1 : 1));
+    .filter((l) => !l.last_contact_at || new Date(l.last_contact_at).getTime() < staleCut)
+    .sort((a, b) => {
+      // never-contacted first, then stalest contact first
+      const ta = a.last_contact_at ? new Date(a.last_contact_at).getTime() : 0;
+      const tb = b.last_contact_at ? new Date(b.last_contact_at).getTime() : 0;
+      return ta - tb;
+    });
 
   const inPlay = active.reduce((sum, l) => sum + parseMoney(l.budget_range), 0);
 
@@ -156,7 +164,7 @@ export default function TemplateDashboard() {
           {greeting()}, <span style={{ fontWeight: 500 }}>Louie.</span>
         </h1>
         <div style={{ fontSize: 13, color: "rgba(25,26,28,0.5)" }}>
-          {dateLine} &middot; {dueList.length} follow-up{dueList.length === 1 ? "" : "s"} due today
+          {dateLine} &middot; {dueList.length} lead{dueList.length === 1 ? "" : "s"} to follow up with
         </div>
       </div>
 
@@ -296,15 +304,21 @@ export default function TemplateDashboard() {
               boxShadow: "0 14px 34px rgba(20,24,33,0.25)",
             }}
           >
-            <div style={{ ...cardTitle, color: "#fff", marginBottom: 16 }}>Follow-ups due</div>
+            <div style={{ ...cardTitle, color: "#fff", marginBottom: 4 }}>Follow up with these</div>
+            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", marginBottom: 14 }}>
+              Not texted or called in {STALE_DAYS}+ days. Log a text and they drop off.
+            </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
               {dueList.length === 0 && (
                 <div style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", padding: "6px 0" }}>
-                  Nothing due — set follow-up dates on your leads.
+                  All caught up — everyone active has been contacted recently. Nice.
                 </div>
               )}
-              {dueList.slice(0, 5).map((f) => {
-                const b = followUpBucket(f);
+              {dueList.slice(0, 6).map((f) => {
+                const never = !f.last_contact_at;
+                const note = never
+                  ? "Never contacted"
+                  : `Last texted ${relativeContact(f.last_contact_at!)}`;
                 return (
                   <Link
                     key={f.id}
@@ -324,18 +338,20 @@ export default function TemplateDashboard() {
                         height: 8,
                         flex: "none",
                         borderRadius: "50%",
-                        background: b === "overdue" ? "#E4501E" : "#f0a15c",
+                        background: never ? "#E4501E" : "#f0a15c",
                       }}
                     />
                     <span style={{ minWidth: 0, flex: 1 }}>
                       <span style={{ display: "block", fontSize: 13.5, fontWeight: 600 }}>{f.name}</span>
                       <span style={{ display: "block", fontSize: 12, color: "rgba(255,255,255,0.55)" }}>
-                        {(f.source || "lead") + " · " + f.status.replace(/_/g, " ")}
+                        {note}
                       </span>
                     </span>
-                    <span style={{ fontSize: 11.5, fontWeight: 600, color: "rgba(255,255,255,0.6)", whiteSpace: "nowrap" }}>
-                      {b === "overdue" ? "Overdue" : "Today"}
-                    </span>
+                    {f.phone && (
+                      <span style={{ fontSize: 11.5, fontWeight: 600, color: "#f0a15c", whiteSpace: "nowrap" }}>
+                        Text
+                      </span>
+                    )}
                   </Link>
                 );
               })}
