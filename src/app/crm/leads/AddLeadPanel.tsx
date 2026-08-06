@@ -23,12 +23,9 @@ const INTENT_OPTIONS = ["Buy", "Sell", "Both", "Just browsing"] as const;
 type IntentOption = (typeof INTENT_OPTIONS)[number];
 
 const SOURCE_OPTIONS = [
-  "Expired",
-  "FSBO",
-  "Circle Prospect",
-  "Geographic Farm",
+  "Website",
   "Referral",
-  "Inbound",
+  "Phone call",
   "Other",
 ] as const;
 type SourceOption = (typeof SOURCE_OPTIONS)[number];
@@ -47,7 +44,7 @@ export default function AddLeadPanel({
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [intent, setIntent] = useState<IntentOption>("Buy");
-  const [source, setSource] = useState<SourceOption | "">("");
+  const [source, setSource] = useState<SourceOption | "">("Website");
   const [notes, setNotes] = useState("");
 
   const [saving, setSaving] = useState(false);
