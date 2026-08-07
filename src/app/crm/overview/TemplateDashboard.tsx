@@ -268,11 +268,11 @@ export default function TemplateDashboard() {
                           textOverflow: "ellipsis",
                         }}
                       >
-                        {d.address || d.name}
+                        {d.name}
                       </div>
                       <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4, fontSize: 11.5, gap: 8 }}>
                         <span style={{ color: "rgba(25,26,28,0.5)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                          {d.name}
+                          {d.address || d.phone || "—"}
                         </span>
                         <span
                           style={{
