@@ -1546,3 +1546,73 @@ body {
   margin-bottom: 14px; padding-bottom: 10px;
   border-bottom: 1px solid rgba(25,26,28,0.08);
 }
+
+/* ═══════════ Standalone /contact page (yard-sign QR landing) ═══════════ */
+.cq-page {
+  min-height: 100svh; background: #f2efe9;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(228,80,30,0.07), transparent 60%);
+  color: #191a1c; display: flex; align-items: flex-start; justify-content: center;
+  padding: 40px 22px 60px;
+  font-family: var(--font-manrope), "Manrope", system-ui, sans-serif;
+}
+.cq-inner { width: 100%; max-width: 440px; text-align: center; }
+.cq-logo { display: inline-block; margin-bottom: 20px; }
+.cq-logo img { width: 84px; height: auto; filter: drop-shadow(0 8px 22px rgba(22,24,29,0.25)); }
+.cq-eyebrow {
+  font-family: var(--font-grotesk), "Space Grotesk", sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--s-gold, #E4501E); margin-bottom: 14px;
+}
+.cq-page h1 {
+  margin: 0 0 16px;
+  font-family: var(--font-grotesk), "Space Grotesk", sans-serif;
+  font-weight: 300; font-size: clamp(32px, 8vw, 44px); line-height: 1.05;
+  letter-spacing: -0.03em; text-transform: uppercase; color: #191a1c;
+}
+.cq-page h1 span { font-weight: 500; }
+.cq-sub { margin: 0 auto 28px; font-size: 15px; line-height: 1.65; color: rgba(25,26,28,0.62); max-width: 380px; }
+.cq-card {
+  background: #fff; border: 1px solid rgba(25,26,28,0.08); border-radius: 22px;
+  padding: 22px; text-align: left; box-shadow: 0 12px 40px rgba(25,26,28,0.08);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.cq-input {
+  width: 100%; padding: 15px 16px; border-radius: 13px;
+  border: 1px solid rgba(25,26,28,0.16); background: #fff; color: #191a1c;
+  font-family: inherit; font-size: 16px; outline: none; transition: border-color .2s;
+}
+.cq-input::placeholder { color: rgba(25,26,28,0.4); }
+.cq-input:focus { border-color: var(--s-gold, #E4501E); }
+textarea.cq-input { resize: vertical; min-height: 66px; }
+.cq-submit {
+  width: 100%; padding: 16px; border-radius: 100px; border: none; cursor: pointer;
+  background: var(--s-gold, #E4501E); color: #fff; font-weight: 600; font-size: 16px;
+  font-family: inherit; box-shadow: 0 8px 22px rgba(228,80,30,0.35); transition: background .25s;
+}
+.cq-submit:hover { background: #c9430f; }
+.cq-submit:disabled { opacity: 0.6; }
+.cq-err { color: #c0392b; font-size: 13.5px; margin: 0; }
+.cq-note { font-size: 12px; color: rgba(25,26,28,0.45); text-align: center; margin: 4px 0 0; }
+.cq-phone {
+  display: inline-block; margin-top: 22px; font-size: 14.5px; font-weight: 600;
+  color: var(--s-gold, #E4501E);
+}
+.cq-phone:hover { color: #c9430f; }
+.cq-done { text-align: center; align-items: center; padding: 34px 24px; }
+.cq-check {
+  width: 60px; height: 60px; border-radius: 50%; margin-bottom: 18px;
+  background: rgba(29,122,79,0.12); color: #1d7a4f;
+  display: flex; align-items: center; justify-content: center;
+}
+.cq-done h2 {
+  margin: 0 0 10px;
+  font-family: var(--font-grotesk), "Space Grotesk", sans-serif;
+  font-weight: 500; font-size: 24px; color: #191a1c;
+}
+.cq-done p { margin: 0 0 22px; font-size: 15px; line-height: 1.6; color: rgba(25,26,28,0.62); }
+.cq-call {
+  display: inline-block; padding: 14px 30px; border-radius: 100px;
+  background: #191a1c; color: #fff; font-weight: 600; font-size: 15px;
+}
+.cq-call:hover { background: #E4501E; color: #fff; }
