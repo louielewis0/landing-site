@@ -17,6 +17,8 @@ export default function SiteFooter() {
     { label: "Reviews", href: "/reviews" },
     { label: "Best Suburbs Guide", href: "/best-metro-detroit-suburbs" },
     { label: "School Districts Guide", href: "/best-school-districts-metro-detroit" },
+    { label: "Home Budget Guide", href: "/how-much-home-metro-detroit-budget" },
+    { label: "First-Time Buyer Programs", href: "/first-time-home-buyer-programs-michigan" },
     { label: "Privacy", href: "/privacy" },
   ];
 

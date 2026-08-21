@@ -352,7 +352,19 @@ export default function BestSuburbsGuidePage() {
               </a>{" "}
               ·{" "}
               <a href="/troy-vs-rochester-hills" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
-                Troy vs Rochester Hills, head to head
+                Troy vs Rochester Hills
+              </a>{" "}
+              ·{" "}
+              <a href="/birmingham-vs-bloomfield-hills" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
+                Birmingham vs Bloomfield Hills
+              </a>{" "}
+              ·{" "}
+              <a href="/sterling-heights-vs-warren" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
+                Sterling Heights vs Warren
+              </a>{" "}
+              ·{" "}
+              <a href="/how-much-home-metro-detroit-budget" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
+                How much home your budget buys
               </a>
             </p>
           </div>
