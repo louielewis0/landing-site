@@ -1,22 +1,37 @@
 "use client";
 
 import { useEffect } from "react";
-import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, CircleMarker, Marker, Popup, useMap } from "react-leaflet";
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { FarmTarget } from "./cluster";
 
-/** Fit the map to all pins whenever the set changes. */
+/** Louie's home — a fixed reference pin on the farm map. */
+const HOME = { lat: 42.6495781, lng: -83.2000812, label: "Home · 3449 Greenspring Ln, Rochester Hills" };
+
+const homeIcon = L.divIcon({
+  className: "",
+  html: `<div style="width:32px;height:32px;background:#2E5A9C;border:3px solid #fff;border-radius:50%;box-shadow:0 3px 10px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7M5 9v11h14V9"/></svg>
+  </div>`,
+  iconSize: [32, 32],
+  iconAnchor: [16, 16],
+});
+
+/** Fit the map to all pins (plus home) whenever the set changes. */
 function FitBounds({ targets }: { targets: FarmTarget[] }) {
   const map = useMap();
   useEffect(() => {
     const pts = targets.filter((t) => Number.isFinite(t.lat) && Number.isFinite(t.lng));
-    if (pts.length === 0) return;
-    if (pts.length === 1) {
-      map.setView([pts[0].lat, pts[0].lng], 15);
+    if (pts.length === 0) {
+      map.setView([HOME.lat, HOME.lng], 12);
       return;
     }
-    const bounds = pts.map((t) => [t.lat, t.lng]) as [number, number][];
-    map.fitBounds(bounds, { padding: [40, 40] });
+    const bounds = [
+      ...pts.map((t) => [t.lat, t.lng]),
+      [HOME.lat, HOME.lng],
+    ] as [number, number][];
+    map.fitBounds(bounds, { padding: [45, 45] });
   }, [map, targets]);
   return null;
 }
@@ -47,6 +62,13 @@ export default function FarmMap({
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <FitBounds targets={withCoords} />
+      <Marker position={[HOME.lat, HOME.lng]} icon={homeIcon} zIndexOffset={1000}>
+        <Popup>
+          <div style={{ fontFamily: "Manrope, system-ui, sans-serif", fontWeight: 600, fontSize: 13, color: "#191a1c" }}>
+            🏠 {HOME.label}
+          </div>
+        </Popup>
+      </Marker>
       {withCoords.map((t) => {
         const focused = t.id === focusId;
         return (
