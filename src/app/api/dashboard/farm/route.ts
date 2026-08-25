@@ -15,6 +15,9 @@ import { geocodeAddress } from "@/lib/geocode";
  * /api/dashboard/*.
  */
 
+// Geocoding a big paste can take a while — give the function room.
+export const maxDuration = 60;
+
 const norm = (s: string) => s.trim().replace(/\s+/g, " ").toLowerCase();
 
 export async function GET(req: NextRequest) {
@@ -65,9 +68,9 @@ export async function POST(req: NextRequest) {
 
   let added = 0;
   let failed = 0;
-  const rows: { address: string; lat: number; lng: number }[] = [];
 
-  // Geocode sequentially (Nominatim fallback is ~1 req/sec).
+  // Geocode + insert one at a time so partial progress always persists
+  // (a slow fallback on one address never loses the earlier ones).
   for (const address of toAdd) {
     const geo = await geocodeAddress(
       // Nudge the geocoder toward Metro Detroit if the paste omits state.
@@ -77,16 +80,15 @@ export async function POST(req: NextRequest) {
       failed++;
       continue;
     }
-    rows.push({ address, lat: geo.lat, lng: geo.lng });
-    added++;
-    await new Promise((r) => setTimeout(r, 200));
-  }
-
-  if (rows.length > 0) {
-    const { error } = await admin.from("farm_targets").insert(rows);
+    const { error } = await admin
+      .from("farm_targets")
+      .insert({ address, lat: geo.lat, lng: geo.lng });
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      failed++;
+      continue;
     }
+    added++;
+    await new Promise((r) => setTimeout(r, 120));
   }
 
   return NextResponse.json({ added, failed, skippedDup });

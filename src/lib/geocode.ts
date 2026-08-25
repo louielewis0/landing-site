@@ -16,7 +16,7 @@ async function censusGeocode(address: string): Promise<GeoResult> {
     `?address=${encodeURIComponent(address)}` +
     "&benchmark=Public_AR_Current&format=json";
   try {
-    const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+    const res = await fetch(url, { signal: AbortSignal.timeout(6000) });
     if (!res.ok) return null;
     const data = (await res.json()) as {
       result?: { addressMatches?: { coordinates?: { x: number; y: number } }[] };
@@ -38,7 +38,7 @@ async function nominatimGeocode(address: string): Promise<GeoResult> {
   try {
     const res = await fetch(url, {
       headers: { "User-Agent": "MarketCenterRealtyCRM/1.0 (marketcenterrealty.com)" },
-      signal: AbortSignal.timeout(8000),
+      signal: AbortSignal.timeout(6000),
     });
     if (!res.ok) return null;
     const data = (await res.json()) as { lat: string; lon: string }[];
