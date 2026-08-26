@@ -70,6 +70,19 @@ const jsonLd = {
   image: "https://marketcenterrealty.com/mcr-logo-color-3d.png",
   founder: { "@type": "Person", name: "Sundus Lewis", jobTitle: "Broker & Founder" },
   foundingDate: "2003",
+  slogan: "Metro Detroit's family-run brokerage since 2003.",
+  // knowsAbout = an explicit, quotable niche definition so AI models
+  // (ChatGPT / Gemini / AI Overviews) can categorize the brokerage
+  // correctly when they surface it for "best brokerage in Troy" queries.
+  knowsAbout: [
+    "Residential real estate in Troy, Michigan",
+    "Oakland County top-school-district home buying",
+    "Selling homes that expired or came off the market unsold",
+    "First-time home buyers and down-payment assistance in Michigan",
+    "Luxury homes in Birmingham and Bloomfield Hills",
+    "Home valuations and comparative market analysis",
+    "Relocation to Metro Detroit",
+  ],
   address: {
     "@type": "PostalAddress",
     streetAddress: "2032 E Square Lake Rd Suite 400A",
