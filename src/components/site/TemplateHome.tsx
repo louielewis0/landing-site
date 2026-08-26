@@ -90,6 +90,48 @@ export function TemplateAbout() {
   );
 }
 
+const AREAS = [
+  { slug: "troy-real-estate-agent", city: "Troy", img: "/areas/troy-real-estate-agent.jpg" },
+  { slug: "rochester-hills-real-estate-agent", city: "Rochester Hills", img: "/areas/rochester-hills-real-estate-agent.jpg" },
+  { slug: "birmingham-real-estate-agent", city: "Birmingham", img: "/areas/birmingham-real-estate-agent.jpg" },
+  { slug: "bloomfield-hills-real-estate-agent", city: "Bloomfield Hills", img: "/areas/bloomfield-hills-real-estate-agent.jpg" },
+  { slug: "west-bloomfield-real-estate-agent", city: "West Bloomfield", img: "/areas/west-bloomfield-real-estate-agent.jpg" },
+  { slug: "sterling-heights-real-estate-agent", city: "Sterling Heights", img: "/areas/sterling-heights-real-estate-agent.jpg" },
+  { slug: "warren-real-estate-agent", city: "Warren", img: "/areas/warren-real-estate-agent.jpg" },
+];
+
+export function TemplateAreas() {
+  return (
+    <div className="t-wrap t-areas" id="areas">
+      <div className="t-areas-head">
+        <div>
+          <div className="t-eyebrow">Areas we serve</div>
+          <h2>
+            Your neighborhood, <span>our backyard.</span>
+          </h2>
+        </div>
+        <p className="t-areas-sub">
+          Local expertise in the Metro Detroit communities we know street by
+          street. Find your city below.
+        </p>
+      </div>
+      <div className="t-areas-grid">
+        {AREAS.map((a) => (
+          <Link key={a.slug} href={`/${a.slug}`} className="t-area-card">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={a.img} alt={`Real estate agent in ${a.city}, MI`} loading="lazy" />
+            <div className="t-area-shade" aria-hidden />
+            <div className="t-area-label">
+              <span className="t-area-city">{a.city}</span>
+              <span className="t-area-sub">Real estate agent &rarr;</span>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function TemplateCta() {
   return (
     <div className="t-wrap t-cta-wrap">

@@ -1689,3 +1689,42 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
   .crm-mesh .farm-grid { grid-template-columns: 1fr; }
   .crm-mesh .farm-map, .crm-mesh .farm-routes { height: 420px; }
 }
+
+/* ═══════════ Homepage "Areas we serve" (links to city pages) ═══════════ */
+.site-theme .t-areas { padding-bottom: 96px; }
+.site-theme .t-areas-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 34px; }
+.site-theme .t-areas-head h2 {
+  margin: 0; font-weight: 300; font-size: clamp(30px, 3.6vw, 46px);
+  letter-spacing: -0.025em; text-transform: uppercase;
+}
+.site-theme .t-areas-head h2 span { font-weight: 500; }
+.site-theme .t-areas-sub { margin: 0; font-size: 14.5px; line-height: 1.6; color: rgba(25,26,28,0.55); max-width: 340px; }
+.site-theme .t-areas-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+.site-theme .t-area-card {
+  position: relative; height: 200px; border-radius: 18px; overflow: hidden;
+  display: block; background: var(--navy-2); box-shadow: 0 8px 26px rgba(25,26,28,0.1);
+  transition: transform .35s cubic-bezier(.2,.9,.3,1), box-shadow .35s;
+}
+.site-theme .t-area-card:hover { transform: translateY(-5px); box-shadow: 0 18px 42px rgba(25,26,28,0.18); }
+.site-theme .t-area-card > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.site-theme .t-area-card:hover > img { transform: scale(1.06); }
+.site-theme .t-area-shade {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(15,17,22,0) 30%, rgba(15,17,22,0.78) 100%);
+}
+.site-theme .t-area-label { position: absolute; left: 16px; right: 16px; bottom: 14px; }
+.site-theme .t-area-city {
+  display: block; font-family: var(--font-grotesk), "Space Grotesk", sans-serif;
+  font-weight: 500; font-size: 19px; color: #fff; letter-spacing: -0.01em;
+}
+.site-theme .t-area-sub { display: block; font-size: 12px; color: rgba(255,255,255,0.72); font-weight: 600; letter-spacing: 0.02em; margin-top: 2px; }
+@media (max-width: 900px) { .site-theme .t-areas-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .site-theme .t-areas-grid { grid-template-columns: 1fr 1fr; } .site-theme .t-area-card { height: 150px; } }
+
+/* Footer areas column (city page links for internal linking) */
+.site-theme .t-foot-areas { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+.site-theme .t-foot-areas-h { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(25,26,28,0.4); margin-bottom: 2px; font-weight: 600; }
+.site-theme .t-foot-areas a { color: rgba(25,26,28,0.7); }
+.site-theme .t-foot-areas a:hover { color: var(--s-gold); }

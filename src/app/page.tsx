@@ -2,6 +2,7 @@ import SiteShell from "@/components/site/SiteShell";
 import {
   TemplateHero,
   TemplateStats,
+  TemplateAreas,
   TemplateAbout,
   TemplateCta,
 } from "@/components/site/TemplateHome";
@@ -15,6 +16,7 @@ export default function Home() {
         <TemplateHero />
         <TemplateStats />
         <ListingsShowcase />
+        <TemplateAreas />
         <TemplateAbout />
         <TemplateCta />
         <ContactForm />

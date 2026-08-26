@@ -22,6 +22,16 @@ export default function SiteFooter() {
     { label: "Privacy", href: "/privacy" },
   ];
 
+  const areas = [
+    { label: "Troy", href: "/troy-real-estate-agent" },
+    { label: "Rochester Hills", href: "/rochester-hills-real-estate-agent" },
+    { label: "Birmingham", href: "/birmingham-real-estate-agent" },
+    { label: "Bloomfield Hills", href: "/bloomfield-hills-real-estate-agent" },
+    { label: "West Bloomfield", href: "/west-bloomfield-real-estate-agent" },
+    { label: "Sterling Heights", href: "/sterling-heights-real-estate-agent" },
+    { label: "Warren", href: "/warren-real-estate-agent" },
+  ];
+
   return (
     <footer className="t-foot">
       <div className="t-wrap">
@@ -38,6 +48,14 @@ export default function SiteFooter() {
             {links.map((l) => (
               <Link key={l.label} href={l.href}>
                 {l.label}
+              </Link>
+            ))}
+          </div>
+          <div className="t-foot-areas">
+            <span className="t-foot-areas-h">Real estate agents in</span>
+            {areas.map((a) => (
+              <Link key={a.href} href={a.href}>
+                {a.label}
               </Link>
             ))}
           </div>
