@@ -42,7 +42,7 @@ export function TemplateHero() {
 export function TemplateStats() {
   return (
     <div className="t-wrap t-stats">
-      <div className="t-eyebrow">Since 2004</div>
+      <div className="t-eyebrow">Since 2003</div>
       <h2>
         Metro Detroit&rsquo;s <span className="t-blue">family-run</span> brokerage.
       </h2>
