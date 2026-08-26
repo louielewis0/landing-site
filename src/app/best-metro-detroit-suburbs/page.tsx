@@ -355,6 +355,10 @@ export default function BestSuburbsGuidePage() {
                 Troy vs Rochester Hills
               </a>{" "}
               ·{" "}
+              <a href="/troy-vs-birmingham" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
+                Troy vs Birmingham
+              </a>{" "}
+              ·{" "}
               <a href="/birmingham-vs-bloomfield-hills" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
                 Birmingham vs Bloomfield Hills
               </a>{" "}
