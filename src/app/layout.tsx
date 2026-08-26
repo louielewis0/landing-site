@@ -97,6 +97,7 @@ const jsonLd = {
     "https://www.zillow.com/profile/realestatemarketmedia",
     "https://www.realtor.com/realestateagents/56e9bd52f384a20100602938",
     "https://www.yelp.com/biz/sundus-lewis-real-estate-market-center-troy",
+    "https://nextdoor.com/page/real-estate-market-center-troy-mi-6o0hsp",
   ],
 };
 
