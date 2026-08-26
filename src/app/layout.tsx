@@ -59,11 +59,17 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "RealEstateAgent",
+  "@id": "https://marketcenterrealty.com/#organization",
   name: company.name,
+  alternateName: "Market Center Realty",
   description: company.description,
   telephone: company.phone,
   email: company.email,
   url: "https://marketcenterrealty.com",
+  logo: "https://marketcenterrealty.com/mcr-logo-color-3d.png",
+  image: "https://marketcenterrealty.com/mcr-logo-color-3d.png",
+  founder: { "@type": "Person", name: "Sundus Lewis", jobTitle: "Broker & Founder" },
+  foundingDate: "2003",
   address: {
     "@type": "PostalAddress",
     streetAddress: "2032 E Square Lake Rd Suite 400A",
@@ -82,6 +88,13 @@ const jsonLd = {
     "Warren, MI",
   ],
   priceRange: "$$-$$$$",
+  // sameAs = every official profile. This is the signal that tells
+  // Google all these listings are ONE business (yours), consolidating
+  // the brand search results. Add the rest as URLs are confirmed.
+  sameAs: [
+    "https://www.facebook.com/sunduslewis/",
+    "https://www.instagram.com/realestatemarketcenter/",
+  ],
 };
 
 export default function RootLayout({
