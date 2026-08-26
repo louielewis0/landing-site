@@ -94,6 +94,9 @@ const jsonLd = {
   sameAs: [
     "https://www.facebook.com/sunduslewis/",
     "https://www.instagram.com/realestatemarketcenter/",
+    "https://www.zillow.com/profile/realestatemarketmedia",
+    "https://www.realtor.com/realestateagents/56e9bd52f384a20100602938",
+    "https://www.yelp.com/biz/sundus-lewis-real-estate-market-center-troy",
   ],
 };
 
