@@ -24,6 +24,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/rochester-hills-vs-birmingham`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/west-bloomfield-vs-bloomfield-hills`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/fastest-appreciating-metro-detroit-suburbs`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/troy-vs-west-bloomfield`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/oakland-county-vs-macomb-county`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/how-much-home-metro-detroit-budget`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/first-time-home-buyer-programs-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/water-damage-sell-or-restore`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },

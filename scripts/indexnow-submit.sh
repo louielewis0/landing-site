@@ -25,6 +25,8 @@ else
     "https://marketcenterrealty.com/rochester-hills-vs-birmingham"
     "https://marketcenterrealty.com/west-bloomfield-vs-bloomfield-hills"
     "https://marketcenterrealty.com/fastest-appreciating-metro-detroit-suburbs"
+    "https://marketcenterrealty.com/troy-vs-west-bloomfield"
+    "https://marketcenterrealty.com/oakland-county-vs-macomb-county"
     "https://marketcenterrealty.com/how-much-home-metro-detroit-budget"
     "https://marketcenterrealty.com/first-time-home-buyer-programs-michigan"
     "https://marketcenterrealty.com/troy-real-estate-agent"
