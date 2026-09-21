@@ -15,6 +15,7 @@ export default function SiteFooter() {
     { label: "Listings", href: "/#listings" },
     { label: "Team", href: "/#about" },
     { label: "Reviews", href: "/reviews" },
+    { label: "Market Update", href: "/metro-detroit-housing-market-update" },
     { label: "Best Suburbs Guide", href: "/best-metro-detroit-suburbs" },
     { label: "School Districts Guide", href: "/best-school-districts-metro-detroit" },
     { label: "Home Budget Guide", href: "/how-much-home-metro-detroit-budget" },
