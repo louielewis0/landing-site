@@ -19,7 +19,7 @@ const URL = `${BASE}/${SLUG}`;
 export const metadata: Metadata = {
   title: "Birmingham vs Bloomfield Hills (2026): Which Luxury Suburb Wins?",
   description:
-    "Birmingham and Bloomfield Hills compared with sourced 2026 data — home values, sale prices, days on market, and Niche school ranks (#9 vs #7). Birmingham's typical value just passed Bloomfield Hills. By a Metro Detroit brokerage.",
+    "Birmingham and Bloomfield Hills compared with sourced 2026 data — home values, sale prices, days on market, and Niche school ranks (#9 vs #7). Birmingham has quietly out-valued Bloomfield Hills for years. By a Metro Detroit brokerage.",
   alternates: { canonical: URL },
   openGraph: {
     title: "Birmingham vs Bloomfield Hills (2026): Which Luxury Suburb Wins?",
@@ -37,7 +37,7 @@ const faqs = [
   {
     question: "Is Birmingham or Bloomfield Hills more expensive?",
     answer:
-      "It depends which gauge you read, and they now disagree in an interesting way. On Zillow's smoothed typical home value (June 2026), Birmingham ($757,616) has passed Bloomfield Hills ($690,654) — the walkable downtown now out-prices the gated estates next door. On Redfin's median sale price (three months ending May 2026), Bloomfield Hills is higher at $912,454 versus Birmingham's $817,511 — but Bloomfield Hills' figure rests on only 16 sales that quarter, so a couple of big estates swing the whole number. Both are Metro Detroit's top price tier.",
+      "It depends which gauge you read, and they disagree in an interesting way. On Zillow's smoothed typical home value (June 2026), Birmingham ($757,616) runs higher than Bloomfield Hills ($690,654) — and it has for years, the walkable downtown quietly out-valuing the gated estates next door. On Redfin's median sale price (three months ending May 2026), Bloomfield Hills is higher at $912,454 versus Birmingham's $817,511 — but Bloomfield Hills' figure rests on only 16 sales that quarter, so a couple of big estates swing the whole number. Both are Metro Detroit's top price tier.",
   },
   {
     question: "Which has better schools, Birmingham or Bloomfield Hills?",
@@ -57,7 +57,7 @@ const faqs = [
   {
     question: "Which appreciated more over the past year?",
     answer:
-      "Birmingham on the smoothed index — up 6.4% in Zillow's value series (year through June 2026) versus 4.9% for Bloomfield Hills, and Birmingham's index passed Bloomfield Hills' in the process. Redfin's sale prices are noisier here because Bloomfield Hills trades so few homes; where the gauges conflict on a thin-volume city, trust the smoothed index.",
+      "Birmingham on the smoothed index — up 6.4% in Zillow's value series (year through June 2026) versus 4.9% for Bloomfield Hills, so Birmingham's long-standing lead is widening, not new. Redfin's sale prices are noisier here because Bloomfield Hills trades so few homes; where the gauges conflict on a thin-volume city, trust the smoothed index.",
   },
 ];
 
@@ -148,10 +148,11 @@ export default function BirminghamVsBloomfieldHillsPage() {
             <div className="reveal" style={{ borderRadius: "var(--s-radius)", border: "1px solid rgba(217,118,47,0.3)", background: "rgba(217,118,47,0.06)", padding: 30 }}>
               <div className="s-eyebrow">The short answer</div>
               <p style={{ fontSize: 16.5, lineHeight: 1.8, color: "var(--s-ink)" }}>
-                They&rsquo;re Metro Detroit&rsquo;s two premier luxury suburbs, and the headline is that
-                Birmingham&rsquo;s typical home value ($757,616) has <strong>passed</strong> Bloomfield
-                Hills&rsquo; ($690,654) in Zillow&rsquo;s June 2026 index — the walkable downtown now
-                out-prices the gated estates next door. Choose <strong>Birmingham</strong> for a
+                They&rsquo;re Metro Detroit&rsquo;s two premier luxury suburbs, and here&rsquo;s the
+                counterintuitive part: Birmingham&rsquo;s typical home value ($757,616) has
+                <strong> run higher</strong> than Bloomfield Hills&rsquo; ($690,654) in Zillow&rsquo;s index
+                for years — the walkable downtown quietly out-valuing the gated estates next door, and the
+                gap is widening. Choose <strong>Birmingham</strong> for a
                 live-on-foot downtown, a market that actually trades (20-day median), and Michigan&rsquo;s
                 #9 school district. Choose <strong>Bloomfield Hills</strong> for estates on acreage,
                 privacy, the #7 district, and legacy-asset scarcity — just expect thin inventory and longer
