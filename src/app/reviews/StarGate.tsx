@@ -137,9 +137,9 @@ export default function StarGate() {
             <Star
               width={46}
               height={46}
-              style={{ color: filled ? "var(--s-gold)" : "rgba(25,26,28,0.16)", transition: "color .3s" }}
-              fill={filled ? "currentColor" : "none"}
-              strokeWidth={1.5}
+              style={{ color: filled ? "var(--s-gold)" : "rgba(25,26,28,0.45)", transition: "color .2s" }}
+              fill={filled ? "currentColor" : "rgba(25,26,28,0.05)"}
+              strokeWidth={1.75}
             />
           </button>
         );
