@@ -1,45 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Star,
-  CheckCircle2,
-  AlertCircle,
-  Lock,
-} from "lucide-react";
+import { Star, CheckCircle2, AlertCircle, Lock } from "lucide-react";
 
 /**
- * /reviews — rating-gated capture surface.
+ * /reviews — rating-gated capture surface (cream/navy theme).
  *
- * Single source of truth for entering the reviews flow. Stars are
- * interactive; clicking commits a rating. Two branches:
+ * 5★ → POST /api/reviews/google-link → server validates rating === 5 →
+ *      returns the URL from a server-only env var → opens Google in a new
+ *      tab (URL never in the client bundle).
+ * 1–4★ → private feedback form ("what could we do better") → POST
+ *        /api/reviews/feedback → records feedback AND inserts a lead into
+ *        the CRM (source "review-feedback") for fast follow-up.
  *
- *   5★ → POST /api/reviews/google-link → server validates rating === 5 →
- *        returns the URL from a server-only env var → opens Google in a
- *        new tab. The URL is never in the client bundle, never in the
- *        static markup.
- *
- *        Mobile-safari quirk: window.open is only honored while the
- *        call stack is still attached to the user gesture. Awaiting
- *        the fetch BEFORE calling window.open breaks the chain and
- *        Safari silently blocks the popup. To survive that, we
- *        synchronously pre-open a blank tab on the click, then set its
- *        location once the URL comes back. If the browser refuses even
- *        the pre-open (rare — embedded webviews, strict configs), we
- *        fall back to same-tab nav so the user still reaches Google.
- *
- *   1–4★ → no Google. Local feedback form appears (textarea + optional
- *          name + optional email) → POST /api/reviews/feedback → inserts
- *          into public.public_feedback (anon INSERT-only RLS) → thank-you
- *          state.
- *
- * Status state machine:
- *   selecting  → user hasn't clicked a star yet
- *   redirecting → 5★ clicked, waiting on the URL fetch
- *   feedback    → 1–4★ clicked, feedback form open
- *   submitting  → feedback form submit in flight
- *   thank-you   → feedback recorded; private appreciation state
- *   error       → fatal error (redirect URL fetch failed). Has a retry.
+ * Only the presentation is themed here; the gating logic, the iOS-Safari
+ * synchronous window.open, and the submit flow are unchanged.
  */
 
 type Status =
@@ -49,6 +24,17 @@ type Status =
   | "submitting"
   | "thank-you"
   | "error";
+
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  padding: "13px 15px",
+  borderRadius: 12,
+  border: "1px solid var(--line)",
+  background: "#fff",
+  color: "var(--s-ink)",
+  fontFamily: "inherit",
+  fontSize: 14.5,
+};
 
 export default function StarGate() {
   const [status, setStatus] = useState<Status>("selecting");
@@ -60,31 +46,15 @@ export default function StarGate() {
   const [errorMsg, setErrorMsg] = useState("");
 
   async function handleStarClick(rating: number) {
-    // Block re-clicks once a path has been chosen — agents can refresh
-    // to start over. Prevents accidental double-fire.
     if (status !== "selecting") return;
-
     setSelectedRating(rating);
     setErrorMsg("");
 
     if (rating === 5) {
-      // CRITICAL — open the placeholder tab SYNCHRONOUSLY, BEFORE any
-      // await. iOS Safari only honors window.open while the call stack
-      // is still attached to the user gesture; an await before this
-      // line breaks the chain and the popup is silently blocked. This
-      // is the entire reason the previous "new tab after fetch" pattern
-      // failed on iPhone.
-      //
-      // We intentionally omit 'noopener' here. With noopener, the
-      // browser returns null instead of a window reference, which would
-      // strand us — we couldn't redirect the tab we just opened. The
-      // destination is our own Google Business Profile URL, so the
-      // weaker hygiene is an acceptable trade for the redirect actually
-      // working. (For belt-and-suspenders, we could set win.opener =
-      // null right after open(); skipping for now to keep this small.)
+      // Open placeholder tab SYNCHRONOUSLY before any await (iOS Safari
+      // only honors window.open while attached to the user gesture).
       const win = window.open("", "_blank");
       setStatus("redirecting");
-
       try {
         const res = await fetch("/api/reviews/google-link", {
           method: "POST",
@@ -92,36 +62,20 @@ export default function StarGate() {
           body: JSON.stringify({ rating: 5 }),
         });
         if (!res.ok) {
-          throw new Error(
-            "We couldn't open Google right now. Please try again in a moment.",
-          );
+          throw new Error("We couldn't open Google right now. Please try again in a moment.");
         }
         const data = (await res.json()) as { url?: string };
         if (!data.url) throw new Error("Missing redirect URL.");
-
         if (win && !win.closed) {
-          // Pre-open succeeded — redirect the placeholder tab to Google.
-          // Our tab stays on /reviews; we reset the gate.
           win.location.href = data.url;
           changeRating();
         } else {
-          // The browser blocked even the pre-open (embedded webviews,
-          // strict configs, "Block Pop-ups" set very aggressively). Fall
-          // back to same-tab navigation so the user still reaches Google.
-          // We DON'T reset state here — the page is about to unload.
           window.location.href = data.url;
         }
       } catch (e) {
-        // Fetch failed (network error, env var missing, etc.). Close the
-        // placeholder tab so the user doesn't end up with a stranded
-        // blank window, and surface the error in our UI.
-        if (win && !win.closed) {
-          win.close();
-        }
+        if (win && !win.closed) win.close();
         setStatus("error");
-        setErrorMsg(
-          e instanceof Error ? e.message : "Something went wrong.",
-        );
+        setErrorMsg(e instanceof Error ? e.message : "Something went wrong.");
       }
     } else {
       setStatus("feedback");
@@ -129,7 +83,6 @@ export default function StarGate() {
   }
 
   function changeRating() {
-    // Lets a user back out of the feedback or error states and re-pick.
     setStatus("selecting");
     setSelectedRating(0);
     setHoveredStar(0);
@@ -141,9 +94,7 @@ export default function StarGate() {
 
   async function submitFeedback(e: React.FormEvent) {
     e.preventDefault();
-    if (!Number.isInteger(selectedRating) || selectedRating < 1 || selectedRating > 4) {
-      return;
-    }
+    if (!Number.isInteger(selectedRating) || selectedRating < 1 || selectedRating > 4) return;
     setStatus("submitting");
     setErrorMsg("");
     try {
@@ -158,12 +109,8 @@ export default function StarGate() {
         }),
       });
       if (!res.ok) {
-        const errBody = (await res.json().catch(() => ({}))) as {
-          error?: string;
-        };
-        throw new Error(
-          errBody.error ?? "Couldn't submit feedback. Please try again.",
-        );
+        const errBody = (await res.json().catch(() => ({}))) as { error?: string };
+        throw new Error(errBody.error ?? "Couldn't submit feedback. Please try again.");
       }
       setStatus("thank-you");
     } catch (e) {
@@ -172,9 +119,8 @@ export default function StarGate() {
     }
   }
 
-  /* ── Star row — used in selecting + locked-display states ──────────── */
   const renderStars = (interactive: boolean) => (
-    <div className="flex justify-center gap-2 sm:gap-3">
+    <div style={{ display: "flex", justifyContent: "center", gap: 10 }}>
       {[1, 2, 3, 4, 5].map((star) => {
         const filled = star <= (interactive ? hoveredStar || selectedRating : selectedRating);
         return (
@@ -185,17 +131,13 @@ export default function StarGate() {
             onMouseLeave={() => interactive && setHoveredStar(0)}
             onClick={() => interactive && handleStarClick(star)}
             disabled={!interactive}
-            className={`transition-transform ${
-              interactive
-                ? "hover:scale-110 active:scale-95 cursor-pointer"
-                : "cursor-default"
-            }`}
+            style={{ background: "none", border: "none", padding: 0, cursor: interactive ? "pointer" : "default", transition: "transform .15s" }}
             aria-label={`${star} star${star === 1 ? "" : "s"}`}
           >
             <Star
-              className={`w-10 h-10 sm:w-12 sm:h-12 transition-colors duration-300 ${
-                filled ? "text-[var(--gold)]" : "text-bone/15"
-              }`}
+              width={46}
+              height={46}
+              style={{ color: filled ? "var(--s-gold)" : "rgba(25,26,28,0.16)", transition: "color .3s" }}
               fill={filled ? "currentColor" : "none"}
               strokeWidth={1.5}
             />
@@ -205,43 +147,42 @@ export default function StarGate() {
     </div>
   );
 
-  /* ── Selecting ─────────────────────────────────────────────────────── */
+  /* ── Selecting ── */
   if (status === "selecting") {
     return (
-      <div id="rating" className="fade-up delay-3">
+      <div id="rating">
         {renderStars(true)}
-        <p className="text-[13px] text-bone/45 mt-6 font-light tracking-wide">
+        <p style={{ fontSize: 13.5, color: "var(--s-muted)", marginTop: 20, letterSpacing: "0.02em" }}>
           Tap a star to rate your experience
         </p>
       </div>
     );
   }
 
-  /* ── Redirecting (5★) ──────────────────────────────────────────────── */
+  /* ── Redirecting (5★) ── */
   if (status === "redirecting") {
     return (
-      <div id="rating" className="fade-up">
+      <div id="rating">
         {renderStars(false)}
-        <div className="mt-8 inline-flex items-center gap-3 text-[14px] text-bone/75 font-light">
-          <span className="w-4 h-4 border-2 border-[var(--gold)] border-t-transparent rounded-full animate-spin" />
+        <div style={{ marginTop: 26, display: "inline-flex", alignItems: "center", gap: 12, fontSize: 14, color: "var(--s-muted)" }}>
+          <span className="animate-spin" style={{ width: 16, height: 16, border: "2px solid var(--s-gold)", borderTopColor: "transparent", borderRadius: "50%", display: "inline-block" }} />
           Opening Google…
         </div>
       </div>
     );
   }
 
-  /* ── Feedback form (1–4★) ──────────────────────────────────────────── */
+  /* ── Feedback form (1–4★) ── */
   if (status === "feedback" || status === "submitting") {
     return (
-      <div id="rating" className="fade-up max-w-lg mx-auto">
+      <div id="rating" style={{ maxWidth: 520, margin: "0 auto" }}>
         {renderStars(false)}
-        <p className="text-[13px] text-bone/45 mt-4 mb-8 font-light tracking-wide">
-          You rated us {selectedRating} {selectedRating === 1 ? "star" : "stars"}.
-          {" "}
+        <p style={{ fontSize: 13.5, color: "var(--s-muted)", marginTop: 16, marginBottom: 26 }}>
+          You rated us {selectedRating} {selectedRating === 1 ? "star" : "stars"}.{" "}
           <button
             type="button"
             onClick={changeRating}
-            className="underline underline-offset-2 hover:text-bone/70 transition-colors"
+            style={{ background: "none", border: "none", color: "var(--s-gold)", textDecoration: "underline", textUnderlineOffset: 2, cursor: "pointer", fontSize: 13.5 }}
           >
             Change rating
           </button>
@@ -249,17 +190,15 @@ export default function StarGate() {
 
         <form
           onSubmit={submitFeedback}
-          className="relative rounded-2xl p-7 sm:p-8 bg-bone/[0.06] backdrop-blur-2xl border border-bone/15 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] text-left space-y-4"
+          style={{ borderRadius: "var(--s-radius)", border: "1px solid var(--line)", background: "#fff", padding: 28, textAlign: "left", display: "grid", gap: 16, boxShadow: "0 20px 50px -24px rgba(25,26,28,0.18)" }}
         >
-          <span className="absolute -top-px left-8 right-8 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/50 to-transparent" />
-
           <div>
-            <p className="eyebrow mb-3">Tell us what happened</p>
-            <h3 className="font-display text-2xl sm:text-3xl font-light text-bone tracking-tight">
+            <div className="s-eyebrow" style={{ marginBottom: 10 }}>Tell us what happened</div>
+            <h3 style={{ fontSize: "clamp(21px, 3vw, 26px)", lineHeight: 1.2, color: "var(--s-ink)", marginBottom: 6 }}>
               Your feedback goes straight to us — privately.
             </h3>
-            <p className="text-[13.5px] text-bone/55 mt-2 font-light">
-              Not Google. Not public. Just a direct line so we can fix it.
+            <p style={{ fontSize: 13.5, color: "var(--s-muted)" }}>
+              Not Google. Not public. Just a direct line so we can make it right.
             </p>
           </div>
 
@@ -269,44 +208,31 @@ export default function StarGate() {
             placeholder="What could we have done better?"
             rows={4}
             required
-            className="w-full px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] resize-y transition-all"
+            style={{ ...inputStyle, resize: "vertical" }}
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Your name (optional)"
-              autoComplete="name"
-              className="px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
-            />
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email (optional, for follow-up)"
-              autoComplete="email"
-              className="px-4 py-3.5 rounded-lg bg-bone/[0.04] border border-bone/15 text-bone placeholder-bone/35 focus:outline-none focus:border-[var(--gold)]/60 focus:bg-bone/[0.07] transition-all"
-            />
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name (optional)" autoComplete="name" style={inputStyle} />
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email (optional)" autoComplete="email" style={inputStyle} />
           </div>
 
           <button
             type="submit"
             disabled={status === "submitting" || !comment.trim()}
-            className="w-full px-6 py-4 rounded-full bg-[var(--gold)] hover:bg-[var(--gold-soft)] text-ink font-semibold text-[14px] tracking-wide transition-all duration-400 disabled:opacity-50"
+            className="btn btn-gold"
+            style={{ width: "100%", justifyContent: "center", opacity: status === "submitting" || !comment.trim() ? 0.55 : 1 }}
           >
             {status === "submitting" ? "Sending…" : "Send feedback"}
           </button>
 
-          <p className="flex items-center justify-center gap-2 text-[11.5px] text-bone/45 tracking-wide pt-1">
+          <p style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, fontSize: 11.5, color: "var(--s-muted)" }}>
             <Lock className="w-3 h-3" />
             Private. Doesn&rsquo;t post anywhere public.
           </p>
 
           {errorMsg && (
-            <div className="flex items-start gap-2 text-[13px] text-rust">
-              <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+            <div style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: 13, color: "#c0392b" }}>
+              <AlertCircle className="w-4 h-4" style={{ flexShrink: 0, marginTop: 2 }} />
               <span>{errorMsg}</span>
             </div>
           )}
@@ -315,38 +241,33 @@ export default function StarGate() {
     );
   }
 
-  /* ── Thank-you (post-feedback) ─────────────────────────────────────── */
+  /* ── Thank-you ── */
   if (status === "thank-you") {
     return (
-      <div id="rating" className="fade-up max-w-md mx-auto">
-        <div className="w-14 h-14 rounded-full border border-[var(--gold)]/40 bg-[var(--gold)]/10 text-[var(--gold-soft)] flex items-center justify-center mx-auto mb-6">
+      <div id="rating" style={{ maxWidth: 460, margin: "0 auto" }}>
+        <div style={{ width: 56, height: 56, borderRadius: "50%", background: "rgba(217,118,47,0.12)", border: "1px solid rgba(217,118,47,0.35)", color: "var(--s-gold)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
           <CheckCircle2 className="w-7 h-7" strokeWidth={2} />
         </div>
-        <h3 className="font-display text-3xl sm:text-4xl font-light text-bone tracking-tight mb-4">
+        <h3 style={{ fontSize: "clamp(24px, 4vw, 32px)", lineHeight: 1.2, color: "var(--s-ink)", marginBottom: 12 }}>
           Thanks for the feedback.
         </h3>
-        <p className="text-[15px] text-bone/65 font-light leading-relaxed">
-          We appreciate you taking the time to tell us. Your note goes
-          directly to the team — privately — and we use every one of them
-          to do better next time.
+        <p style={{ fontSize: 15, lineHeight: 1.7, color: "var(--s-muted)" }}>
+          We appreciate you taking the time to tell us. Your note goes directly to the team — privately —
+          and we use every one to do better next time.
         </p>
       </div>
     );
   }
 
-  /* ── Error (redirect URL fetch failed) ─────────────────────────────── */
+  /* ── Error ── */
   return (
-    <div id="rating" className="fade-up max-w-md mx-auto">
+    <div id="rating" style={{ maxWidth: 460, margin: "0 auto" }}>
       {renderStars(false)}
-      <div className="mt-8 flex items-start gap-2 text-[14px] text-rust justify-center">
-        <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+      <div style={{ marginTop: 26, display: "flex", alignItems: "flex-start", gap: 8, fontSize: 14, color: "#c0392b", justifyContent: "center" }}>
+        <AlertCircle className="w-4 h-4" style={{ flexShrink: 0, marginTop: 2 }} />
         <span>{errorMsg || "Something went wrong."}</span>
       </div>
-      <button
-        type="button"
-        onClick={changeRating}
-        className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-bone/25 text-bone hover:border-bone/60 hover:bg-bone/5 text-[13px] tracking-wide transition-all duration-500"
-      >
+      <button type="button" onClick={changeRating} className="btn btn-ghost" style={{ marginTop: 22 }}>
         Try again
       </button>
     </div>

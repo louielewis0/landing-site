@@ -62,7 +62,21 @@ export async function POST(req: NextRequest) {
     user_agent: req.headers.get("user-agent")?.slice(0, 500) ?? null,
   };
 
-  const { error } = await supabase.from("public_feedback").insert(payload);
+  // Keep the standing record in public_feedback (existing behavior).
+  await supabase.from("public_feedback").insert(payload);
+
+  // ALSO surface it in the CRM so an unhappy client gets fast follow-up.
+  // Sub-5-star feedback lands as a lead tagged source "review-feedback"
+  // (intent "other"), with the rating + comment in the message field, so
+  // it shows in /crm — and in the "respond now" queue, which is the point.
+  const { error } = await supabase.from("leads").insert({
+    name: payload.name || "Review feedback",
+    email: payload.email,
+    phone: null,
+    intent: "other",
+    source: "review-feedback",
+    message: `⭐ ${payload.rating}-star review feedback: ${payload.comment ?? "(no comment left)"}`,
+  });
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
