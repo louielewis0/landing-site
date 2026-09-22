@@ -1,7 +1,75 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Star } from "lucide-react";
 import { company } from "@/lib/config";
 import CountUpStats from "./CountUpStats";
+
+/**
+ * Real, verbatim Google reviews for Real Estate Market Center (Sundus Lewis'
+ * Google Business Profile, 5.0★ / 70+ reviews). Displayed as visible on-page
+ * social proof — intentionally NOT emitted as self-serving aggregateRating
+ * JSON-LD, which Google treats as ineligible/spam for an entity reviewing
+ * itself. Only REMC's own reviews appear anywhere on the site.
+ */
+const GOOGLE_REVIEWS: { text: string; name: string }[] = [
+  { text: "Really helpful and professional team! They made the entire process smooth and stress-free, and their knowledge of the local market was evident from start to finish. I'd highly recommend Real Estate Market Center to anyone looking for a team that's responsive, knowledgeable, and genuinely easy to work with.", name: "Fadi E." },
+  { text: "Had a great experience working with Real Estate Market Center. The entire staff was incredibly nice, professional, and efficient from start to finish. They are just the best.", name: "Steven N." },
+  { text: "It was a pleasure working with Real Estate Market Center. Everyone on the team was professional, responsive, and really knew the ins and outs of the market.", name: "Anthony M." },
+  { text: "I had an excellent experience with Real Estate Market Center. Their team was knowledgeable, dependable, and easy to work with throughout the entire process. They have a strong understanding of the Metro Detroit real estate market.", name: "Vincent A." },
+  { text: "Louis was a great help at Real Estate Market Center. Best brokerage in Metro Detroit. Made the process simple and easy for me. Would recommend.", name: "Danjel P." },
+  { text: "Best brokerage in Troy — highly recommend Real Estate Market Center!", name: "Adam J." },
+];
+
+function Stars({ size = 15 }: { size?: number }) {
+  return (
+    <span style={{ display: "inline-flex", gap: 2 }} aria-label="5 out of 5 stars">
+      {[0, 1, 2, 3, 4].map((i) => (
+        <Star key={i} width={size} height={size} style={{ color: "var(--s-gold)" }} fill="currentColor" strokeWidth={0} />
+      ))}
+    </span>
+  );
+}
+
+export function TemplateReviews() {
+  return (
+    <div className="t-wrap" style={{ paddingTop: 20, paddingBottom: 20 }} id="reviews">
+      <div style={{ textAlign: "center", marginBottom: 40 }}>
+        <div className="t-eyebrow" style={{ justifyContent: "center" }}>Google reviews</div>
+        <h2 style={{ marginBottom: 16 }}>
+          Rated <span className="t-blue">5.0</span> by 70+ clients.
+        </h2>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
+          <Stars size={20} />
+          <span style={{ fontSize: 14, color: "var(--s-muted)" }}>5.0 average · 70+ reviews on Google</span>
+        </div>
+      </div>
+
+      <div style={{ display: "grid", gap: 18, gridTemplateColumns: "repeat(auto-fit, minmax(290px, 1fr))" }}>
+        {GOOGLE_REVIEWS.map((r) => (
+          <figure key={r.name} style={{ margin: 0, borderRadius: "var(--s-radius)", border: "1px solid var(--line)", background: "#fff", padding: 26, display: "flex", flexDirection: "column", gap: 14 }}>
+            <Stars />
+            <blockquote style={{ margin: 0, fontSize: 14.5, lineHeight: 1.7, color: "var(--s-ink)", flex: 1 }}>
+              &ldquo;{r.text}&rdquo;
+            </blockquote>
+            <figcaption style={{ display: "flex", alignItems: "center", gap: 10, paddingTop: 12, borderTop: "1px solid var(--line)" }}>
+              <span style={{ width: 34, height: 34, borderRadius: "50%", background: "var(--navy)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontWeight: 600, flexShrink: 0 }}>
+                {r.name.charAt(0)}
+              </span>
+              <span>
+                <span style={{ display: "block", fontSize: 13.5, fontWeight: 600, color: "var(--s-ink)" }}>{r.name}</span>
+                <span style={{ fontSize: 11.5, color: "var(--s-muted)" }}>Google review</span>
+              </span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <div style={{ textAlign: "center", marginTop: 34 }}>
+        <Link href="/reviews" className="t-pill">Read more &amp; leave a review</Link>
+      </div>
+    </div>
+  );
+}
 
 /**
  * Homepage sections, built 1:1 from the user's template

@@ -73,7 +73,7 @@ export default function SuburbMatchPage() {
               <HeroLeadForm source="suburb-match" />
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginTop: 14, fontSize: 12.5, color: "var(--s-muted)" }}>
                 <Star className="w-3.5 h-3.5" style={{ color: "var(--s-gold)" }} fill="currentColor" strokeWidth={0} />
-                Rated 5.0 on Google · 20+ years · $100M+ closed
+                Rated 5.0 on Google (70+ reviews) · 20+ years · $100M+ closed
               </div>
             </div>
           </div>

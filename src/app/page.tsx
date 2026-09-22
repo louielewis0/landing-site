@@ -4,6 +4,7 @@ import {
   TemplateStats,
   TemplateAreas,
   TemplateAbout,
+  TemplateReviews,
   TemplateCta,
 } from "@/components/site/TemplateHome";
 import ListingsShowcase from "@/components/site/ListingsShowcase";
@@ -18,6 +19,7 @@ export default function Home() {
         <ListingsShowcase />
         <TemplateAreas />
         <TemplateAbout />
+        <TemplateReviews />
         <TemplateCta />
         <ContactForm />
       </main>

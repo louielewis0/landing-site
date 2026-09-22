@@ -202,7 +202,7 @@ export default function OaklandBrokeragesPage() {
                   </div>
                   <p style={{ fontSize: 14.5, lineHeight: 1.7, color: "var(--s-muted)" }}>
                     {b.publisher
-                      ? "Full disclosure: this is us. Real Estate Market Center is a family-run, independent brokerage in Troy, established in 2003, with 20+ years and a reported $100M+ in closed sales across Oakland and Macomb County. Our edge is transparency — we publish our own sourced market research (home values, school-district ranks, budget guides) so clients can check our work before they ever call. Rated 5.0 on Google."
+                      ? "Full disclosure: this is us. Real Estate Market Center is a family-run, independent brokerage in Troy, established in 2003, with 20+ years and a reported $100M+ in closed sales across Oakland and Macomb County. Our edge is transparency — we publish our own sourced market research (home values, school-district ranks, budget guides) so clients can check our work before they ever call. Rated 5.0 on Google across 70+ reviews."
                       : b.focus + "."}
                   </p>
                   {b.publisher && (
