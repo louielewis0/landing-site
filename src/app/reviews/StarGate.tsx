@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Star, CheckCircle2, AlertCircle, Lock } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 /**
  * /reviews — rating-gated capture surface (cream/navy theme).
@@ -97,26 +98,26 @@ export default function StarGate() {
     if (!Number.isInteger(selectedRating) || selectedRating < 1 || selectedRating > 4) return;
     setStatus("submitting");
     setErrorMsg("");
-    try {
-      const res = await fetch("/api/reviews/feedback", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          rating: selectedRating,
-          comment: comment.trim() || null,
-          name: name.trim() || null,
-          email: email.trim() || null,
-        }),
-      });
-      if (!res.ok) {
-        const errBody = (await res.json().catch(() => ({}))) as { error?: string };
-        throw new Error(errBody.error ?? "Couldn't submit feedback. Please try again.");
-      }
-      setStatus("thank-you");
-    } catch (e) {
+
+    // Insert directly into the CRM's leads table from the browser — the same
+    // proven anon-client path the site's other lead forms use (reliable;
+    // avoids the server route's "fetch failed"). Tagged source
+    // "review-feedback" so it surfaces in /crm's respond-now queue.
+    const { error } = await supabase.from("leads").insert({
+      name: name.trim() || "Review feedback",
+      email: email.trim() || null,
+      phone: null,
+      intent: "other",
+      source: "review-feedback",
+      message: `⭐ ${selectedRating}-star review feedback: ${comment.trim() || "(no comment left)"}`,
+    });
+
+    if (error) {
       setStatus("feedback");
-      setErrorMsg(e instanceof Error ? e.message : "Something went wrong.");
+      setErrorMsg("Couldn't send that just now — please try again, or call us.");
+      return;
     }
+    setStatus("thank-you");
   }
 
   const renderStars = (interactive: boolean) => (
