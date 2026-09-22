@@ -30,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/sterling-heights-vs-rochester-hills`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/metro-detroit-lake-living-guide`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/relocating-to-metro-detroit`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/metro-detroit-suburb-match`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/how-much-home-metro-detroit-budget`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/first-time-home-buyer-programs-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/water-damage-sell-or-restore`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },

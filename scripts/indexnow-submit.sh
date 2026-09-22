@@ -31,6 +31,7 @@ else
     "https://marketcenterrealty.com/sterling-heights-vs-rochester-hills"
     "https://marketcenterrealty.com/metro-detroit-lake-living-guide"
     "https://marketcenterrealty.com/relocating-to-metro-detroit"
+    "https://marketcenterrealty.com/metro-detroit-suburb-match"
     "https://marketcenterrealty.com/how-much-home-metro-detroit-budget"
     "https://marketcenterrealty.com/first-time-home-buyer-programs-michigan"
     "https://marketcenterrealty.com/troy-real-estate-agent"
