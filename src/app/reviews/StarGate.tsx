@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Star, CheckCircle2, AlertCircle, Lock } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { company } from "@/lib/config";
 
 /**
  * /reviews — rating-gated capture surface (cream/navy theme).
@@ -118,8 +119,13 @@ export default function StarGate() {
     });
 
     if (error) {
+      // Surface the real cause so a failure is diagnosable rather than opaque.
+      // Kept short and human; the raw DB message is logged for debugging.
+      console.error("review-feedback insert failed:", error);
       setStatus("feedback");
-      setErrorMsg("Couldn't send that just now — please try again, or call us.");
+      setErrorMsg(
+        `Couldn't send that (${error.message || "unknown error"}). Please try again, or call us at ${company.phone}.`,
+      );
       return;
     }
     setStatus("thank-you");
