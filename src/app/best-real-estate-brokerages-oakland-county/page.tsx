@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import SiteShell from "@/components/site/SiteShell";
-import { company, googleReviews } from "@/lib/config";
+import { company } from "@/lib/config";
 import { ArrowRight, ChevronRight, CalendarDays, Landmark, Building2, Phone, MapPin, ShieldCheck, Star } from "lucide-react";
 
 const BASE = "https://marketcenterrealty.com";
@@ -162,13 +162,14 @@ export default function OaklandBrokeragesPage() {
               <p style={{ fontSize: 13.5, color: "var(--s-muted)", marginBottom: 26, maxWidth: 760 }}>Verified facts only — type, tenure, location, focus. See &ldquo;How this was compiled&rdquo; for why star ratings are intentionally excluded.</p>
             </div>
             <div className="reveal" style={{ overflowX: "auto", borderRadius: "var(--s-radius)", border: "1px solid var(--line)", background: "#fff" }}>
-              <table style={{ width: "100%", textAlign: "left", fontSize: 13, minWidth: 720, borderCollapse: "collapse" }}>
+              <table style={{ width: "100%", textAlign: "left", fontSize: 13, minWidth: 880, borderCollapse: "collapse" }}>
                 <thead>
                   <tr style={{ borderBottom: "1px solid var(--line)", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.14em", color: "var(--s-muted)" }}>
                     <th style={{ padding: "14px 16px", fontWeight: 600 }}>Brokerage</th>
                     <th style={{ padding: "14px 16px", fontWeight: 600 }}>Office</th>
                     <th style={{ padding: "14px 16px", fontWeight: 600 }}>Type</th>
                     <th style={{ padding: "14px 16px", fontWeight: 600 }}>Est.</th>
+                    <th style={{ padding: "14px 16px", fontWeight: 600 }}>Google reviews</th>
                     <th style={{ padding: "14px 16px", fontWeight: 600 }}>Focus</th>
                   </tr>
                 </thead>
@@ -179,13 +180,27 @@ export default function OaklandBrokeragesPage() {
                       <td style={{ padding: "13px 16px", color: "var(--s-muted)" }}>{b.city}</td>
                       <td style={{ padding: "13px 16px", color: "var(--s-muted)" }}>{b.type}</td>
                       <td style={{ padding: "13px 16px", color: "var(--s-muted)", fontVariantNumeric: "tabular-nums" }}>{b.est}</td>
+                      <td style={{ padding: "13px 16px" }}>
+                        {b.publisher ? (
+                          <span style={{ display: "inline-flex", flexDirection: "column", gap: 3 }}>
+                            <span style={{ display: "inline-flex", gap: 1 }}>
+                              {[0, 1, 2, 3, 4].map((i) => (
+                                <Star key={i} width={12} height={12} style={{ color: "var(--s-gold)" }} fill="currentColor" strokeWidth={0} />
+                              ))}
+                            </span>
+                            <span style={{ fontSize: 11.5, fontWeight: 600, color: "var(--s-ink)", whiteSpace: "nowrap" }}>70+ Google reviews</span>
+                          </span>
+                        ) : (
+                          <span style={{ color: "var(--s-muted)" }}>&mdash;</span>
+                        )}
+                      </td>
                       <td style={{ padding: "13px 16px", color: "var(--s-muted)" }}>{b.focus}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p style={{ fontSize: 11, color: "var(--s-muted)", marginTop: 14 }}>&ldquo;—&rdquo; means an establishment year isn&rsquo;t publicly stated on the brokerage&rsquo;s own materials. Facts as of September 2026.</p>
+            <p style={{ fontSize: 11, color: "var(--s-muted)", marginTop: 14 }}>&ldquo;—&rdquo; means the figure isn&rsquo;t shown: an establishment year not publicly stated, or a Google-reviews figure we haven&rsquo;t independently verified (we only publish our own). Check each brokerage&rsquo;s current Google rating directly. Facts as of September 2026.</p>
           </div>
         </section>
 
@@ -290,41 +305,6 @@ export default function OaklandBrokeragesPage() {
                   <summary style={{ fontSize: 15.5, fontWeight: 600, color: "var(--s-ink)", cursor: "pointer" }}>{f.question}</summary>
                   <p style={{ fontSize: 14, lineHeight: 1.8, color: "var(--s-muted)", marginTop: 12 }}>{f.answer}</p>
                 </details>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* REMC Google reviews (publisher — only our own reviews shown) */}
-        <section className="bg-cream" style={{ padding: "70px 0" }}>
-          <div className="container" style={{ maxWidth: 860, textAlign: "center" }}>
-            <div className="s-eyebrow" style={{ justifyContent: "center" }}>What our clients say</div>
-            <h2 style={{ fontSize: "clamp(24px, 2.8vw, 32px)", marginBottom: 14 }}>Real Estate Market Center — rated 5.0 on Google</h2>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 30 }}>
-              <span style={{ display: "inline-flex", gap: 2 }}>
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <Star key={i} width={18} height={18} style={{ color: "var(--s-gold)" }} fill="currentColor" strokeWidth={0} />
-                ))}
-              </span>
-              <span style={{ fontSize: 13.5, color: "var(--s-muted)" }}>5.0 average · 70+ reviews</span>
-            </div>
-            <div style={{ display: "grid", gap: 14, gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", textAlign: "left" }}>
-              {googleReviews.slice(0, 3).map((r) => (
-                <figure key={r.name} style={{ margin: 0, borderRadius: 16, border: "1px solid var(--line)", background: "#fff", padding: 20, display: "flex", flexDirection: "column", gap: 12 }}>
-                  <span style={{ display: "inline-flex", gap: 2 }}>
-                    {[0, 1, 2, 3, 4].map((i) => (
-                      <Star key={i} width={13} height={13} style={{ color: "var(--s-gold)" }} fill="currentColor" strokeWidth={0} />
-                    ))}
-                  </span>
-                  <blockquote style={{ margin: 0, fontSize: 13.5, lineHeight: 1.6, color: "var(--s-ink)", flex: 1 }}>&ldquo;{r.text}&rdquo;</blockquote>
-                  <figcaption style={{ display: "flex", alignItems: "center", gap: 10, paddingTop: 10, borderTop: "1px solid var(--line)" }}>
-                    <span style={{ width: 30, height: 30, borderRadius: "50%", background: "var(--navy)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 600, flexShrink: 0 }}>{r.name.charAt(0)}</span>
-                    <span>
-                      <span style={{ display: "block", fontSize: 13, fontWeight: 600, color: "var(--s-ink)" }}>{r.name}</span>
-                      <span style={{ fontSize: 11, color: "var(--s-muted)" }}>Google review</span>
-                    </span>
-                  </figcaption>
-                </figure>
               ))}
             </div>
           </div>
