@@ -137,4 +137,19 @@ export const neighborhoods = [
   { name: "Rochester Hills", blurb: "Family-friendly, parks, and excellent new-construction inventory." },
 ];
 
+/**
+ * Real, verbatim 5-star Google reviews for Real Estate Market Center
+ * (Sundus Lewis' Business Profile, 5.0★ / 70+ reviews). Shown as visible
+ * social proof only — never emitted as self-serving aggregateRating schema.
+ * Shared by the homepage and the brokerage-comparison page. Only REMC's own
+ * reviews ever appear on the site.
+ */
+export const googleReviews = [
+  { text: "Really helpful and professional team! They made the entire process smooth and stress-free, and their knowledge of the local market was evident from start to finish. I'd highly recommend Real Estate Market Center to anyone looking for a team that's responsive, knowledgeable, and genuinely easy to work with.", name: "Fadi E." },
+  { text: "Had a great experience working with Real Estate Market Center. The entire staff was incredibly nice, professional, and efficient from start to finish. They are just the best.", name: "Steven N." },
+  { text: "It was a pleasure working with Real Estate Market Center. Everyone on the team was professional, responsive, and really knew the ins and outs of the market.", name: "Anthony M." },
+  { text: "I had an excellent experience with Real Estate Market Center. Their team was knowledgeable, dependable, and easy to work with throughout the entire process. They have a strong understanding of the Metro Detroit real estate market.", name: "Vincent A." },
+  { text: "Best brokerage in Troy — highly recommend Real Estate Market Center!", name: "Adam J." },
+] as const;
+
 // Listings are now sourced from src/lib/listings.ts (MLS-ready).
