@@ -103,9 +103,14 @@ export default function StarGate() {
     // proven anon-client path the site's other lead forms use (reliable;
     // avoids the server route's "fetch failed"). Tagged source
     // "review-feedback" so it surfaces in /crm's respond-now queue.
+    // NOTE: leads.email is NOT NULL on the live DB (the nullable migration
+    // isn't applied), and this form's email is optional — so we fall back to
+    // a clearly-internal sentinel address when none is given, rather than
+    // sending null and failing the insert. If a real email is provided, the
+    // team can follow up with the unhappy client directly.
     const { error } = await supabase.from("leads").insert({
-      name: name.trim() || "Review feedback",
-      email: email.trim() || null,
+      name: name.trim() || "Review feedback (no name given)",
+      email: email.trim() || "review-feedback@marketcenterrealty.com",
       phone: null,
       intent: "other",
       source: "review-feedback",
