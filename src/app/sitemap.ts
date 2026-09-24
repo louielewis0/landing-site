@@ -42,6 +42,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/first-time-home-buyer-programs-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/water-damage-sell-or-restore`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/reviews`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${base}/home-sale-proceeds-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/rental-property-roi-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/home-affordability-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/rent-vs-buy-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/1031-exchange-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     ...cityPages,
   ];
 }

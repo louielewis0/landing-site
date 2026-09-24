@@ -618,6 +618,10 @@ body {
 .site-theme .bg-cream { background: var(--cream); }
 .site-theme .bg-cream-2 { background: var(--cream-2); }
 
+/* ── Calculator tools: two-column input/result grid, stacks on mobile ── */
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 820px) { .calc-grid { grid-template-columns: 1fr; } }
+
 /* ── Service cards ── */
 .site-theme .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
 .site-theme .service-card {
