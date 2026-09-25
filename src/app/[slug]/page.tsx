@@ -69,6 +69,8 @@ export default async function CityLandingPage({ params }: Props) {
     "sterling-heights-real-estate-agent": { href: "/best-real-estate-brokerages-sterling-heights", label: "Compare the best real estate brokerages in Sterling Heights" },
     "west-bloomfield-real-estate-agent": { href: "/best-real-estate-brokerages-oakland-county", label: "Compare the best real estate brokerages in Oakland County" },
     "warren-real-estate-agent": { href: "/best-real-estate-brokerages-sterling-heights", label: "Compare the best brokerages in the Sterling Heights & Macomb area" },
+    "madison-heights-real-estate-agent": { href: "/best-real-estate-brokerages-madison-heights", label: "Compare the best real estate brokerages in Madison Heights" },
+    "auburn-hills-real-estate-agent": { href: "/best-real-estate-brokerages-auburn-hills", label: "Compare the best real estate brokerages in Auburn Hills" },
   };
   const brokerage = brokerageBySlug[page.slug];
 

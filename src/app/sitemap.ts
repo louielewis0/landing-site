@@ -38,6 +38,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/best-real-estate-brokerages-rochester-hills`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/best-real-estate-brokerages-sterling-heights`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/best-real-estate-brokerages-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/best-real-estate-brokerages-madison-heights`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/best-real-estate-brokerages-auburn-hills`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/how-much-home-metro-detroit-budget`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/first-time-home-buyer-programs-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/water-damage-sell-or-restore`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },

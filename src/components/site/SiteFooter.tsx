@@ -45,6 +45,8 @@ export default function SiteFooter() {
     { label: "West Bloomfield", href: "/west-bloomfield-real-estate-agent" },
     { label: "Sterling Heights", href: "/sterling-heights-real-estate-agent" },
     { label: "Warren", href: "/warren-real-estate-agent" },
+    { label: "Madison Heights", href: "/madison-heights-real-estate-agent" },
+    { label: "Auburn Hills", href: "/auburn-hills-real-estate-agent" },
   ];
 
   return (
