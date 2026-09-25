@@ -38,7 +38,7 @@ const data: BrokerageComparisonData = {
     {
       name: "Real Estate Market Center",
       city: "Troy",
-      type: "Independent, family-run",
+      type: "Independent luxury",
       est: "2003",
       focus:
         "Full-service across Birmingham & Oakland County; street-level local pricing; publishes its own sourced market research",
@@ -66,7 +66,7 @@ const data: BrokerageComparisonData = {
     {
       name: "Max Broock Realtors",
       city: "Birmingham",
-      type: "Real Estate One family (Michigan's largest brokerage group)",
+      type: "Real Estate One family brand",
       est: "1895",
       focus:
         "Luxury and estate homes on Old Woodward; Luxury Portfolio / LeadingRE networks",
@@ -115,7 +115,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Are Max Broock and Real Estate One the same company?",
       answer:
-        "Effectively yes — both are part of the Real Estate One Family of Companies, Michigan's largest brokerage group, headquartered in Southfield. Max Broock is its luxury brand. They're Michigan regional brands, not national franchises like RE/MAX or Keller Williams. We flag this because it's easy to mistake them for separate independent competitors when comparing brokerages.",
+        "Effectively yes — both are part of the Real Estate One Family of Companies, a large Michigan brokerage group, headquartered in Southfield. Max Broock is its luxury brand. They're Michigan regional brands, not national franchises like RE/MAX or Keller Williams. We flag this because it's easy to mistake them for separate independent competitors when comparing brokerages.",
     },
     {
       question: "What's the difference between a franchise and an independent brokerage?",

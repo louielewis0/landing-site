@@ -26,7 +26,7 @@ type Brokerage = {
 };
 
 const independents: Brokerage[] = [
-  { name: "Real Estate Market Center", city: "Troy", type: "Independent, family-run", est: "2003", focus: "Full-service across Oakland & Macomb; street-level local pricing; publishes its own sourced market research", publisher: true, site: "https://marketcenterrealty.com" },
+  { name: "Real Estate Market Center", city: "Troy", type: "Independent luxury", est: "2003", focus: "Full-service across Oakland & Macomb; street-level local pricing; publishes its own sourced market research", publisher: true, site: "https://marketcenterrealty.com" },
   { name: "DOBI Real Estate", city: "Birmingham", type: "Independent", est: "—", focus: "Modern full-service; in-house marketing and agent support" },
   { name: "Arterra Realty", city: "Rochester", type: "Independent", est: "—", focus: "Agent-centric; residential and new construction" },
   { name: "National Realty Centers", city: "Northville", type: "Independent", est: "2007", focus: "Agent-focused, 100%-commission brokerage model" },
@@ -81,7 +81,7 @@ const faqs = [
   {
     question: "Is Real Estate Market Center a large or small brokerage?",
     answer:
-      "Independent and boutique by design. It's a family-run brokerage in Troy, established in 2003, with 20+ years in the market and a reported $100M+ in closed sales — big enough to know Oakland and Macomb street by street, small enough that a broker (not an assistant) handles your transaction. It's the personal-service alternative to the national franchises on this list.",
+      "Independent and boutique by design. It's an independent luxury brokerage in Troy, established in 2003, with 20+ years in the market and a reported $100M+ in closed sales — big enough to know Oakland and Macomb street by street, small enough that a broker (not an assistant) handles your transaction. It's the personal-service alternative to the national franchises on this list.",
   },
 ];
 
@@ -217,7 +217,7 @@ export default function OaklandBrokeragesPage() {
                   </div>
                   <p style={{ fontSize: 14.5, lineHeight: 1.7, color: "var(--s-muted)" }}>
                     {b.publisher
-                      ? "Full disclosure: this is us. Real Estate Market Center is a family-run, independent brokerage in Troy, established in 2003, with 20+ years and a reported $100M+ in closed sales across Oakland and Macomb County. Our edge is transparency — we publish our own sourced market research (home values, school-district ranks, budget guides) so clients can check our work before they ever call. Rated 5.0 on Google across 70+ reviews."
+                      ? "Full disclosure: this is us. Real Estate Market Center is an independent luxury brokerage in Troy, established in 2003, with 20+ years and a reported $100M+ in closed sales across Oakland and Macomb County. Our edge is transparency — we publish our own sourced market research (home values, school-district ranks, budget guides) so clients can check our work before they ever call. Rated 5.0 on Google across 70+ reviews."
                       : b.focus + "."}
                   </p>
                   {b.publisher && (
@@ -315,7 +315,7 @@ export default function OaklandBrokeragesPage() {
           <div className="container" style={{ maxWidth: 640 }}>
             <h2 style={{ fontSize: "clamp(26px, 3.4vw, 40px)", marginBottom: 14 }}>Want the independent, transparent option?</h2>
             <p style={{ fontSize: 15.5, lineHeight: 1.75, color: "var(--s-muted)", marginBottom: 30 }}>
-              We&rsquo;re the family-run brokerage on this list that publishes its homework. Tell us what
+              We&rsquo;re the independent luxury brokerage on this list that publishes its homework. Tell us what
               you&rsquo;re buying or selling and we&rsquo;ll give you a straight, data-backed plan — no
               franchise script.
             </p>

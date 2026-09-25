@@ -8,16 +8,16 @@ export const company = {
   city: "Troy",
   state: "MI",
   region: "Metro Detroit",
-  tagline: "Metro Detroit's trusted full-service real estate experts.",
+  tagline: "Metro Detroit's independent luxury real estate brokerage.",
   footerTagline:
     "Proudly serving Metro Detroit homeowners, buyers, and investors.",
   description:
-    "Metro Detroit real estate experts with 20+ years of experience and $100M+ in closed sales. Serving Troy, Rochester Hills, Birmingham, Bloomfield Hills, Sterling Heights, Royal Oak, Detroit, Warren, and Farmington Hills.",
+    "Metro Detroit's independent luxury real estate brokerage — 20+ years of experience and $100M+ in closed sales. Serving Troy, Rochester Hills, Birmingham, Bloomfield Hills, Sterling Heights, Royal Oak, Detroit, Warren, and Farmington Hills.",
 
   phone: "(248) 568-6081",
   phoneTel: "+12485686081",
   email: "realestatemarketmedia@gmail.com",
-  address: "2032 E Square Lake Rd, Suite 400A, Troy, MI 48085",
+  address: "2032 E Square Lake Rd Ste 400A, Troy, MI 48085",
 
   googleMapsEmbed:
     "https://maps.google.com/maps?q=2032%20E%20Square%20Lake%20Rd%20Suite%20400A%20Troy%20MI&t=&z=15&ie=UTF8&iwloc=&output=embed",

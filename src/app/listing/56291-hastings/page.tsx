@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteShell from "@/components/site/SiteShell";
-import ShowingCTA from "@/components/site/ShowingCTA";
+import ListingInquiry from "@/components/site/ListingInquiry";
 import ListingCarousel from "@/components/site/ListingCarousel";
 import { company } from "@/lib/config";
 
 const PROPERTY = "56291 Hastings Dr, Macomb Twp";
 
 export const metadata: Metadata = {
-  title: `56291 Hastings, Macomb Twp — $520,000 | 4 Bed Colonial | ${company.name}`,
+  title: `56291 Hastings, Macomb Twp — Off Market | 4 Bed Colonial | ${company.name}`,
   description:
-    "For sale: 56291 Hastings, Macomb Twp MI 48042. 4-bed, 2.1-bath colonial, 3,600 finished sqft, updated kitchen, finished basement, stamped-concrete patio. $520,000. MLS #20261057937. Listed by Real Estate Market Center.",
+    "56291 Hastings, Macomb Twp MI 48042 — a 4-bed, 2.1-bath, 3,600 sqft colonial listed by Real Estate Market Center. Currently off market. We're the listing agents — inquire and we'll reach back if it returns to the market.",
   alternates: {
     canonical: "https://marketcenterrealty.com/listing/56291-hastings",
   },
   openGraph: {
-    title: "56291 Hastings, Macomb Twp — $520,000",
+    title: "56291 Hastings, Macomb Twp — Off Market",
     description:
-      "4 Bed | 2.1 Bath | 3,600 sqft finished colonial with updated kitchen, finished basement & stamped-concrete patio.",
+      "4 Bed | 2.1 Bath | 3,600 sqft finished colonial in Macomb Twp. Off market — inquire with the listing agents at Real Estate Market Center.",
     type: "website",
     images: ["/listing/hastings/exterior.jpg"],
   },
@@ -51,28 +51,41 @@ const PHOTOS = [
   { src: "/listing/hastings/bedroom.jpg", alt: "Primary bedroom with vaulted ceiling and large windows" },
 ];
 
-const inquiryMail = `mailto:${company.email}?subject=${encodeURIComponent(
-  "Inquiry: 56291 Hastings, Macomb Twp (MLS #20261057937)"
-)}&body=${encodeURIComponent(
-  "Hi, I'm interested in 56291 Hastings, Macomb Twp. Please send me more information or set up a showing."
-)}`;
-
 export default function HastingsListing() {
   return (
     <SiteShell>
       <main>
         <section className="t-wrap t-listing">
-          <div className="t-eyebrow">For Sale &middot; MLS #20261057937</div>
-          <h1>56291 Hastings Dr</h1>
+          <div className="t-eyebrow">Off Market &middot; Listed by {company.name}</div>
+          <h1>
+            56291 Hastings Dr<span className="t-listing-sold"> &mdash; Off Market</span>
+          </h1>
           <p className="t-listing-sub">Macomb Twp, MI 48042 &middot; Strathmore Sub</p>
           <div className="t-listing-price">
-            $520,000 <span>4 bd &middot; 2.1 ba &middot; 3,600 sqft</span>
+            Off Market <span>4 bd &middot; 2.1 ba &middot; 3,600 sqft &middot; last listed $520,000</span>
           </div>
 
-          <div className="t-listing-actions">
-            <ShowingCTA property={PROPERTY} label="Schedule a showing" />
-            <a href={inquiryMail} className="t-pill-ghost">
-              Request info
+          <div
+            style={{
+              marginTop: 18,
+              padding: "16px 20px",
+              borderRadius: 14,
+              background: "rgba(217,118,47,0.06)",
+              border: "1px solid rgba(217,118,47,0.28)",
+              fontSize: 14.5,
+              lineHeight: 1.6,
+              color: "var(--s-ink)",
+              maxWidth: 620,
+            }}
+          >
+            This home is <strong>not currently on the market</strong>. We&rsquo;re the listing agents, and it may
+            return &mdash; if you have questions or want to be notified if it comes back on, send an inquiry below
+            and a broker will reach back.
+          </div>
+
+          <div className="t-listing-actions" style={{ marginTop: 22 }}>
+            <a href="#inquire" className="t-pill t-pill-solid t-pill-dark">
+              Ask about this home
             </a>
           </div>
 
@@ -121,23 +134,33 @@ export default function HastingsListing() {
           </div>
         </section>
 
-        <div className="t-wrap t-cta-wrap">
-          <div className="t-cta">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/listing/hastings/exterior.jpg" alt="" loading="lazy" />
-            <div className="t-cta-shade" aria-hidden />
-            <div className="t-cta-copy">
+        {/* Off-market inquiry section (replaces the showing CTA) */}
+        <div className="t-wrap t-cta-wrap" id="inquire">
+          <div style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 40, alignItems: "center" }} className="t-listing-cols">
+            <div>
               <h2>
-                Want to see it
+                Interested in
                 <br />
-                <span>in person?</span>
+                <span>this home?</span>
               </h2>
-              <p>
-                Book a private showing in a few taps. Tell us when works and a
-                licensed broker confirms your time personally.
+              <p className="t-hv-sub">
+                It&rsquo;s off market for now, but as the listing agents we can tell you more about the property,
+                the neighborhood, and whether it&rsquo;s likely to return. Leave your details and we&rsquo;ll reach
+                back personally.
               </p>
-              <ShowingCTA property={PROPERTY} />
+              <p style={{ fontSize: 14, color: "var(--s-muted)", marginTop: 16 }}>
+                Thinking about your own move?{" "}
+                <Link href="/home-value" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
+                  See what your home is worth
+                </Link>{" "}
+                or{" "}
+                <Link href="/reviews" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
+                  read our client reviews
+                </Link>
+                .
+              </p>
             </div>
+            <ListingInquiry property={PROPERTY} source="off-market-inquiry-hastings" />
           </div>
         </div>
       </main>

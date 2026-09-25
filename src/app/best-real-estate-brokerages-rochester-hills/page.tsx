@@ -39,7 +39,7 @@ const data: BrokerageComparisonData = {
     {
       name: "Real Estate Market Center",
       city: "Troy",
-      type: "Independent, family-run",
+      type: "Independent luxury",
       est: "2003",
       focus:
         "Full-service across Rochester Hills & Oakland County; street-level local pricing; publishes its own sourced market research",
@@ -82,7 +82,7 @@ const data: BrokerageComparisonData = {
     {
       name: "Real Estate One — Rochester",
       city: "Rochester",
-      type: "Real Estate One (Michigan's largest brokerage group)",
+      type: "Real Estate One (Michigan regional brand)",
       est: "—",
       focus: "Full-service residential; statewide Michigan network",
     },

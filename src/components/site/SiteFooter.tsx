@@ -15,12 +15,26 @@ export default function SiteFooter() {
     { label: "Listings", href: "/#listings" },
     { label: "Team", href: "/#about" },
     { label: "Reviews", href: "/reviews" },
+    { label: "Contact", href: "/contact" },
     { label: "Market Update", href: "/metro-detroit-housing-market-update" },
     { label: "Best Suburbs Guide", href: "/best-metro-detroit-suburbs" },
     { label: "School Districts Guide", href: "/best-school-districts-metro-detroit" },
     { label: "Home Budget Guide", href: "/how-much-home-metro-detroit-budget" },
     { label: "First-Time Buyer Programs", href: "/first-time-home-buyer-programs-michigan" },
+    { label: "Oakland County Brokerages", href: "/best-real-estate-brokerages-oakland-county" },
+    { label: "Michigan Brokerages", href: "/best-real-estate-brokerages-michigan" },
     { label: "Privacy", href: "/privacy" },
+  ];
+
+  // Free interactive tools — de-orphaned into the footer sitewide.
+  const tools = [
+    { label: "Home Sale Proceeds", href: "/home-sale-proceeds-calculator" },
+    { label: "Affordability Calculator", href: "/home-affordability-calculator" },
+    { label: "Rental ROI Calculator", href: "/rental-property-roi-calculator" },
+    { label: "Rent vs. Buy", href: "/rent-vs-buy-calculator" },
+    { label: "1031 Exchange", href: "/1031-exchange-calculator" },
+    { label: "Sell or Rent?", href: "/sell-or-rent-calculator" },
+    { label: "Down Payment Help", href: "/michigan-down-payment-assistance" },
   ];
 
   const areas = [
@@ -53,6 +67,14 @@ export default function SiteFooter() {
             ))}
           </div>
           <div className="t-foot-areas">
+            <span className="t-foot-areas-h">Free tools</span>
+            {tools.map((t) => (
+              <Link key={t.href} href={t.href}>
+                {t.label}
+              </Link>
+            ))}
+          </div>
+          <div className="t-foot-areas">
             <span className="t-foot-areas-h">Real estate agents in</span>
             {areas.map((a) => (
               <Link key={a.href} href={a.href}>
@@ -63,7 +85,9 @@ export default function SiteFooter() {
           <div className="t-foot-contact">
             <a href={`tel:${company.phoneTel}`}>{company.phone}</a>
             <br />
-            {company.email} &middot; Troy, MI
+            {company.address}
+            <br />
+            {company.email}
           </div>
         </div>
         <div className="t-foot-bottom">

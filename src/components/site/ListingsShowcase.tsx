@@ -10,8 +10,8 @@ const CARDS = [
   {
     href: "/listing/56291-hastings",
     img: "/listing/hastings/kitchen.jpg",
-    tag: "For Sale",
-    price: "$520,000",
+    tag: "Off Market",
+    price: "Off Market",
     meta: "4 bd · 2.1 ba",
     addr: "56291 Hastings · Macomb Twp",
   },

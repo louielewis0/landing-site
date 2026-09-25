@@ -92,7 +92,7 @@ export function TemplateStats() {
     <div className="t-wrap t-stats">
       <div className="t-eyebrow">Since 2003</div>
       <h2>
-        Metro Detroit&rsquo;s <span className="t-blue">family-run</span> brokerage.
+        Metro Detroit&rsquo;s <span className="t-blue">independent luxury</span> brokerage.
       </h2>
       <CountUpStats />
     </div>
@@ -111,13 +111,13 @@ export function TemplateAbout() {
       <div>
         <div className="t-eyebrow">Who we are</div>
         <h2>
-          One family, <span>helping yours.</span>
+          Independent luxury, <span>done personally.</span>
         </h2>
         <p className="t-about-p">
-          We&rsquo;re not a franchise desk. For two decades our family has guided Metro
-          Detroit families through buying and selling &mdash; straight answers,
-          street-level pricing knowledge, and one point of contact from first call
-          to closing.
+          We&rsquo;re not a franchise desk. For two decades we&rsquo;ve given Metro
+          Detroit buyers and sellers white-glove, independent representation &mdash;
+          straight answers, street-level pricing knowledge, and one point of contact
+          from first call to closing.
         </p>
         <div className="t-about-rows">
           <div>

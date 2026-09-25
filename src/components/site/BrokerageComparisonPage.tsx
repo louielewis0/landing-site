@@ -220,7 +220,7 @@ export default function BrokerageComparisonPage({ data }: { data: BrokerageCompa
                   </div>
                   <p style={{ fontSize: 14.5, lineHeight: 1.7, color: "var(--s-muted)" }}>
                     {b.publisher
-                      ? "Full disclosure: this is us. Real Estate Market Center is a family-run, independent brokerage in Troy, established in 2003, with 20+ years and a reported $100M+ in closed sales across Oakland and Macomb County. Our edge is transparency — we publish our own sourced market research (home values, school-district ranks, budget guides) so clients can check our work before they ever call. Rated 5.0 on Google across 70+ reviews."
+                      ? "Full disclosure: this is us. Real Estate Market Center is an independent luxury brokerage in Troy, established in 2003, with 20+ years and a reported $100M+ in closed sales across Oakland and Macomb County. Our edge is transparency — we publish our own sourced market research (home values, school-district ranks, budget guides) so clients can check our work before they ever call. Rated 5.0 on Google across 70+ reviews."
                       : b.focus + "."}
                   </p>
                   {b.publisher && (
@@ -318,7 +318,7 @@ export default function BrokerageComparisonPage({ data }: { data: BrokerageCompa
           <div className="container" style={{ maxWidth: 640 }}>
             <h2 style={{ fontSize: "clamp(26px, 3.4vw, 40px)", marginBottom: 14 }}>Want the independent, transparent option?</h2>
             <p style={{ fontSize: 15.5, lineHeight: 1.75, color: "var(--s-muted)", marginBottom: 30 }}>
-              We&rsquo;re the family-run brokerage on this list that publishes its homework. Tell us what
+              We&rsquo;re the independent luxury brokerage on this list that publishes its homework. Tell us what
               you&rsquo;re buying or selling in {regionShort} and we&rsquo;ll give you a straight, data-backed
               plan — no franchise script.
             </p>

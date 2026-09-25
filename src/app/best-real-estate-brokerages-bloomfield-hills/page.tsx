@@ -38,7 +38,7 @@ const data: BrokerageComparisonData = {
     {
       name: "Real Estate Market Center",
       city: "Troy",
-      type: "Independent, family-run",
+      type: "Independent luxury",
       est: "2003",
       focus:
         "Full-service across Bloomfield Hills & Oakland County; street-level local pricing; publishes its own sourced market research",
@@ -66,7 +66,7 @@ const data: BrokerageComparisonData = {
     {
       name: "Max Broock Realtors",
       city: "Bloomfield Hills",
-      type: "Real Estate One family (Michigan's largest brokerage group)",
+      type: "Real Estate One family brand",
       est: "1895",
       focus:
         "Luxury and estate homes across Birmingham–Bloomfield; Luxury Portfolio / LeadingRE networks",
@@ -89,7 +89,7 @@ const data: BrokerageComparisonData = {
     {
       name: "Real Estate One",
       city: "Bloomfield Hills",
-      type: "Real Estate One (Michigan's largest brokerage group)",
+      type: "Real Estate One (Michigan regional brand)",
       est: "—",
       focus: "Full-service residential; statewide Michigan network",
     },
@@ -115,7 +115,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Are Max Broock and Real Estate One the same company?",
       answer:
-        "Effectively yes — both are part of the Real Estate One Family of Companies, Michigan's largest brokerage group, headquartered in Southfield, and in Bloomfield Hills they even share a Telegraph Road campus. Max Broock is the group's luxury brand. They're Michigan regional brands, not national franchises. We flag it because it's easy to mistake them for separate independent competitors.",
+        "Effectively yes — both are part of the Real Estate One Family of Companies, a large Michigan brokerage group, headquartered in Southfield, and in Bloomfield Hills they even share a Telegraph Road campus. Max Broock is the group's luxury brand. They're Michigan regional brands, not national franchises. We flag it because it's easy to mistake them for separate independent competitors.",
     },
     {
       question: "What's the difference between a franchise and an independent brokerage?",

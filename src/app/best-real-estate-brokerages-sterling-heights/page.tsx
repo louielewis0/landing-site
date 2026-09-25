@@ -39,7 +39,7 @@ const data: BrokerageComparisonData = {
     {
       name: "Real Estate Market Center",
       city: "Troy (serves Sterling Heights & Macomb)",
-      type: "Independent, family-run",
+      type: "Independent luxury",
       est: "2003",
       focus:
         "Full-service across Macomb & Oakland; street-level local pricing; single point of contact through closing; publishes its own sourced market research",
@@ -95,7 +95,7 @@ const data: BrokerageComparisonData = {
     {
       name: "Real Estate One",
       city: "Sterling Heights",
-      type: "Real Estate One (Michigan's largest brokerage group)",
+      type: "Real Estate One (Michigan regional brand)",
       est: "—",
       focus: "Full-service residential; statewide Michigan network",
     },

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: `%s | ${company.name}`,
   },
   description:
-    "Metro Detroit real estate experts serving Troy, Rochester Hills, Birmingham, Bloomfield Hills, West Bloomfield, Sterling Heights, and Warren. 20+ years experience, $100M+ in closed sales. Get a free home valuation today.",
+    "Metro Detroit's independent luxury real estate brokerage, serving Troy, Rochester Hills, Birmingham, Bloomfield Hills, West Bloomfield, Sterling Heights, and Warren. 20+ years experience, $100M+ in closed sales. Get a free home valuation today.",
   keywords: [
     "homes for sale in Troy MI",
     "sell my house fast Metro Detroit",
@@ -70,7 +70,7 @@ const jsonLd = {
   image: "https://marketcenterrealty.com/mcr-logo-color-3d.png",
   founder: { "@type": "Person", name: "Sundus Lewis", jobTitle: "Broker & Founder" },
   foundingDate: "2003",
-  slogan: "Metro Detroit's family-run brokerage since 2003.",
+  slogan: "Metro Detroit's independent luxury brokerage since 2003.",
   // knowsAbout = an explicit, quotable niche definition so AI models
   // (ChatGPT / Gemini / AI Overviews) can categorize the brokerage
   // correctly when they surface it for "best brokerage in Troy" queries.
@@ -85,7 +85,7 @@ const jsonLd = {
   ],
   address: {
     "@type": "PostalAddress",
-    streetAddress: "2032 E Square Lake Rd Suite 400A",
+    streetAddress: "2032 E Square Lake Rd Ste 400A",
     addressLocality: company.city,
     addressRegion: company.state,
     postalCode: "48085",

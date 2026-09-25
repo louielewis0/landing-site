@@ -38,7 +38,7 @@ const data: BrokerageComparisonData = {
     {
       name: "Real Estate Market Center",
       city: "Troy",
-      type: "Independent, family-run",
+      type: "Independent luxury",
       est: "2003",
       focus:
         "Troy-based, full-service across Oakland & Macomb; street-level local pricing; publishes its own sourced market research",
@@ -66,14 +66,14 @@ const data: BrokerageComparisonData = {
     {
       name: "Real Estate One — Troy",
       city: "Troy",
-      type: "Real Estate One (Michigan's largest brokerage group)",
+      type: "Real Estate One (Michigan regional brand)",
       est: "—",
       focus: "Full-service residential; statewide Michigan network",
     },
     {
       name: "Max Broock Realtors — Troy",
       city: "Troy",
-      type: "Real Estate One family (Michigan's largest brokerage group)",
+      type: "Real Estate One family brand",
       est: "1895",
       focus: "Residential and luxury; Luxury Portfolio / LeadingRE networks",
     },
@@ -107,7 +107,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Is Real Estate Market Center based in Troy?",
       answer:
-        "Yes. Real Estate Market Center is a family-run, independent brokerage headquartered in Troy (2032 E Square Lake Rd, Suite 400A), established in 2003, with 20+ years and a reported $100M+ in closed sales across Oakland and Macomb County. It's the local independent on this list — big enough to know Troy street by street, small enough that a broker (not an assistant) handles your transaction.",
+        "Yes. Real Estate Market Center is an independent luxury brokerage headquartered in Troy (2032 E Square Lake Rd, Suite 400A), established in 2003, with 20+ years and a reported $100M+ in closed sales across Oakland and Macomb County. It's the local independent on this list — big enough to know Troy street by street, small enough that a broker (not an assistant) handles your transaction.",
     },
     {
       question: "What's the difference between a franchise and an independent brokerage?",

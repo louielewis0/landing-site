@@ -29,7 +29,7 @@ const data: BrokerageComparisonData = {
     <>
       Michigan&rsquo;s brokerage landscape is led by a few large groups and a long tail of strong
       local firms. <strong>The Real Estate One Family of Companies</strong> — which includes Max
-      Broock and Reinhart — is the largest Michigan-based group, headquartered in Southfield.{" "}
+      Broock and Reinhart — is a long-established Michigan-based group, headquartered in Southfield.{" "}
       <strong>National franchise networks and multi-market brands</strong> — Berkshire Hathaway
       HomeServices Michigan, @properties Christie&rsquo;s, Howard Hanna, Coldwell Banker Weir Manuel,
       and Remerica — operate across the state. And <strong>independent brokerages</strong> — like
@@ -42,7 +42,7 @@ const data: BrokerageComparisonData = {
     {
       name: "Real Estate Market Center",
       city: "Troy",
-      type: "Independent, family-run",
+      type: "Independent luxury",
       est: "2003",
       focus:
         "Metro Detroit independent; full-service across Oakland, Macomb & Wayne; single point of contact through closing; publishes its own sourced market research",
@@ -62,10 +62,10 @@ const data: BrokerageComparisonData = {
     {
       name: "Real Estate One",
       city: "Southfield",
-      type: "Michigan's largest brokerage group (family-owned)",
+      type: "Michigan-based brokerage group (family-owned)",
       est: "1929",
       focus:
-        "The largest Michigan-based real estate company; thousands of agents statewide; parent of Max Broock, Reinhart, and other regional brands",
+        "A long-established Michigan brokerage group; parent of Max Broock, Reinhart, and other regional brands",
     },
     {
       name: "Max Broock Realtors",
@@ -128,12 +128,12 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Michigan?",
       answer:
-        "There's no single statewide 'best.' Michigan is a large, regional market, so the right brokerage depends on where you're buying or selling. The Real Estate One Family of Companies (including Max Broock and Reinhart) is the largest Michigan-based group; national networks like Berkshire Hathaway HomeServices, @properties Christie's, and Howard Hanna operate across the state; and independents like Real Estate Market Center compete on personal service in their local markets. Choose a brokerage — and an agent — that genuinely works your specific region.",
+        "There's no single statewide 'best.' Michigan is a large, regional market, so the right brokerage depends on where you're buying or selling. The Real Estate One Family of Companies (including Max Broock and Reinhart) is a large Michigan-based group; national networks like Berkshire Hathaway HomeServices, @properties Christie's, and Howard Hanna operate across the state; and independents like Real Estate Market Center compete on personal service in their local markets. Choose a brokerage — and an agent — that genuinely works your specific region.",
     },
     {
       question: "What is the largest real estate brokerage in Michigan?",
       answer:
-        "The Real Estate One Family of Companies, headquartered in Southfield, is Michigan's largest real estate group by agent count and volume. It's a family-owned company that traces its roots to 1929 and operates several brands, including the luxury brand Max Broock and the Ann Arbor market leader Reinhart Realtors. Being the largest doesn't automatically make it the best fit for every buyer or seller — that depends on your market and the individual agent.",
+        "A few large brokerage groups operate across Michigan — but 'largest' and 'best' aren't the same thing. The biggest brand doesn't negotiate your deal or know your street; the brokerage and agent you actually work with do. Independent brokerages like Real Estate Market Center compete on personal service, local expertise, and results in the markets they know best. Judge a brokerage on its local track record and the attention you'll actually get — not on how many offices it has.",
     },
     {
       question: "Are Max Broock, Reinhart, and Real Estate One separate companies?",

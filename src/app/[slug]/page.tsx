@@ -59,6 +59,19 @@ export default async function CityLandingPage({ params }: Props) {
 
   const otherCities = cityPages.filter((c) => c.slug !== page.slug);
 
+  // Contextual link from each city page to its matching brokerage-comparison
+  // page (de-orphans those pages where they're most relevant for local SEO).
+  const brokerageBySlug: Record<string, { href: string; label: string }> = {
+    "troy-real-estate-agent": { href: "/best-real-estate-brokerages-troy", label: "Compare the best real estate brokerages in Troy" },
+    "rochester-hills-real-estate-agent": { href: "/best-real-estate-brokerages-rochester-hills", label: "Compare the best real estate brokerages in Rochester Hills" },
+    "birmingham-real-estate-agent": { href: "/best-real-estate-brokerages-birmingham", label: "Compare the best real estate brokerages in Birmingham" },
+    "bloomfield-hills-real-estate-agent": { href: "/best-real-estate-brokerages-bloomfield-hills", label: "Compare the best real estate brokerages in Bloomfield Hills" },
+    "sterling-heights-real-estate-agent": { href: "/best-real-estate-brokerages-sterling-heights", label: "Compare the best real estate brokerages in Sterling Heights" },
+    "west-bloomfield-real-estate-agent": { href: "/best-real-estate-brokerages-oakland-county", label: "Compare the best real estate brokerages in Oakland County" },
+    "warren-real-estate-agent": { href: "/best-real-estate-brokerages-sterling-heights", label: "Compare the best brokerages in the Sterling Heights & Macomb area" },
+  };
+  const brokerage = brokerageBySlug[page.slug];
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -83,7 +96,7 @@ export default async function CityLandingPage({ params }: Props) {
     },
     address: {
       "@type": "PostalAddress",
-      streetAddress: "2032 E Square Lake Rd Suite 400A",
+      streetAddress: "2032 E Square Lake Rd Ste 400A",
       addressLocality: "Troy",
       addressRegion: "MI",
       postalCode: "48085",
@@ -583,6 +596,14 @@ export default async function CityLandingPage({ params }: Props) {
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </div>
+            {brokerage && (
+              <div className="reveal" style={{ marginTop: 12 }}>
+                <a href={brokerage.href} style={{ color: "rgba(255,255,255,0.65)", fontSize: 13, display: "inline-flex", alignItems: "center", gap: 8 }}>
+                  {brokerage.label}
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            )}
           </div>
         </section>
 
