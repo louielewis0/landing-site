@@ -49,6 +49,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/best-real-estate-agent-warren`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/best-real-estate-agent-madison-heights`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/best-real-estate-agent-auburn-hills`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/best-real-estate-agent-metro-detroit`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/best-real-estate-agent-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/how-much-home-metro-detroit-budget`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/first-time-home-buyer-programs-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/water-damage-sell-or-restore`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
