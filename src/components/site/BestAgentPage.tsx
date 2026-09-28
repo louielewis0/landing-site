@@ -15,9 +15,27 @@ const SUNDUS = {
     { num: "20+", label: "Years in the business" },
     { num: "500+", label: "Homes closed" },
     { num: "$100M+", label: "In closed sales" },
-    { num: "5.0", label: "70 Google reviews" },
+    { num: "5.0", label: "70+ Google reviews" },
   ] as { num: string; label: string }[],
 };
+
+/* Real Google reviews that specifically mention Sundus by name. Fill this from
+   the live Google Business Profile — verbatim only, never invented. Until it
+   has 3+ entries, the page falls back to the general REMC reviews. */
+const SUNDUS_REVIEWS: { text: string; name: string }[] = [
+  {
+    text: "I've had the pleasure of working with Sundus and Real Estate Market Center 10 + years, and I can't recommend her highly enough. She is a true professional who genuinely cares about her clients' needs and wellbeing. What sets Sundus apart is her hands-on approach throughout the entire process — she stays actively involved from start to finish, making sure every detail is handled. If you're looking for a realtor who combines expertise with genuine care, Sundus Lewis is the one to call. Highly recommend!",
+    name: "Rafi Sabbagh",
+  },
+  {
+    text: "Best real estate brokerage in Michigan, really appreciated Sundus Lewis the broker for Real Estate Market Center running me through the whole process step by step.",
+    name: "Ramiz Ghareeba",
+  },
+  {
+    text: "We have been trying to look for a house for so long until we met Sundus — she was so fast and so helpful and super kind, and thanks to her we got the house we wanted!",
+    name: "Ammar Jarbooa",
+  },
+];
 
 export type BestAgentFAQ = { question: string; answer: string };
 
@@ -68,7 +86,7 @@ function Stars() {
 export default function BestAgentPage({ data }: { data: BestAgentData }) {
   const { city, regionShort } = data;
   const url = `${BASE}/${data.slug}`;
-  const reviews = googleReviews.slice(0, 4);
+  const reviews = (SUNDUS_REVIEWS.length >= 3 ? SUNDUS_REVIEWS : googleReviews).slice(0, 3);
 
   const personSchema = {
     "@context": "https://schema.org",
@@ -133,7 +151,7 @@ export default function BestAgentPage({ data }: { data: BestAgentData }) {
                 <h2 style={{ fontSize: "clamp(24px, 3vw, 32px)", lineHeight: 1.15, marginBottom: 4 }}>{SUNDUS.name}</h2>
                 <div style={{ fontSize: 14, color: "var(--s-gold)", fontWeight: 600, marginBottom: 8 }}>{SUNDUS.title}</div>
                 <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "var(--s-muted)", marginBottom: 18 }}>
-                  <Stars /> 5.0 · 70 Google reviews
+                  <Stars /> 5.0 · 70+ Google reviews
                 </div>
                 <p style={{ fontSize: 15, lineHeight: 1.75, color: "var(--s-ink)", marginBottom: 20 }}>
                   Sundus Lewis is the broker and owner of Real Estate Market Center, an independent luxury brokerage in
