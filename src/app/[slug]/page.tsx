@@ -74,6 +74,14 @@ export default async function CityLandingPage({ params }: Props) {
   };
   const brokerage = brokerageBySlug[page.slug];
 
+  // Contextual link to the broker-profile ("best real estate agent in [city]")
+  // page where one exists — reinforces the city page and vice versa.
+  const bestAgentBySlug: Record<string, { href: string; label: string }> = {
+    "troy-real-estate-agent": { href: "/best-real-estate-agent-troy", label: "Meet Troy's top-rated broker, Sundus Lewis" },
+    "birmingham-real-estate-agent": { href: "/best-real-estate-agent-birmingham", label: "Meet Birmingham's top-rated broker, Sundus Lewis" },
+  };
+  const bestAgent = bestAgentBySlug[page.slug];
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -602,6 +610,14 @@ export default async function CityLandingPage({ params }: Props) {
               <div className="reveal" style={{ marginTop: 12 }}>
                 <a href={brokerage.href} style={{ color: "rgba(255,255,255,0.65)", fontSize: 13, display: "inline-flex", alignItems: "center", gap: 8 }}>
                   {brokerage.label}
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            )}
+            {bestAgent && (
+              <div className="reveal" style={{ marginTop: 12 }}>
+                <a href={bestAgent.href} style={{ color: "rgba(255,255,255,0.65)", fontSize: 13, display: "inline-flex", alignItems: "center", gap: 8 }}>
+                  {bestAgent.label}
                   <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </div>

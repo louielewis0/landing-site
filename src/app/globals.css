@@ -622,6 +622,16 @@ body {
 .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 @media (max-width: 820px) { .calc-grid { grid-template-columns: 1fr; } }
 
+/* ── Best-agent pages: broker card, stats, reviews grids (stack on mobile) ── */
+.agent-card { display: grid; grid-template-columns: 300px 1fr; gap: 34px; align-items: start; }
+.agent-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.agent-reviews { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+@media (max-width: 760px) {
+  .agent-card { grid-template-columns: 1fr; }
+  .agent-stats { grid-template-columns: repeat(2, 1fr); }
+  .agent-reviews { grid-template-columns: 1fr; }
+}
+
 /* ── Service cards ── */
 .site-theme .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
 .site-theme .service-card {
