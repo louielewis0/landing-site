@@ -79,6 +79,13 @@ export default async function CityLandingPage({ params }: Props) {
   const bestAgentBySlug: Record<string, { href: string; label: string }> = {
     "troy-real-estate-agent": { href: "/best-real-estate-agent-troy", label: "Meet Troy's top-rated broker, Sundus Lewis" },
     "birmingham-real-estate-agent": { href: "/best-real-estate-agent-birmingham", label: "Meet Birmingham's top-rated broker, Sundus Lewis" },
+    "rochester-hills-real-estate-agent": { href: "/best-real-estate-agent-rochester-hills", label: "Meet Rochester Hills' top-rated broker, Sundus Lewis" },
+    "bloomfield-hills-real-estate-agent": { href: "/best-real-estate-agent-bloomfield-hills", label: "Meet Bloomfield Hills' top-rated broker, Sundus Lewis" },
+    "west-bloomfield-real-estate-agent": { href: "/best-real-estate-agent-west-bloomfield", label: "Meet West Bloomfield's top-rated broker, Sundus Lewis" },
+    "sterling-heights-real-estate-agent": { href: "/best-real-estate-agent-sterling-heights", label: "Meet Sterling Heights' top-rated broker, Sundus Lewis" },
+    "warren-real-estate-agent": { href: "/best-real-estate-agent-warren", label: "Meet Warren's top-rated broker, Sundus Lewis" },
+    "madison-heights-real-estate-agent": { href: "/best-real-estate-agent-madison-heights", label: "Meet Madison Heights' top-rated broker, Sundus Lewis" },
+    "auburn-hills-real-estate-agent": { href: "/best-real-estate-agent-auburn-hills", label: "Meet Auburn Hills' top-rated broker, Sundus Lewis" },
   };
   const bestAgent = bestAgentBySlug[page.slug];
 
