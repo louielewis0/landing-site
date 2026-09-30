@@ -89,6 +89,18 @@ export default async function CityLandingPage({ params }: Props) {
   };
   const bestAgent = bestAgentBySlug[page.slug];
 
+  // Niche guide pages (school-district / luxury) linked from their city page.
+  const guidesBySlug: Record<string, { href: string; label: string }[]> = {
+    "troy-real-estate-agent": [{ href: "/homes-in-the-troy-school-district", label: "Homes in the Troy School District" }],
+    "rochester-hills-real-estate-agent": [{ href: "/homes-in-rochester-community-schools", label: "Homes in Rochester Community Schools" }],
+    "bloomfield-hills-real-estate-agent": [
+      { href: "/homes-in-the-bloomfield-hills-school-district", label: "Homes in the Bloomfield Hills School District" },
+      { href: "/luxury-homes-in-bloomfield-hills", label: "Luxury homes in Bloomfield Hills" },
+    ],
+    "birmingham-real-estate-agent": [{ href: "/luxury-homes-in-birmingham", label: "Luxury homes in Birmingham" }],
+  };
+  const guides = guidesBySlug[page.slug] ?? [];
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -629,6 +641,14 @@ export default async function CityLandingPage({ params }: Props) {
                 </a>
               </div>
             )}
+            {guides.map((g) => (
+              <div key={g.href} className="reveal" style={{ marginTop: 12 }}>
+                <a href={g.href} style={{ color: "rgba(255,255,255,0.65)", fontSize: 13, display: "inline-flex", alignItems: "center", gap: 8 }}>
+                  {g.label}
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            ))}
           </div>
         </section>
 
