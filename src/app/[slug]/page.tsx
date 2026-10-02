@@ -92,12 +92,24 @@ export default async function CityLandingPage({ params }: Props) {
   // Niche guide pages (school-district / luxury) linked from their city page.
   const guidesBySlug: Record<string, { href: string; label: string }[]> = {
     "troy-real-estate-agent": [{ href: "/homes-in-the-troy-school-district", label: "Homes in the Troy School District" }],
-    "rochester-hills-real-estate-agent": [{ href: "/homes-in-rochester-community-schools", label: "Homes in Rochester Community Schools" }],
+    "rochester-hills-real-estate-agent": [
+      { href: "/homes-in-rochester-community-schools", label: "Homes in Rochester Community Schools" },
+      { href: "/homes-in-the-avondale-school-district", label: "Homes in the Avondale School District (the boundary trap)" },
+    ],
     "bloomfield-hills-real-estate-agent": [
       { href: "/homes-in-the-bloomfield-hills-school-district", label: "Homes in the Bloomfield Hills School District" },
       { href: "/luxury-homes-in-bloomfield-hills", label: "Luxury homes in Bloomfield Hills" },
     ],
-    "birmingham-real-estate-agent": [{ href: "/luxury-homes-in-birmingham", label: "Luxury homes in Birmingham" }],
+    "birmingham-real-estate-agent": [
+      { href: "/homes-in-birmingham-public-schools", label: "Homes in Birmingham Public Schools (Groves vs Seaholm)" },
+      { href: "/luxury-homes-in-birmingham", label: "Luxury homes in Birmingham" },
+    ],
+    "west-bloomfield-real-estate-agent": [
+      { href: "/homes-in-the-west-bloomfield-school-district", label: "Homes in the West Bloomfield School District" },
+    ],
+    "auburn-hills-real-estate-agent": [
+      { href: "/homes-in-the-avondale-school-district", label: "Homes in the Avondale School District" },
+    ],
   };
   const guides = guidesBySlug[page.slug] ?? [];
 
