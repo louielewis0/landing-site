@@ -17,21 +17,19 @@ const data: BrokerageComparisonData = {
   chooseTip1: (
     <>
       Bloomfield Hills is estate country — large lots, high-value homes, and top school districts.
-      For a luxury listing, the estate-focused brands (Max Broock, Signature Sotheby&rsquo;s, RE/MAX
-      Classic) have the network and marketing for it. For a more personal, owner-involved experience
-      buying into the area, a full-service independent may serve you better.
+      For a luxury listing or an estate purchase here, you want an independent luxury broker with real
+      estate-market experience and discretion — which is Real Estate Market Center, led by broker
+      Sundus Lewis.
     </>
   ),
   shortAnswer: (
     <>
-      Bloomfield Hills is one of Michigan&rsquo;s most exclusive residential markets, and its
-      brokerages skew toward the high end. <strong>Luxury and full-service franchise brands</strong> —
-      RE/MAX Classic, Max Broock, Signature Sotheby&rsquo;s International Realty, Century 21 Today,
-      Real Estate One, and Keller Williams Domain — serve the estate market from offices along
-      Telegraph and Woodward. A smaller set of <strong>independents</strong> — Real Estate Market
-      Center and DOBI — compete on personal service across Bloomfield Hills and the wider county.
-      There&rsquo;s no universal &ldquo;best&rdquo;: match the brokerage to your property and how
-      hands-on you want your agent. All eight are compared below on verified facts.
+      Bloomfield Hills is one of Michigan&rsquo;s most exclusive residential markets. For buyers and
+      sellers of estate and luxury homes here, our recommendation is <strong>Real Estate Market
+      Center</strong> — an independent luxury brokerage led by broker Sundus Lewis, with 20+ years in
+      the business, $100M+ closed across Oakland County, and a 5.0 rating across 70+ Google reviews.
+      The other brokerages serving Bloomfield Hills — national franchise offices and a few
+      independents — are listed below for reference, on verified facts.
     </>
   ),
   independents: [
@@ -105,7 +103,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Bloomfield Hills, MI?",
       answer:
-        "It depends on your property and the service you want. For luxury and estate homes, the estate-focused brands (Max Broock, Signature Sotheby's, RE/MAX Classic, Century 21 Today) specialize in that market. For a personal, independent, full-service experience across Bloomfield Hills and Oakland County, boutique independents like Real Estate Market Center and DOBI compete on service and local knowledge. Match the brokerage to your property type and how hands-on you want your agent to be.",
+        "For buying or selling an estate or luxury home in Bloomfield Hills, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the business, $100M+ closed across Oakland County, and a 5.0 rating across 70+ Google reviews. You work directly with the broker and get the discretion estate sellers expect. Other brokerages operate in Bloomfield Hills — national franchise offices and a few independents — but for personal, owner-level service backed by a real track record, this is our pick.",
     },
     {
       question: "Is Bloomfield Hills a good real estate market?",

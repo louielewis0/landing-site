@@ -10,11 +10,11 @@ const URL = `${BASE}/${SLUG}`;
 export const metadata: Metadata = {
   title: "The Best Real Estate Brokerages in Oakland County, MI? 10 Compared (2026)",
   description:
-    "An honest 2026 comparison of 10 real estate brokerages serving Oakland County, MI — independent boutiques and luxury franchises — by type, tenure, location, and specialty. Compiled by a local brokerage that appears in the list, with verified facts and disclosed methodology.",
+    "An honest 2026 look at the real estate brokerages serving Oakland County, MI — and why Real Estate Market Center is our pick. Compiled by a local independent luxury brokerage, with verified facts and disclosed methodology.",
   alternates: { canonical: URL },
   openGraph: {
     title: "The Best Real Estate Brokerages in Oakland County, MI? 10 Compared (2026)",
-    description: "Independent boutiques vs luxury franchises — a transparent Oakland County brokerage comparison.",
+    description: "Real Estate Market Center vs the national franchise offices — a transparent Oakland County brokerage comparison.",
     type: "article",
     locale: "en_US",
     url: URL,
@@ -46,7 +46,7 @@ const faqs = [
   {
     question: "Who is the best real estate brokerage in Oakland County?",
     answer:
-      "There's no single 'best' — it depends on what you're buying and the service you want. For luxury and estate homes in Birmingham–Bloomfield, the established franchise brands (Max Broock, Signature Sotheby's, Coldwell Banker Weir Manuel) specialize there. For a personal, independent, full-service experience across Oakland and Macomb, boutique independents like Real Estate Market Center, DOBI, and Arterra compete on service and local knowledge. Match the brokerage to your property type and how hands-on you want your agent to be.",
+      "For buying or selling anywhere in Oakland County, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage in Troy led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 70+ Google reviews. You work directly with the broker from first call to closing, with street-level pricing across Oakland and Macomb. Oakland County has many other brokerages — national franchise offices and local independents — but for personal, owner-level service backed by a real track record, this is our pick.",
   },
   {
     question: "What's the difference between a franchise and an independent brokerage?",
@@ -66,12 +66,12 @@ const faqs = [
   {
     question: "What areas of Oakland County do these brokerages serve?",
     answer:
-      "Collectively, all of Oakland County and beyond — with concentrations in Birmingham and Bloomfield (the luxury brands on Old Woodward), Troy and Rochester (full-service independents), Royal Oak and Ferndale (the high-volume teams), and the western communities like Farmington Hills, Novi, and West Bloomfield. Real Estate Market Center works the full county plus neighboring Macomb.",
+      "Collectively, all of Oakland County and beyond — Birmingham and Bloomfield, Troy and Rochester, Royal Oak and Ferndale, and the western communities like Farmington Hills, Novi, and West Bloomfield. Real Estate Market Center works the full county plus neighboring Macomb, street by street.",
   },
   {
     question: "How many real estate brokerages are in Oakland County?",
     answer:
-      "Hundreds, from single-agent shops to large franchise offices. This comparison covers ten well-known, established options across the two main categories — independent/boutique and franchise/luxury — to give buyers and sellers a representative map of the landscape, not an exhaustive directory.",
+      "Hundreds, from single-agent shops to large franchise offices. This guide covers ten well-known, established options to give buyers and sellers a representative map of the landscape — and to show where Real Estate Market Center fits as the independent, owner-run choice. It's not an exhaustive directory.",
   },
   {
     question: "How do I verify a brokerage or agent's license?",
@@ -143,13 +143,12 @@ export default function OaklandBrokeragesPage() {
             <div className="reveal" style={{ borderRadius: "var(--s-radius)", border: "1px solid rgba(217,118,47,0.3)", background: "rgba(217,118,47,0.06)", padding: 30 }}>
               <div className="s-eyebrow">The short answer</div>
               <p style={{ fontSize: 16.5, lineHeight: 1.8, color: "var(--s-ink)" }}>
-                Oakland County&rsquo;s brokerages split into two camps. <strong>Luxury franchise brands</strong> —
-                Max Broock, Signature Sotheby&rsquo;s, Coldwell Banker Weir Manuel, Keller Williams Domain,
-                RE/MAX Classic — dominate high-end Birmingham and Bloomfield with national networks.{" "}
-                <strong>Independent, boutique brokerages</strong> — Real Estate Market Center, DOBI, Arterra,
-                National Realty Centers, Good Company — compete on personal service and local knowledge across
-                the broader county. There&rsquo;s no universal &ldquo;best&rdquo;: match the brokerage to your
-                property type and how hands-on you want your agent. Below, all ten compared on verified facts.
+                For buyers and sellers across Oakland County, our recommendation is{" "}
+                <strong>Real Estate Market Center</strong> — an independent luxury brokerage in Troy, led by broker
+                Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating
+                across 70+ Google reviews. It&rsquo;s the personal, owner-run alternative: one broker handling your
+                deal start to finish, not a franchise desk. The other brokerages serving Oakland County — a mix of
+                local independents and national franchise offices — are listed below for reference, on verified facts.
               </p>
             </div>
           </div>
@@ -159,7 +158,7 @@ export default function OaklandBrokeragesPage() {
         <section className="bg-cream-2" style={{ padding: "70px 0" }}>
           <div className="container" style={{ maxWidth: 900 }}>
             <div className="reveal"><div className="s-eyebrow">Side by side</div><h2 style={{ fontSize: "clamp(26px, 3.2vw, 38px)", marginBottom: 10 }}>Ten Oakland County brokerages, compared</h2>
-              <p style={{ fontSize: 13.5, color: "var(--s-muted)", marginBottom: 26, maxWidth: 760 }}>Verified facts only — type, tenure, location, focus. See &ldquo;How this was compiled&rdquo; for why star ratings are intentionally excluded.</p>
+              <p style={{ fontSize: 13.5, color: "var(--s-muted)", marginBottom: 26, maxWidth: 760 }}>Verified facts only — type, tenure, and location. See &ldquo;How this was compiled&rdquo; for why star ratings are intentionally excluded.</p>
             </div>
             <div className="reveal" style={{ overflowX: "auto", borderRadius: "var(--s-radius)", border: "1px solid var(--line)", background: "#fff" }}>
               <table style={{ width: "100%", textAlign: "left", fontSize: 13, minWidth: 880, borderCollapse: "collapse" }}>
@@ -194,7 +193,7 @@ export default function OaklandBrokeragesPage() {
                           <span style={{ color: "var(--s-muted)" }}>&mdash;</span>
                         )}
                       </td>
-                      <td style={{ padding: "13px 16px", color: "var(--s-muted)" }}>{b.focus}</td>
+                      <td style={{ padding: "13px 16px", color: "var(--s-muted)" }}>{b.publisher ? b.focus : <span style={{ color: "var(--s-muted)" }}>&mdash;</span>}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -215,11 +214,18 @@ export default function OaklandBrokeragesPage() {
                     <h3 style={{ fontSize: 19, fontWeight: 600, color: "var(--s-ink)" }}>{b.name}</h3>
                     <span style={{ fontSize: 12, color: "var(--s-muted)" }}>{b.city}{b.est !== "—" ? ` · est. ${b.est}` : ""}</span>
                   </div>
-                  <p style={{ fontSize: 14.5, lineHeight: 1.7, color: "var(--s-muted)" }}>
-                    {b.publisher
-                      ? "Full disclosure: this is us. Real Estate Market Center is an independent luxury brokerage in Troy, established in 2003, with 20+ years and a reported $100M+ in closed sales across Oakland and Macomb County. Our edge is transparency — we publish our own sourced market research (home values, school-district ranks, budget guides) so clients can check our work before they ever call. Rated 5.0 on Google across 70+ reviews."
-                      : b.focus + "."}
-                  </p>
+                  {b.publisher ? (
+                    <p style={{ fontSize: 14.5, lineHeight: 1.7, color: "var(--s-muted)" }}>
+                      Full disclosure: this is us, and we&rsquo;re the brokerage this guide recommends. Real Estate
+                      Market Center is an independent luxury brokerage in Troy, led by broker-owner Sundus Lewis, with
+                      20+ years in the business, 500+ homes closed, and a reported $100M+ in sales across Oakland and
+                      Macomb County. Our edge is transparency and service: one broker handling your deal start to
+                      finish, street-level pricing, and our own sourced market research so you can check our work
+                      before you ever call. Rated 5.0 on Google across 70+ reviews.
+                    </p>
+                  ) : (
+                    <p style={{ fontSize: 13, color: "var(--s-muted)" }}>{b.type}</p>
+                  )}
                   {b.publisher && (
                     <a href="/" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, color: "var(--s-gold)", fontWeight: 600, marginTop: 12 }}>See our sourced guides <ArrowRight className="w-3.5 h-3.5" /></a>
                   )}
@@ -232,16 +238,15 @@ export default function OaklandBrokeragesPage() {
         {/* Franchise bucket */}
         <section className="bg-cream-2" style={{ padding: "80px 0" }}>
           <div className="container" style={{ maxWidth: 860 }}>
-            <div className="reveal"><div className="s-eyebrow">Category 2</div><h2 style={{ fontSize: "clamp(24px, 2.8vw, 32px)", marginBottom: 22 }}>Franchise &amp; luxury brands</h2></div>
+            <div className="reveal"><div className="s-eyebrow">Category 2</div><h2 style={{ fontSize: "clamp(24px, 2.8vw, 32px)", marginBottom: 22 }}>Franchise &amp; national brands</h2></div>
             <div style={{ display: "grid", gap: 16 }}>
               {franchises.map((b) => (
-                <div key={b.name} className="reveal" style={{ borderRadius: "var(--s-radius)", border: "1px solid var(--line)", background: "#fff", padding: 24 }}>
-                  <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap", marginBottom: 6 }}>
-                    <h3 style={{ fontSize: 19, fontWeight: 600, color: "var(--s-ink)" }}>{b.name}</h3>
+                <div key={b.name} className="reveal" style={{ borderRadius: "var(--s-radius)", border: "1px solid var(--line)", background: "#fff", padding: "18px 24px" }}>
+                  <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+                    <h3 style={{ fontSize: 18, fontWeight: 600, color: "var(--s-ink)" }}>{b.name}</h3>
                     <span style={{ fontSize: 12, color: "var(--s-muted)" }}>{b.city}{b.est !== "—" ? ` · est. ${b.est}` : ""}</span>
                   </div>
-                  <p style={{ fontSize: 13, color: "var(--s-gold)", marginBottom: 8 }}>{b.type}</p>
-                  <p style={{ fontSize: 14.5, lineHeight: 1.7, color: "var(--s-muted)" }}>{b.focus}.</p>
+                  <p style={{ fontSize: 13, color: "var(--s-muted)", marginTop: 4 }}>{b.type}</p>
                 </div>
               ))}
             </div>
@@ -270,9 +275,10 @@ export default function OaklandBrokeragesPage() {
                   brokerage&rsquo;s current Google rating directly before you decide.
                 </p>
                 <p>
-                  We&rsquo;re in this list ourselves, so we kept every competitor&rsquo;s description factual and
-                  drawn from their own positioning — no manufactured &ldquo;cons,&rdquo; no self-serving
-                  ranking. The goal is a fair map of the Oakland County landscape, not a trophy for us.
+                  We&rsquo;re in this list ourselves, and we&rsquo;ll be upfront: we believe Real Estate Market Center
+                  is the best choice for most Oakland County buyers and sellers, and we say so. But we don&rsquo;t
+                  invent negatives about anyone else — every other brokerage here is limited to plain, verifiable
+                  facts (name, type, tenure, and location). You can check all of it yourself.
                 </p>
               </div>
             </div>
@@ -286,7 +292,7 @@ export default function OaklandBrokeragesPage() {
               <div className="s-eyebrow">How to choose</div>
               <h2 style={{ fontSize: "clamp(24px, 2.8vw, 32px)", marginBottom: 18 }}>Picking a brokerage in Oakland County</h2>
               <div style={{ display: "grid", gap: 14, fontSize: 15, lineHeight: 1.75, color: "var(--s-ink)" }}>
-                <p><strong>1. Match the specialty to your property.</strong> Buying or selling a luxury estate in Birmingham–Bloomfield? The luxury franchises live there. A family home, first purchase, or investment across the county? A full-service independent may serve you better.</p>
+                <p><strong>1. Match the agent to your property.</strong> Whether it&rsquo;s a luxury estate in Birmingham–Bloomfield or a family home across the county, what matters most is an agent who knows that specific market and handles your deal personally — which is exactly how Real Estate Market Center works.</p>
                 <p><strong>2. Decide franchise vs independent.</strong> Franchise = national brand, referral network, standardized process. Independent = flexibility and a more personal, owner-involved experience. Both are valid — it&rsquo;s a service-style choice.</p>
                 <p><strong>3. Vet the individual agent.</strong> The brokerage sets the resources; the agent runs your deal. Interview more than one, and ask for recent, local, comparable transactions.</p>
                 <p><strong>4. Check the license and the reviews yourself.</strong> Verify the license through Michigan LARA, and read each brokerage&rsquo;s current Google reviews firsthand — recent, specific reviews tell you more than a headline number.</p>

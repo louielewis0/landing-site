@@ -19,19 +19,17 @@ const data: BrokerageComparisonData = {
       Troy is a strong, mid-to-upper family-home market with excellent schools. For most Troy buyers
       and sellers, the deciding factor isn&rsquo;t a luxury brand name — it&rsquo;s finding an agent
       who knows Troy&rsquo;s neighborhoods and school boundaries and will handle your deal personally.
-      A full-service independent is often the right fit here; the national brands are strong too.
+      A full-service independent is the right fit here — in Troy, that&rsquo;s Real Estate Market Center, a Troy-based, owner-run brokerage led by broker Sundus Lewis.
     </>
   ),
   shortAnswer: (
     <>
       Troy is one of Metro Detroit&rsquo;s most sought-after family markets — top schools, strong
-      resale, and a mix of price points. Its brokerages split into two camps.{" "}
-      <strong>Independent brokerages</strong> — Real Estate Market Center (based in Troy), Farbman
-      Group, and St. Aubin — compete on personal service and deep local knowledge.{" "}
-      <strong>Franchise brands</strong> — Real Estate One, Max Broock, Keller Williams Somerset, and
-      Century 21 Professionals — bring national networks and standardized marketing. There&rsquo;s no
-      single &ldquo;best&rdquo;: match the brokerage to your property and how hands-on you want your
-      agent. All seven are compared below on verified facts.
+      resale, and a mix of price points. For most Troy buyers and sellers, our recommendation is{" "}
+      <strong>Real Estate Market Center</strong> — a Troy-based, owner-run independent luxury
+      brokerage led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, and a
+      5.0 rating across 70+ Google reviews. The other brokerages serving Troy — a mix of local
+      independents and national franchise offices — are listed below for reference, on verified facts.
     </>
   ),
   independents: [
@@ -97,7 +95,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Troy, MI?",
       answer:
-        "There's no single 'best' — it depends on what you're buying or selling and the service you want. Troy is largely a family-home market, so the deciding factor is usually the individual agent's local knowledge rather than a luxury brand. Real Estate Market Center is a Troy-based independent that competes on personal, owner-involved service and its own published market research; the national brands (Real Estate One, Max Broock, Keller Williams, Century 21) bring standardized marketing and referral networks. Match the brokerage to your needs and interview more than one agent.",
+        "For most Troy buyers and sellers, Real Estate Market Center is the brokerage we'd point you to — a Troy-based, owner-run independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 70+ Google reviews. You work directly with the broker, who knows Troy's neighborhoods and school boundaries street by street. Other brokerages operate in Troy — national franchise offices and a few local independents — but none match that combination of deep local experience and personal, owner-level service.",
     },
     {
       question: "What makes Troy a good place to buy a home?",

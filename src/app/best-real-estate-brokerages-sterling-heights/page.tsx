@@ -17,21 +17,19 @@ const data: BrokerageComparisonData = {
   chooseTip1: (
     <>
       Sterling Heights and the surrounding Macomb communities are mostly a solid, mid-market
-      family-home market rather than a luxury one. The deciding factor is usually an agent who knows
-      the local subdivisions and pricing — not a luxury brand name. A full-service independent or a
-      strong local franchise office both work well here.
+      family-home market. The deciding factor is an agent who knows the local subdivisions and pricing
+      and handles your deal personally — which points to Real Estate Market Center, a Troy-based
+      independent that works Macomb closely, led by broker Sundus Lewis.
     </>
   ),
   shortAnswer: (
     <>
       Sterling Heights is Macomb County&rsquo;s largest city and a strong, mid-market family-home
-      market. Its brokerages — spread across Sterling Heights, Shelby Township, Clinton Township, and
-      Macomb — split into two camps. <strong>Franchise brands</strong> dominate: RE/MAX Eclipse,
-      RE/MAX First, Century 21 Professionals, Century 21 Town &amp; Country, Keller Williams Central,
-      Real Estate One, Realty Executives Home Towne, and Coldwell Banker Weir Manuel.{" "}
-      <strong>Independents</strong> — Real Estate Market Center and St. Aubin Real Estate — compete on
-      personal service and local knowledge. There&rsquo;s no single &ldquo;best&rdquo;: match the
-      brokerage to your property and how hands-on you want your agent. All ten are compared below on
+      market. For buyers and sellers across Sterling Heights and the surrounding Macomb communities,
+      our recommendation is <strong>Real Estate Market Center</strong> — a Troy-based independent
+      luxury brokerage led by broker Sundus Lewis that works Macomb closely, with 20+ years in the
+      business, 500+ homes closed, and a 5.0 rating across 70+ Google reviews. The other brokerages
+      serving the area — mostly national franchise offices — are listed below for reference, on
       verified facts.
     </>
   ),
@@ -118,7 +116,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Sterling Heights, MI?",
       answer:
-        "There's no single 'best' — it depends on your property and the service you want. Sterling Heights is mostly a mid-market family-home market, so the individual agent's local knowledge matters more than a luxury brand. Real Estate Market Center is a Troy-based independent that serves Sterling Heights and Macomb with personal, owner-involved service; the franchise offices (RE/MAX, Century 21, Keller Williams, Real Estate One, Realty Executives, Coldwell Banker) bring national networks and standardized marketing. Match the brokerage to your needs and interview more than one agent.",
+        "For buying or selling in Sterling Heights, Real Estate Market Center is the brokerage we'd point you to — a Troy-based independent luxury brokerage led by broker Sundus Lewis that works Sterling Heights and Macomb closely, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 70+ Google reviews. You work directly with the broker from first call to closing. The area has other brokerages — mostly national franchise offices — but none pair that personal, owner-level service with a real local track record.",
     },
     {
       question: "Is Sterling Heights in Macomb County or Oakland County?",

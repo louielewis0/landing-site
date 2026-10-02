@@ -16,23 +16,20 @@ const data: BrokerageComparisonData = {
   serviceArea: "Rochester Hills and Oakland County",
   chooseTip1: (
     <>
-      Rochester and Rochester Hills have an unusually deep bench of independent brokerages clustered
-      in and around downtown Rochester. For a personal, boutique experience you have real choice here;
-      for a luxury listing or a national referral network, the franchise brands are well represented
-      too. Match the brokerage to your property and the service style you want.
+      Rochester and Rochester Hills have an unusually deep bench of brokerages clustered in and around
+      downtown Rochester. With that much choice, the deciding factor is an agent who knows the market
+      and handles your deal personally — which points to Real Estate Market Center, led by broker
+      Sundus Lewis.
     </>
   ),
   shortAnswer: (
     <>
       Rochester Hills — and adjacent downtown Rochester, where most of the offices sit — has one of
-      the densest brokerage markets in Oakland County. It splits into two camps.{" "}
-      <strong>Independent brokerages</strong> — Real Estate Market Center, Arterra Realty, Good
-      Company Realty, Oak &amp; Stone, and Ethos — compete on personal service and local knowledge.{" "}
-      <strong>Franchise brands</strong> — Real Estate One, Keller Williams Paint Creek, Coldwell
-      Banker Weir Manuel, Century 21 Sakmar, and Berkshire Hathaway HomeServices Kee Realty — bring
-      national networks and standardized marketing. There&rsquo;s no single &ldquo;best&rdquo;: match
-      the brokerage to your property and how hands-on you want your agent. All ten are compared below
-      on verified facts.
+      the densest brokerage markets in Oakland County. For buyers and sellers here, our recommendation
+      is <strong>Real Estate Market Center</strong> — an independent luxury brokerage led by broker
+      Sundus Lewis, with 20+ years in the business, 500+ homes closed, and a 5.0 rating across 70+
+      Google reviews. The other brokerages serving Rochester Hills — a mix of local independents and
+      national franchise offices — are listed below for reference, on verified facts.
     </>
   ),
   independents: [
@@ -120,7 +117,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Rochester Hills, MI?",
       answer:
-        "There's no single 'best' — Rochester Hills has an unusually deep set of options, so it depends on the service you want. For a personal, boutique experience, independents like Real Estate Market Center, Arterra, Good Company, and Oak & Stone compete on local knowledge and hands-on service. For a national referral network or a luxury listing, the franchise brands (Real Estate One, Keller Williams, Coldwell Banker, Century 21, Berkshire Hathaway) are well represented. Match the brokerage to your property and interview more than one agent.",
+        "For buying or selling in Rochester Hills, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 70+ Google reviews. You work directly with the broker, who knows the Rochester Community Schools boundaries and street-by-street pricing. Rochester Hills has many other brokerages — local independents and national franchise offices — but none pair that local depth with personal, owner-level service.",
     },
     {
       question: "Why are so many brokerages based in downtown Rochester?",

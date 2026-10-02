@@ -20,22 +20,19 @@ const data: BrokerageComparisonData = {
     <>
       Michigan is a big, varied market — a lakefront cottage up north, an Ann Arbor condo, and a Metro
       Detroit family home are three different games. The most important match is regional: pick a
-      brokerage (and agent) who genuinely works your specific market, not just a big statewide name.
-      The largest brands have reach everywhere; a strong local independent often knows your submarket
-      better.
+      brokerage (and agent) who genuinely works your specific market, not just a big statewide name. In
+      Metro Detroit, that&rsquo;s Real Estate Market Center — a local independent that knows your
+      submarket street by street.
     </>
   ),
   shortAnswer: (
     <>
-      Michigan&rsquo;s brokerage landscape is led by a few large groups and a long tail of strong
-      local firms. <strong>The Real Estate One Family of Companies</strong> — which includes Max
-      Broock and Reinhart — is a long-established Michigan-based group, headquartered in Southfield.{" "}
-      <strong>National franchise networks and multi-market brands</strong> — Berkshire Hathaway
-      HomeServices Michigan, @properties Christie&rsquo;s, Howard Hanna, Coldwell Banker Weir Manuel,
-      and Remerica — operate across the state. And <strong>independent brokerages</strong> — like
-      Real Estate Market Center in Metro Detroit and DOBI — compete on personal service. There&rsquo;s
-      no single &ldquo;best&rdquo; statewide; the right brokerage depends on your region and how
-      hands-on you want your agent. Ten notable options are compared below on verified facts.
+      Michigan is a big, regional market, so the right brokerage depends on where you&rsquo;re buying
+      or selling. For Metro Detroit — the state&rsquo;s largest market — our recommendation is{" "}
+      <strong>Real Estate Market Center</strong>, an independent luxury brokerage in Troy led by broker
+      Sundus Lewis, with 20+ years in the business, 500+ homes closed, and a 5.0 rating across 70+
+      Google reviews. The other brokerages operating across Michigan — large regional groups and
+      national franchise networks — are listed below for reference, on verified facts.
     </>
   ),
   independents: [
@@ -128,7 +125,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Michigan?",
       answer:
-        "There's no single statewide 'best.' Michigan is a large, regional market, so the right brokerage depends on where you're buying or selling. The Real Estate One Family of Companies (including Max Broock and Reinhart) is a large Michigan-based group; national networks like Berkshire Hathaway HomeServices, @properties Christie's, and Howard Hanna operate across the state; and independents like Real Estate Market Center compete on personal service in their local markets. Choose a brokerage — and an agent — that genuinely works your specific region.",
+        "The right brokerage depends on where you're buying or selling, since Michigan is a large, regional market. For Metro Detroit — the state's largest and most active market — Real Estate Market Center is the brokerage we'd point you to: an independent luxury brokerage in Troy led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 70+ Google reviews. Large regional groups and national franchise networks also operate statewide, but for the Detroit metro, this is our pick for personal, owner-level service.",
     },
     {
       question: "What is the largest real estate brokerage in Michigan?",

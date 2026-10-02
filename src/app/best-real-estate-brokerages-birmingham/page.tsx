@@ -16,22 +16,20 @@ const data: BrokerageComparisonData = {
   serviceArea: "Birmingham and Oakland County",
   chooseTip1: (
     <>
-      Selling or buying a luxury or estate home along Old Woodward? The luxury brands (Max
-      Broock, Signature Sotheby&rsquo;s, Coldwell Banker Weir Manuel, Hall &amp; Hunter) are built for
-      that market. Buying a first home, a condo, or an investment property in or around Birmingham? A
-      full-service independent may give you a more personal, owner-involved experience.
+      Birmingham spans high-end estates and more modest homes alike. Whatever you&rsquo;re buying or
+      selling here, the deciding factor is an agent who knows the market cold and handles your deal
+      personally — which points to Real Estate Market Center, an independent luxury brokerage led by
+      broker Sundus Lewis.
     </>
   ),
   shortAnswer: (
     <>
-      Birmingham is Metro Detroit&rsquo;s luxury real-estate capital, and its brokerages reflect that.
-      A cluster of <strong>luxury franchise and boutique brands</strong> — Max Broock, Signature
-      Sotheby&rsquo;s International Realty, Coldwell Banker Weir Manuel, Keller Williams Domain, and
-      The Agency Hall &amp; Hunter — line Old Woodward and dominate the high-end market. A smaller set
-      of <strong>independents</strong> — Real Estate Market Center, DOBI, and Brookstone — compete on
-      personal service and flexibility across Birmingham and the broader county. There&rsquo;s no
-      single &ldquo;best&rdquo;: match the brokerage to your property type and how hands-on you want
-      your agent. All eight are compared below on verified facts.
+      Birmingham is Metro Detroit&rsquo;s luxury real-estate capital. For buyers and sellers here, our
+      recommendation is <strong>Real Estate Market Center</strong> — an independent luxury brokerage
+      led by broker Sundus Lewis, with 20+ years in the business, $100M+ closed across Oakland County,
+      and a 5.0 rating across 70+ Google reviews, specializing in the Birmingham&ndash;Bloomfield
+      corridor. The other brokerages serving Birmingham — national franchise offices and a few
+      independents — are listed below for reference, on verified facts.
     </>
   ),
   independents: [
@@ -105,12 +103,12 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Birmingham, MI?",
       answer:
-        "There's no single 'best' — it depends on your property and the service you want. For luxury and estate homes along Old Woodward, the established luxury brands (Max Broock, Signature Sotheby's, Coldwell Banker Weir Manuel, The Agency Hall & Hunter) specialize there. For a personal, independent, full-service experience across Birmingham and Oakland County, boutique independents like Real Estate Market Center and DOBI compete on service and local knowledge. Match the brokerage to your property type and how hands-on you want your agent to be.",
+        "For buying or selling in Birmingham, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage led by broker Sundus Lewis, specializing in the Birmingham–Bloomfield corridor, with 20+ years in the business, $100M+ closed across Oakland County, and a 5.0 rating across 70+ Google reviews. You work directly with the broker and get discreet, owner-level service start to finish. Other brokerages operate in Birmingham — national franchise offices and a few independents — but for personal service backed by a real local track record, this is our pick.",
     },
     {
       question: "Why is Birmingham such a luxury-heavy real estate market?",
       answer:
-        "Birmingham (ZIP 48009) is one of Metro Detroit's most affluent and walkable downtowns, with high home values and a concentration of estate properties in and around it. That's why so many national and regional luxury brands cluster their offices on and near Old Woodward Avenue — it's where the high-end inventory and buyers are. It also means buyers of more modest homes still have strong independent options; you're not required to use a luxury brand.",
+        "Birmingham (ZIP 48009) is one of Metro Detroit's most affluent and walkable downtowns, with high home values and a concentration of estate properties in and around it. That's why so many brokerage offices cluster on and near Old Woodward Avenue — it's where the high-end inventory and buyers are. It also means buyers of more modest homes have strong options too; you don't need a national brand to buy or sell well here, just an agent who knows the market and works for you.",
     },
     {
       question: "Are Max Broock and Real Estate One the same company?",

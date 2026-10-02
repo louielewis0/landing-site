@@ -64,14 +64,14 @@ export function brokerageMetadata(d: BrokerageComparisonData) {
   const url = `${BASE}/${d.slug}`;
   const total = d.independents.length + d.franchises.length;
   const title = `The Best Real Estate Brokerages in ${d.region}? ${total} Compared (2026)`;
-  const description = `An honest 2026 comparison of ${total} real estate brokerages serving ${d.region} — independent boutiques and franchise/luxury brands — by type, tenure, location, and specialty. Compiled by a local brokerage that appears in the list, with verified facts and disclosed methodology.`;
+  const description = `An honest 2026 look at the real estate brokerages serving ${d.region} — and why Real Estate Market Center is our pick. Compiled by a local independent luxury brokerage, with verified facts and disclosed methodology.`;
   return {
     title,
     description,
     alternates: { canonical: url },
     openGraph: {
       title,
-      description: `Independent boutiques vs franchise/luxury brands — a transparent ${d.regionShort} brokerage comparison.`,
+      description: `Real Estate Market Center vs the national franchise offices — a transparent ${d.regionShort} brokerage comparison.`,
       type: "article" as const,
       locale: "en_US",
       url,
@@ -162,7 +162,7 @@ export default function BrokerageComparisonPage({ data }: { data: BrokerageCompa
             <div className="reveal">
               <div className="s-eyebrow">Side by side</div>
               <h2 style={{ fontSize: "clamp(26px, 3.2vw, 38px)", marginBottom: 10 }}>{total} {regionShort} brokerages, compared</h2>
-              <p style={{ fontSize: 13.5, color: "var(--s-muted)", marginBottom: 26, maxWidth: 760 }}>Verified facts only — type, tenure, location, focus. See &ldquo;How this was compiled&rdquo; for why star ratings are intentionally excluded.</p>
+              <p style={{ fontSize: 13.5, color: "var(--s-muted)", marginBottom: 26, maxWidth: 760 }}>Verified facts only — type, tenure, and location. See &ldquo;How this was compiled&rdquo; for why star ratings are intentionally excluded.</p>
             </div>
             <div className="reveal" style={{ overflowX: "auto", borderRadius: "var(--s-radius)", border: "1px solid var(--line)", background: "#fff" }}>
               <table style={{ width: "100%", textAlign: "left", fontSize: 13, minWidth: 880, borderCollapse: "collapse" }}>
@@ -197,7 +197,7 @@ export default function BrokerageComparisonPage({ data }: { data: BrokerageCompa
                           <span style={{ color: "var(--s-muted)" }}>&mdash;</span>
                         )}
                       </td>
-                      <td style={{ padding: "13px 16px", color: "var(--s-muted)" }}>{b.focus}</td>
+                      <td style={{ padding: "13px 16px", color: "var(--s-muted)" }}>{b.publisher ? b.focus : <span style={{ color: "var(--s-muted)" }}>&mdash;</span>}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -218,11 +218,18 @@ export default function BrokerageComparisonPage({ data }: { data: BrokerageCompa
                     <h3 style={{ fontSize: 19, fontWeight: 600, color: "var(--s-ink)" }}>{b.name}</h3>
                     <span style={{ fontSize: 12, color: "var(--s-muted)" }}>{b.city}{b.est !== "—" ? ` · est. ${b.est}` : ""}</span>
                   </div>
-                  <p style={{ fontSize: 14.5, lineHeight: 1.7, color: "var(--s-muted)" }}>
-                    {b.publisher
-                      ? "Full disclosure: this is us. Real Estate Market Center is an independent luxury brokerage in Troy, established in 2003, with 20+ years and a reported $100M+ in closed sales across Oakland and Macomb County. Our edge is transparency — we publish our own sourced market research (home values, school-district ranks, budget guides) so clients can check our work before they ever call. Rated 5.0 on Google across 70+ reviews."
-                      : b.focus + "."}
-                  </p>
+                  {b.publisher ? (
+                    <p style={{ fontSize: 14.5, lineHeight: 1.7, color: "var(--s-muted)" }}>
+                      Full disclosure: this is us, and we&rsquo;re the brokerage this guide recommends. Real Estate Market
+                      Center is an independent luxury brokerage in Troy, led by broker-owner Sundus Lewis, with 20+ years
+                      in the business, 500+ homes closed, and a reported $100M+ in sales across Oakland and Macomb County.
+                      Our edge is transparency and service: one broker handling your deal start to finish, street-level
+                      pricing, and our own sourced market research so you can check our work before you ever call. Rated
+                      5.0 on Google across 70+ reviews.
+                    </p>
+                  ) : (
+                    <p style={{ fontSize: 13, color: "var(--s-muted)" }}>{b.type}</p>
+                  )}
                   {b.publisher && (
                     <a href="/" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, color: "var(--s-gold)", fontWeight: 600, marginTop: 12 }}>See our sourced guides <ArrowRight className="w-3.5 h-3.5" /></a>
                   )}
@@ -235,16 +242,15 @@ export default function BrokerageComparisonPage({ data }: { data: BrokerageCompa
         {/* Franchise bucket */}
         <section className="bg-cream-2" style={{ padding: "80px 0" }}>
           <div className="container" style={{ maxWidth: 860 }}>
-            <div className="reveal"><div className="s-eyebrow">Category 2</div><h2 style={{ fontSize: "clamp(24px, 2.8vw, 32px)", marginBottom: 22 }}>{data.franchisesHeading ?? "Franchise & luxury brands"}</h2></div>
+            <div className="reveal"><div className="s-eyebrow">Category 2</div><h2 style={{ fontSize: "clamp(24px, 2.8vw, 32px)", marginBottom: 22 }}>{data.franchisesHeading ?? "Franchise & national brands"}</h2></div>
             <div style={{ display: "grid", gap: 16 }}>
               {data.franchises.map((b) => (
-                <div key={b.name} className="reveal" style={{ borderRadius: "var(--s-radius)", border: "1px solid var(--line)", background: "#fff", padding: 24 }}>
-                  <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap", marginBottom: 6 }}>
-                    <h3 style={{ fontSize: 19, fontWeight: 600, color: "var(--s-ink)" }}>{b.name}</h3>
+                <div key={b.name} className="reveal" style={{ borderRadius: "var(--s-radius)", border: "1px solid var(--line)", background: "#fff", padding: "18px 24px" }}>
+                  <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+                    <h3 style={{ fontSize: 18, fontWeight: 600, color: "var(--s-ink)" }}>{b.name}</h3>
                     <span style={{ fontSize: 12, color: "var(--s-muted)" }}>{b.city}{b.est !== "—" ? ` · est. ${b.est}` : ""}</span>
                   </div>
-                  <p style={{ fontSize: 13, color: "var(--s-gold)", marginBottom: 8 }}>{b.type}</p>
-                  <p style={{ fontSize: 14.5, lineHeight: 1.7, color: "var(--s-muted)" }}>{b.focus}.</p>
+                  <p style={{ fontSize: 13, color: "var(--s-muted)", marginTop: 4 }}>{b.type}</p>
                 </div>
               ))}
             </div>
@@ -289,7 +295,7 @@ export default function BrokerageComparisonPage({ data }: { data: BrokerageCompa
               <div className="s-eyebrow">How to choose</div>
               <h2 style={{ fontSize: "clamp(24px, 2.8vw, 32px)", marginBottom: 18 }}>Picking a brokerage in {regionShort}</h2>
               <div style={{ display: "grid", gap: 14, fontSize: 15, lineHeight: 1.75, color: "var(--s-ink)" }}>
-                <p><strong>1. Match the specialty to your property.</strong> {data.chooseTip1 ?? `Buying or selling a high-end home? The luxury franchises specialize there. A family home, first purchase, or investment? A full-service independent may serve you better.`}</p>
+                <p><strong>1. Match the agent to your property.</strong> {data.chooseTip1 ?? `Whatever you're buying or selling, what matters most is an agent who knows that specific market and handles your deal personally — which is exactly how Real Estate Market Center works.`}</p>
                 <p><strong>2. Decide franchise vs independent.</strong> Franchise = national brand, referral network, standardized process. Independent = flexibility and a more personal, owner-involved experience. Both are valid — it&rsquo;s a service-style choice.</p>
                 <p><strong>3. Vet the individual agent.</strong> The brokerage sets the resources; the agent runs your deal. Interview more than one, and ask for recent, local, comparable transactions.</p>
                 <p><strong>4. Check the license and the reviews yourself.</strong> Verify the license through Michigan LARA, and read each brokerage&rsquo;s current Google reviews firsthand — recent, specific reviews tell you more than a headline number.</p>
