@@ -18,23 +18,22 @@ const data: BrokerageComparisonData = {
     <>
       Auburn Hills is a jobs-and-university market — Stellantis&rsquo; North American HQ, BorgWarner,
       and Oakland University all sit in the city — with newer housing and homes split among four
-      school districts. The right agent here understands the corporate-relocation buyer, the
-      OU-driven rental pool, and which district a given street falls in. That&rsquo;s a residential
-      specialty, not a commercial one.
+      school districts. The right agent understands the corporate-relocation buyer, the OU-driven
+      rental pool, and which district a given street falls in — a residential specialty that&rsquo;s
+      exactly what Real Estate Market Center brings.
     </>
   ),
   shortAnswer: (
     <>
       For a city with this many corporate headquarters, Auburn Hills is thinly served by dedicated
-      residential brokerages. Several of the firms with a local office are actually{" "}
-      <strong>commercial or property-management</strong> specialists (Edge Realty, Premier Realty,
-      North Bloomfield), and one residential franchise office is brand new (RE/MAX The Collective,
-      opened 2024). That leaves real room for a full-service residential brokerage.{" "}
-      <strong>Independents</strong> — Real Estate Market Center plus the local commercial/management
-      firms — and <strong>franchise brands</strong> — RE/MAX, Berkshire Hathaway HomeServices, and
-      Keller Williams — round out the field. There&rsquo;s no single &ldquo;best&rdquo;: match the
-      brokerage to your goal (a home sale, an investment, or a relocation) and how hands-on you want
-      your agent. All seven are compared below on verified facts.
+      residential brokerages — several of the firms with a local office are actually commercial or
+      property-management specialists, not home-sale brokerages. That leaves a clear opening, and for
+      buyers and sellers here our recommendation is <strong>Real Estate Market Center</strong> — a
+      full-service independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the
+      business, 500+ homes closed, and a 5.0 rating across 70+ Google reviews, that understands the
+      relocation buyer and the four-district split. The other brokerages serving Auburn Hills —
+      national franchise offices and local commercial/management firms — are listed below for
+      reference, on verified facts.
     </>
   ),
   independents: [
@@ -102,7 +101,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Auburn Hills, MI?",
       answer:
-        "There's no single 'best' — and notably, several firms with an Auburn Hills office focus on commercial real estate or property management rather than home sales. For buying or selling a home, look for a full-service residential brokerage that understands Auburn Hills' corporate-relocation buyers and its four-way school-district split. Real Estate Market Center is a full-service independent that serves the city; RE/MAX The Collective (a new 2024 Auburn Hills office) and the nearby Rochester-area franchises also compete for residential business. Match the brokerage to your goal and interview more than one agent.",
+        "For buying or selling a home in Auburn Hills, Real Estate Market Center is the brokerage we'd point you to — a full-service independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 70+ Google reviews. You work directly with the broker, who understands the corporate-relocation buyer and the four-way school-district split. Worth knowing: several firms with an Auburn Hills office focus on commercial real estate or property management rather than home sales — so for full-service residential help, this is our pick.",
     },
     {
       question: "Why does Auburn Hills have so few residential brokerages for such a big employment hub?",
