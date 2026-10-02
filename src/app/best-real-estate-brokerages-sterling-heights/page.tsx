@@ -126,7 +126,7 @@ const data: BrokerageComparisonData = {
     {
       question: "What kind of housing market is Sterling Heights?",
       answer:
-        "Sterling Heights is a stable, mid-market suburb known for well-kept subdivisions, good value relative to nearby Oakland County, and a strong base of family homes and condos. It's less luxury-driven than Birmingham or Bloomfield Hills, which is why the market is led by full-service franchise offices and local independents rather than estate specialists. A local agent who knows the specific subdivisions and school areas is the biggest advantage here.",
+        "Sterling Heights is a stable, mid-market suburb known for well-kept subdivisions, good value relative to nearby Oakland County, and a strong base of family homes and condos. It's less luxury-driven than Birmingham or Bloomfield Hills, so an agent's local knowledge and pricing discipline matter more than any brand name. A local agent who knows the specific subdivisions and school areas is the biggest advantage here — which is exactly what Real Estate Market Center brings.",
     },
     {
       question: "What's the difference between a franchise and an independent brokerage?",
