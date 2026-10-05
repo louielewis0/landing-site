@@ -55,8 +55,10 @@ export async function POST(req: NextRequest) {
   }
 
   const key = process.env.RESEND_API_KEY;
-  const to = process.env.NOTIFY_EMAIL;
-  if (!key || !to) {
+  const to = process.env.NOTIFY_EMAIL?.split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (!key || !to || to.length === 0) {
     // Not configured yet — acknowledge so the webhook doesn't retry.
     return NextResponse.json({ pending: "email not configured" });
   }
@@ -101,7 +103,7 @@ export async function POST(req: NextRequest) {
       },
       body: JSON.stringify({
         from: `${company.name} Leads <onboarding@resend.dev>`,
-        to: [to],
+        to,
         subject: `${hot ? "🔥 " : ""}New lead: ${r.name}${r.phone ? ` · ${r.phone}` : ""}`,
         html,
       }),
