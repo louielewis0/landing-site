@@ -58,10 +58,6 @@ export async function POST(req: NextRequest) {
   const to = process.env.NOTIFY_EMAIL?.split(",")
     .map((s) => s.trim())
     .filter(Boolean);
-  if (!key || !to || to.length === 0) {
-    // Not configured yet — acknowledge so the webhook doesn't retry.
-    return NextResponse.json({ pending: "email not configured" });
-  }
 
   const rows: [string, string | null | undefined][] = [
     ["Name", r.name],
@@ -105,30 +101,62 @@ export async function POST(req: NextRequest) {
     "Call them now. Details: marketcenterrealty.com/crm",
   ].join("\n");
 
-  try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${key}`,
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        from: `${company.name} Leads <leads@marketcenterrealty.com>`,
-        to,
-        subject: `${hot ? "🔥 " : ""}New lead: ${r.name}${r.phone ? ` · ${r.phone}` : ""}`,
-        html,
-        text,
-      }),
-    });
-    if (!res.ok) {
-      const detail = await res.text();
-      return NextResponse.json({ error: "send failed", detail }, { status: 502 });
+  // Fire both channels best-effort and independently — a failure in one
+  // never blocks the other. Return a per-channel status so the webhook
+  // can see what happened without retry-storming.
+  const results: Record<string, string> = {};
+
+  // 1) Email via Resend
+  if (key && to && to.length > 0) {
+    try {
+      const res = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${key}`,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          from: `${company.name} Leads <leads@marketcenterrealty.com>`,
+          to,
+          subject: `${hot ? "🔥 " : ""}New lead: ${r.name}${r.phone ? ` · ${r.phone}` : ""}`,
+          html,
+          text,
+        }),
+      });
+      results.email = res.ok ? "sent" : `failed: ${await res.text()}`;
+    } catch (e) {
+      results.email = `error: ${e instanceof Error ? e.message : String(e)}`;
     }
-    return NextResponse.json({ sent: true });
-  } catch (e) {
-    return NextResponse.json(
-      { error: e instanceof Error ? e.message : String(e) },
-      { status: 502 },
-    );
+  } else {
+    results.email = "not configured";
   }
+
+  // 2) Pushover push notification (dedicated phone alert, carrier-proof)
+  const pToken = process.env.PUSHOVER_TOKEN;
+  const pUser = process.env.PUSHOVER_USER;
+  if (pToken && pUser) {
+    try {
+      const params = new URLSearchParams({
+        token: pToken,
+        user: pUser,
+        title: `${hot ? "🔥 Hot lead" : "New lead"}: ${r.name}`,
+        message: text,
+        priority: hot ? "1" : "0",
+        url: "https://marketcenterrealty.com/crm",
+        url_title: "Open in CRM",
+      });
+      const res = await fetch("https://api.pushover.net/1/messages.json", {
+        method: "POST",
+        headers: { "content-type": "application/x-www-form-urlencoded" },
+        body: params,
+      });
+      results.pushover = res.ok ? "sent" : `failed: ${await res.text()}`;
+    } catch (e) {
+      results.pushover = `error: ${e instanceof Error ? e.message : String(e)}`;
+    }
+  } else {
+    results.pushover = "not configured";
+  }
+
+  return NextResponse.json(results);
 }
