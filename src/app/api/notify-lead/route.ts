@@ -102,7 +102,7 @@ export async function POST(req: NextRequest) {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        from: `${company.name} Leads <onboarding@resend.dev>`,
+        from: `${company.name} Leads <leads@send.marketcenterrealty.com>`,
         to,
         subject: `${hot ? "🔥 " : ""}New lead: ${r.name}${r.phone ? ` · ${r.phone}` : ""}`,
         html,
