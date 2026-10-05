@@ -94,6 +94,17 @@ export async function POST(req: NextRequest) {
       <div style="text-align:center;margin:16px 0"><a href="https://marketcenterrealty.com/crm" style="color:#E4501E;font-size:13px;font-weight:600;text-decoration:none">Open in CRM →</a></div>
     </div>`;
 
+  // Plain-text version — carrier email-to-SMS gateways (@vtext.com etc.)
+  // read this, not the HTML. Keep it short and action-first.
+  const text = [
+    `${hot ? "HOT " : ""}New lead: ${r.name}`,
+    ...rows
+      .slice(1) // skip Name (already in first line)
+      .filter(([, v]) => v)
+      .map(([k, v]) => `${k}: ${v}`),
+    "Call them now. Details: marketcenterrealty.com/crm",
+  ].join("\n");
+
   try {
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -106,6 +117,7 @@ export async function POST(req: NextRequest) {
         to,
         subject: `${hot ? "🔥 " : ""}New lead: ${r.name}${r.phone ? ` · ${r.phone}` : ""}`,
         html,
+        text,
       }),
     });
     if (!res.ok) {
