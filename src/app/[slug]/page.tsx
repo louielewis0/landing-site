@@ -99,13 +99,18 @@ export default async function CityLandingPage({ params }: Props) {
     "bloomfield-hills-real-estate-agent": [
       { href: "/homes-in-the-bloomfield-hills-school-district", label: "Homes in the Bloomfield Hills School District" },
       { href: "/luxury-homes-in-bloomfield-hills", label: "Luxury homes in Bloomfield Hills" },
+      { href: "/most-exclusive-neighborhoods-oakland-county", label: "Most exclusive neighborhoods in Oakland County" },
+      { href: "/gated-communities-oakland-county", label: "Gated communities in Oakland County" },
     ],
     "birmingham-real-estate-agent": [
       { href: "/homes-in-birmingham-public-schools", label: "Homes in Birmingham Public Schools (Groves vs Seaholm)" },
       { href: "/luxury-homes-in-birmingham", label: "Luxury homes in Birmingham" },
+      { href: "/most-exclusive-neighborhoods-oakland-county", label: "Most exclusive neighborhoods in Oakland County" },
     ],
     "west-bloomfield-real-estate-agent": [
       { href: "/homes-in-the-west-bloomfield-school-district", label: "Homes in the West Bloomfield School District" },
+      { href: "/west-bloomfield-lakefront-homes", label: "West Bloomfield lakefront homes" },
+      { href: "/oakland-county-lakefront-homes", label: "Oakland County lakes: lakefront guide" },
     ],
     "auburn-hills-real-estate-agent": [
       { href: "/homes-in-the-avondale-school-district", label: "Homes in the Avondale School District" },
