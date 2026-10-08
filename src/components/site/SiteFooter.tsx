@@ -11,7 +11,8 @@ export default function SiteFooter() {
   const year = new Date().getFullYear();
 
   const links = [
-    { label: "Sell", href: "/home-value" },
+    { label: "Sell Your Home", href: "/sell-your-home-metro-detroit" },
+    { label: "What's My Home Worth?", href: "/home-value" },
     { label: "Listings", href: "/#listings" },
     { label: "Team", href: "/#about" },
     { label: "Reviews", href: "/reviews" },

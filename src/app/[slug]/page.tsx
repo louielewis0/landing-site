@@ -91,26 +91,39 @@ export default async function CityLandingPage({ params }: Props) {
 
   // Niche guide pages (school-district / luxury) linked from their city page.
   const guidesBySlug: Record<string, { href: string; label: string }[]> = {
-    "troy-real-estate-agent": [{ href: "/homes-in-the-troy-school-district", label: "Homes in the Troy School District" }],
+    "troy-real-estate-agent": [
+      { href: "/what-is-my-home-worth-troy", label: "What's my Troy home worth? (free valuation)" },
+      { href: "/homes-in-the-troy-school-district", label: "Homes in the Troy School District" },
+    ],
     "rochester-hills-real-estate-agent": [
+      { href: "/what-is-my-home-worth-rochester-hills", label: "What's my Rochester Hills home worth? (free valuation)" },
       { href: "/homes-in-rochester-community-schools", label: "Homes in Rochester Community Schools" },
       { href: "/homes-in-the-avondale-school-district", label: "Homes in the Avondale School District (the boundary trap)" },
     ],
     "bloomfield-hills-real-estate-agent": [
+      { href: "/what-is-my-home-worth-bloomfield-hills", label: "What's my Bloomfield Hills home worth? (free valuation)" },
       { href: "/homes-in-the-bloomfield-hills-school-district", label: "Homes in the Bloomfield Hills School District" },
       { href: "/luxury-homes-in-bloomfield-hills", label: "Luxury homes in Bloomfield Hills" },
       { href: "/most-exclusive-neighborhoods-oakland-county", label: "Most exclusive neighborhoods in Oakland County" },
       { href: "/gated-communities-oakland-county", label: "Gated communities in Oakland County" },
     ],
     "birmingham-real-estate-agent": [
+      { href: "/what-is-my-home-worth-birmingham", label: "What's my Birmingham home worth? (free valuation)" },
       { href: "/homes-in-birmingham-public-schools", label: "Homes in Birmingham Public Schools (Groves vs Seaholm)" },
       { href: "/luxury-homes-in-birmingham", label: "Luxury homes in Birmingham" },
       { href: "/most-exclusive-neighborhoods-oakland-county", label: "Most exclusive neighborhoods in Oakland County" },
     ],
     "west-bloomfield-real-estate-agent": [
+      { href: "/what-is-my-home-worth-west-bloomfield", label: "What's my West Bloomfield home worth? (free valuation)" },
       { href: "/homes-in-the-west-bloomfield-school-district", label: "Homes in the West Bloomfield School District" },
       { href: "/west-bloomfield-lakefront-homes", label: "West Bloomfield lakefront homes" },
       { href: "/oakland-county-lakefront-homes", label: "Oakland County lakes: lakefront guide" },
+    ],
+    "sterling-heights-real-estate-agent": [
+      { href: "/what-is-my-home-worth-sterling-heights", label: "What's my Sterling Heights home worth? (free valuation)" },
+    ],
+    "warren-real-estate-agent": [
+      { href: "/what-is-my-home-worth-warren", label: "What's my Warren home worth? (free valuation)" },
     ],
     "auburn-hills-real-estate-agent": [
       { href: "/homes-in-the-avondale-school-district", label: "Homes in the Avondale School District" },
