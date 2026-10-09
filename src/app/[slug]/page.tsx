@@ -93,15 +93,18 @@ export default async function CityLandingPage({ params }: Props) {
   const guidesBySlug: Record<string, { href: string; label: string }[]> = {
     "troy-real-estate-agent": [
       { href: "/what-is-my-home-worth-troy", label: "What's my Troy home worth? (free valuation)" },
+      { href: "/living-in-troy", label: "Living in Troy: the relocation guide" },
       { href: "/homes-in-the-troy-school-district", label: "Homes in the Troy School District" },
     ],
     "rochester-hills-real-estate-agent": [
       { href: "/what-is-my-home-worth-rochester-hills", label: "What's my Rochester Hills home worth? (free valuation)" },
+      { href: "/living-in-rochester-hills", label: "Living in Rochester Hills: the relocation guide" },
       { href: "/homes-in-rochester-community-schools", label: "Homes in Rochester Community Schools" },
       { href: "/homes-in-the-avondale-school-district", label: "Homes in the Avondale School District (the boundary trap)" },
     ],
     "bloomfield-hills-real-estate-agent": [
       { href: "/what-is-my-home-worth-bloomfield-hills", label: "What's my Bloomfield Hills home worth? (free valuation)" },
+      { href: "/living-in-bloomfield-hills", label: "Living in Bloomfield Hills: the relocation guide" },
       { href: "/homes-in-the-bloomfield-hills-school-district", label: "Homes in the Bloomfield Hills School District" },
       { href: "/luxury-homes-in-bloomfield-hills", label: "Luxury homes in Bloomfield Hills" },
       { href: "/most-exclusive-neighborhoods-oakland-county", label: "Most exclusive neighborhoods in Oakland County" },
@@ -109,6 +112,7 @@ export default async function CityLandingPage({ params }: Props) {
     ],
     "birmingham-real-estate-agent": [
       { href: "/what-is-my-home-worth-birmingham", label: "What's my Birmingham home worth? (free valuation)" },
+      { href: "/living-in-birmingham", label: "Living in Birmingham: the relocation guide" },
       { href: "/homes-in-birmingham-public-schools", label: "Homes in Birmingham Public Schools (Groves vs Seaholm)" },
       { href: "/luxury-homes-in-birmingham", label: "Luxury homes in Birmingham" },
       { href: "/most-exclusive-neighborhoods-oakland-county", label: "Most exclusive neighborhoods in Oakland County" },
