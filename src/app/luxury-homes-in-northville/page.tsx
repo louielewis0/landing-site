@@ -165,9 +165,9 @@ const data: GuidePageData = {
     },
   ],
   related: [
+    { href: "/living-in-northville", label: "Living in Northville: the relocation guide" },
     { href: "/home-value", label: "What's my home worth? (free valuation)" },
     { href: "/luxury-homes-in-novi", label: "Luxury homes in Novi" },
-    { href: "/luxury-homes-in-bloomfield-hills", label: "Luxury homes in Bloomfield Hills" },
     { href: "/most-exclusive-neighborhoods-oakland-county", label: "Most exclusive neighborhoods in Oakland County" },
     { href: "/sell-your-home-metro-detroit", label: "Sell your home for more" },
   ],

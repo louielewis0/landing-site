@@ -171,9 +171,9 @@ const data: GuidePageData = {
     },
   ],
   related: [
+    { href: "/living-in-novi", label: "Living in Novi: the relocation guide" },
     { href: "/home-value", label: "What's my home worth? (free valuation)" },
     { href: "/luxury-homes-in-northville", label: "Luxury homes in Northville" },
-    { href: "/luxury-homes-in-birmingham", label: "Luxury homes in Birmingham" },
     { href: "/gated-communities-oakland-county", label: "Gated communities in Oakland County" },
     { href: "/sell-your-home-metro-detroit", label: "Sell your home for more" },
   ],

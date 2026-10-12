@@ -120,6 +120,7 @@ export default async function CityLandingPage({ params }: Props) {
     ],
     "west-bloomfield-real-estate-agent": [
       { href: "/what-is-my-home-worth-west-bloomfield", label: "What's my West Bloomfield home worth? (free valuation)" },
+      { href: "/living-in-west-bloomfield", label: "Living in West Bloomfield: the relocation guide" },
       { href: "/homes-in-the-west-bloomfield-school-district", label: "Homes in the West Bloomfield School District" },
       { href: "/west-bloomfield-lakefront-homes", label: "West Bloomfield lakefront homes" },
       { href: "/oakland-county-lakefront-homes", label: "Oakland County lakes: lakefront guide" },
