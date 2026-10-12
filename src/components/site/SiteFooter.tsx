@@ -25,6 +25,7 @@ export default function SiteFooter() {
     { label: "How to Buy in Michigan", href: "/how-to-buy-a-home-in-michigan" },
     { label: "Michigan Closing Costs", href: "/michigan-closing-costs" },
     { label: "Michigan Property Taxes", href: "/michigan-property-taxes-explained" },
+    { label: "Royal Oak Home Values", href: "/what-is-my-home-worth-royal-oak" },
     { label: "Oakland County Brokerages", href: "/best-real-estate-brokerages-oakland-county" },
     { label: "Michigan Brokerages", href: "/best-real-estate-brokerages-michigan" },
     { label: "Privacy", href: "/privacy" },

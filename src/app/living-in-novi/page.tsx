@@ -140,7 +140,7 @@ const data: GuidePageData = {
   ],
   related: [
     { href: "/luxury-homes-in-novi", label: "Luxury homes in Novi" },
-    { href: "/home-value", label: "What's my home worth? (free valuation)" },
+    { href: "/what-is-my-home-worth-novi", label: "What's my Novi home worth?" },
     { href: "/how-to-buy-a-home-in-michigan", label: "How to buy a home in Michigan" },
     { href: "/relocating-to-metro-detroit", label: "Relocating to Metro Detroit" },
     { href: "/living-in-northville", label: "Living in Northville" },

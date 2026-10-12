@@ -132,7 +132,11 @@ export default async function CityLandingPage({ params }: Props) {
       { href: "/what-is-my-home-worth-warren", label: "What's my Warren home worth? (free valuation)" },
     ],
     "auburn-hills-real-estate-agent": [
+      { href: "/what-is-my-home-worth-auburn-hills", label: "What's my Auburn Hills home worth? (free valuation)" },
       { href: "/homes-in-the-avondale-school-district", label: "Homes in the Avondale School District" },
+    ],
+    "madison-heights-real-estate-agent": [
+      { href: "/what-is-my-home-worth-madison-heights", label: "What's my Madison Heights home worth? (free valuation)" },
     ],
   };
   const guides = guidesBySlug[page.slug] ?? [];
