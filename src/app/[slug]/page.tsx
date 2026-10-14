@@ -99,6 +99,9 @@ export default async function CityLandingPage({ params }: Props) {
     "rochester-hills-real-estate-agent": [
       { href: "/what-is-my-home-worth-rochester-hills", label: "What's my Rochester Hills home worth? (free valuation)" },
       { href: "/living-in-rochester-hills", label: "Living in Rochester Hills: the relocation guide" },
+      { href: "/best-neighborhoods-in-rochester-hills", label: "Best neighborhoods in Rochester Hills" },
+      { href: "/rochester-hills-condos", label: "Rochester Hills condos" },
+      { href: "/new-construction-rochester-hills", label: "New construction in Rochester Hills" },
       { href: "/luxury-homes-in-rochester", label: "Luxury homes in Rochester & Oakland Township" },
       { href: "/homes-in-rochester-community-schools", label: "Homes in Rochester Community Schools" },
       { href: "/homes-in-the-avondale-school-district", label: "Homes in the Avondale School District (the boundary trap)" },
