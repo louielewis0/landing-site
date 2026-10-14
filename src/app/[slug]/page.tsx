@@ -114,6 +114,9 @@ export default async function CityLandingPage({ params }: Props) {
     "birmingham-real-estate-agent": [
       { href: "/what-is-my-home-worth-birmingham", label: "What's my Birmingham home worth? (free valuation)" },
       { href: "/living-in-birmingham", label: "Living in Birmingham: the relocation guide" },
+      { href: "/best-neighborhoods-in-birmingham", label: "Best neighborhoods in Birmingham" },
+      { href: "/birmingham-condos", label: "Birmingham condos: downtown buildings & prices" },
+      { href: "/quarton-lake-estates-birmingham", label: "Quarton Lake Estates: the trophy neighborhood" },
       { href: "/homes-in-birmingham-public-schools", label: "Homes in Birmingham Public Schools (Groves vs Seaholm)" },
       { href: "/luxury-homes-in-birmingham", label: "Luxury homes in Birmingham" },
       { href: "/most-exclusive-neighborhoods-oakland-county", label: "Most exclusive neighborhoods in Oakland County" },
