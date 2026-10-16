@@ -22,19 +22,19 @@ export function TemplateReviews() {
           href="https://townanswer.com/pro/real-estate-market-center-troy-445735/"
           target="_blank"
           rel="noopener noreferrer"
-          title="Ranked #1 real estate brokerage in Troy, MI on TownAnswer"
+          title="Ranked #1 real estate brokerage in Michigan on TownAnswer"
           style={{ display: "inline-block", marginBottom: 16 }}
         >
           <Image
             src="/townanswer-badge.png"
-            alt="Ranked #1 real estate brokerage in Troy, MI — TownAnswer 2026"
+            alt="Ranked #1 real estate brokerage in Michigan — TownAnswer 2026"
             width={124}
             height={124}
           />
         </a>
         <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
           <Stars size={18} />
-          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--s-ink)" }}>Rated 5.0 by 80+ clients on Google &middot; Ranked #1 in Troy by TownAnswer</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--s-ink)" }}>Rated 5.0 by 80+ clients on Google &middot; Ranked #1 in Michigan by TownAnswer</span>
         </div>
       </div>
 
