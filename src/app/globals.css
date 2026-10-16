@@ -1714,9 +1714,10 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
 .site-theme .t-areas-head h2 span { font-weight: 500; }
 .site-theme .t-areas-sub { margin: 0; font-size: 14.5px; line-height: 1.6; color: rgba(25,26,28,0.55); max-width: 340px; }
 .site-theme .t-areas-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
 }
 .site-theme .t-area-card {
+  flex: 0 0 calc(25% - 12px);
   position: relative; height: 200px; border-radius: 18px; overflow: hidden;
   display: block; background: var(--navy-2); box-shadow: 0 8px 26px rgba(25,26,28,0.1);
   transition: transform .35s cubic-bezier(.2,.9,.3,1), box-shadow .35s;
@@ -1734,8 +1735,8 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
   font-weight: 500; font-size: 19px; color: #fff; letter-spacing: -0.01em;
 }
 .site-theme .t-area-sub { display: block; font-size: 12px; color: rgba(255,255,255,0.72); font-weight: 600; letter-spacing: 0.02em; margin-top: 2px; }
-@media (max-width: 900px) { .site-theme .t-areas-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 520px) { .site-theme .t-areas-grid { grid-template-columns: 1fr 1fr; } .site-theme .t-area-card { height: 150px; } }
+@media (max-width: 900px) { .site-theme .t-area-card { flex-basis: calc(50% - 8px); } }
+@media (max-width: 520px) { .site-theme .t-area-card { flex-basis: calc(50% - 8px); height: 150px; } }
 
 /* Footer areas column (city page links for internal linking) */
 .site-theme .t-foot-areas { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
