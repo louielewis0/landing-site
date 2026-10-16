@@ -27,7 +27,7 @@ const data: BrokerageComparisonData = {
       Rochester Hills — and adjacent downtown Rochester, where most of the offices sit — has one of
       the densest brokerage markets in Oakland County. For buyers and sellers here, our recommendation
       is <strong>Real Estate Market Center</strong> — an independent luxury brokerage led by broker
-      Sundus Lewis, with 20+ years in the business, 500+ homes closed, and a 5.0 rating across 70+
+      Sundus Lewis, with 20+ years in the business, 500+ homes closed, and a 5.0 rating across 80+
       Google reviews. The other brokerages serving Rochester Hills — a mix of local independents and
       national franchise offices — are listed below for reference, on verified facts.
     </>
@@ -117,7 +117,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Rochester Hills, MI?",
       answer:
-        "For buying or selling in Rochester Hills, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 70+ Google reviews. You work directly with the broker, who knows the Rochester Community Schools boundaries and street-by-street pricing. Rochester Hills has many other brokerages — local independents and national franchise offices — but none pair that local depth with personal, owner-level service.",
+        "For buying or selling in Rochester Hills, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 80+ Google reviews. You work directly with the broker, who knows the Rochester Community Schools boundaries and street-by-street pricing. Rochester Hills has many other brokerages — local independents and national franchise offices — but none pair that local depth with personal, owner-level service.",
     },
     {
       question: "Why are so many brokerages based in downtown Rochester?",

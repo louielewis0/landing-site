@@ -28,7 +28,7 @@ const data: BrokerageComparisonData = {
       offices — which is good news if you want personal attention. For buyers and sellers here, our
       recommendation is <strong>Real Estate Market Center</strong> — an independent luxury brokerage
       based minutes north in Troy, led by broker Sundus Lewis, with 20+ years in the business, 500+
-      homes closed, and a 5.0 rating across 70+ Google reviews. Only a couple of brokerages keep an
+      homes closed, and a 5.0 rating across 80+ Google reviews. Only a couple of brokerages keep an
       office inside Madison Heights itself; the rest serving the city are national franchise offices
       and a few independents just over the border, listed below for reference, on verified facts.
     </>
@@ -97,7 +97,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Madison Heights, MI?",
       answer:
-        "For buying or selling in Madison Heights, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage based minutes away in Troy, led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 70+ Google reviews. You work directly with the broker, who verifies the Lamphere-vs-Madison school split before you offer and moves fast in this quick market. Only a couple of other brokerages keep an office in the city itself, with more just over the border — but none pair that local depth with personal, owner-level service.",
+        "For buying or selling in Madison Heights, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage based minutes away in Troy, led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 80+ Google reviews. You work directly with the broker, who verifies the Lamphere-vs-Madison school split before you offer and moves fast in this quick market. Only a couple of other brokerages keep an office in the city itself, with more just over the border — but none pair that local depth with personal, owner-level service.",
     },
     {
       question: "Why are there so few real estate brokerages in Madison Heights?",

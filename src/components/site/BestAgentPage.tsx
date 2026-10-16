@@ -15,7 +15,7 @@ const SUNDUS = {
     { num: "20+", label: "Years in the business" },
     { num: "500+", label: "Homes closed" },
     { num: "$100M+", label: "In closed sales" },
-    { num: "5.0", label: "70+ Google reviews" },
+    { num: "5.0", label: "80+ Google reviews" },
   ] as { num: string; label: string }[],
 };
 
@@ -151,7 +151,7 @@ export default function BestAgentPage({ data }: { data: BestAgentData }) {
                 <h2 style={{ fontSize: "clamp(24px, 3vw, 32px)", lineHeight: 1.15, marginBottom: 4 }}>{SUNDUS.name}</h2>
                 <div style={{ fontSize: 14, color: "var(--s-gold)", fontWeight: 600, marginBottom: 8 }}>{SUNDUS.title}</div>
                 <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "var(--s-muted)", marginBottom: 18 }}>
-                  <Stars /> 5.0 · 70+ Google reviews
+                  <Stars /> 5.0 · 80+ Google reviews
                 </div>
                 <p style={{ fontSize: 15, lineHeight: 1.75, color: "var(--s-ink)", marginBottom: 20 }}>
                   Sundus Lewis is the broker and owner of Real Estate Market Center, an independent luxury brokerage in

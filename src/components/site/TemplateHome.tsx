@@ -20,7 +20,7 @@ export function TemplateReviews() {
       <div style={{ textAlign: "center", marginBottom: 28 }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
           <Stars size={18} />
-          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--s-ink)" }}>Rated 5.0 by 70+ clients on Google</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--s-ink)" }}>Rated 5.0 by 80+ clients on Google</span>
         </div>
       </div>
 

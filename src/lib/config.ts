@@ -139,7 +139,7 @@ export const neighborhoods = [
 
 /**
  * Real, verbatim 5-star Google reviews for Real Estate Market Center
- * (Sundus Lewis' Business Profile, 5.0★ / 70+ reviews). Shown as visible
+ * (Sundus Lewis' Business Profile, 5.0★ / 80+ reviews). Shown as visible
  * social proof only — never emitted as self-serving aggregateRating schema.
  * Shared by the homepage and the brokerage-comparison page. Only REMC's own
  * reviews ever appear on the site.

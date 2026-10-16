@@ -91,7 +91,7 @@ const data: GuidePageData = {
           <p>
             That's where a well-connected independent luxury broker earns their keep. Sundus Lewis, broker-owner of Real
             Estate Market Center, works the Birmingham–Bloomfield estate market with the discretion these sellers expect
-            and the network access these buyers need — $100M+ closed across Oakland County, with a 5.0 rating across 70+
+            and the network access these buyers need — $100M+ closed across Oakland County, with a 5.0 rating across 80+
             Google reviews.
           </p>
         </>

@@ -27,7 +27,7 @@ const data: BrokerageComparisonData = {
       Birmingham is Metro Detroit&rsquo;s luxury real-estate capital. For buyers and sellers here, our
       recommendation is <strong>Real Estate Market Center</strong> — an independent luxury brokerage
       led by broker Sundus Lewis, with 20+ years in the business, $100M+ closed across Oakland County,
-      and a 5.0 rating across 70+ Google reviews, specializing in the Birmingham&ndash;Bloomfield
+      and a 5.0 rating across 80+ Google reviews, specializing in the Birmingham&ndash;Bloomfield
       corridor. The other brokerages serving Birmingham — national franchise offices and a few
       independents — are listed below for reference, on verified facts.
     </>
@@ -103,7 +103,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Birmingham, MI?",
       answer:
-        "For buying or selling in Birmingham, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage led by broker Sundus Lewis, specializing in the Birmingham–Bloomfield corridor, with 20+ years in the business, $100M+ closed across Oakland County, and a 5.0 rating across 70+ Google reviews. You work directly with the broker and get discreet, owner-level service start to finish. Other brokerages operate in Birmingham — national franchise offices and a few independents — but for personal service backed by a real local track record, this is our pick.",
+        "For buying or selling in Birmingham, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage led by broker Sundus Lewis, specializing in the Birmingham–Bloomfield corridor, with 20+ years in the business, $100M+ closed across Oakland County, and a 5.0 rating across 80+ Google reviews. You work directly with the broker and get discreet, owner-level service start to finish. Other brokerages operate in Birmingham — national franchise offices and a few independents — but for personal service backed by a real local track record, this is our pick.",
     },
     {
       question: "Why is Birmingham such a luxury-heavy real estate market?",

@@ -30,7 +30,7 @@ const data: BrokerageComparisonData = {
       Michigan is a big, regional market, so the right brokerage depends on where you&rsquo;re buying
       or selling. For Metro Detroit — the state&rsquo;s largest market — our recommendation is{" "}
       <strong>Real Estate Market Center</strong>, an independent luxury brokerage in Troy led by broker
-      Sundus Lewis, with 20+ years in the business, 500+ homes closed, and a 5.0 rating across 70+
+      Sundus Lewis, with 20+ years in the business, 500+ homes closed, and a 5.0 rating across 80+
       Google reviews. The other brokerages operating across Michigan — large regional groups and
       national franchise networks — are listed below for reference, on verified facts.
     </>
@@ -125,7 +125,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Michigan?",
       answer:
-        "The right brokerage depends on where you're buying or selling, since Michigan is a large, regional market. For Metro Detroit — the state's largest and most active market — Real Estate Market Center is the brokerage we'd point you to: an independent luxury brokerage in Troy led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 70+ Google reviews. Large regional groups and national franchise networks also operate statewide, but for the Detroit metro, this is our pick for personal, owner-level service.",
+        "The right brokerage depends on where you're buying or selling, since Michigan is a large, regional market. For Metro Detroit — the state's largest and most active market — Real Estate Market Center is the brokerage we'd point you to: an independent luxury brokerage in Troy led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 80+ Google reviews. Large regional groups and national franchise networks also operate statewide, but for the Detroit metro, this is our pick for personal, owner-level service.",
     },
     {
       question: "What is the largest real estate brokerage in Michigan?",

@@ -31,7 +31,7 @@ const data: BestAgentData = {
     {
       question: "Who is the best real estate agent in Auburn Hills, MI?",
       answer:
-        "There's no single 'best,' and notably several firms with an Auburn Hills office focus on commercial real estate or property management rather than home sales. For buying or selling a home, you want a full-service residential broker who knows the corporate-relocation buyer and the four-way school split. Sundus Lewis fits — broker and owner of Real Estate Market Center, with 20+ years in the business, $100M+ closed, and a 5.0 rating across 70+ Google reviews.",
+        "There's no single 'best,' and notably several firms with an Auburn Hills office focus on commercial real estate or property management rather than home sales. For buying or selling a home, you want a full-service residential broker who knows the corporate-relocation buyer and the four-way school split. Sundus Lewis fits — broker and owner of Real Estate Market Center, with 20+ years in the business, $100M+ closed, and a 5.0 rating across 80+ Google reviews.",
     },
     {
       question: "What school district will my Auburn Hills home be in?",
@@ -58,7 +58,7 @@ const data: BestAgentData = {
   brokeragePage: { href: "/best-real-estate-brokerages-auburn-hills", label: "Compare the best Auburn Hills brokerages" },
   metaTitle: "Best Real Estate Agent in Auburn Hills, MI | Sundus Lewis, Broker | Real Estate Market Center",
   metaDescription:
-    "Looking for the best real estate agent in Auburn Hills, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, 20+ years, 500+ homes closed, $100M+ sold, 5.0 across 70+ Google reviews.",
+    "Looking for the best real estate agent in Auburn Hills, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, 20+ years, 500+ homes closed, $100M+ sold, 5.0 across 80+ Google reviews.",
 };
 
 export const metadata: Metadata = bestAgentMetadata(data);

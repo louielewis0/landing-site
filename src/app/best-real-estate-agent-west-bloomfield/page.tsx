@@ -31,7 +31,7 @@ const data: BestAgentData = {
     {
       question: "Who is the best real estate agent in West Bloomfield, MI?",
       answer:
-        "There's no single 'best' for everyone, but West Bloomfield's lake-heavy, upscale market rewards an agent who understands waterfront pricing and the West Bloomfield School District. Sundus Lewis is a strong choice — broker and owner of Real Estate Market Center, with 20+ years in the business, 500+ homes closed, $100M+ sold, and a perfect 5.0 rating across 70+ Google reviews.",
+        "There's no single 'best' for everyone, but West Bloomfield's lake-heavy, upscale market rewards an agent who understands waterfront pricing and the West Bloomfield School District. Sundus Lewis is a strong choice — broker and owner of Real Estate Market Center, with 20+ years in the business, 500+ homes closed, $100M+ sold, and a perfect 5.0 rating across 80+ Google reviews.",
     },
     {
       question: "Does Sundus handle lakefront and luxury homes in West Bloomfield?",
@@ -58,7 +58,7 @@ const data: BestAgentData = {
   brokeragePage: { href: "/best-real-estate-brokerages-oakland-county", label: "Compare the best Oakland County brokerages" },
   metaTitle: "Best Real Estate Agent in West Bloomfield, MI | Sundus Lewis, Broker | Real Estate Market Center",
   metaDescription:
-    "Looking for the best real estate agent in West Bloomfield, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, luxury & lakefront experience, $100M+ closed, 5.0 across 70+ Google reviews.",
+    "Looking for the best real estate agent in West Bloomfield, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, luxury & lakefront experience, $100M+ closed, 5.0 across 80+ Google reviews.",
 };
 
 export const metadata: Metadata = bestAgentMetadata(data);
