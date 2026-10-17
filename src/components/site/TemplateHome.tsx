@@ -19,22 +19,29 @@ export function TemplateReviews() {
     <div className="t-wrap" style={{ paddingTop: 12, paddingBottom: 12 }} id="reviews">
       <div style={{ textAlign: "center", marginBottom: 28 }}>
         <a
-          href="https://townanswer.com/pro/real-estate-market-center-troy-445735/"
+          href="https://townanswer.com/awards/2026/real-estate-market-center/"
           target="_blank"
           rel="noopener noreferrer"
-          title="Ranked #1 real estate brokerage in Michigan on TownAnswer"
-          style={{ display: "inline-block", marginBottom: 16 }}
+          title="Certified TownAnswer Best 2026 — Best Real Estate Brokerage in Michigan"
+          style={{ display: "inline-block", marginBottom: 14 }}
         >
-          <Image
-            src="/townanswer-badge.png"
-            alt="Ranked #1 real estate brokerage in Michigan — TownAnswer 2026"
-            width={124}
-            height={124}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/townanswer-award-2026.svg"
+            alt="Certified TownAnswer Best 2026 — Best Real Estate Brokerage in Michigan"
+            width={338}
+            height={100}
+            style={{ maxWidth: "100%", height: "auto", borderRadius: 16, boxShadow: "0 8px 26px rgba(25,26,28,0.12)" }}
           />
         </a>
         <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
           <Stars size={18} />
-          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--s-ink)" }}>Rated 5.0 by 80+ clients on Google &middot; Ranked #1 in Michigan by TownAnswer</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--s-ink)" }}>Named Michigan&rsquo;s #1 brokerage by TownAnswer &middot; 5.0 across 84 Google reviews</span>
+        </div>
+        <div style={{ marginTop: 8 }}>
+          <Link href="/best-real-estate-brokerage-in-michigan" style={{ fontSize: 13, fontWeight: 600, color: "var(--s-gold)" }}>
+            See how we earned it &rarr;
+          </Link>
         </div>
       </div>
 
