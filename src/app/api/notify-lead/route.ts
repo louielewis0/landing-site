@@ -31,6 +31,7 @@ type LeadRecord = {
 const SOURCE_LABEL: Record<string, string> = {
   "instant-valuation": "Home valuation tool",
   "ai-concierge": "Maya (AI chat)",
+  "ai-receptionist": "AI receptionist (missed call)",
   "showing-request": "Showing request",
   "yard-sign": "Yard sign (QR scan)",
   "contact-form": "Website contact form",
