@@ -58,28 +58,46 @@ const FIELDS = [
   "caller_name", "callback_number", "intent", "city",
   "timeline", "price_range", "is_spam", "notes",
 ] as const;
+const FIELD_SET = new Set<string>(FIELDS);
 
-// Collect our fields whether Vapi returns them as the classic
-// `analysis.structuredData` (keyed by field name) or the newer
-// `analysis.structuredOutputs` (keyed by output id, value possibly wrapped).
+const set = (out: Record<string, unknown>, k: string, v: unknown) => {
+  if (FIELD_SET.has(k) && out[k] === undefined && v !== undefined && v !== null) out[k] = v;
+};
+
+// Collect our fields no matter how Vapi shaped them:
+//  - classic `analysis.structuredData` → object keyed by field name
+//  - newer `analysis.structuredOutputs` → keyed by output id OR name, where
+//    each value is a single object output ({result:{...}}), a scalar output
+//    ({name, result}), or the raw value itself.
 function collectFields(analysis?: VapiAnalysis): StructuredData {
   const out: Record<string, unknown> = {};
+
   const sd = analysis?.structuredData;
-  if (sd && typeof sd === "object") Object.assign(out, sd);
+  if (sd && typeof sd === "object") {
+    for (const [k, v] of Object.entries(sd as Record<string, unknown>)) set(out, k, v);
+  }
 
   const so = analysis?.structuredOutputs;
   if (so && typeof so === "object") {
-    for (const v of Object.values(so)) {
-      if (!v || typeof v !== "object") continue;
+    for (const [key, v] of Object.entries(so as Record<string, unknown>)) {
+      // scalar keyed directly by field name
+      if (typeof v !== "object" || v === null) {
+        set(out, key, v);
+        continue;
+      }
       const rec = v as Record<string, unknown>;
-      const inner = (rec.result ?? rec.value ?? rec) as Record<string, unknown>;
-      if (inner && typeof inner === "object") {
-        for (const k of FIELDS) {
-          if (k in inner && out[k] === undefined) out[k] = inner[k];
-        }
+      const payload = "result" in rec ? rec.result : "value" in rec ? rec.value : rec;
+      const named = typeof rec.name === "string" ? rec.name : key;
+      if (payload && typeof payload === "object") {
+        // object output: pull every known field out of it
+        for (const [k, val] of Object.entries(payload as Record<string, unknown>)) set(out, k, val);
+      } else {
+        // scalar output, identified by its name or the map key
+        set(out, named, payload);
       }
     }
   }
+
   return out as StructuredData;
 }
 
