@@ -34,10 +34,18 @@ type StructuredData = {
   notes?: string;
 };
 
+type VapiAnalysis = {
+  summary?: string;
+  structuredData?: StructuredData;
+  // Newer "Structured Outputs" feature delivers results here, keyed by output
+  // id; each value may be the result object directly or wrapped in {result}/{value}.
+  structuredOutputs?: Record<string, unknown>;
+};
+
 type VapiMessage = {
   type?: string;
   endedReason?: string;
-  analysis?: { summary?: string; structuredData?: StructuredData };
+  analysis?: VapiAnalysis;
   artifact?: { transcript?: string };
   transcript?: string;
   customer?: { number?: string };
@@ -45,6 +53,35 @@ type VapiMessage = {
 };
 
 const clean = (v: unknown) => (typeof v === "string" ? v.trim() : "");
+
+const FIELDS = [
+  "caller_name", "callback_number", "intent", "city",
+  "timeline", "price_range", "is_spam", "notes",
+] as const;
+
+// Collect our fields whether Vapi returns them as the classic
+// `analysis.structuredData` (keyed by field name) or the newer
+// `analysis.structuredOutputs` (keyed by output id, value possibly wrapped).
+function collectFields(analysis?: VapiAnalysis): StructuredData {
+  const out: Record<string, unknown> = {};
+  const sd = analysis?.structuredData;
+  if (sd && typeof sd === "object") Object.assign(out, sd);
+
+  const so = analysis?.structuredOutputs;
+  if (so && typeof so === "object") {
+    for (const v of Object.values(so)) {
+      if (!v || typeof v !== "object") continue;
+      const rec = v as Record<string, unknown>;
+      const inner = (rec.result ?? rec.value ?? rec) as Record<string, unknown>;
+      if (inner && typeof inner === "object") {
+        for (const k of FIELDS) {
+          if (k in inner && out[k] === undefined) out[k] = inner[k];
+        }
+      }
+    }
+  }
+  return out as StructuredData;
+}
 
 // Map the caller's stated intent to the two column values we KNOW the
 // leads table accepts (mirrors /api/valuation). Anything buy-side or
@@ -78,7 +115,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ skipped: msg?.type ?? "no-message" });
   }
 
-  const sd = msg.analysis?.structuredData ?? {};
+  const sd = collectFields(msg.analysis);
   const summary = clean(msg.analysis?.summary);
   const transcript = clean(msg.artifact?.transcript || msg.transcript);
   const callerNumber = clean(msg.customer?.number || msg.call?.customer?.number);
@@ -88,7 +125,7 @@ export async function POST(req: NextRequest) {
   const city = clean(sd.city);
   const timeline = clean(sd.timeline);
   const priceRange = clean(sd.price_range);
-  const isSpam = sd.is_spam === true;
+  const isSpam = sd.is_spam === true || String(sd.is_spam).toLowerCase() === "true";
   const { intent, lead_type, transaction_type } = mapIntent(clean(sd.intent));
 
   // Compose the broker-facing note: summary + captured fields + a trimmed
