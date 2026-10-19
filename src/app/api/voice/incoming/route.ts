@@ -23,7 +23,7 @@ import { NextRequest, NextResponse } from "next/server";
  */
 
 const CELL = process.env.BUSINESS_CELL || "+12485686081";
-const MAYA = process.env.VAPI_NUMBER || ""; // set to the Vapi number once purchased
+const MAYA = process.env.VAPI_NUMBER || "+12488349166"; // Maya (Vapi AI receptionist)
 const RING_TIMEOUT = Number(process.env.RING_TIMEOUT || 16);
 
 const xml = (body: string) =>
