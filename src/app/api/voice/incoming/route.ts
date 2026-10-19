@@ -44,10 +44,16 @@ async function handle(req: NextRequest) {
     /* no body (e.g. a GET health check) — fine */
   }
 
-  const callerId = /^\+?\d{10,15}$/.test(from) ? ` callerId="${esc(from)}"` : "";
+  // Present the BUSINESS number as caller ID to the cell (not the lead's
+  // number). Saved as a contact, it reliably rings through iPhone call
+  // screening and Verizon spam filtering, which otherwise bounce unknown
+  // callers straight to voicemail. (`from` is unused for now but captured
+  // above in case we want lead caller ID back later.)
+  void from;
+  const BUSINESS = process.env.BUSINESS_NUMBER || "+12482834955";
 
   // Leg 1: ring the cell. answerOnBridge => caller hears ringing, not silence.
-  let body = `<Dial timeout="${RING_TIMEOUT}" answerOnBridge="true"${callerId}><Number>${esc(CELL)}</Number></Dial>`;
+  let body = `<Dial timeout="${RING_TIMEOUT}" answerOnBridge="true" callerId="${esc(BUSINESS)}"><Number>${esc(CELL)}</Number></Dial>`;
 
   // Leg 2 (only reached if the cell didn't answer): hand off to Maya.
   if (MAYA) {
