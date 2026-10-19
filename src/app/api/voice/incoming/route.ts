@@ -24,7 +24,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const CELL = process.env.BUSINESS_CELL || "+12485686081";
 const MAYA = process.env.VAPI_NUMBER || "+12488349166"; // Maya (Vapi AI receptionist)
-const RING_TIMEOUT = Number(process.env.RING_TIMEOUT || 5);
+const RING_TIMEOUT = Number(process.env.RING_TIMEOUT || 15);
 
 const xml = (body: string) =>
   new NextResponse(`<?xml version="1.0" encoding="UTF-8"?>\n<Response>${body}</Response>`, {
@@ -57,7 +57,7 @@ async function handle(req: NextRequest) {
   // cell's voicemail before Maya can catch it, which loses leads. Flip
   // RING_CELL_FIRST to "true" (env) once the number is warmed up (~1-2 days)
   // and the cell starts ringing through reliably.
-  const RING_CELL_FIRST = process.env.RING_CELL_FIRST === "true";
+  const RING_CELL_FIRST = process.env.RING_CELL_FIRST !== "false";
 
   let body = "";
   if (RING_CELL_FIRST) {
