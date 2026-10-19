@@ -52,10 +52,20 @@ async function handle(req: NextRequest) {
   void from;
   const BUSINESS = process.env.BUSINESS_NUMBER || "+12482834955";
 
-  // Leg 1: ring the cell. answerOnBridge => caller hears ringing, not silence.
-  let body = `<Dial timeout="${RING_TIMEOUT}" answerOnBridge="true" callerId="${esc(BUSINESS)}"><Number>${esc(CELL)}</Number></Dial>`;
+  // "Ring the cell first" is OFF until the brand-new Twilio number earns
+  // Verizon's trust — right now Verizon diverts the forwarded call to the
+  // cell's voicemail before Maya can catch it, which loses leads. Flip
+  // RING_CELL_FIRST to "true" (env) once the number is warmed up (~1-2 days)
+  // and the cell starts ringing through reliably.
+  const RING_CELL_FIRST = process.env.RING_CELL_FIRST === "true";
 
-  // Leg 2 (only reached if the cell didn't answer): hand off to Maya.
+  let body = "";
+  if (RING_CELL_FIRST) {
+    // Leg 1: ring the cell. answerOnBridge => caller hears ringing, not silence.
+    body += `<Dial timeout="${RING_TIMEOUT}" answerOnBridge="true" callerId="${esc(BUSINESS)}"><Number>${esc(CELL)}</Number></Dial>`;
+  }
+  // Maya catches the call (the only leg while cell-first is off; the fallback
+  // leg when it's on).
   if (MAYA) {
     body += `<Dial answerOnBridge="true"><Number>${esc(MAYA)}</Number></Dial>`;
   }
