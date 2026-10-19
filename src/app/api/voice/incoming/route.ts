@@ -24,7 +24,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const CELL = process.env.BUSINESS_CELL || "+12485686081";
 const MAYA = process.env.VAPI_NUMBER || "+12488349166"; // Maya (Vapi AI receptionist)
-const RING_TIMEOUT = Number(process.env.RING_TIMEOUT || 13);
+const RING_TIMEOUT = Number(process.env.RING_TIMEOUT || 5);
 
 const xml = (body: string) =>
   new NextResponse(`<?xml version="1.0" encoding="UTF-8"?>\n<Response>${body}</Response>`, {
