@@ -164,9 +164,6 @@ const AREAS = [
   { slug: "rochester-hills-real-estate-agent", city: "Rochester Hills", img: "/areas/rochester-hills-real-estate-agent.jpg" },
   { slug: "birmingham-real-estate-agent", city: "Birmingham", img: "/areas/birmingham-real-estate-agent.jpg" },
   { slug: "bloomfield-hills-real-estate-agent", city: "Bloomfield Hills", img: "/areas/bloomfield-hills-real-estate-agent.jpg" },
-  { slug: "west-bloomfield-real-estate-agent", city: "West Bloomfield", img: "/areas/west-bloomfield-real-estate-agent.jpg" },
-  { slug: "sterling-heights-real-estate-agent", city: "Sterling Heights", img: "/areas/sterling-heights-real-estate-agent.jpg" },
-  { slug: "warren-real-estate-agent", city: "Warren", img: "/areas/warren-real-estate-agent.jpg" },
 ];
 
 export function TemplateAreas() {
