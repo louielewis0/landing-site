@@ -64,6 +64,7 @@ export default async function CityLandingPage({ params }: Props) {
   const brokerageBySlug: Record<string, { href: string; label: string }> = {
     "troy-real-estate-agent": { href: "/best-real-estate-brokerages-troy", label: "Compare the best real estate brokerages in Troy" },
     "rochester-hills-real-estate-agent": { href: "/best-real-estate-brokerages-rochester-hills", label: "Compare the best real estate brokerages in Rochester Hills" },
+    "rochester-real-estate-agent": { href: "/best-real-estate-brokerages-oakland-county", label: "Compare the best real estate brokerages in Oakland County" },
     "birmingham-real-estate-agent": { href: "/best-real-estate-brokerages-birmingham", label: "Compare the best real estate brokerages in Birmingham" },
     "bloomfield-hills-real-estate-agent": { href: "/best-real-estate-brokerages-bloomfield-hills", label: "Compare the best real estate brokerages in Bloomfield Hills" },
     "sterling-heights-real-estate-agent": { href: "/best-real-estate-brokerages-sterling-heights", label: "Compare the best real estate brokerages in Sterling Heights" },

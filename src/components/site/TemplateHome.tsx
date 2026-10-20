@@ -162,6 +162,7 @@ export function TemplateAbout() {
 const AREAS = [
   { slug: "troy-real-estate-agent", city: "Troy", img: "/areas/troy-real-estate-agent.jpg" },
   { slug: "rochester-hills-real-estate-agent", city: "Rochester Hills", img: "/areas/rochester-hills-real-estate-agent.jpg" },
+  { slug: "rochester-real-estate-agent", city: "Rochester", img: "/areas/rochester-real-estate-agent.jpg" },
   { slug: "birmingham-real-estate-agent", city: "Birmingham", img: "/areas/birmingham-real-estate-agent.jpg" },
   { slug: "bloomfield-hills-real-estate-agent", city: "Bloomfield Hills", img: "/areas/bloomfield-hills-real-estate-agent.jpg" },
   { slug: "west-bloomfield-real-estate-agent", city: "West Bloomfield", img: "/areas/west-bloomfield-real-estate-agent.jpg" },
