@@ -99,8 +99,12 @@ const jsonLd = {
   areaServed: [
     "Troy, MI",
     "Rochester Hills, MI",
+    "Rochester, MI",
     "Birmingham, MI",
     "Bloomfield Hills, MI",
+    "Bloomfield Township, MI",
+    "Beverly Hills, MI",
+    "Franklin, MI",
     "West Bloomfield, MI",
     "Sterling Heights, MI",
     "Warren, MI",
