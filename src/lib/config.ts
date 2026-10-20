@@ -150,6 +150,11 @@ export const googleReviews = [
   { text: "It was a pleasure working with Real Estate Market Center. Everyone on the team was professional, responsive, and really knew the ins and outs of the market.", name: "Anthony M." },
   { text: "I had an excellent experience with Real Estate Market Center. Their team was knowledgeable, dependable, and easy to work with throughout the entire process. They have a strong understanding of the Metro Detroit real estate market.", name: "Vincent A." },
   { text: "Best brokerage in Troy — highly recommend Real Estate Market Center!", name: "Adam J." },
+  { text: "Sundus Lewis was absolutely amazing to work with during the purchase of my first home. From start to finish, she made the entire process feel smooth, organized, and far less stressful than I expected.", name: "Nicole M." },
+  { text: "I've had the pleasure of working with Sundus and Real Estate Market Center 10+ years, and I can't recommend her highly enough.", name: "Rafi S." },
+  { text: "I had a great experience with Real Estate Market Center. The process was smooth from start to finish, and everything was handled in a professional and straightforward way.", name: "Ashton S." },
+  { text: "Working with this team was a really positive experience from start to finish. They were responsive, easy to talk to, and made sure I understood every step along the way.", name: "Ramiz G." },
+  { text: "As in-state investors, we were excited to explore opportunities in the Metro Detroit areas. Working with Sundus made the entire process smooth, efficient, and ultimately successful.", name: "Adam F." },
 ] as const;
 
 // Listings are now sourced from src/lib/listings.ts (MLS-ready).

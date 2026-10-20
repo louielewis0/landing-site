@@ -45,24 +45,24 @@ export function TemplateReviews() {
         </div>
       </div>
 
-      <div style={{ display: "grid", gap: 14, gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }}>
-        {googleReviews.slice(0, 3).map((r) => (
-          <figure key={r.name} style={{ margin: 0, borderRadius: 16, border: "1px solid var(--line)", background: "#fff", padding: 20, display: "flex", flexDirection: "column", gap: 12 }}>
-            <Stars size={14} />
-            <blockquote style={{ margin: 0, fontSize: 13.5, lineHeight: 1.6, color: "var(--s-ink)", flex: 1 }}>
-              &ldquo;{r.text}&rdquo;
-            </blockquote>
-            <figcaption style={{ display: "flex", alignItems: "center", gap: 10, paddingTop: 10, borderTop: "1px solid var(--line)" }}>
-              <span style={{ width: 30, height: 30, borderRadius: "50%", background: "var(--navy)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 600, flexShrink: 0 }}>
-                {r.name.charAt(0)}
-              </span>
-              <span>
-                <span style={{ display: "block", fontSize: 13, fontWeight: 600, color: "var(--s-ink)" }}>{r.name}</span>
-                <span style={{ fontSize: 11, color: "var(--s-muted)" }}>Google review</span>
-              </span>
-            </figcaption>
-          </figure>
-        ))}
+      <div className="t-reviews-marquee" aria-label="Client reviews">
+        <div className="t-reviews-track">
+          {[...googleReviews, ...googleReviews].map((r, i) => (
+            <figure key={`${r.name}-${i}`} className="t-review-card" aria-hidden={i >= googleReviews.length}>
+              <Stars size={14} />
+              <blockquote>&ldquo;{r.text}&rdquo;</blockquote>
+              <figcaption style={{ display: "flex", alignItems: "center", gap: 10, paddingTop: 10, borderTop: "1px solid var(--line)" }}>
+                <span style={{ width: 30, height: 30, borderRadius: "50%", background: "var(--navy)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 600, flexShrink: 0 }}>
+                  {r.name.charAt(0)}
+                </span>
+                <span>
+                  <span style={{ display: "block", fontSize: 13, fontWeight: 600, color: "var(--s-ink)" }}>{r.name}</span>
+                  <span style={{ fontSize: 11, color: "var(--s-muted)" }}>Google review</span>
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
       </div>
 
       <div style={{ textAlign: "center", marginTop: 24 }}>
