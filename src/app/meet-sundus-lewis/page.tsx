@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import GuidePage, { guideMetadata, type GuidePageData } from "@/components/site/GuidePage";
+import LuxuryBrandPage, { luxuryMetadata, type LuxuryBrandData } from "@/components/site/LuxuryBrandPage";
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -30,7 +30,7 @@ const personSchema = {
   ],
 };
 
-const data: GuidePageData = {
+const data: LuxuryBrandData = {
   slug: "meet-sundus-lewis",
   crumbLabel: "Meet Sundus Lewis",
   eyebrow: "Meet the broker",
@@ -42,56 +42,44 @@ const data: GuidePageData = {
   h1Text: "Meet Sundus Lewis — Broker & Owner of Real Estate Market Center",
   sub: (
     <>
-      Sundus Lewis is the broker and owner of <strong>Real Estate Market Center</strong>, the
-      independent luxury brokerage she founded in Troy in 2003 &mdash; and which was named the{" "}
-      <strong>#1 real estate brokerage in Michigan</strong> for 2026. With 20+ years in the business,
-      she gives Metro Detroit buyers and sellers discreet, owner-level representation from first call
-      to closing.
+      Broker and owner of <strong>Real Estate Market Center</strong>, the independent luxury brokerage
+      she founded in Troy in 2003 &mdash; and built into the <strong>#1 real estate brokerage in
+      Michigan</strong> for 2026. Twenty years in, she still gives every client discreet, owner-level
+      representation from first call to closing.
     </>
   ),
-  bullets: [
-    "Broker & Owner since 2003",
-    "20+ years in real estate",
-    "500+ homes closed · $100M+ sold",
-    "Luxury & full-service specialist",
+  heroImage: "/sundus-lewis.png",
+  heroImageAlt: "Sundus Lewis, Broker & Owner of Real Estate Market Center",
+  stats: [
+    { value: "2003", label: "Founded the firm" },
+    { value: "20+", label: "Years in real estate" },
+    { value: "500+", label: "Homes closed" },
+    { value: "$100M+", label: "In sales" },
   ],
+  awardBand: true,
+  extraSchema: personSchema,
   publishedISO: "2026-10-20",
-  publishedLabel: "October 20, 2026",
   faqHeading: "Sundus Lewis — FAQ",
   sections: [
     {
       heading: "A local broker who built Michigan's #1 brokerage",
       body: (
         <>
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
-          <div style={{ display: "flex", gap: 24, alignItems: "flex-start", flexWrap: "wrap" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/sundus-lewis.png"
-              alt="Sundus Lewis, Broker & Owner of Real Estate Market Center"
-              width={200}
-              height={200}
-              style={{ width: 200, height: 200, objectFit: "cover", borderRadius: 18, flexShrink: 0, boxShadow: "0 8px 26px rgba(25,26,28,0.12)" }}
-            />
-            <div style={{ flex: 1, minWidth: 260, display: "grid", gap: 14 }}>
-              <p>
-                Sundus Lewis founded Real Estate Market Center in 2003 and has spent two decades
-                helping Metro Detroit families buy and sell &mdash; 13+ of those years as a licensed
-                broker. Along the way she&rsquo;s closed more than <strong>500 homes</strong> and{" "}
-                <strong>$100M+ in sales</strong> across Oakland, Macomb, and Wayne counties.
-              </p>
-              <p>
-                She built the brokerage on a simple idea: that buyers and sellers deserve to work
-                directly with the broker &mdash; not get handed off &mdash; and get honest, street-level
-                guidance instead of a franchise script. In 2026, that approach earned Real Estate Market
-                Center the{" "}
-                <a href="/best-real-estate-brokerage-in-michigan" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
-                  #1 real estate brokerage in Michigan
-                </a>{" "}
-                ranking from TownAnswer.
-              </p>
-            </div>
-          </div>
+          <p>
+            Sundus Lewis founded Real Estate Market Center in 2003 and has spent two decades helping
+            Metro Detroit families buy and sell &mdash; 13+ of those years as a licensed broker. Along
+            the way she&rsquo;s closed more than <strong>500 homes</strong> and <strong>$100M+ in
+            sales</strong> across Oakland, Macomb, and Wayne counties.
+          </p>
+          <p>
+            She built the brokerage on a simple idea: that buyers and sellers deserve to work directly
+            with the broker &mdash; not get handed off &mdash; and get honest, street-level guidance
+            instead of a franchise script. In 2026, that approach earned Real Estate Market Center the{" "}
+            <a href="/best-real-estate-brokerage-in-michigan" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
+              #1 real estate brokerage in Michigan
+            </a>{" "}
+            ranking from TownAnswer.
+          </p>
         </>
       ),
     },
@@ -167,8 +155,8 @@ const data: GuidePageData = {
     "Meet Sundus Lewis, broker & owner of Real Estate Market Center — the independent Troy, MI luxury brokerage she founded in 2003 and built into Michigan's #1-ranked brokerage (TownAnswer 2026). 20+ years, 500+ homes closed, $100M+ sold.",
 };
 
-export const metadata: Metadata = guideMetadata(data);
+export const metadata: Metadata = luxuryMetadata(data);
 
 export default function Page() {
-  return <GuidePage data={data} />;
+  return <LuxuryBrandPage data={data} />;
 }

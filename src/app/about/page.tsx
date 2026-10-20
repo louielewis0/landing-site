@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import GuidePage, { guideMetadata, type GuidePageData } from "@/components/site/GuidePage";
+import LuxuryBrandPage, { luxuryMetadata, type LuxuryBrandData } from "@/components/site/LuxuryBrandPage";
 
-const data: GuidePageData = {
+const data: LuxuryBrandData = {
   slug: "about",
   crumbLabel: "About",
-  eyebrow: "About us",
+  eyebrow: "About the brokerage",
   h1: (
     <>
       About <span style={{ color: "var(--s-gold)" }}>Real Estate Market Center</span>
@@ -13,20 +13,20 @@ const data: GuidePageData = {
   h1Text: "About Real Estate Market Center — Metro Detroit's Independent Luxury Brokerage",
   sub: (
     <>
-      Real Estate Market Center is an <strong>independent luxury real estate brokerage</strong> in
-      Troy, Michigan, led by broker-owner <strong>Sundus Lewis</strong>. Since 2003 we&rsquo;ve given
-      Metro Detroit buyers and sellers white-glove, owner-level representation &mdash; and in 2026 we
-      were named the <strong>#1 real estate brokerage in Michigan</strong> by TownAnswer.
+      An <strong>independent luxury real estate brokerage</strong> in Troy, Michigan, led by
+      broker-owner <strong>Sundus Lewis</strong>. Since 2003 we&rsquo;ve given Metro Detroit buyers and
+      sellers white-glove, owner-level representation &mdash; and in 2026 we were named the{" "}
+      <strong>#1 real estate brokerage in Michigan</strong>.
     </>
   ),
-  bullets: [
-    "Independent luxury — not a franchise",
-    "Serving Metro Detroit since 2003",
-    "#1 brokerage in Michigan (TownAnswer 2026)",
-    "5.0★ across 85+ Google reviews",
+  stats: [
+    { value: "2003", label: "Serving since" },
+    { value: "500+", label: "Homes closed" },
+    { value: "$100M+", label: "In sales" },
+    { value: "#1", label: "In Michigan" },
   ],
+  awardBand: true,
   publishedISO: "2026-10-20",
-  publishedLabel: "October 20, 2026",
   faqHeading: "About Real Estate Market Center — FAQ",
   sections: [
     {
@@ -136,8 +136,8 @@ const data: GuidePageData = {
     "Real Estate Market Center is an independent luxury real estate brokerage in Troy, MI, led by broker-owner Sundus Lewis since 2003 — named the #1 brokerage in Michigan (TownAnswer 2026), 5.0★ across 85+ reviews, 500+ homes closed, $100M+ sold.",
 };
 
-export const metadata: Metadata = guideMetadata(data);
+export const metadata: Metadata = luxuryMetadata(data);
 
 export default function Page() {
-  return <GuidePage data={data} />;
+  return <LuxuryBrandPage data={data} />;
 }
