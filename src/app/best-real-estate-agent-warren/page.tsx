@@ -31,7 +31,7 @@ const data: BestAgentData = {
     {
       question: "Who is the best real estate agent in Warren, MI?",
       answer:
-        "There's no single 'best' for everyone. Warren is an affordable, high-turnover value market, so the biggest factors are accurate pricing, speed, and knowing the first-time-buyer and investor angles. Sundus Lewis is a strong choice — broker and owner of Real Estate Market Center, serving Warren from nearby Troy, with 20+ years in the business, 500+ homes closed, $100M+ sold, and a 5.0 rating across 80+ Google reviews.",
+        "There's no single 'best' for everyone. Warren is an affordable, high-turnover value market, so the biggest factors are accurate pricing, speed, and knowing the first-time-buyer and investor angles. Sundus Lewis is a strong choice — broker and owner of Real Estate Market Center, serving Warren from nearby Troy, with 20+ years in the business, 500+ homes closed, $100M+ sold, and a 5.0 rating across 85+ Google reviews.",
     },
     {
       question: "Is Warren a good place to buy or invest?",
@@ -58,7 +58,7 @@ const data: BestAgentData = {
   brokeragePage: { href: "/best-real-estate-brokerages-sterling-heights", label: "Compare the best Sterling Heights & Macomb brokerages" },
   metaTitle: "Best Real Estate Agent in Warren, MI | Sundus Lewis, Broker | Real Estate Market Center",
   metaDescription:
-    "Looking for the best real estate agent in Warren, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, 20+ years, 500+ homes closed, $100M+ sold, 5.0 across 80+ Google reviews.",
+    "Looking for the best real estate agent in Warren, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, 20+ years, 500+ homes closed, $100M+ sold, 5.0 across 85+ Google reviews.",
 };
 
 export const metadata: Metadata = bestAgentMetadata(data);

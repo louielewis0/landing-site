@@ -31,7 +31,7 @@ const data: BestAgentData = {
     {
       question: "Who is the best real estate agent in Bloomfield Hills, MI?",
       answer:
-        "There's no single 'best' for everyone, but Bloomfield Hills is a luxury, estate-driven market that rewards an agent with high-end marketing, discretion, and real experience selling expensive Oakland County homes. Sundus Lewis is a strong fit — broker and owner of Real Estate Market Center, a luxury-focused independent, with 20+ years in the business, $100M+ closed, and a perfect 5.0 rating across 80+ Google reviews.",
+        "There's no single 'best' for everyone, but Bloomfield Hills is a luxury, estate-driven market that rewards an agent with high-end marketing, discretion, and real experience selling expensive Oakland County homes. Sundus Lewis is a strong fit — broker and owner of Real Estate Market Center, a luxury-focused independent, with 20+ years in the business, $100M+ closed, and a perfect 5.0 rating across 85+ Google reviews.",
     },
     {
       question: "Does Sundus Lewis specialize in luxury and estate homes?",
@@ -58,7 +58,7 @@ const data: BestAgentData = {
   brokeragePage: { href: "/best-real-estate-brokerages-bloomfield-hills", label: "Compare the best Bloomfield Hills brokerages" },
   metaTitle: "Best Real Estate Agent in Bloomfield Hills, MI | Sundus Lewis, Luxury Broker | Real Estate Market Center",
   metaDescription:
-    "Looking for the best luxury real estate agent in Bloomfield Hills, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, luxury specialist, $100M+ closed, 5.0 across 80+ Google reviews.",
+    "Looking for the best luxury real estate agent in Bloomfield Hills, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, luxury specialist, $100M+ closed, 5.0 across 85+ Google reviews.",
 };
 
 export const metadata: Metadata = bestAgentMetadata(data);

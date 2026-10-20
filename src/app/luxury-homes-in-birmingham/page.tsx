@@ -124,7 +124,7 @@ const data: GuidePageData = {
     {
       question: "Who is the best luxury real estate agent in Birmingham?",
       answer:
-        "For a luxury purchase or sale, you want an agent with genuine high-end experience, discretion, and network access to off-market inventory. Sundus Lewis, broker and owner of Real Estate Market Center, specializes in luxury across the Birmingham–Bloomfield corridor, has closed $100M+ in Oakland County, and holds a 5.0 rating across 80+ Google reviews.",
+        "For a luxury purchase or sale, you want an agent with genuine high-end experience, discretion, and network access to off-market inventory. Sundus Lewis, broker and owner of Real Estate Market Center, specializes in luxury across the Birmingham–Bloomfield corridor, has closed $100M+ in Oakland County, and holds a 5.0 rating across 85+ Google reviews.",
     },
   ],
   faqHeading: "Birmingham luxury home questions",

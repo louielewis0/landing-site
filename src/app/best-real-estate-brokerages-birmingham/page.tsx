@@ -27,7 +27,7 @@ const data: BrokerageComparisonData = {
       Birmingham is Metro Detroit&rsquo;s luxury real-estate capital. For buyers and sellers here, our
       recommendation is <strong>Real Estate Market Center</strong> — an independent luxury brokerage
       led by broker Sundus Lewis, with 20+ years in the business, $100M+ closed across Oakland County,
-      and a 5.0 rating across 80+ Google reviews, specializing in the Birmingham&ndash;Bloomfield
+      and a 5.0 rating across 85+ Google reviews, specializing in the Birmingham&ndash;Bloomfield
       corridor. In 2026 it was named the{" "}
       <a href="/best-real-estate-brokerage-in-michigan" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
         #1 real estate brokerage in Michigan
@@ -108,7 +108,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Birmingham, MI?",
       answer:
-        "For buying or selling in Birmingham, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage led by broker Sundus Lewis, specializing in the Birmingham–Bloomfield corridor, with 20+ years in the business, $100M+ closed across Oakland County, and a 5.0 rating across 80+ Google reviews. In 2026, TownAnswer named it the #1 real estate brokerage in Michigan — first of 1,634 statewide — on a methodology businesses cannot pay to influence. You work directly with the broker and get discreet, owner-level service start to finish. Other brokerages operate in Birmingham — national franchise offices and a few independents — but for personal service backed by a real, verified local track record, this is our pick.",
+        "For buying or selling in Birmingham, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage led by broker Sundus Lewis, specializing in the Birmingham–Bloomfield corridor, with 20+ years in the business, $100M+ closed across Oakland County, and a 5.0 rating across 85+ Google reviews. In 2026, TownAnswer named it the #1 real estate brokerage in Michigan — first of 1,634 statewide — on a methodology businesses cannot pay to influence. You work directly with the broker and get discreet, owner-level service start to finish. Other brokerages operate in Birmingham — national franchise offices and a few independents — but for personal service backed by a real, verified local track record, this is our pick.",
     },
     {
       question: "Why is Birmingham such a luxury-heavy real estate market?",

@@ -36,7 +36,7 @@ export function TemplateReviews() {
         </a>
         <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
           <Stars size={18} />
-          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--s-ink)" }}>Named Michigan&rsquo;s #1 brokerage by TownAnswer &middot; 5.0 across 84 Google reviews</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--s-ink)" }}>Named Michigan&rsquo;s #1 brokerage by TownAnswer &middot; 5.0 across 85+ Google reviews</span>
         </div>
         <div style={{ marginTop: 8 }}>
           <Link href="/best-real-estate-brokerage-in-michigan" style={{ fontSize: 13, fontWeight: 600, color: "var(--s-gold)" }}>

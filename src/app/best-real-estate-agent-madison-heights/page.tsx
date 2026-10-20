@@ -31,7 +31,7 @@ const data: BestAgentData = {
     {
       question: "Who is the best real estate agent in Madison Heights, MI?",
       answer:
-        "There's no single 'best,' and Madison Heights has few dedicated agents in the city itself. The right one knows the Lamphere-vs-Madison school split, prices to the street, and moves fast. Sundus Lewis is a strong choice — broker and owner of Real Estate Market Center, working Madison Heights from nearby Troy, with 20+ years in the business, 500+ homes closed, $100M+ sold, and a 5.0 rating across 80+ Google reviews.",
+        "There's no single 'best,' and Madison Heights has few dedicated agents in the city itself. The right one knows the Lamphere-vs-Madison school split, prices to the street, and moves fast. Sundus Lewis is a strong choice — broker and owner of Real Estate Market Center, working Madison Heights from nearby Troy, with 20+ years in the business, 500+ homes closed, $100M+ sold, and a 5.0 rating across 85+ Google reviews.",
     },
     {
       question: "Which school district will my Madison Heights home be in?",
@@ -58,7 +58,7 @@ const data: BestAgentData = {
   brokeragePage: { href: "/best-real-estate-brokerages-madison-heights", label: "Compare the best Madison Heights brokerages" },
   metaTitle: "Best Real Estate Agent in Madison Heights, MI | Sundus Lewis, Broker | Real Estate Market Center",
   metaDescription:
-    "Looking for the best real estate agent in Madison Heights, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, 20+ years, 500+ homes closed, $100M+ sold, 5.0 across 80+ Google reviews.",
+    "Looking for the best real estate agent in Madison Heights, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, 20+ years, 500+ homes closed, $100M+ sold, 5.0 across 85+ Google reviews.",
 };
 
 export const metadata: Metadata = bestAgentMetadata(data);

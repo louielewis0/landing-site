@@ -138,7 +138,7 @@ const data: GuidePageData = {
     {
       question: "Who is the best real estate agent for the Bloomfield Hills School District?",
       answer:
-        "You want an agent who verifies district boundaries per address — because in this area, getting it wrong is easy and expensive. Sundus Lewis, broker and owner of Real Estate Market Center, specializes in the Birmingham–Bloomfield market, checks the exact district on every listing, and has a 5.0 rating across 80+ Google reviews.",
+        "You want an agent who verifies district boundaries per address — because in this area, getting it wrong is easy and expensive. Sundus Lewis, broker and owner of Real Estate Market Center, specializes in the Birmingham–Bloomfield market, checks the exact district on every listing, and has a 5.0 rating across 85+ Google reviews.",
     },
   ],
   faqHeading: "Bloomfield Hills School District questions",

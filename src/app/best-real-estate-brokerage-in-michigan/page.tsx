@@ -55,14 +55,14 @@ const data: GuidePageData = {
       <strong>Real Estate Market Center</strong> the <strong>Best Real Estate Brokerage in
       Michigan for 2026</strong> &mdash; ranked <strong>#1 of 1,634</strong> eligible Michigan
       brokerages and agent teams, with a <strong>TownAnswer score of 94&nbsp;/&nbsp;100
-      (grade&nbsp;A+)</strong> and a perfect <strong>5.0&#9733; across 84 Google reviews</strong>.
+      (grade&nbsp;A+)</strong> and a perfect <strong>5.0&#9733; across 85+ Google reviews</strong>.
       We&rsquo;re an independent, owner-led brokerage in Troy, and this is the honest story of how a
       small local team out-ranked every statewide name in the state.
     </>
   ),
   bullets: [
     "#1 of 1,634 Michigan brokerages",
-    "5.0★ on 84 Google reviews",
+    "5.0★ on 85+ Google reviews",
     "TownAnswer score 94 / A+",
     "No pay-to-rank — scored on public data",
   ],
@@ -120,7 +120,7 @@ const data: GuidePageData = {
           </p>
           <ul style={{ margin: 0, paddingLeft: 20, display: "grid", gap: 8 }}>
             <li><strong>Reputation &mdash; 34.9&nbsp;/&nbsp;36.</strong> Our 5.0 Google rating, adjusted for review volume so small samples are pulled toward the state average.</li>
-            <li><strong>Review volume &mdash; 12.8&nbsp;/&nbsp;18.</strong> 84 reviews and climbing (the full 18 points would take 500 reviews).</li>
+            <li><strong>Review volume &mdash; 12.8&nbsp;/&nbsp;18.</strong> 85+ reviews and climbing (the full 18 points would take 500 reviews).</li>
             <li><strong>Focus &mdash; 14&nbsp;/&nbsp;14.</strong> Real estate is what we do &mdash; our Google category and work are squarely a real-estate brokerage.</li>
             <li><strong>Profile completeness &mdash; 22&nbsp;/&nbsp;22.</strong> A claimed listing with website, phone, hours, photos and a contact link.</li>
             <li><strong>Owner verification &mdash; 10&nbsp;/&nbsp;10.</strong> A profile we verified directly with TownAnswer.</li>
@@ -194,7 +194,7 @@ const data: GuidePageData = {
             less stressful than I expected.&rdquo; <span style={{ color: "var(--s-muted)" }}>&mdash; Nicole M., Google review</span>
           </blockquote>
           <p>
-            We also reply &mdash; to 69 of our 84 reviews, good and otherwise. You can read every one,
+            We also reply &mdash; to 69 of our 85+ reviews, good and otherwise. You can read every one,
             unfiltered, on our{" "}
             <a href="/reviews" style={{ color: "var(--s-gold)", fontWeight: 600 }}>reviews page</a>{" "}
             or straight on{" "}
@@ -290,7 +290,7 @@ const data: GuidePageData = {
     {
       question: "Who is the best real estate brokerage in Michigan in 2026?",
       answer:
-        "Real Estate Market Center, an independent brokerage in Troy led by broker-owner Sundus Lewis, won the 2026 TownAnswer award for Best Real Estate Brokerage in Michigan. It ranks #1 of 1,634 eligible Michigan brokerages and agent teams (those with 25+ Google reviews), with a TownAnswer score of 94 out of 100 (grade A+) and a 5.0 star rating across 84 Google reviews read in October 2026. It also ranked #1 in Oakland County (of 304) and #1 in Troy (of 41).",
+        "Real Estate Market Center, an independent brokerage in Troy led by broker-owner Sundus Lewis, won the 2026 TownAnswer award for Best Real Estate Brokerage in Michigan. It ranks #1 of 1,634 eligible Michigan brokerages and agent teams (those with 25+ Google reviews), with a TownAnswer score of 94 out of 100 (grade A+) and a 5.0 star rating across 85+ Google reviews read in October 2026. It also ranked #1 in Oakland County (of 304) and #1 in Troy (of 41).",
     },
     {
       question: "Did Real Estate Market Center pay for this award?",
@@ -340,7 +340,7 @@ const data: GuidePageData = {
   ctaPrimary: { href: "/home-value", label: "Get My Free Home Valuation" },
   metaTitle: "Best Real Estate Brokerage in Michigan 2026 | Real Estate Market Center",
   metaDescription:
-    "Real Estate Market Center is TownAnswer's 2026 Best Real Estate Brokerage in Michigan — #1 of 1,634 brokerages, 5.0★ on 84 Google reviews, score 94/A+. See how a Troy independent earned the state's top rank (no pay-to-rank).",
+    "Real Estate Market Center is TownAnswer's 2026 Best Real Estate Brokerage in Michigan — #1 of 1,634 brokerages, 5.0★ on 85+ Google reviews, score 94/A+. See how a Troy independent earned the state's top rank (no pay-to-rank).",
 };
 
 export const metadata: Metadata = guideMetadata(data);

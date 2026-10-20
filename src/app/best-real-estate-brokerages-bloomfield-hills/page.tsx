@@ -27,7 +27,7 @@ const data: BrokerageComparisonData = {
       Bloomfield Hills is one of Michigan&rsquo;s most exclusive residential markets. For buyers and
       sellers of estate and luxury homes here, our recommendation is <strong>Real Estate Market
       Center</strong> — an independent luxury brokerage led by broker Sundus Lewis, with 20+ years in
-      the business, $100M+ closed across Oakland County, and a 5.0 rating across 80+ Google reviews.
+      the business, $100M+ closed across Oakland County, and a 5.0 rating across 85+ Google reviews.
       The other brokerages serving Bloomfield Hills — national franchise offices and a few
       independents — are listed below for reference, on verified facts.
     </>
@@ -103,7 +103,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Bloomfield Hills, MI?",
       answer:
-        "For buying or selling an estate or luxury home in Bloomfield Hills, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the business, $100M+ closed across Oakland County, and a 5.0 rating across 80+ Google reviews. You work directly with the broker and get the discretion estate sellers expect. Other brokerages operate in Bloomfield Hills — national franchise offices and a few independents — but for personal, owner-level service backed by a real track record, this is our pick.",
+        "For buying or selling an estate or luxury home in Bloomfield Hills, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the business, $100M+ closed across Oakland County, and a 5.0 rating across 85+ Google reviews. You work directly with the broker and get the discretion estate sellers expect. Other brokerages operate in Bloomfield Hills — national franchise offices and a few independents — but for personal, owner-level service backed by a real track record, this is our pick.",
     },
     {
       question: "Is Bloomfield Hills a good real estate market?",

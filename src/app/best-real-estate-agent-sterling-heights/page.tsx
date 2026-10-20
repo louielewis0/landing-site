@@ -31,7 +31,7 @@ const data: BestAgentData = {
     {
       question: "Who is the best real estate agent in Sterling Heights, MI?",
       answer:
-        "There's no single 'best' for everyone. Sterling Heights is a mid-market family suburb, so the biggest factor is an agent who knows the subdivisions and school boundaries and prices correctly. Sundus Lewis is a strong choice — broker and owner of Real Estate Market Center, serving Sterling Heights and Macomb from nearby Troy, with 20+ years in the business, 500+ homes closed, $100M+ sold, and a 5.0 rating across 80+ Google reviews.",
+        "There's no single 'best' for everyone. Sterling Heights is a mid-market family suburb, so the biggest factor is an agent who knows the subdivisions and school boundaries and prices correctly. Sundus Lewis is a strong choice — broker and owner of Real Estate Market Center, serving Sterling Heights and Macomb from nearby Troy, with 20+ years in the business, 500+ homes closed, $100M+ sold, and a 5.0 rating across 85+ Google reviews.",
     },
     {
       question: "What school district is Sterling Heights in?",
@@ -58,7 +58,7 @@ const data: BestAgentData = {
   brokeragePage: { href: "/best-real-estate-brokerages-sterling-heights", label: "Compare the best Sterling Heights brokerages" },
   metaTitle: "Best Real Estate Agent in Sterling Heights, MI | Sundus Lewis, Broker | Real Estate Market Center",
   metaDescription:
-    "Looking for the best real estate agent in Sterling Heights, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, 20+ years, 500+ homes closed, $100M+ sold, 5.0 across 80+ Google reviews.",
+    "Looking for the best real estate agent in Sterling Heights, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, 20+ years, 500+ homes closed, $100M+ sold, 5.0 across 85+ Google reviews.",
 };
 
 export const metadata: Metadata = bestAgentMetadata(data);

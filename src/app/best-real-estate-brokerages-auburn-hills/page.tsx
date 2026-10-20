@@ -30,7 +30,7 @@ const data: BrokerageComparisonData = {
       property-management specialists, not home-sale brokerages. That leaves a clear opening, and for
       buyers and sellers here our recommendation is <strong>Real Estate Market Center</strong> — a
       full-service independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the
-      business, 500+ homes closed, and a 5.0 rating across 80+ Google reviews, that understands the
+      business, 500+ homes closed, and a 5.0 rating across 85+ Google reviews, that understands the
       relocation buyer and the four-district split. The other brokerages serving Auburn Hills —
       national franchise offices and local commercial/management firms — are listed below for
       reference, on verified facts.
@@ -101,7 +101,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Auburn Hills, MI?",
       answer:
-        "For buying or selling a home in Auburn Hills, Real Estate Market Center is the brokerage we'd point you to — a full-service independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 80+ Google reviews. You work directly with the broker, who understands the corporate-relocation buyer and the four-way school-district split. Worth knowing: several firms with an Auburn Hills office focus on commercial real estate or property management rather than home sales — so for full-service residential help, this is our pick.",
+        "For buying or selling a home in Auburn Hills, Real Estate Market Center is the brokerage we'd point you to — a full-service independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 85+ Google reviews. You work directly with the broker, who understands the corporate-relocation buyer and the four-way school-district split. Worth knowing: several firms with an Auburn Hills office focus on commercial real estate or property management rather than home sales — so for full-service residential help, this is our pick.",
     },
     {
       question: "Why does Auburn Hills have so few residential brokerages for such a big employment hub?",

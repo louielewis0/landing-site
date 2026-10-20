@@ -127,7 +127,7 @@ const data: GuidePageData = {
     {
       question: "Who is the best luxury real estate agent in Bloomfield Hills?",
       answer:
-        "You want an independent luxury broker with estate experience, discretion, and network access to private inventory. Sundus Lewis, broker and owner of Real Estate Market Center, specializes in the Birmingham–Bloomfield luxury corridor, has closed $100M+ across Oakland County, and holds a 5.0 rating across 80+ Google reviews.",
+        "You want an independent luxury broker with estate experience, discretion, and network access to private inventory. Sundus Lewis, broker and owner of Real Estate Market Center, specializes in the Birmingham–Bloomfield luxury corridor, has closed $100M+ across Oakland County, and holds a 5.0 rating across 85+ Google reviews.",
     },
   ],
   faqHeading: "Bloomfield Hills luxury home questions",

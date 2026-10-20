@@ -191,7 +191,7 @@ export default function BrokerageComparisonPage({ data }: { data: BrokerageCompa
                                 <Star key={i} width={12} height={12} style={{ color: "var(--s-gold)" }} fill="currentColor" strokeWidth={0} />
                               ))}
                             </span>
-                            <span style={{ fontSize: 11.5, fontWeight: 600, color: "var(--s-ink)", whiteSpace: "nowrap" }}>80+ Google reviews</span>
+                            <span style={{ fontSize: 11.5, fontWeight: 600, color: "var(--s-ink)", whiteSpace: "nowrap" }}>85+ Google reviews</span>
                           </span>
                         ) : (
                           <span style={{ color: "var(--s-muted)" }}>&mdash;</span>
@@ -225,7 +225,7 @@ export default function BrokerageComparisonPage({ data }: { data: BrokerageCompa
                       in the business, 500+ homes closed, and a reported $100M+ in sales across Oakland and Macomb County.
                       Our edge is transparency and service: one broker handling your deal start to finish, street-level
                       pricing, and our own sourced market research so you can check our work before you ever call. Rated
-                      5.0 on Google across 80+ reviews.
+                      5.0 on Google across 85+ reviews.
                     </p>
                   ) : (
                     <p style={{ fontSize: 13, color: "var(--s-muted)" }}>{b.type}</p>

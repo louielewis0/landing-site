@@ -46,7 +46,7 @@ const faqs = [
   {
     question: "Who is the best real estate brokerage in Oakland County?",
     answer:
-      "For buying or selling anywhere in Oakland County, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage in Troy led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 80+ Google reviews. You work directly with the broker from first call to closing, with street-level pricing across Oakland and Macomb. Oakland County has many other brokerages — national franchise offices and local independents — but for personal, owner-level service backed by a real track record, this is our pick.",
+      "For buying or selling anywhere in Oakland County, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage in Troy led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 85+ Google reviews. You work directly with the broker from first call to closing, with street-level pricing across Oakland and Macomb. Oakland County has many other brokerages — national franchise offices and local independents — but for personal, owner-level service backed by a real track record, this is our pick.",
   },
   {
     question: "What's the difference between a franchise and an independent brokerage?",
@@ -146,7 +146,7 @@ export default function OaklandBrokeragesPage() {
                 For buyers and sellers across Oakland County, our recommendation is{" "}
                 <strong>Real Estate Market Center</strong> — an independent luxury brokerage in Troy, led by broker
                 Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating
-                across 80+ Google reviews. It&rsquo;s the personal, owner-run alternative: one broker handling your
+                across 85+ Google reviews. It&rsquo;s the personal, owner-run alternative: one broker handling your
                 deal start to finish, not a franchise desk. The other brokerages serving Oakland County — a mix of
                 local independents and national franchise offices — are listed below for reference, on verified facts.
               </p>
@@ -187,7 +187,7 @@ export default function OaklandBrokeragesPage() {
                                 <Star key={i} width={12} height={12} style={{ color: "var(--s-gold)" }} fill="currentColor" strokeWidth={0} />
                               ))}
                             </span>
-                            <span style={{ fontSize: 11.5, fontWeight: 600, color: "var(--s-ink)", whiteSpace: "nowrap" }}>80+ Google reviews</span>
+                            <span style={{ fontSize: 11.5, fontWeight: 600, color: "var(--s-ink)", whiteSpace: "nowrap" }}>85+ Google reviews</span>
                           </span>
                         ) : (
                           <span style={{ color: "var(--s-muted)" }}>&mdash;</span>
@@ -221,7 +221,7 @@ export default function OaklandBrokeragesPage() {
                       20+ years in the business, 500+ homes closed, and a reported $100M+ in sales across Oakland and
                       Macomb County. Our edge is transparency and service: one broker handling your deal start to
                       finish, street-level pricing, and our own sourced market research so you can check our work
-                      before you ever call. Rated 5.0 on Google across 80+ reviews.
+                      before you ever call. Rated 5.0 on Google across 85+ reviews.
                     </p>
                   ) : (
                     <p style={{ fontSize: 13, color: "var(--s-muted)" }}>{b.type}</p>

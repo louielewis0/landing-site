@@ -31,7 +31,7 @@ const data: BestAgentData = {
     {
       question: "Who is the best real estate agent in Metro Detroit?",
       answer:
-        "There's no single 'best' for the whole metro, because Metro Detroit is really dozens of distinct markets. The right agent is one who has genuinely closed across the areas you care about. Sundus Lewis is a strong choice — broker and owner of Real Estate Market Center in Troy, with 20+ years in the business, 500+ homes closed, $100M+ sold across Oakland and Macomb, and a 5.0 rating across 80+ Google reviews.",
+        "There's no single 'best' for the whole metro, because Metro Detroit is really dozens of distinct markets. The right agent is one who has genuinely closed across the areas you care about. Sundus Lewis is a strong choice — broker and owner of Real Estate Market Center in Troy, with 20+ years in the business, 500+ homes closed, $100M+ sold across Oakland and Macomb, and a 5.0 rating across 85+ Google reviews.",
     },
     {
       question: "What areas of Metro Detroit does Sundus cover?",
@@ -58,7 +58,7 @@ const data: BestAgentData = {
   brokeragePage: { href: "/best-real-estate-brokerages-oakland-county", label: "Compare the best Metro Detroit brokerages" },
   metaTitle: "Best Real Estate Agent in Metro Detroit | Sundus Lewis, Broker | Real Estate Market Center",
   metaDescription:
-    "Looking for the best real estate agent in Metro Detroit? Meet Sundus Lewis — broker & owner of Real Estate Market Center, 20+ years, 500+ homes closed across Oakland & Macomb, $100M+ sold, 5.0 across 80+ Google reviews.",
+    "Looking for the best real estate agent in Metro Detroit? Meet Sundus Lewis — broker & owner of Real Estate Market Center, 20+ years, 500+ homes closed across Oakland & Macomb, $100M+ sold, 5.0 across 85+ Google reviews.",
 };
 
 export const metadata: Metadata = bestAgentMetadata(data);

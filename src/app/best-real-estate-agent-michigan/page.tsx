@@ -17,7 +17,7 @@ const data: BestAgentData = {
   publishedLabel: "September 27, 2026",
   localHeading: "Why Sundus is a top real estate broker in Michigan",
   localParagraphs: [
-    "Most of Michigan's real estate activity runs through Metro Detroit, and that's the market Sundus Lewis owns. As broker and owner of Real Estate Market Center in Troy, she's closed 500+ homes and $100M+ in sales across the Detroit metro's Oakland and Macomb counties over 20+ years — with a perfect 5.0 rating across 80+ Google reviews.",
+    "Most of Michigan's real estate activity runs through Metro Detroit, and that's the market Sundus Lewis owns. As broker and owner of Real Estate Market Center in Troy, she's closed 500+ homes and $100M+ in sales across the Detroit metro's Oakland and Macomb counties over 20+ years — with a perfect 5.0 rating across 85+ Google reviews.",
     "Here's the honest part, and why it works in your favor: Sundus is a Southeast Michigan specialist, not a statewide generalist spread thin across the whole state. The best agent for you is the one who knows your specific market cold — the school boundaries, the street-by-street pricing, the local buyers — and for the Detroit metro, that's exactly what she brings. If you're buying or selling anywhere in Metro Detroit, that local depth is the difference between winning and losing.",
   ],
   chooseTip1: (
@@ -31,7 +31,7 @@ const data: BestAgentData = {
     {
       question: "Who is the best real estate agent in Michigan?",
       answer:
-        "There's no single 'best' agent for a state as large and varied as Michigan — the right one is whoever knows your specific local market. For Metro Detroit, the state's largest and most active market, Sundus Lewis is a strong choice: broker and owner of Real Estate Market Center in Troy, with 20+ years in the business, 500+ homes closed, $100M+ sold, and a 5.0 rating across 80+ Google reviews.",
+        "There's no single 'best' agent for a state as large and varied as Michigan — the right one is whoever knows your specific local market. For Metro Detroit, the state's largest and most active market, Sundus Lewis is a strong choice: broker and owner of Real Estate Market Center in Troy, with 20+ years in the business, 500+ homes closed, $100M+ sold, and a 5.0 rating across 85+ Google reviews.",
     },
     {
       question: "Does Sundus Lewis serve all of Michigan?",
@@ -58,7 +58,7 @@ const data: BestAgentData = {
   brokeragePage: { href: "/best-real-estate-brokerages-michigan", label: "Compare the best Michigan brokerages" },
   metaTitle: "Best Real Estate Agent in Michigan | Sundus Lewis, Metro Detroit Broker | Real Estate Market Center",
   metaDescription:
-    "Looking for the best real estate agent in Michigan? For Metro Detroit — the state's largest market — meet Sundus Lewis, broker & owner of Real Estate Market Center: 20+ years, 500+ homes closed, $100M+ sold, 5.0 across 80+ Google reviews.",
+    "Looking for the best real estate agent in Michigan? For Metro Detroit — the state's largest market — meet Sundus Lewis, broker & owner of Real Estate Market Center: 20+ years, 500+ homes closed, $100M+ sold, 5.0 across 85+ Google reviews.",
 };
 
 export const metadata: Metadata = bestAgentMetadata(data);

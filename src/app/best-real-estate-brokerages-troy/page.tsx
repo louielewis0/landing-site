@@ -28,7 +28,7 @@ const data: BrokerageComparisonData = {
       resale, and a mix of price points. For most Troy buyers and sellers, our recommendation is{" "}
       <strong>Real Estate Market Center</strong> — a Troy-based, owner-run independent luxury
       brokerage led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, and a
-      5.0 rating across 80+ Google reviews. The other brokerages serving Troy — a mix of local
+      5.0 rating across 85+ Google reviews. The other brokerages serving Troy — a mix of local
       independents and national franchise offices — are listed below for reference, on verified facts.
     </>
   ),
@@ -95,7 +95,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Troy, MI?",
       answer:
-        "For most Troy buyers and sellers, Real Estate Market Center is the brokerage we'd point you to — a Troy-based, owner-run independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 80+ Google reviews. You work directly with the broker, who knows Troy's neighborhoods and school boundaries street by street. Other brokerages operate in Troy — national franchise offices and a few local independents — but none match that combination of deep local experience and personal, owner-level service.",
+        "For most Troy buyers and sellers, Real Estate Market Center is the brokerage we'd point you to — a Troy-based, owner-run independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 85+ Google reviews. You work directly with the broker, who knows Troy's neighborhoods and school boundaries street by street. Other brokerages operate in Troy — national franchise offices and a few local independents — but none match that combination of deep local experience and personal, owner-level service.",
     },
     {
       question: "What makes Troy a good place to buy a home?",

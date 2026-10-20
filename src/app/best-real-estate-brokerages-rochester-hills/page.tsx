@@ -117,7 +117,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Rochester Hills, MI?",
       answer:
-        "For buying or selling in Rochester Hills, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 80+ Google reviews. You work directly with the broker, who knows the Rochester Community Schools boundaries and street-by-street pricing. Rochester Hills has many other brokerages — local independents and national franchise offices — but none pair that local depth with personal, owner-level service.",
+        "For buying or selling in Rochester Hills, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage led by broker Sundus Lewis, with 20+ years in the business, 500+ homes closed, $100M+ in sales, and a 5.0 rating across 85+ Google reviews. You work directly with the broker, who knows the Rochester Community Schools boundaries and street-by-street pricing. Rochester Hills has many other brokerages — local independents and national franchise offices — but none pair that local depth with personal, owner-level service.",
     },
     {
       question: "Why are so many brokerages based in downtown Rochester?",

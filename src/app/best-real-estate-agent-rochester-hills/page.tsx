@@ -31,7 +31,7 @@ const data: BestAgentData = {
     {
       question: "Who is the best real estate agent in Rochester Hills, MI?",
       answer:
-        "There's no single 'best' for everyone, but the right agent for Rochester Hills understands the Rochester Community Schools boundaries (which don't follow city limits), the Paint Creek and Stony Creek premiums, and the flood pockets near the Clinton River. Sundus Lewis is a strong choice — broker and owner of Real Estate Market Center, with 20+ years in the business, 500+ homes closed, $100M+ sold, and a perfect 5.0 rating across 80+ Google reviews.",
+        "There's no single 'best' for everyone, but the right agent for Rochester Hills understands the Rochester Community Schools boundaries (which don't follow city limits), the Paint Creek and Stony Creek premiums, and the flood pockets near the Clinton River. Sundus Lewis is a strong choice — broker and owner of Real Estate Market Center, with 20+ years in the business, 500+ homes closed, $100M+ sold, and a perfect 5.0 rating across 85+ Google reviews.",
     },
     {
       question: "Are Rochester Hills schools really that good?",
@@ -58,7 +58,7 @@ const data: BestAgentData = {
   brokeragePage: { href: "/best-real-estate-brokerages-rochester-hills", label: "Compare the best Rochester Hills brokerages" },
   metaTitle: "Best Real Estate Agent in Rochester Hills, MI | Sundus Lewis, Broker | Real Estate Market Center",
   metaDescription:
-    "Looking for the best real estate agent in Rochester Hills, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, 20+ years, 500+ homes closed, $100M+ sold, 5.0 across 80+ Google reviews.",
+    "Looking for the best real estate agent in Rochester Hills, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, 20+ years, 500+ homes closed, $100M+ sold, 5.0 across 85+ Google reviews.",
 };
 
 export const metadata: Metadata = bestAgentMetadata(data);

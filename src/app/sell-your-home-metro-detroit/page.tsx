@@ -17,7 +17,7 @@ const data: GuidePageData = {
   sub: (
     <>
       An independent luxury brokerage led by broker-owner Sundus Lewis — 20+ years, $100M+
-      sold, and a 5.0★ rating across 80+ Google reviews. Real local comps, full-service
+      sold, and a 5.0★ rating across 85+ Google reviews. Real local comps, full-service
       marketing, and a pricing strategy built to get you the strongest net result the market
       will bear.
     </>
@@ -25,7 +25,7 @@ const data: GuidePageData = {
   bullets: [
     "Priced on real local comps — not a guess",
     "Full-service marketing, start to finish",
-    "20+ years · $100M+ sold · 5.0★ / 80+ reviews",
+    "20+ years · $100M+ sold · 5.0★ / 85+ reviews",
   ],
   publishedISO: "2026-10-08",
   publishedLabel: "October 8, 2026",
@@ -163,7 +163,7 @@ const data: GuidePageData = {
           </p>
           <p>
             It&rsquo;s a track record of <strong>20+ years, $100M+ in closed sales, and 500+ homes</strong>{" "}
-            — paired with a <strong>5.0★ rating across 80+ Google reviews</strong>. For luxury and
+            — paired with a <strong>5.0★ rating across 85+ Google reviews</strong>. For luxury and
             move-up sellers especially, that combination of discretion, local expertise, and
             hands-on representation is the difference.
           </p>
@@ -250,7 +250,7 @@ const data: GuidePageData = {
   metaTitle:
     "Sell Your Home in Metro Detroit — Pricing, Marketing & Costs | Real Estate Market Center",
   metaDescription:
-    "Sell your Metro Detroit home for more with Real Estate Market Center — independent luxury brokerage, 20+ years, $100M+ sold, 5.0★/80+ reviews. Real comps, full-service marketing, honest costs. Free home valuation.",
+    "Sell your Metro Detroit home for more with Real Estate Market Center — independent luxury brokerage, 20+ years, $100M+ sold, 5.0★/85+ reviews. Real comps, full-service marketing, honest costs. Free home valuation.",
 };
 
 export const metadata: Metadata = guideMetadata(data);
