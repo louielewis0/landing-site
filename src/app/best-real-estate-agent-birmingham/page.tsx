@@ -19,21 +19,25 @@ const data: BestAgentData = {
   localParagraphs: [
     "Birmingham is where Metro Detroit's luxury market concentrates — the walkable Old Woodward downtown, estate homes, and block-by-block premiums from Poppleton Park to Quarton. It's also one of the fastest, most competitive markets in the region, where winning comes down to pricing precision, marketing, and relationships with the agents who control inventory.",
     "That's Sundus Lewis's specialty. As broker and owner of Real Estate Market Center, she focuses on luxury and full-service residential real estate and has closed $100M+ in sales across Oakland County — bringing discreet, high-end marketing to Birmingham-area listings and sharp negotiation to buyers competing in multiple-offer situations. She understands the micro-premiums that keep you from overpaying in Poppleton Park or getting priced out of Quarton.",
-    "In a market this high-stakes, representation quality is the difference between winning a home and losing five bids — or between a luxury listing that sells for full value and one that sits. You work directly with the broker, start to close, backed by a perfect 5.0 rating across 70 Google reviews.",
+    "In a market this high-stakes, representation quality is the difference between winning a home and losing five bids — or between a luxury listing that sells for full value and one that sits. You work directly with the broker, start to close, backed by a perfect 5.0 rating across 80+ Google reviews — and a brokerage TownAnswer named the #1 in Michigan for 2026, first of 1,634 statewide, on a score businesses can't pay to influence.",
   ],
   chooseTip1: (
     <>
       Birmingham is a luxury, fast-moving, relationship-driven market — the best agent knows the block-by-block
       premiums from Poppleton Park to Quarton and the listing agents who control inventory. Sundus specializes in
       luxury homes and has closed $100M+ across Oakland County, so she competes on structure, timing, and
-      relationships, not just price.
+      relationships, not just price. Her brokerage, Real Estate Market Center, is TownAnswer&rsquo;s{" "}
+      <a href="/best-real-estate-brokerage-in-michigan" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
+        #1-ranked real estate brokerage in Michigan
+      </a>{" "}
+      for 2026.
     </>
   ),
   faqs: [
     {
       question: "Who is the best real estate agent in Birmingham, MI?",
       answer:
-        "There's no single 'best' for everyone, but Birmingham's luxury, multiple-offer market rewards an agent who knows the block-by-block premiums, moves fast, and has relationships with the listing agents controlling inventory. Sundus Lewis is a strong choice — broker and owner of Real Estate Market Center, a luxury-focused independent, with 20+ years in the business (13+ as a broker), $100M+ closed across Oakland County, and a perfect 5.0 rating across 70 Google reviews.",
+        "There's no single 'best' for everyone, but Birmingham's luxury, multiple-offer market rewards an agent who knows the block-by-block premiums, moves fast, and has relationships with the listing agents controlling inventory. Sundus Lewis is a strong choice — broker and owner of Real Estate Market Center, a luxury-focused independent, with 20+ years in the business (13+ as a broker), $100M+ closed across Oakland County, and a perfect 5.0 rating across 80+ Google reviews. In 2026, TownAnswer ranked her brokerage the #1 real estate brokerage in Michigan — first of 1,634 statewide, on a methodology businesses cannot pay to influence.",
     },
     {
       question: "Does Sundus Lewis handle luxury and estate homes in Birmingham?",
@@ -58,14 +62,14 @@ const data: BestAgentData = {
     {
       question: "How do I choose the right agent for a Birmingham luxury home?",
       answer:
-        "For a luxury sale or purchase, weigh three things: a real track record with higher-end Oakland County homes, a marketing approach suited to luxury buyers (not generic MLS blasting), and discretion. Verify the license through Michigan LARA and read recent Google reviews. Sundus offers $100M+ in closed sales, a luxury specialty, and a public 5.0/70 rating.",
+        "For a luxury sale or purchase, weigh three things: a real track record with higher-end Oakland County homes, a marketing approach suited to luxury buyers (not generic MLS blasting), and discretion. Verify the license through Michigan LARA and read recent Google reviews. Sundus offers $100M+ in closed sales, a luxury specialty, a public 5.0 rating across 80+ reviews, and a brokerage ranked #1 in Michigan by TownAnswer (2026).",
     },
   ],
   cityPage: { href: "/birmingham-real-estate-agent", label: "See our full Birmingham real estate guide" },
   brokeragePage: { href: "/best-real-estate-brokerages-birmingham", label: "Compare the best Birmingham brokerages" },
   metaTitle: "Best Real Estate Agent in Birmingham, MI | Sundus Lewis, Luxury Broker | Real Estate Market Center",
   metaDescription:
-    "Looking for the best luxury real estate agent in Birmingham, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, luxury specialist, $100M+ closed, and 5.0 across 70 Google reviews.",
+    "Looking for the best luxury real estate agent in Birmingham, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, luxury specialist, $100M+ closed, 5.0 across 80+ Google reviews, and TownAnswer's #1-ranked Michigan brokerage (2026).",
 };
 
 export const metadata: Metadata = bestAgentMetadata(data);

@@ -215,7 +215,7 @@ export default function BestAgentPage({ data }: { data: BestAgentData }) {
               <p><strong>1. Local track record.</strong> {data.chooseTip1}</p>
               <p><strong>2. Straight pricing, backed by data.</strong> The best agents price to the street, not to flatter you into a listing. Sundus publishes Real Estate Market Center&rsquo;s own sourced market research so you can check the numbers before you ever call.</p>
               <p><strong>3. One point of contact.</strong> You want the broker running your deal — not handed to an assistant. Sundus personally handles each transaction from first call to closing.</p>
-              <p><strong>4. Verify the license and the reviews.</strong> Confirm any agent&rsquo;s license through Michigan LARA and read their recent Google reviews yourself. Sundus holds a 5.0 rating across 70 reviews — recent, specific, and public.</p>
+              <p><strong>4. Verify the license and the reviews.</strong> Confirm any agent&rsquo;s license through Michigan LARA and read their recent Google reviews yourself. Sundus holds a 5.0 rating across 80+ reviews — recent, specific, and public.</p>
             </div>
           </div>
         </section>

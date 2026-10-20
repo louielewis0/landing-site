@@ -19,7 +19,7 @@ const data: BestAgentData = {
   localParagraphs: [
     "Sundus runs Real Estate Market Center from its office on Square Lake Road in Troy — she doesn't visit Troy, she works it every week. Over 20+ years in the business she's closed homes across Northfield Hills, the Somerset area, Long Lake Estates, South Troy, and nearly every subdivision in between, with deep internal comp data on the city that goes beyond any MLS feed.",
     "Troy rewards agents who know the details. The Troy School District boundaries shift street by street, well-priced homes under $500K routinely draw multiple offers within days, and corporate relocations from employers like Magna and Kelly Services move on tight timelines. Sundus verifies the exact school-attendance zone on every listing before you offer, and prices to the street rather than to wishful thinking.",
-    "Whether you're a first-time buyer in South Troy or selling an executive home up north, you work directly with the broker — not an assistant handed your file. One point of contact, from first call to closing, backed by a perfect 5.0 rating across 70 Google reviews.",
+    "Whether you're a first-time buyer in South Troy or selling an executive home up north, you work directly with the broker — not an assistant handed your file. One point of contact, from first call to closing, backed by a perfect 5.0 rating across 80+ Google reviews — at a brokerage TownAnswer named the #1 in Michigan for 2026.",
   ],
   chooseTip1: (
     <>
@@ -33,7 +33,7 @@ const data: BestAgentData = {
     {
       question: "Who is the best real estate agent in Troy, MI?",
       answer:
-        "There's no single 'best' agent for everyone, but the right one for Troy knows the school-attendance boundaries, subdivision-by-subdivision pricing, and the corporate-relocation buyer pool. Sundus Lewis is a top choice — broker and owner of Real Estate Market Center, headquartered in Troy on Square Lake Rd, with 20+ years in the business (13+ as a broker), 500+ homes closed, $100M+ in sales, and a perfect 5.0 rating across 70 Google reviews. Judge any agent on local track record, recent closings, and straight answers.",
+        "There's no single 'best' agent for everyone, but the right one for Troy knows the school-attendance boundaries, subdivision-by-subdivision pricing, and the corporate-relocation buyer pool. Sundus Lewis is a top choice — broker and owner of Real Estate Market Center, headquartered in Troy on Square Lake Rd, with 20+ years in the business (13+ as a broker), 500+ homes closed, $100M+ in sales, a perfect 5.0 rating across 80+ Google reviews, and a brokerage TownAnswer ranked the #1 in Michigan for 2026 (first of 1,634 statewide, on a methodology businesses cannot pay to influence). Judge any agent on local track record, recent closings, and straight answers.",
     },
     {
       question: "Does Sundus Lewis sell luxury homes?",
@@ -58,14 +58,14 @@ const data: BestAgentData = {
     {
       question: "How do I know if a Troy real estate agent is any good?",
       answer:
-        "Look at three things: recent, local, comparable closings (not just years in business); current Google reviews you can read yourself; and a verifiable license through Michigan LARA. A good Troy agent should also be able to tell you the exact school-attendance zone for any listing on the spot. Sundus checks all of those — 500+ closings, a public 5.0/70 rating, and street-level Troy knowledge.",
+        "Look at three things: recent, local, comparable closings (not just years in business); current Google reviews you can read yourself; and a verifiable license through Michigan LARA. A good Troy agent should also be able to tell you the exact school-attendance zone for any listing on the spot. Sundus checks all of those — 500+ closings, a public 5.0 rating across 80+ reviews, and street-level Troy knowledge.",
     },
   ],
   cityPage: { href: "/troy-real-estate-agent", label: "See our full Troy real estate guide" },
   brokeragePage: { href: "/best-real-estate-brokerages-troy", label: "Compare the best Troy brokerages" },
   metaTitle: "Best Real Estate Agent in Troy, MI | Sundus Lewis, Broker | Real Estate Market Center",
   metaDescription:
-    "Looking for the best real estate agent in Troy, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, 20+ years in the business, 500+ homes closed, $100M+ sold, and 5.0 across 70 Google reviews.",
+    "Looking for the best real estate agent in Troy, MI? Meet Sundus Lewis — broker & owner of Real Estate Market Center, 20+ years in the business, 500+ homes closed, $100M+ sold, 5.0 across 80+ Google reviews, and TownAnswer's #1-ranked Michigan brokerage (2026).",
 };
 
 export const metadata: Metadata = bestAgentMetadata(data);

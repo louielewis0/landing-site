@@ -12,7 +12,7 @@ const data: BrokerageComparisonData = {
   h1: "The Best Real Estate Brokerages in Birmingham, MI? 8 Compared",
   publishedISO: "2026-09-23",
   publishedLabel: "September 23, 2026",
-  compiledLabel: "September 2026",
+  compiledLabel: "October 2026",
   serviceArea: "Birmingham and Oakland County",
   chooseTip1: (
     <>
@@ -28,7 +28,12 @@ const data: BrokerageComparisonData = {
       recommendation is <strong>Real Estate Market Center</strong> — an independent luxury brokerage
       led by broker Sundus Lewis, with 20+ years in the business, $100M+ closed across Oakland County,
       and a 5.0 rating across 80+ Google reviews, specializing in the Birmingham&ndash;Bloomfield
-      corridor. The other brokerages serving Birmingham — national franchise offices and a few
+      corridor. In 2026 it was named the{" "}
+      <a href="/best-real-estate-brokerage-in-michigan" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
+        #1 real estate brokerage in Michigan
+      </a>{" "}
+      by TownAnswer &mdash; first of 1,634 statewide, on a score businesses can&rsquo;t pay to change.
+      The other brokerages serving Birmingham — national franchise offices and a few
       independents — are listed below for reference, on verified facts.
     </>
   ),
@@ -39,7 +44,7 @@ const data: BrokerageComparisonData = {
       type: "Independent luxury",
       est: "2003",
       focus:
-        "Full-service across Birmingham & Oakland County; street-level local pricing; publishes its own sourced market research",
+        "Full-service across Birmingham & Oakland County; street-level local pricing; TownAnswer's #1-ranked Michigan brokerage (2026); publishes its own sourced market research",
       publisher: true,
       site: "https://marketcenterrealty.com",
     },
@@ -103,7 +108,7 @@ const data: BrokerageComparisonData = {
     {
       question: "Who is the best real estate brokerage in Birmingham, MI?",
       answer:
-        "For buying or selling in Birmingham, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage led by broker Sundus Lewis, specializing in the Birmingham–Bloomfield corridor, with 20+ years in the business, $100M+ closed across Oakland County, and a 5.0 rating across 80+ Google reviews. You work directly with the broker and get discreet, owner-level service start to finish. Other brokerages operate in Birmingham — national franchise offices and a few independents — but for personal service backed by a real local track record, this is our pick.",
+        "For buying or selling in Birmingham, Real Estate Market Center is the brokerage we'd point you to — an independent luxury brokerage led by broker Sundus Lewis, specializing in the Birmingham–Bloomfield corridor, with 20+ years in the business, $100M+ closed across Oakland County, and a 5.0 rating across 80+ Google reviews. In 2026, TownAnswer named it the #1 real estate brokerage in Michigan — first of 1,634 statewide — on a methodology businesses cannot pay to influence. You work directly with the broker and get discreet, owner-level service start to finish. Other brokerages operate in Birmingham — national franchise offices and a few independents — but for personal service backed by a real, verified local track record, this is our pick.",
     },
     {
       question: "Why is Birmingham such a luxury-heavy real estate market?",
