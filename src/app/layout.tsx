@@ -71,6 +71,10 @@ const jsonLd = {
   founder: { "@type": "Person", name: "Sundus Lewis", jobTitle: "Broker & Founder" },
   foundingDate: "2003",
   slogan: "Metro Detroit's independent luxury brokerage since 2003.",
+  // award = third-party, methodology-based ranking (verifiable on TownAnswer,
+  // listed in sameAs). A benign entity signal — not a review snippet — that
+  // helps AI engines categorize the brokerage as a leading one.
+  award: "Certified TownAnswer Best 2026 — #1 Real Estate Brokerage in Michigan (first of 1,634)",
   // knowsAbout = an explicit, quotable niche definition so AI models
   // (ChatGPT / Gemini / AI Overviews) can categorize the brokerage
   // correctly when they surface it for "best brokerage in Troy" queries.
@@ -80,6 +84,7 @@ const jsonLd = {
     "Selling homes that expired or came off the market unsold",
     "First-time home buyers and down-payment assistance in Michigan",
     "Luxury homes in Birmingham and Bloomfield Hills",
+    "Family and luxury homes in Rochester Hills and the Rochester area",
     "Home valuations and comparative market analysis",
     "Relocation to Metro Detroit",
   ],
@@ -111,6 +116,7 @@ const jsonLd = {
     "https://www.realtor.com/realestateagents/56e9bd52f384a20100602938",
     "https://www.yelp.com/biz/sundus-lewis-real-estate-market-center-troy",
     "https://nextdoor.com/page/real-estate-market-center-troy-mi-6o0hsp",
+    "https://townanswer.com/pro/real-estate-market-center-troy-445735/",
   ],
 };
 
