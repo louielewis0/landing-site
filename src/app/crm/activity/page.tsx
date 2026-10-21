@@ -7,7 +7,7 @@ export default function CrmActivityPage() {
   return (
     <>
       <h1 style={{ margin: "0 0 6px", fontFamily: "var(--font-grotesk), 'Space Grotesk', sans-serif", fontWeight: 300, fontSize: 40, letterSpacing: "-0.025em", color: "var(--crm-ink)" }}>
-        Touch timeline.
+        Activity
       </h1>
       <p className="text-white/55 text-[14px] mb-8 max-w-2xl">
         Every call, email, text, meeting, and note — across every lead,

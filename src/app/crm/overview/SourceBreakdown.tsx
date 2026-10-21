@@ -1,5 +1,36 @@
 import type { Lead } from "@/lib/lead-shape";
 
+/** Raw source slugs (free text, no DB constraint) → friendly labels so
+ *  the chart reads in plain English. Unknown values are title-cased. */
+const SOURCE_LABELS: Record<string, string> = {
+  hero: "Homepage",
+  "leads-page": "Leads page",
+  website: "Website",
+  "contact-form": "Contact form",
+  "instant-valuation": "Home value tool",
+  "ai-concierge": "Website chat",
+  "showing-request": "Showing request",
+  "yard-sign": "Yard sign QR",
+  "ai-receptionist": "Phone (AI)",
+  "phone call": "Phone call",
+  "phone-call": "Phone call",
+  referral: "Referral",
+  fsbo: "For-sale-by-owner",
+  expired: "Expired listing",
+  other: "Other",
+  unknown: "Unknown",
+};
+
+function prettySource(raw: string): string {
+  const key = raw.trim().toLowerCase();
+  if (SOURCE_LABELS[key]) return SOURCE_LABELS[key];
+  return raw
+    .replace(/[-_]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
 /**
  * Leads-by-source horizontal bar list. Native SVG-free
  * implementation — each bar is a positioned div with a width
@@ -61,7 +92,7 @@ export default function SourceBreakdown({ leads }: { leads: Lead[] }) {
                 className="flex items-center gap-4 px-6 py-3 hover:bg-white/[0.025] transition-colors duration-150"
               >
                 <span className="w-32 text-[13px] text-white/65 truncate">
-                  {source}
+                  {prettySource(source)}
                 </span>
                 <div className="flex-1 h-2 bg-white/[0.06] rounded-full overflow-hidden">
                   <div

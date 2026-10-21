@@ -383,8 +383,8 @@ export default function LeadsTableClient() {
       <nav className="flex items-center gap-2 mb-6 flex-wrap" aria-label="Lead views">
         {(
           [
-            ["inbound", "Website & Inbound", inboundLeads.length],
-            ["expired", "Expired prospecting", expiredLeads.length],
+            ["inbound", "Incoming leads", inboundLeads.length],
+            ["expired", "Expired listings", expiredLeads.length],
             ["all", "All leads", leads.length],
           ] as const
         ).map(([key, label, count]) => (
@@ -418,7 +418,7 @@ export default function LeadsTableClient() {
       {/* Inbound pulse — answers "are we getting website leads?" at a glance */}
       {view === "inbound" && latestInbound.length > 0 && (
         <div className="crm-glass rounded-2xl p-5 mb-6">
-          <p className="crm-label text-[var(--gold-soft)] mb-3">Latest inbound</p>
+          <p className="crm-label text-[var(--gold-soft)] mb-3">Just came in</p>
           <ul className="space-y-1.5">
             {latestInbound.map((l) => (
               <li key={l.id} className="flex items-baseline gap-3 text-[13.5px]">

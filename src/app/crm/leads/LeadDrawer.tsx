@@ -410,7 +410,7 @@ export default function LeadDrawer({
                     className="inline-flex items-center gap-2 text-[12px] text-[var(--gold-soft)] hover:text-[var(--gold)] tracking-wide transition-colors disabled:opacity-50"
                   >
                     <PhoneOutgoing className="w-3.5 h-3.5" strokeWidth={1.75} />
-                    {tracing ? "Tracing…" : "Find phone (skip trace)"}
+                    {tracing ? "Searching…" : "Find phone number"}
                   </button>
                 </div>
               )}

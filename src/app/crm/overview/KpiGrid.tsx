@@ -56,42 +56,42 @@ export default function KpiGrid({ leads }: { leads: Lead[] }) {
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
       <KpiCard
-        label="Respond Now"
+        label="Call Right Now"
         value={uncontactedInbound}
-        delta={uncontactedInbound > 0 ? "uncontacted inbound" : "inbox clear"}
+        delta={uncontactedInbound > 0 ? "new leads not yet contacted" : "all new leads contacted"}
         icon={<Zap className="w-4 h-4" strokeWidth={1.5} />}
         emphasis={uncontactedInbound > 0 ? "highlight" : "default"}
       />
       <KpiCard
         label="New This Week"
         value={newThisWeek}
-        delta={newThisWeek > 0 ? "last 7 days" : "—"}
+        delta={newThisWeek > 0 ? "leads in the last 7 days" : "none in the last 7 days"}
         icon={<TrendingUp className="w-4 h-4" strokeWidth={1.5} />}
       />
       <KpiCard
         label="Hot Leads"
         value={hot}
-        delta={active > 0 ? `of ${active} active` : undefined}
+        delta={active > 0 ? `of ${active} active lead${active === 1 ? "" : "s"}` : undefined}
         icon={<Flame className="w-4 h-4" strokeWidth={1.5} />}
         emphasis="highlight"
       />
       <KpiCard
         label="Overdue Follow-ups"
         value={overdue}
-        delta={overdue > 0 ? "needs response" : "all clear"}
+        delta={overdue > 0 ? "past their follow-up date" : "nothing overdue"}
         icon={<Clock className="w-4 h-4" strokeWidth={1.5} />}
         emphasis={overdue > 0 ? "highlight" : "default"}
       />
       <KpiCard
         label="Pipeline Value"
         value={money(pipelineValue)}
-        delta={`${active} active lead${active === 1 ? "" : "s"}`}
+        delta={`${active} active lead${active === 1 ? "" : "s"} in play`}
         icon={<DollarSign className="w-4 h-4" strokeWidth={1.5} />}
       />
       <KpiCard
-        label="Est. GCI in Play"
+        label="Est. Commission"
         value={money(estGci)}
-        delta="at 3% listing side"
+        delta="roughly 3% of pipeline"
         icon={<Landmark className="w-4 h-4" strokeWidth={1.5} />}
       />
     </section>

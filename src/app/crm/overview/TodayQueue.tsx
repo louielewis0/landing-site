@@ -108,8 +108,8 @@ export default function TodayQueue({ leads }: { leads: Lead[] }) {
   const queues: QueueDef[] = [
     {
       key: "respond",
-      title: "Respond now",
-      hint: "new inbound — contact rate drops 10x after the first hour",
+      title: "Call right now",
+      hint: "brand-new leads — reach out fast while they're paying attention",
       icon: Zap,
       rows: respondNow,
       right: (l) => ageLabel(l.created_at),
@@ -117,7 +117,7 @@ export default function TodayQueue({ leads }: { leads: Lead[] }) {
     {
       key: "overdue",
       title: "Overdue follow-ups",
-      hint: "promised touches that slipped",
+      hint: "you set a date to follow up and it's already passed",
       icon: Clock,
       rows: overdue,
       right: (l) => ({
@@ -129,30 +129,30 @@ export default function TodayQueue({ leads }: { leads: Lead[] }) {
     },
     {
       key: "today",
-      title: "Due today",
-      hint: "scheduled for today",
+      title: "Follow up today",
+      hint: "you planned to reach out to these today",
       icon: CalendarCheck,
       rows: dueToday,
       right: () => ({ text: "today" }),
     },
     {
       key: "nonext",
-      title: "No next step",
-      hint: "active leads with nothing scheduled — the silent pipeline killer",
+      title: "No follow-up planned",
+      hint: "active leads with no next step set — easy to forget",
       icon: CircleDashed,
       rows: noNextStep,
       right: (l) =>
         l.last_contact_at
-          ? { text: `contacted ${relativeTime(l.last_contact_at)}` }
+          ? { text: `last contact ${relativeTime(l.last_contact_at)}` }
           : { text: "never contacted", urgent: true },
     },
     {
       key: "slipping",
-      title: "Slipping away",
-      hint: "active but not contacted in 14+ days",
+      title: "Going quiet",
+      hint: "still active, but no contact in 14+ days",
       icon: TrendingDown,
       rows: slipping,
-      right: (l) => ({ text: `idle ${relativeTime(lastTouch(l))}` }),
+      right: (l) => ({ text: `quiet ${relativeTime(lastTouch(l))}` }),
     },
   ];
 
@@ -162,11 +162,11 @@ export default function TodayQueue({ leads }: { leads: Lead[] }) {
     <section className="crm-glass rounded-2xl overflow-hidden">
       <header className="flex items-center justify-between px-6 py-4 border-b border-white/[0.07] bg-gradient-to-r from-[var(--gold)]/[0.06] to-transparent">
         <div>
-          <p className="crm-label text-[var(--gold-soft)] mb-1">Today&apos;s Work</p>
+          <p className="crm-label text-[var(--gold-soft)] mb-1">What to do next</p>
           <p className="text-white/50 text-[13px]">
             {totalWork === 0
-              ? "Queue clear — go find more leads"
-              : `${totalWork} action${totalWork === 1 ? "" : "s"} in priority order — work top to bottom`}
+              ? "All caught up — go find new leads"
+              : `${totalWork} thing${totalWork === 1 ? "" : "s"} to do, most important first — just work down the list`}
           </p>
         </div>
         <Link
@@ -181,8 +181,8 @@ export default function TodayQueue({ leads }: { leads: Lead[] }) {
         <div className="p-8">
           <EmptyState
             icon={<CheckCircle className="w-5 h-5" strokeWidth={1.5} />}
-            title="Nothing waiting."
-            description="No uncontacted inbound, nothing overdue, everything scheduled. Import expireds or work the aged list."
+            title="You're all caught up."
+            description="No new leads to call, nothing overdue, and every active lead has a next step. Nice work."
           />
         </div>
       ) : (

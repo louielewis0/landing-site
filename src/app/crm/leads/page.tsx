@@ -20,8 +20,8 @@ export default function CrmLeadsPage() {
         Leads
       </h1>
       <p style={{ fontSize: 14, color: "var(--crm-ink-faint)", margin: "0 0 24px", maxWidth: 560 }}>
-        Search, filter, scrub, export. Click any row to open the full
-        record and activity timeline.
+        Search, filter, and export your leads. Click any row to open the
+        full record and its history.
       </p>
       {/* Suspense boundary is required because LeadsTableClient calls
           useSearchParams() — Next.js 16 prerenders /crm/leads as static

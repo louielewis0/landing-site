@@ -256,9 +256,9 @@ export default function CommandCenter() {
       >
         {[
           { label: "New leads", value: dash(newCount), accent: newCount > 0 },
-          { label: "In play", value: dash(fmtMoney(inPlay)) },
-          { label: "Hot", value: dash(hot), accent: hot > 0 },
-          { label: "Closing", value: dash(closing) },
+          { label: "Pipeline value", value: dash(fmtMoney(inPlay)) },
+          { label: "Hot leads", value: dash(hot), accent: hot > 0 },
+          { label: "Closing soon", value: dash(closing) },
         ].map((f, i) => (
           <div
             key={f.label}
