@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AlertCircle, RefreshCw, ListChecks, LayoutGrid } from "lucide-react";
 import { useLeads } from "../_lib/use-leads";
 import TodayQueue from "./TodayQueue";
+import DailyVitals from "./DailyVitals";
 import KpiGrid from "./KpiGrid";
 import RecentLeads from "./RecentLeads";
 import SourceBreakdown from "./SourceBreakdown";
@@ -271,6 +272,9 @@ export default function CommandCenter() {
           </div>
         ))}
       </div>
+
+      {/* ── Daily effort scoreboard ──────────────────────────── */}
+      <DailyVitals />
 
       {/* ── Body: loading / error / view ─────────────────────── */}
       {result.status === "loading" && (

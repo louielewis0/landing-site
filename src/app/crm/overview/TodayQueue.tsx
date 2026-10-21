@@ -7,6 +7,9 @@ import {
   TrendingDown,
   ChevronRight,
   CheckCircle,
+  Flame,
+  Phone,
+  MessageSquare,
 } from "lucide-react";
 import PriorityDot from "@/components/crm/PriorityDot";
 import EmptyState from "@/components/crm/EmptyState";
@@ -33,6 +36,14 @@ import type { Lead } from "@/lib/lead-shape";
  */
 
 const HOUR = 3600 * 1000;
+
+/** Build tel:/sms: links from a free-text phone, or null if none. */
+function phoneLinks(phone: string | null): { tel: string; sms: string } | null {
+  const d = (phone ?? "").replace(/[^\d]/g, "");
+  if (d.length < 10) return null;
+  const e164 = d.length === 10 ? `+1${d}` : d.startsWith("1") ? `+${d}` : `+${d}`;
+  return { tel: `tel:${e164}`, sms: `sms:${e164}` };
+}
 
 function ageLabel(iso: string): { text: string; urgent: boolean } {
   const ms = Date.now() - new Date(iso).getTime();
@@ -197,30 +208,88 @@ export default function TodayQueue({ leads }: { leads: Lead[] }) {
                       — {q.hint}
                     </span>
                   </div>
-                  <ul className="space-y-1">
+                  <ul className="space-y-0.5">
                     {q.rows.slice(0, 5).map((l) => {
                       const r = q.right(l);
+                      const links = phoneLinks(l.phone);
+                      const mail = l.email ? `mailto:${l.email}` : null;
                       return (
-                        <li key={l.id}>
+                        <li
+                          key={l.id}
+                          className="group flex items-center gap-3 rounded-xl px-3 py-2 -mx-3 hover:bg-white/[0.045] transition-colors duration-150"
+                        >
                           <Link
                             href={`/crm/leads?lead=${l.id}`}
-                            className="flex items-center gap-3 rounded-xl px-3 py-2 -mx-3 hover:bg-white/[0.045] transition-colors duration-150"
+                            className="flex items-center gap-2.5 min-w-0 flex-1"
                           >
                             <PriorityDot priority={l.priority} />
-                            <span className="text-[13px] font-medium text-white/85 truncate">
-                              {l.name}
-                            </span>
-                            <span className="text-[11.5px] text-white/40 truncate">
-                              {[l.source, l.intent].filter(Boolean).join(" · ")}
-                            </span>
-                            <span
-                              className={`ml-auto text-[11px] crm-num shrink-0 ${
-                                r.urgent ? "text-[#FB7185]" : "text-white/45"
-                              }`}
-                            >
-                              {r.text}
+                            {l.priority === "hot" && (
+                              <Flame
+                                className="w-3 h-3 text-[#FB7185] shrink-0"
+                                strokeWidth={2}
+                                aria-label="Hot lead"
+                              />
+                            )}
+                            <span className="min-w-0">
+                              <span className="flex items-center gap-2">
+                                <span className="text-[13px] font-medium text-white/85 truncate">
+                                  {l.name}
+                                </span>
+                                <span className="text-[11.5px] text-white/40 truncate">
+                                  {[l.source, l.intent].filter(Boolean).join(" · ")}
+                                </span>
+                              </span>
+                              {l.message && (
+                                <span className="block text-[11.5px] text-white/35 truncate italic">
+                                  &ldquo;{l.message}&rdquo;
+                                </span>
+                              )}
                             </span>
                           </Link>
+
+                          <span
+                            className={`text-[11px] crm-num shrink-0 ${
+                              r.urgent ? "text-[#FB7185]" : "text-white/45"
+                            }`}
+                          >
+                            {r.text}
+                          </span>
+
+                          {/* Act from the feed — no record open needed. */}
+                          <span className="flex items-center gap-1 shrink-0 opacity-70 group-hover:opacity-100 transition-opacity duration-150">
+                            {links ? (
+                              <>
+                                <a
+                                  href={links.tel}
+                                  title={`Call ${l.name}`}
+                                  className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold text-[#0A0908] bg-gradient-to-br from-[var(--gold-soft)] to-[var(--gold)] hover:brightness-110 transition"
+                                >
+                                  <Phone className="w-3 h-3" strokeWidth={2} />
+                                  Call
+                                </a>
+                                <a
+                                  href={links.sms}
+                                  title={`Text ${l.name}`}
+                                  className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold text-white/80 border border-white/15 hover:border-white/30 hover:text-white transition"
+                                >
+                                  <MessageSquare className="w-3 h-3" strokeWidth={2} />
+                                  Text
+                                </a>
+                              </>
+                            ) : mail ? (
+                              <a
+                                href={mail}
+                                title={`Email ${l.name}`}
+                                className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold text-white/80 border border-white/15 hover:border-white/30 hover:text-white transition"
+                              >
+                                Email
+                              </a>
+                            ) : (
+                              <span className="text-[10.5px] text-white/25 px-2">
+                                no contact
+                              </span>
+                            )}
+                          </span>
                         </li>
                       );
                     })}
