@@ -57,7 +57,7 @@ async function handle(req: NextRequest) {
   // cell's voicemail before Maya can catch it, which loses leads. Flip
   // RING_CELL_FIRST to "true" (env) once the number is warmed up (~1-2 days)
   // and the cell starts ringing through reliably.
-  const RING_CELL_FIRST = process.env.RING_CELL_FIRST !== "false";
+  const RING_CELL_FIRST = process.env.RING_CELL_FIRST === "true";
 
   let body = "";
   if (RING_CELL_FIRST) {
