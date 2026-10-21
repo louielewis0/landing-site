@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import TemplateDashboard from "./overview/TemplateDashboard";
+import CommandCenter from "./overview/CommandCenter";
 
 export const metadata: Metadata = { title: "Dashboard" };
 
 export default function CrmOverviewPage() {
-  return <TemplateDashboard />;
+  return <CommandCenter />;
 }

@@ -5,9 +5,9 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 /**
- * Sidebar — 1:1 from the user's "Market Center CRM.html" template:
- * light 240px rail, logo + stacked MARKET CENTER / CRM wordmark,
- * numbered nav items, and the Louie user card pinned to the bottom.
+ * Sidebar — dark-executive rail for the CRM. Deep translucent panel on the
+ * charcoal mesh, logo + stacked MARKET CENTER / CRM wordmark in bone, numbered
+ * nav with a gold active state, and the Louie user card pinned to the bottom.
  */
 
 const NAV = [
@@ -16,7 +16,10 @@ const NAV = [
   { num: "03", label: "Pipeline", href: "/crm/pipeline" },
   { num: "04", label: "Activity", href: "/crm/activity" },
   { num: "05", label: "Farm map", href: "/crm/farm" },
+  { num: "06", label: "Playbook", href: "/crm/playbook" },
 ];
+
+const GROTESK = "var(--font-grotesk), 'Space Grotesk', sans-serif";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -25,62 +28,81 @@ export default function Sidebar() {
     <aside
       className="hidden md:flex md:flex-col md:shrink-0 md:sticky md:top-0 md:h-screen md:self-start"
       style={{
-        width: 240,
-        gap: 8,
+        width: 244,
+        gap: 6,
         padding: "26px 18px",
-        borderRight: "1px solid rgba(25,26,28,0.1)",
+        borderRight: "1px solid var(--crm-line)",
+        background:
+          "linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.01))",
+        backdropFilter: "blur(14px)",
+        WebkitBackdropFilter: "blur(14px)",
       }}
     >
-      <Link href="/crm" style={{ display: "flex", alignItems: "center", gap: 10, padding: "0 8px 22px" }}>
+      <Link
+        href="/crm"
+        style={{ display: "flex", alignItems: "center", gap: 11, padding: "0 8px 24px" }}
+      >
         <Image
           src="/mcr-logo-color-3d.png"
           alt="Real Estate Market Center"
           width={36}
           height={36}
-          style={{ borderRadius: 9, objectFit: "contain" }}
+          style={{
+            borderRadius: 9,
+            objectFit: "contain",
+            filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.45))",
+          }}
         />
         <span
           style={{
-            fontFamily: "var(--font-grotesk), 'Space Grotesk', sans-serif",
+            fontFamily: GROTESK,
             fontWeight: 600,
             fontSize: 11.5,
-            letterSpacing: "0.14em",
+            letterSpacing: "0.16em",
             textTransform: "uppercase",
-            lineHeight: 1.3,
-            color: "#191a1c",
+            lineHeight: 1.35,
+            color: "var(--crm-ink)",
           }}
         >
           Market Center
           <br />
-          <span style={{ color: "rgba(25,26,28,0.45)" }}>CRM</span>
+          <span style={{ color: "var(--crm-gold-soft)" }}>CRM</span>
         </span>
       </Link>
 
       {NAV.map((n) => {
-        const active = n.href === "/crm" ? pathname === "/crm" : pathname.startsWith(n.href);
+        const active =
+          n.href === "/crm" ? pathname === "/crm" : pathname.startsWith(n.href);
         return (
           <Link
             key={n.href}
             href={n.href}
             style={{
+              position: "relative",
               display: "flex",
               alignItems: "center",
               gap: 12,
               padding: "11px 14px",
               borderRadius: 12,
               fontSize: 14,
+              fontFamily: GROTESK,
               fontWeight: active ? 600 : 500,
-              background: active ? "rgba(255,255,255,0.72)" : "transparent",
-              color: active ? "#191a1c" : "rgba(25,26,28,0.7)",
-              boxShadow: active ? "0 2px 10px rgba(25,26,28,0.06)" : "none",
+              background: active ? "var(--crm-gold-dim)" : "transparent",
+              color: active ? "var(--crm-ink)" : "var(--crm-ink-dim)",
+              border: active
+                ? "1px solid rgba(200,162,76,0.28)"
+                : "1px solid transparent",
+              boxShadow: active ? "inset 0 1px 0 rgba(255,255,255,0.05)" : "none",
+              transition: "color 160ms ease, background 160ms ease",
             }}
           >
             <span
               style={{
-                fontFamily: "var(--font-grotesk), 'Space Grotesk', sans-serif",
-                fontSize: 12,
+                fontFamily: GROTESK,
+                fontSize: 11,
+                letterSpacing: "0.08em",
                 width: 16,
-                color: active ? "#E4501E" : "rgba(25,26,28,0.35)",
+                color: active ? "var(--crm-gold-soft)" : "var(--crm-ink-ghost)",
               }}
             >
               {n.num}
@@ -91,35 +113,39 @@ export default function Sidebar() {
       })}
 
       <div
+        className="crm-glass"
         style={{
           marginTop: "auto",
           padding: 16,
           borderRadius: 16,
-          background: "rgba(255,255,255,0.6)",
-          border: "1px solid rgba(25,26,28,0.08)",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 11 }}>
           <div
             style={{
               width: 34,
               height: 34,
               borderRadius: "50%",
-              background: "#2E5A9C",
-              color: "#fff",
+              background:
+                "linear-gradient(135deg, var(--crm-gold-soft), var(--crm-gold))",
+              color: "#0A0908",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontFamily: "var(--font-grotesk), 'Space Grotesk', sans-serif",
-              fontWeight: 500,
+              fontFamily: GROTESK,
+              fontWeight: 600,
               fontSize: 13,
             }}
           >
             LL
           </div>
           <div>
-            <div style={{ fontSize: 13.5, fontWeight: 600, color: "#191a1c" }}>Louie Lewis</div>
-            <div style={{ fontSize: 11.5, color: "rgba(25,26,28,0.5)" }}>Real Estate Market Center</div>
+            <div style={{ fontSize: 13.5, fontWeight: 600, color: "var(--crm-ink)" }}>
+              Louie Lewis
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--crm-ink-faint)" }}>
+              Real Estate Market Center
+            </div>
           </div>
         </div>
       </div>

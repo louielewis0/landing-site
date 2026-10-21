@@ -17,16 +17,17 @@
   --color-gold-deep: #9C7A2E;
   --color-rust: #8C4A1F;
 
-  /* CRM design system — user's "Market Center CRM.html" template:
-     bone ground, ink text, burnt-orange accent, steel-blue + green.
+  /* CRM design system — "dark executive" (cinematic) redesign:
+     deep charcoal ground, frosted gold-edged glass, cream text,
+     refined gold as the single luxury accent.
      Additive: marketing pages never reference these. */
-  --color-crm-bg: #f2efe9;
-  --color-crm-panel: #ffffff;
-  --color-crm-teal: #1d7a4f;
-  --color-crm-violet: #2E5A9C;
-  --color-crm-sky: #2E5A9C;
-  --color-crm-amber: #E4501E;
-  --color-crm-rose: #c0392b;
+  --color-crm-bg: #0C0C10;
+  --color-crm-panel: #141419;
+  --color-crm-teal: #34C790;
+  --color-crm-violet: #8FA6D8;
+  --color-crm-sky: #7FB2E8;
+  --color-crm-amber: #E4934C;
+  --color-crm-rose: #FB7185;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -44,6 +45,22 @@
   --gold-soft: #D9B968;
   --gold-deep: #9C7A2E;
   --rust: #8C4A1F;
+
+  /* ── CRM "dark executive" semantic tokens ──
+     Used by inline-styled CRM surfaces so the whole dashboard shares
+     one ink/surface/accent language on the dark ground. */
+  --crm-ink: #F4F1EA;                      /* primary text (warm bone)   */
+  --crm-ink-dim: rgba(244, 241, 234, 0.64); /* secondary text            */
+  --crm-ink-faint: rgba(244, 241, 234, 0.40); /* labels / muted          */
+  --crm-ink-ghost: rgba(244, 241, 234, 0.26); /* disabled / hints        */
+  --crm-line: rgba(255, 255, 255, 0.09);   /* hairlines, borders         */
+  --crm-line-soft: rgba(255, 255, 255, 0.055);
+  --crm-surface: rgba(255, 255, 255, 0.045); /* glass card fill          */
+  --crm-surface-2: rgba(255, 255, 255, 0.07); /* hover / raised fill     */
+  --crm-surface-solid: #141419;            /* opaque dense panel         */
+  --crm-gold: #C8A24C;
+  --crm-gold-soft: #D9B968;
+  --crm-gold-dim: rgba(200, 162, 76, 0.16); /* gold tint fill            */
 
   --ease-cinema: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
@@ -238,10 +255,12 @@ body {
 .crm-mesh {
   background-color: var(--color-crm-bg);
   background-image:
-    radial-gradient(ellipse 55% 40% at 8% 0%, rgba(200, 162, 76, 0.08), transparent 60%),
-    radial-gradient(ellipse 50% 45% at 95% 12%, rgba(167, 139, 250, 0.07), transparent 60%),
-    radial-gradient(ellipse 60% 50% at 70% 100%, rgba(45, 212, 191, 0.05), transparent 60%);
+    radial-gradient(ellipse 58% 44% at 6% -4%, rgba(200, 162, 76, 0.13), transparent 60%),
+    radial-gradient(ellipse 52% 46% at 98% 6%, rgba(200, 162, 76, 0.07), transparent 58%),
+    radial-gradient(ellipse 70% 55% at 62% 108%, rgba(156, 122, 46, 0.08), transparent 62%),
+    linear-gradient(180deg, #0C0C10 0%, #0A0A0D 60%, #0C0B0E 100%);
   background-attachment: fixed;
+  color: var(--crm-ink);
 }
 
 /* Frosted card: translucent fill, 1px border, inset top highlight,
@@ -265,6 +284,19 @@ body {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
     0 24px 64px rgba(0, 0, 0, 0.55);
+}
+
+/* Gold-edged accent card for hero surfaces (KPI strip, focus panels). */
+.crm-glass-gold {
+  background:
+    linear-gradient(180deg, rgba(200, 162, 76, 0.07), rgba(200, 162, 76, 0) 42%),
+    rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(200, 162, 76, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 34px rgba(0, 0, 0, 0.4);
 }
 
 /* Solid panel for dense data (tables): no translucency behind rows. */
@@ -294,6 +326,45 @@ body {
 .crm-num {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
+}
+
+/* Luxury display face — Cormorant Garamond (loaded in root layout as
+   --font-display). Used for the greeting, section titles, and the big
+   KPI numerals so the dashboard reads editorial, not utilitarian. */
+.crm-display {
+  font-family: var(--font-display), "Cormorant Garamond", Georgia, serif;
+  letter-spacing: -0.01em;
+  color: var(--crm-ink);
+}
+/* Big metric numerals: serif, tabular so columns don't jitter. */
+.crm-figure {
+  font-family: var(--font-display), "Cormorant Garamond", Georgia, serif;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: var(--crm-ink);
+}
+/* Gold-washed display text for the single hero numeral per view. */
+.crm-figure-gold {
+  background: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 55%, var(--gold-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Thin all-caps eyebrow, gold. */
+.crm-eyebrow {
+  font-family: var(--font-grotesk), "Space Grotesk", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--crm-gold-soft);
+}
+/* Gold hairline rule. */
+.crm-rule {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(200, 162, 76, 0.5), rgba(200, 162, 76, 0.08) 60%, transparent);
 }
 
 /* Buttons — one system: primary / secondary / destructive. */
@@ -1401,106 +1472,40 @@ body {
    re-skins every crm- component class to the bone / glass system.
    ════════════════════════════════════════════════════════════════════ */
 .crm-mesh {
-  /* One-line magic: every text-white / bg-white / border-white utility
-     reads var(--color-white); remap it to ink so all dark-theme text
-     becomes dark-on-bone at its own alpha. */
-  --color-white: #191a1c;
-  /* CRM buttons/accents that read the cinematic gold → template orange */
-  --gold: #E4501E;
-  --gold-soft: #f0a15c;
-  --gold-deep: #c9430f;
-
-  background-color: #f2efe9;
-  background-image:
-    radial-gradient(ellipse 55% 40% at 6% 0%, rgba(228,80,30,0.06), transparent 60%),
-    radial-gradient(ellipse 50% 45% at 96% 8%, rgba(46,90,156,0.06), transparent 60%);
-  color: #191a1c;
+  /* Dark executive: leave --color-white as real white so every
+     text-white / bg-white / border-white utility in the CRM components
+     renders as authored for a dark ground, and let --gold stay the base
+     cinematic gold (#C8A24C). The dark background + gold atmosphere come
+     from the base .crm-mesh rule and :root tokens near the top of file. */
   font-family: var(--font-manrope), "Manrope", system-ui, sans-serif;
+  color: var(--crm-ink);
 }
 .crm-mesh h1, .crm-mesh h2, .crm-mesh h3, .crm-mesh .crm-title {
   font-family: var(--font-grotesk), "Space Grotesk", sans-serif;
-  color: #191a1c;
+  color: var(--crm-ink);
 }
 
-/* Frosted cards → white 72% glass on bone */
-.crm-mesh .crm-glass {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(25, 26, 28, 0.07);
-  box-shadow: 0 4px 18px rgba(25, 26, 28, 0.05);
-}
-.crm-mesh .crm-glass-heavy {
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);
-  border: 1px solid rgba(25, 26, 28, 0.1);
-  box-shadow: 0 30px 80px rgba(25, 26, 28, 0.22);
-}
-.crm-mesh .crm-panel {
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(25, 26, 28, 0.07);
-  box-shadow: 0 4px 18px rgba(25, 26, 28, 0.05);
-}
-.crm-mesh .crm-title { font-weight: 500; color: #191a1c; }
-.crm-mesh .crm-label { color: rgba(25, 26, 28, 0.45); }
+/* Frosted cards, panels, titles, labels: the dark base .crm-glass /
+   .crm-glass-heavy / .crm-panel / .crm-title / .crm-label rules at the
+   top of this file already carry the dark-executive look — no .crm-mesh
+   override needed. (.crm-title weight bumped to 500 for the dashboard.) */
+.crm-mesh .crm-title { font-weight: 500; }
 
-/* Buttons */
-.crm-mesh .crm-btn-primary {
-  background: #E4501E; color: #fff;
-  box-shadow: 0 6px 18px rgba(228, 80, 30, 0.3);
-}
-.crm-mesh .crm-btn-primary:hover:not(:disabled) {
-  background: #c9430f; box-shadow: 0 8px 22px rgba(228, 80, 30, 0.42); transform: translateY(-1px);
-}
-.crm-mesh .crm-btn-secondary {
-  background: rgba(25, 26, 28, 0.04); color: #191a1c; border: 1px solid rgba(25, 26, 28, 0.15);
-}
-.crm-mesh .crm-btn-secondary:hover:not(:disabled) {
-  background: rgba(25, 26, 28, 0.08); border-color: rgba(25, 26, 28, 0.3); color: #191a1c;
-}
-.crm-mesh .crm-btn-destructive {
-  background: rgba(192, 57, 43, 0.1); color: #c0392b; border: 1px solid rgba(192, 57, 43, 0.28);
-}
-.crm-mesh .crm-btn-destructive:hover:not(:disabled) {
-  background: rgba(192, 57, 43, 0.18); border-color: rgba(192, 57, 43, 0.5);
-}
-.crm-mesh .crm-btn:focus-visible { outline: 2px solid rgba(228, 80, 30, 0.7); }
+/* Buttons, inputs, tables: the dark base .crm-btn* / .crm-input /
+   .crm-table rules at the top of this file are already dark-executive
+   (gold primary, white-alpha fills, cream text). No overrides, and no
+   accent-remapping — the components' own semantic accent colors (sky /
+   violet / teal / amber / rose on status pills and dots) are meant to
+   read on dark, so they stand as authored. */
 
-/* Inputs */
-.crm-mesh .crm-input {
-  background: #fff; border: 1px solid rgba(25, 26, 28, 0.15); color: #191a1c;
-}
-.crm-mesh .crm-input::placeholder { color: rgba(25, 26, 28, 0.4); }
-.crm-mesh .crm-input:focus {
-  border-color: rgba(228, 80, 30, 0.6); background: #fff;
-  box-shadow: 0 0 0 3px rgba(228, 80, 30, 0.15);
-}
+/* Native <select> dropdown options on the dark ground. */
+.crm-mesh option { background: #141419; color: var(--crm-ink); }
 
-/* Tables */
-.crm-mesh .crm-table th { color: rgba(25, 26, 28, 0.45); }
-.crm-mesh .crm-table tbody tr { border-top: 1px solid rgba(25, 26, 28, 0.06); }
-.crm-mesh .crm-table tbody tr:hover { background: rgba(25, 26, 28, 0.03); }
-
-/* Native <select> dropdown options (were dark) → white */
-.crm-mesh option { background: #fff; color: #191a1c; }
-
-/* Explicit dark surfaces baked into components → light glass */
-.crm-mesh [class*="bg-[#12141A]"],
-.crm-mesh [class*="bg-[#0A0B0F]"] {
-  background-color: rgba(255, 255, 255, 0.92) !important;
-}
-.crm-mesh [class*="bg-black"] { background-color: rgba(255,255,255,0.9) !important; }
-
-/* Accent chips/dots remapped to the template palette */
-.crm-mesh [class*="bg-[#2DD4BF]"], .crm-mesh [class*="bg-[#4ADE80]"] { background-color: #1d7a4f !important; }
-.crm-mesh [class*="bg-[#A78BFA]"], .crm-mesh [class*="bg-[#38BDF8]"] { background-color: #2E5A9C !important; }
-.crm-mesh [class*="bg-[#FBBF24]"], .crm-mesh [class*="bg-[#FB923C]"] { background-color: #E4501E !important; }
-.crm-mesh [class*="bg-[#FB7185]"] { background-color: #c0392b !important; }
-
-/* CRM-scoped scrollbar + selection on bone */
-.crm-mesh ::-webkit-scrollbar-track { background: #e9e5dc; }
-.crm-mesh ::-webkit-scrollbar-thumb { background: rgba(25,26,28,0.22); }
-.crm-mesh ::-webkit-scrollbar-thumb:hover { background: #E4501E; }
-.crm-mesh ::selection { background: rgba(228,80,30,0.25); color: #191a1c; }
+/* CRM-scoped scrollbar + selection. */
+.crm-mesh ::-webkit-scrollbar-track { background: #0A0A0D; }
+.crm-mesh ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.14); border-radius: 10px; }
+.crm-mesh ::-webkit-scrollbar-thumb:hover { background: var(--gold-deep); }
+.crm-mesh ::selection { background: rgba(200, 162, 76, 0.3); color: var(--crm-ink); }
 
 /* CRM dashboard responsive: stack pipeline + right column on narrow */
 @media (max-width: 1100px) {
@@ -1556,9 +1561,9 @@ body {
 .crm-mesh .crm-drawer-sec {
   font-family: var(--font-grotesk), "Space Grotesk", sans-serif;
   font-size: 12px; font-weight: 600; letter-spacing: 0.14em;
-  text-transform: uppercase; color: rgba(25,26,28,0.4);
+  text-transform: uppercase; color: var(--crm-ink-faint);
   margin-bottom: 14px; padding-bottom: 10px;
-  border-bottom: 1px solid rgba(25,26,28,0.08);
+  border-bottom: 1px solid var(--crm-line);
 }
 
 /* ═══════════ Standalone /contact page (yard-sign QR landing) ═══════════ */
@@ -1634,71 +1639,72 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
 /* ═══════════ CRM Farm map (expired door-knock routes) ═══════════ */
 .crm-mesh .farm-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 18px; }
 .crm-mesh .farm-title {
-  margin: 0 0 4px; font-family: var(--font-grotesk), "Space Grotesk", sans-serif;
-  font-weight: 300; font-size: 40px; letter-spacing: -0.025em; color: #191a1c;
+  margin: 0 0 4px; font-family: var(--font-display), "Cormorant Garamond", Georgia, serif;
+  font-weight: 500; font-size: 44px; letter-spacing: -0.01em; color: var(--crm-ink);
 }
-.crm-mesh .farm-sub { margin: 0; font-size: 14px; color: rgba(25,26,28,0.55); max-width: 520px; }
+.crm-mesh .farm-sub { margin: 0; font-size: 14px; color: var(--crm-ink-dim); max-width: 520px; }
 .crm-mesh .farm-counter {
-  background: #141821; color: #fff; border-radius: 14px; padding: 12px 18px;
-  font-size: 13px; white-space: nowrap;
+  background: rgba(200, 162, 76, 0.1); color: var(--crm-ink); border: 1px solid rgba(200, 162, 76, 0.24);
+  border-radius: 14px; padding: 12px 18px; font-size: 13px; white-space: nowrap;
 }
-.crm-mesh .farm-counter b { font-size: 20px; font-family: var(--font-grotesk), sans-serif; }
-.crm-mesh .farm-counter span { color: rgba(255,255,255,0.55); }
+.crm-mesh .farm-counter b { font-size: 20px; font-family: var(--font-grotesk), sans-serif; color: var(--crm-gold-soft); }
+.crm-mesh .farm-counter span { color: var(--crm-ink-faint); }
 
 .crm-mesh .farm-paste { display: flex; gap: 12px; margin-bottom: 6px; align-items: stretch; }
 .crm-mesh .farm-paste textarea {
-  flex: 1; padding: 14px 16px; border-radius: 14px; border: 1px solid rgba(25,26,28,0.14);
-  background: #fff; color: #191a1c; font-family: inherit; font-size: 14px; resize: vertical;
+  flex: 1; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--crm-line);
+  background: var(--crm-surface); color: var(--crm-ink); font-family: inherit; font-size: 14px; resize: vertical;
   outline: none; line-height: 1.5;
 }
-.crm-mesh .farm-paste textarea:focus { border-color: #E4501E; }
+.crm-mesh .farm-paste textarea::placeholder { color: var(--crm-ink-ghost); }
+.crm-mesh .farm-paste textarea:focus { border-color: rgba(200, 162, 76, 0.6); box-shadow: 0 0 0 3px rgba(200, 162, 76, 0.15); }
 .crm-mesh .farm-paste button {
   flex: none; align-self: flex-start; padding: 14px 22px; border-radius: 100px; border: none;
-  background: #E4501E; color: #fff; font-weight: 600; font-size: 14px; cursor: pointer;
-  white-space: nowrap; box-shadow: 0 6px 18px rgba(228,80,30,0.3); transition: background .2s;
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #0A0908; font-weight: 600; font-size: 14px; cursor: pointer;
+  white-space: nowrap; box-shadow: 0 6px 18px rgba(200,162,76,0.25); transition: all .2s;
 }
-.crm-mesh .farm-paste button:hover:not(:disabled) { background: #c9430f; }
+.crm-mesh .farm-paste button:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(200,162,76,0.4); }
 .crm-mesh .farm-paste button:disabled { opacity: 0.5; cursor: default; }
-.crm-mesh .farm-toast { margin: 6px 2px 0; font-size: 13px; color: #2E5A9C; font-weight: 600; }
+.crm-mesh .farm-toast { margin: 6px 2px 0; font-size: 13px; color: var(--crm-gold-soft); font-weight: 600; }
 
 .crm-mesh .farm-grid { display: grid; grid-template-columns: 1.55fr 1fr; gap: 18px; margin-top: 18px; align-items: stretch; }
 .crm-mesh .farm-map {
   height: 560px; border-radius: 18px; overflow: hidden;
-  background: rgba(255,255,255,0.72); border: 1px solid rgba(25,26,28,0.08);
+  background: var(--crm-surface); border: 1px solid var(--crm-line);
 }
 .crm-mesh .farm-empty { height: 100%; display: grid; place-items: center; text-align: center;
-  color: rgba(25,26,28,0.45); font-size: 14px; padding: 30px; }
+  color: var(--crm-ink-faint); font-size: 14px; padding: 30px; }
 .crm-mesh .farm-routes { height: 560px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding-right: 4px; }
-.crm-mesh .farm-routes-empty { color: rgba(25,26,28,0.45); font-size: 13.5px; padding: 8px 2px; }
+.crm-mesh .farm-routes-empty { color: var(--crm-ink-faint); font-size: 13.5px; padding: 8px 2px; }
 .crm-mesh .farm-cluster {
-  background: rgba(255,255,255,0.72); border: 1px solid rgba(25,26,28,0.08);
-  border-radius: 16px; padding: 12px 14px; box-shadow: 0 4px 18px rgba(25,26,28,0.05);
+  background: var(--crm-surface); border: 1px solid var(--crm-line);
+  border-radius: 16px; padding: 12px 14px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 8px 28px rgba(0,0,0,0.3);
 }
 .crm-mesh .farm-cluster-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
 .crm-mesh .farm-cluster-name {
   font-family: var(--font-grotesk), sans-serif; font-weight: 600; font-size: 12px;
-  letter-spacing: 0.1em; text-transform: uppercase; color: #191a1c;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--crm-ink);
 }
-.crm-mesh .farm-cluster-count { font-size: 11.5px; font-weight: 600; color: rgba(25,26,28,0.45); }
+.crm-mesh .farm-cluster-count { font-size: 11.5px; font-weight: 600; color: var(--crm-ink-faint); }
 .crm-mesh .farm-row {
   display: flex; align-items: center; gap: 10px; padding: 8px 6px; border-radius: 9px;
 }
-.crm-mesh .farm-row:hover { background: rgba(25,26,28,0.03); }
-.crm-mesh .farm-row.carded .farm-addr { color: rgba(25,26,28,0.4); text-decoration: line-through; }
+.crm-mesh .farm-row:hover { background: rgba(255,255,255,0.04); }
+.crm-mesh .farm-row.carded .farm-addr { color: var(--crm-ink-ghost); text-decoration: line-through; }
 .crm-mesh .farm-check {
   flex: none; width: 22px; height: 22px; border-radius: 6px; cursor: pointer;
-  border: 1.5px solid rgba(25,26,28,0.25); background: #fff; color: #fff;
+  border: 1.5px solid var(--crm-line); background: rgba(255,255,255,0.04); color: #0A0908;
   display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;
 }
-.crm-mesh .farm-row.carded .farm-check { background: #1d7a4f; border-color: #1d7a4f; }
-.crm-mesh .farm-addr { flex: 1; font-size: 13px; color: #191a1c; min-width: 0; }
-.crm-mesh .farm-dir { flex: none; color: #2E5A9C; font-weight: 700; font-size: 14px; text-decoration: none; }
-.crm-mesh .farm-dir:hover { color: #E4501E; }
+.crm-mesh .farm-row.carded .farm-check { background: #34C790; border-color: #34C790; }
+.crm-mesh .farm-addr { flex: 1; font-size: 13px; color: var(--crm-ink); min-width: 0; }
+.crm-mesh .farm-dir { flex: none; color: var(--crm-gold-soft); font-weight: 700; font-size: 14px; text-decoration: none; }
+.crm-mesh .farm-dir:hover { color: var(--crm-gold); }
 .crm-mesh .farm-del {
-  flex: none; background: none; border: none; cursor: pointer; color: rgba(25,26,28,0.3);
+  flex: none; background: none; border: none; cursor: pointer; color: var(--crm-ink-ghost);
   font-size: 17px; line-height: 1; padding: 0 2px;
 }
-.crm-mesh .farm-del:hover { color: #c0392b; }
+.crm-mesh .farm-del:hover { color: #FB7185; }
 @media (max-width: 1000px) {
   .crm-mesh .farm-grid { grid-template-columns: 1fr; }
   .crm-mesh .farm-map, .crm-mesh .farm-routes { height: 420px; }

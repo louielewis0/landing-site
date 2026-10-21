@@ -65,7 +65,7 @@ export default function SourceBreakdown({ leads }: { leads: Lead[] }) {
                 </span>
                 <div className="flex-1 h-2 bg-white/[0.06] rounded-full overflow-hidden">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-[var(--gold)] via-[var(--gold-soft)] to-[#A78BFA]"
+                    className="h-full rounded-full bg-gradient-to-r from-[var(--gold-deep)] via-[var(--gold)] to-[var(--gold-soft)]"
                     style={{ width: `${barPct}%` }}
                   />
                 </div>

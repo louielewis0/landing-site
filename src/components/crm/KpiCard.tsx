@@ -31,7 +31,7 @@ export default function KpiCard({
     <div
       className={`crm-glass rounded-2xl p-5 sm:p-6 transition-all duration-150 hover:-translate-y-0.5 ${
         emphasis === "highlight"
-          ? "!bg-[linear-gradient(135deg,rgba(200,162,76,0.12),rgba(167,139,250,0.05))] !border-[var(--gold)]/30"
+          ? "!bg-[linear-gradient(135deg,rgba(200,162,76,0.14),rgba(200,162,76,0.03))] !border-[var(--gold)]/35"
           : "hover:!bg-white/[0.06]"
       }`}
     >
@@ -49,7 +49,7 @@ export default function KpiCard({
           </span>
         )}
       </div>
-      <p className="crm-num text-3xl font-semibold text-[#191a1c]">
+      <p className="crm-figure text-[2rem] sm:text-[2.25rem]">
         {value}
       </p>
       {delta && (

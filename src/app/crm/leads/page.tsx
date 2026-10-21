@@ -14,12 +14,12 @@ export default function CrmLeadsPage() {
           fontWeight: 300,
           fontSize: 40,
           letterSpacing: "-0.025em",
-          color: "#191a1c",
+          color: "var(--crm-ink)",
         }}
       >
         Leads
       </h1>
-      <p style={{ fontSize: 14, color: "rgba(25,26,28,0.55)", margin: "0 0 24px", maxWidth: 560 }}>
+      <p style={{ fontSize: 14, color: "var(--crm-ink-faint)", margin: "0 0 24px", maxWidth: 560 }}>
         Search, filter, scrub, export. Click any row to open the full
         record and activity timeline.
       </p>

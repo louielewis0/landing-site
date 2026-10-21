@@ -9,7 +9,7 @@ import { clusterTargets, type FarmTarget } from "./cluster";
 const FarmMap = dynamic(() => import("./FarmMap"), {
   ssr: false,
   loading: () => (
-    <div style={{ height: "100%", display: "grid", placeItems: "center", color: "rgba(25,26,28,0.4)", fontSize: 13 }}>
+    <div style={{ height: "100%", display: "grid", placeItems: "center", color: "var(--crm-ink-faint)", fontSize: 13 }}>
       Loading map…
     </div>
   ),
