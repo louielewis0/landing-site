@@ -914,7 +914,7 @@ body {
   background: #fff; border: 1px solid var(--line); border-radius: 24px;
   padding: 34px; box-shadow: var(--s-shadow); text-align: left;
 }
-.site-theme .lead-card h3 { font-size: 22px; margin-bottom: 6px; }
+.site-theme .lead-card h3, .site-theme .lead-card h2 { font-size: 22px; margin-bottom: 6px; }
 .site-theme .lead-card input {
   width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line);
   background: var(--cream); color: var(--s-ink); font-family: inherit; font-size: 14px;

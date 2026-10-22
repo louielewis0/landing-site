@@ -87,7 +87,7 @@ export default function HomeValueForm() {
     return (
       <div className="lead-card" style={{ textAlign: "center", padding: "54px 34px" }}>
         <div className="val-spin" aria-hidden />
-        <h3 style={{ marginTop: 22 }}>Analyzing {address}…</h3>
+        <h2 style={{ marginTop: 22 }}>Analyzing {address}…</h2>
         <p style={{ color: "var(--s-muted)", fontSize: 14 }}>
           Pulling recorded sales, comparing nearby homes, weighing recent
           market movement.
@@ -192,7 +192,7 @@ export default function HomeValueForm() {
         <div className="s-eyebrow" style={{ justifyContent: "center" }}>
           Request received
         </div>
-        <h3>Your valuation is being prepared.</h3>
+        <h2>Your valuation is being prepared.</h2>
         <p style={{ color: "var(--s-muted)", fontSize: 14.5 }}>
           A licensed broker is running your property against live MLS
           comps. Expect your number within 24 hours — usually much sooner.
@@ -221,7 +221,7 @@ export default function HomeValueForm() {
 
       {step === 1 ? (
         <>
-          <h3>Where&rsquo;s the property?</h3>
+          <h2>Where&rsquo;s the property?</h2>
           <p style={{ color: "var(--s-muted)", fontSize: 13.5, marginBottom: 18 }}>
             Instant estimate, powered by recorded-sale data.
           </p>
@@ -274,7 +274,7 @@ export default function HomeValueForm() {
         </>
       ) : (
         <>
-          <h3>Where should we send the full report?</h3>
+          <h2>Where should we send the full report?</h2>
           <p style={{ color: "var(--s-muted)", fontSize: 13.5, marginBottom: 18 }}>
             Your estimate appears instantly — the broker-verified report
             follows within 24 hours.
