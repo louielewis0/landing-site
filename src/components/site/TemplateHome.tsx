@@ -7,7 +7,7 @@ import BgVideo from "./BgVideo";
 
 function Stars({ size = 15 }: { size?: number }) {
   return (
-    <span style={{ display: "inline-flex", gap: 2 }} aria-label="5 out of 5 stars">
+    <span style={{ display: "inline-flex", gap: 2 }} role="img" aria-label="5 out of 5 stars">
       {[0, 1, 2, 3, 4].map((i) => (
         <Star key={i} width={size} height={size} style={{ color: "var(--s-gold)" }} fill="currentColor" strokeWidth={0} />
       ))}
