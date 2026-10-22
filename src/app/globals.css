@@ -1229,11 +1229,11 @@ body {
 .site-theme .t-foot-links { display: flex; gap: 32px; font-size: 13.5px; font-weight: 500; flex-wrap: wrap; }
 .site-theme .t-foot-links a { color: rgba(25,26,28,0.7); transition: color .25s; }
 .site-theme .t-foot-links a:hover { color: var(--s-gold); }
-.site-theme .t-foot-contact { font-size: 13.5px; color: rgba(25,26,28,0.6); text-align: right; line-height: 1.7; }
+.site-theme .t-foot-contact { font-size: 13.5px; color: rgba(25,26,28,0.72); text-align: right; line-height: 1.7; }
 .site-theme .t-foot-bottom {
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
   padding-top: 22px; border-top: 1px solid rgba(25,26,28,0.1);
-  font-size: 12px; color: rgba(25,26,28,0.4);
+  font-size: 12px; color: rgba(25,26,28,0.70);
 }
 
 /* Responsive */
@@ -1278,7 +1278,8 @@ body {
 /* Nav overlays the full-bleed hero on the homepage (nav-over-video) */
 .nav-over-video { position: relative; }
 .nav-over-video .t-nav { position: absolute; top: 0; left: 0; right: 0; z-index: 50; max-width: none; padding: 26px 40px 0; }
-.nav-over-video .t-nav-word { color: #fff; text-shadow: 0 1px 10px rgba(0,0,0,0.3); }
+/* (.t-nav-word is used only in the footer — never whiten it, or it vanishes
+   on cream. The top nav has no wordmark, so no video override is needed.) */
 .nav-over-video .t-nav-links a { color: rgba(255,255,255,0.82); }
 .nav-over-video .t-nav-links a:hover { color: #fff; }
 .nav-over-video .t-nav-phone { border-color: rgba(255,255,255,0.45); color: #fff; background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
@@ -1337,14 +1338,14 @@ body {
   line-height: 1.02; letter-spacing: -0.03em; text-transform: uppercase;
 }
 .site-theme .t-rev h1 span { font-weight: 500; }
-.site-theme .t-rev-sub { margin: 0 auto 40px; font-size: 16px; line-height: 1.7; color: rgba(25,26,28,0.6); max-width: 460px; }
+.site-theme .t-rev-sub { margin: 0 auto 40px; font-size: 16px; line-height: 1.7; color: rgba(25,26,28,0.72); max-width: 460px; }
 .site-theme .t-rev-steps { max-width: 760px; padding-bottom: 90px; }
 .site-theme .t-rev-steps h2 {
   margin: 0 0 26px; font-weight: 300; font-size: clamp(28px, 3.4vw, 42px);
   letter-spacing: -0.02em; text-transform: uppercase;
 }
 .site-theme .t-rev-steps h2 span { font-weight: 500; }
-.site-theme .t-rev-desc { color: rgba(25,26,28,0.55); font-weight: 400; }
+.site-theme .t-rev-desc { color: rgba(25,26,28,0.70); font-weight: 400; }
 
 /* Listing actions + gallery (active listing) */
 .site-theme .t-listing-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
@@ -1798,6 +1799,6 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
 
 /* Footer areas column (city page links for internal linking) */
 .site-theme .t-foot-areas { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
-.site-theme .t-foot-areas-h { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(25,26,28,0.4); margin-bottom: 2px; font-weight: 600; }
+.site-theme .t-foot-areas-h { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(25,26,28,0.70); margin-bottom: 2px; font-weight: 600; }
 .site-theme .t-foot-areas a { color: rgba(25,26,28,0.7); }
 .site-theme .t-foot-areas a:hover { color: var(--s-gold); }
