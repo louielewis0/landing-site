@@ -148,7 +148,7 @@ export default function ClientReviewPage() {
         }}
       />
 
-      <div className="relative flex items-center justify-center min-h-screen px-6 py-16">
+      <main className="relative flex items-center justify-center min-h-screen px-6 py-16">
         <div className="w-full max-w-lg">
           {/* Logo */}
           <div className="flex justify-center mb-10">
@@ -180,6 +180,7 @@ export default function ClientReviewPage() {
                     onMouseEnter={() => setHoveredStar(star)}
                     onMouseLeave={() => setHoveredStar(0)}
                     onClick={() => handleRating(star)}
+                    aria-label={`${star} star${star === 1 ? "" : "s"}`}
                     className="transition-transform hover:scale-110 active:scale-95"
                   >
                     <Star
@@ -212,9 +213,9 @@ export default function ClientReviewPage() {
                     <Star key={i} className="w-8 h-8" style={{ color: "var(--s-gold)" }} fill="currentColor" strokeWidth={0} />
                   ))}
                 </div>
-                <h2 style={{ fontSize: "clamp(24px, 4vw, 32px)", marginBottom: 8 }}>
+                <h1 style={{ fontSize: "clamp(24px, 4vw, 32px)", marginBottom: 8 }}>
                   Thank you!
-                </h2>
+                </h1>
                 <p style={{ color: "var(--s-muted)" }}>
                   We wrote a review you can use — edit it or paste it as-is.
                 </p>
@@ -320,9 +321,9 @@ export default function ClientReviewPage() {
           {/* Step: 1-4 stars → private feedback */}
           {step === "feedback" && (
             <div className="text-center" style={{ color: "var(--s-ink)" }}>
-              <h2 style={{ fontSize: "clamp(24px, 4vw, 32px)", marginBottom: 12 }}>
+              <h1 style={{ fontSize: "clamp(24px, 4vw, 32px)", marginBottom: 12 }}>
                 We appreciate your honesty.
-              </h2>
+              </h1>
               <p style={{ color: "var(--s-muted)", marginBottom: 32 }}>
                 We'd love to know how we can improve. This goes directly to our
                 team — it won't be posted publicly.
@@ -332,8 +333,9 @@ export default function ClientReviewPage() {
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
                 placeholder="What could we have done better?"
+                aria-label="Your feedback"
                 rows={4}
-                className="w-full px-5 py-4 rounded-xl resize-none transition-all focus:outline-none"
+                className="w-full px-5 py-4 rounded-xl resize-none transition-all focus:ring-2 focus:ring-[#C8A24C] focus:outline-none"
                 style={{
                   background: "#fff",
                   border: "1px solid var(--line)",
@@ -365,9 +367,9 @@ export default function ClientReviewPage() {
               >
                 <Check className="w-8 h-8" strokeWidth={2.5} />
               </div>
-              <h2 style={{ fontSize: "clamp(24px, 4vw, 32px)", marginBottom: 12 }}>
+              <h1 style={{ fontSize: "clamp(24px, 4vw, 32px)", marginBottom: 12 }}>
                 Thank you, {req?.name?.split(" ")[0]}.
-              </h2>
+              </h1>
               <p style={{ color: "var(--s-muted)", marginBottom: 32 }}>
                 Your response has been received. We truly appreciate you taking
                 the time.
@@ -379,7 +381,7 @@ export default function ClientReviewPage() {
             </div>
           )}
         </div>
-      </div>
+      </main>
     </div>
     </div>
   );

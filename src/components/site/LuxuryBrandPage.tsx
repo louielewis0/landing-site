@@ -91,7 +91,7 @@ export default function LuxuryBrandPage({ data }: { data: LuxuryBrandData }) {
 
             <div style={{ display: "grid", gridTemplateColumns: data.heroImage ? "minmax(0,1.5fr) minmax(0,0.9fr)" : "1fr", gap: "clamp(28px,5vw,64px)", alignItems: "center" }}>
               <div>
-                <div style={{ color: "var(--s-gold)", fontWeight: 700, fontSize: 13, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 20 }}>{data.eyebrow}</div>
+                <div style={{ color: "var(--s-gold-ink)", fontWeight: 700, fontSize: 13, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 20 }}>{data.eyebrow}</div>
                 <h1 style={{ fontFamily: SERIF, fontWeight: 500, fontSize: "clamp(40px,6.4vw,76px)", lineHeight: 1.03, letterSpacing: "-0.01em", color: "#F1EADB", margin: 0 }}>{data.h1}</h1>
                 <div style={{ width: 72, height: 2, background: "var(--s-gold)", margin: "28px 0 26px" }} />
                 <p style={{ fontSize: 17.5, lineHeight: 1.75, color: "rgba(241,234,219,0.82)", maxWidth: 620, margin: 0 }}>{data.sub}</p>
@@ -147,7 +147,7 @@ export default function LuxuryBrandPage({ data }: { data: LuxuryBrandData }) {
               <p style={{ fontSize: 15, lineHeight: 1.7, color: "rgba(241,234,219,0.75)", margin: "0 auto 18px", maxWidth: 520 }}>
                 Named first of 1,634 Michigan brokerages by TownAnswer &mdash; on a methodology businesses can&rsquo;t pay to influence. 5.0&#9733; across 85+ Google reviews.
               </p>
-              <a href="/best-real-estate-brokerage-in-michigan" style={{ color: "var(--s-gold)", fontWeight: 600, fontSize: 14, display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <a href="/best-real-estate-brokerage-in-michigan" style={{ color: "var(--s-gold-ink)", fontWeight: 600, fontSize: 14, display: "inline-flex", alignItems: "center", gap: 6 }}>
                 See how we earned it <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </div>
@@ -169,7 +169,7 @@ export default function LuxuryBrandPage({ data }: { data: LuxuryBrandData }) {
             {data.related.length > 0 && (
               <div style={{ marginTop: 30, display: "flex", gap: "12px 26px", flexWrap: "wrap", fontSize: 14 }}>
                 {data.related.map((r) => (
-                  <a key={r.href} href={r.href} style={{ color: "var(--s-gold)", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6 }}>
+                  <a key={r.href} href={r.href} style={{ color: "var(--s-gold-ink)", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6 }}>
                     {r.label} <ArrowRight className="w-3.5 h-3.5" />
                   </a>
                 ))}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
 /**
@@ -25,15 +25,45 @@ export default function ShowingCTA({
   const [when, setWhen] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
   const [err, setErr] = useState("");
+  const cardRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const prevFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    prevFocusRef.current = document.activeElement as HTMLElement | null;
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const card = cardRef.current;
+      if (!card) return;
+      const focusables = card.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+      if (e.shiftKey) {
+        if (active === first || !card.contains(active)) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      prevFocusRef.current?.focus();
     };
   }, [open]);
 
@@ -78,9 +108,9 @@ export default function ShowingCTA({
       </button>
 
       {open && (
-        <div className="t-lb sf-overlay" role="dialog" aria-label="Book a showing" onClick={() => setOpen(false)}>
-          <div className="sf-card" onClick={(e) => e.stopPropagation()}>
-            <button className="sf-close" aria-label="Close" onClick={() => setOpen(false)}>
+        <div className="t-lb sf-overlay" role="dialog" aria-modal="true" aria-label="Book a showing" onClick={() => setOpen(false)}>
+          <div className="sf-card" ref={cardRef} onClick={(e) => e.stopPropagation()}>
+            <button className="sf-close" aria-label="Close" ref={closeRef} onClick={() => setOpen(false)}>
               &times;
             </button>
             {status === "ok" ? (
@@ -107,10 +137,10 @@ export default function ShowingCTA({
                   your time personally.
                 </p>
                 <form onSubmit={submit} className="sf-form">
-                  <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" autoComplete="name" />
-                  <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email" autoComplete="email" />
-                  <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" type="tel" autoComplete="tel" />
-                  <input value={when} onChange={(e) => setWhen(e.target.value)} placeholder="Preferred day / time (e.g. Sat afternoon)" />
+                  <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" aria-label="Full name" autoComplete="name" />
+                  <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" aria-label="Email address" type="email" autoComplete="email" />
+                  <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" aria-label="Phone number" type="tel" autoComplete="tel" />
+                  <input value={when} onChange={(e) => setWhen(e.target.value)} placeholder="Preferred day / time (e.g. Sat afternoon)" aria-label="Preferred day and time" />
                   {err && <p className="sf-err">{err}</p>}
                   <button type="submit" className="t-pill t-pill-solid t-pill-dark" disabled={status === "loading"}>
                     {status === "loading" ? "Sending…" : "Request my showing"}

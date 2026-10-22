@@ -114,6 +114,7 @@ export default function ToolLeadForm({
   return (
     <form
       onSubmit={handleSubmit}
+      aria-label="Request your report"
       style={{
         borderRadius: "var(--s-radius)",
         border: "1px solid var(--line)",
@@ -130,10 +131,10 @@ export default function ToolLeadForm({
         </h3>
         <p style={{ fontSize: 13.5, color: "var(--s-muted)", lineHeight: 1.6 }}>{subhead}</p>
       </div>
-      <input style={input} value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" autoComplete="name" />
+      <input style={input} aria-label="Full name" aria-required="true" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" autoComplete="name" />
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-        <input style={input} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email" autoComplete="email" />
-        <input style={input} value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" type="tel" autoComplete="tel" />
+        <input style={input} aria-label="Email address" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email" autoComplete="email" />
+        <input style={input} aria-label="Phone number" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" type="tel" autoComplete="tel" />
       </div>
       <button
         type="submit"

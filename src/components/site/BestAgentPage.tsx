@@ -149,7 +149,7 @@ export default function BestAgentPage({ data }: { data: BestAgentData }) {
               </div>
               <div>
                 <h2 style={{ fontSize: "clamp(24px, 3vw, 32px)", lineHeight: 1.15, marginBottom: 4 }}>{SUNDUS.name}</h2>
-                <div style={{ fontSize: 14, color: "var(--s-gold)", fontWeight: 600, marginBottom: 8 }}>{SUNDUS.title}</div>
+                <div style={{ fontSize: 14, color: "var(--s-gold-ink)", fontWeight: 600, marginBottom: 8 }}>{SUNDUS.title}</div>
                 <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13.5, color: "var(--s-muted)", marginBottom: 18 }}>
                   <Stars /> 5.0 · 85+ Google reviews
                 </div>
@@ -234,8 +234,8 @@ export default function BestAgentPage({ data }: { data: BestAgentData }) {
             </div>
             {/* Reinforcing cross-links */}
             <div style={{ marginTop: 26, display: "flex", gap: "10px 22px", flexWrap: "wrap", fontSize: 13.5 }}>
-              <a href={data.cityPage.href} style={{ color: "var(--s-gold)", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6 }}>{data.cityPage.label} <ArrowRight className="w-3.5 h-3.5" /></a>
-              <a href={data.brokeragePage.href} style={{ color: "var(--s-gold)", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6 }}>{data.brokeragePage.label} <ArrowRight className="w-3.5 h-3.5" /></a>
+              <a href={data.cityPage.href} style={{ color: "var(--s-gold-ink)", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6 }}>{data.cityPage.label} <ArrowRight className="w-3.5 h-3.5" /></a>
+              <a href={data.brokeragePage.href} style={{ color: "var(--s-gold-ink)", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6 }}>{data.brokeragePage.label} <ArrowRight className="w-3.5 h-3.5" /></a>
             </div>
           </div>
         </section>

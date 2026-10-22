@@ -499,13 +499,14 @@ body {
      highlight, dark media panels. */
   --navy: #191a1c;            /* ink — headings + dark bands */
   --navy-2: #141821;          /* dark media panel */
-  --s-gold: #E4501E;          /* burnt orange accent */
+  --s-gold: #E4501E;          /* burnt orange accent — brand fills, large text, focus rings */
+  --s-gold-ink: #B23810;      /* accessible burnt orange for SMALL text / links / buttons (WCAG AA on cream) */
   --s-gold-light: #ffb59a;
   --s-blue: #2E5A9C;          /* steel blue highlight */
   --cream: #f2efe9;           /* bone */
   --cream-2: #e9e5dc;
   --s-ink: #191a1c;
-  --s-muted: rgba(25, 26, 28, 0.55);
+  --s-muted: rgba(25, 26, 28, 0.70); /* bumped from .55 → clears 4.5:1 on cream (WCAG 1.4.3) */
   --line: rgba(25, 26, 28, 0.12);
   --s-shadow: 0 24px 60px rgba(25, 26, 28, 0.16);
   --s-radius: 26px;
@@ -533,7 +534,7 @@ body {
 .site-theme .s-eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
   font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--s-gold); margin-bottom: 14px;
+  color: var(--s-gold-ink); margin-bottom: 14px;
 }
 .site-theme .s-eyebrow::before { content: ""; width: 22px; height: 1.5px; background: var(--s-gold); display: inline-block; }
 .site-theme .btn {
@@ -543,12 +544,35 @@ body {
   transition: transform .35s cubic-bezier(.2,.9,.3,1), box-shadow .35s, background .35s;
   white-space: nowrap;
 }
-.site-theme .btn-gold { background: var(--s-gold); color: #fff; box-shadow: 0 12px 30px -8px rgba(217,118,47,0.55); }
+.site-theme .btn-gold { background: var(--s-gold-ink); color: #fff; box-shadow: 0 12px 30px -8px rgba(178,56,16,0.5); }
 .site-theme .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 18px 36px -8px rgba(217,118,47,0.65); }
 .site-theme .btn-outline { background: transparent; border: 1.5px solid rgba(255,255,255,0.4); color: #fff; }
 .site-theme .btn-outline:hover { background: rgba(255,255,255,0.12); transform: translateY(-3px); }
 .site-theme .btn-navy { background: var(--navy); color: #fff; box-shadow: 0 12px 30px -10px rgba(19,28,46,0.5); }
 .site-theme .btn-navy:hover { transform: translateY(-3px); }
+
+/* ── Accessibility: skip-to-content link + visible keyboard focus ── */
+.skip-link {
+  position: fixed; top: 10px; left: 10px; z-index: 1000;
+  transform: translateY(-160%);
+  background: var(--navy, #191a1c); color: #fff;
+  padding: 12px 20px; border-radius: 10px;
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-weight: 600; font-size: 14px; text-decoration: none;
+  transition: transform .2s ease;
+}
+.skip-link:focus { transform: translateY(0); outline: 3px solid var(--s-gold); outline-offset: 2px; }
+/* Visible focus ring on every interactive element (WCAG 2.4.7). --s-gold
+   clears 3:1 on both cream and navy, so the ring is seen on any section. */
+.site-theme a:focus-visible,
+.site-theme button:focus-visible,
+.site-theme input:focus-visible,
+.site-theme select:focus-visible,
+.site-theme textarea:focus-visible,
+.site-theme [tabindex]:focus-visible {
+  outline: 2px solid var(--s-gold);
+  outline-offset: 2px;
+}
 .site-theme .reveal {
   opacity: 0;
   transform: translateY(36px);
@@ -774,7 +798,7 @@ body {
 .site-theme .area-card-txt small { opacity: .75; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
 .site-theme .area-card-txt strong { display: block; font-family: var(--font-inter), "Inter", sans-serif; font-size: 18px; margin-top: 2px; letter-spacing: -0.02em; }
 .site-theme .areas-more { text-align: center; margin-top: 34px; color: var(--s-muted); font-size: 14px; }
-.site-theme .areas-more a { color: var(--s-gold); font-weight: 600; }
+.site-theme .areas-more a { color: var(--s-gold-ink); font-weight: 600; }
 
 /* ── Contact ── */
 .site-theme .contact-sec { background: var(--cream-2); padding: 120px 0 90px; }
@@ -809,7 +833,7 @@ body {
 .site-theme .foot-brand p { margin-top: 16px; max-width: 280px; line-height: 1.7; }
 .site-theme .foot-col h4 { color: var(--navy); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 16px; font-family: var(--font-inter), "Inter", sans-serif; font-weight: 600; }
 .site-theme .foot-col ul { list-style: none; display: grid; gap: 10px; padding: 0; }
-.site-theme .foot-col a:hover { color: var(--s-gold); }
+.site-theme .foot-col a:hover { color: var(--s-gold-ink); }
 .site-theme .foot-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; flex-wrap: wrap; gap: 10px; font-size: 12.5px; }
 
 .site-theme .back-to-top {
@@ -826,7 +850,7 @@ body {
 .site-theme .prose-site p { color: var(--s-ink); margin-bottom: 16px; max-width: 72ch; }
 .site-theme .prose-site ul, .site-theme .prose-site ol { margin: 0 0 16px 22px; }
 .site-theme .prose-site li { margin-bottom: 8px; }
-.site-theme .prose-site a { color: var(--s-gold); font-weight: 600; }
+.site-theme .prose-site a { color: var(--s-gold-ink); font-weight: 600; }
 
 /* ── Responsive ── */
 @media (max-width: 980px) {
@@ -1754,7 +1778,8 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
   display: flex; gap: 14px; width: max-content;
   animation: t-review-scroll 70s linear infinite;
 }
-.site-theme .t-reviews-marquee:hover .t-reviews-track { animation-play-state: paused; }
+.site-theme .t-reviews-marquee:hover .t-reviews-track,
+.site-theme .t-reviews-marquee:focus-within .t-reviews-track { animation-play-state: paused; }
 @keyframes t-review-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .site-theme .t-review-card {
   flex: 0 0 340px; width: 340px; height: 232px; margin: 0;

@@ -29,6 +29,7 @@ export default function SiteFooter() {
     { label: "Oakland County Brokerages", href: "/best-real-estate-brokerages-oakland-county" },
     { label: "Michigan Brokerages", href: "/best-real-estate-brokerages-michigan" },
     { label: "Privacy", href: "/privacy" },
+    { label: "Accessibility", href: "/accessibility" },
   ];
 
   // Free interactive tools — de-orphaned into the footer sitewide.

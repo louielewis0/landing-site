@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Star } from "lucide-react";
 import { company, googleReviews } from "@/lib/config";
 import CountUpStats from "./CountUpStats";
+import BgVideo from "./BgVideo";
 
 function Stars({ size = 15 }: { size?: number }) {
   return (
@@ -39,7 +40,7 @@ export function TemplateReviews() {
           <span style={{ fontSize: 14, fontWeight: 600, color: "var(--s-ink)" }}>Named Michigan&rsquo;s #1 brokerage by TownAnswer &middot; 5.0 across 85+ Google reviews</span>
         </div>
         <div style={{ marginTop: 8 }}>
-          <Link href="/best-real-estate-brokerage-in-michigan" style={{ fontSize: 13, fontWeight: 600, color: "var(--s-gold)" }}>
+          <Link href="/best-real-estate-brokerage-in-michigan" style={{ fontSize: 13, fontWeight: 600, color: "var(--s-gold-ink)" }}>
             See how we earned it &rarr;
           </Link>
         </div>
@@ -83,9 +84,7 @@ export function TemplateReviews() {
 export function TemplateHero() {
   return (
     <section className="t-hero-full">
-      <video autoPlay muted loop playsInline preload="metadata" poster="/hero-video-poster.jpg">
-        <source src="/hero-video.mp4" type="video/mp4" />
-      </video>
+      <BgVideo srcMp4="/hero-video.mp4" poster="/hero-video-poster.jpg" />
       <div className="t-hero-full-shade" aria-hidden />
       <div className="t-hero-logo">
         <Image

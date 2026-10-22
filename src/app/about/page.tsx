@@ -64,12 +64,12 @@ const data: LuxuryBrandData = {
       body: (
         <>
           <p>
-            In 2026, <a href="/best-real-estate-brokerage-in-michigan" style={{ color: "var(--s-gold)", fontWeight: 600 }}>TownAnswer named Real Estate Market Center the #1 real estate brokerage in Michigan</a>{" "}
+            In 2026, <a href="/best-real-estate-brokerage-in-michigan" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>TownAnswer named Real Estate Market Center the #1 real estate brokerage in Michigan</a>{" "}
             &mdash; first of 1,634 eligible brokerages statewide, on a methodology that businesses
             cannot pay to influence. We also hold a perfect <strong>5.0 rating across 85+ Google
             reviews</strong>, with clients consistently describing the process as smooth, professional,
             and handled start to finish. Read them on our{" "}
-            <a href="/reviews" style={{ color: "var(--s-gold)", fontWeight: 600 }}>reviews page</a>.
+            <a href="/reviews" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>reviews page</a>.
           </p>
         </>
       ),
@@ -80,11 +80,11 @@ const data: LuxuryBrandData = {
         <>
           <p>We work street by street across Metro Detroit&rsquo;s most sought-after communities:</p>
           <ul style={{ margin: 0, paddingLeft: 20, display: "grid", gap: 6 }}>
-            <li><a href="/troy-real-estate-agent" style={{ color: "var(--s-gold)", fontWeight: 600 }}>Troy</a> &mdash; our home city</li>
-            <li><a href="/birmingham-real-estate-agent" style={{ color: "var(--s-gold)", fontWeight: 600 }}>Birmingham</a></li>
-            <li><a href="/bloomfield-hills-real-estate-agent" style={{ color: "var(--s-gold)", fontWeight: 600 }}>Bloomfield Hills</a></li>
-            <li><a href="/rochester-hills-real-estate-agent" style={{ color: "var(--s-gold)", fontWeight: 600 }}>Rochester Hills</a> &amp; <a href="/rochester-real-estate-agent" style={{ color: "var(--s-gold)", fontWeight: 600 }}>Rochester</a></li>
-            <li><a href="/west-bloomfield-real-estate-agent" style={{ color: "var(--s-gold)", fontWeight: 600 }}>West Bloomfield</a></li>
+            <li><a href="/troy-real-estate-agent" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>Troy</a> &mdash; our home city</li>
+            <li><a href="/birmingham-real-estate-agent" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>Birmingham</a></li>
+            <li><a href="/bloomfield-hills-real-estate-agent" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>Bloomfield Hills</a></li>
+            <li><a href="/rochester-hills-real-estate-agent" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>Rochester Hills</a> &amp; <a href="/rochester-real-estate-agent" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>Rochester</a></li>
+            <li><a href="/west-bloomfield-real-estate-agent" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>West Bloomfield</a></li>
           </ul>
         </>
       ),

@@ -23,8 +23,11 @@ export default function SiteShell({
     <div
       className={`site-theme ${fraunces.variable} ${inter.variable} ${manrope.variable} ${grotesk.variable} ${navOnDark ? "nav-over-video" : ""}`}
     >
+      <a href="#main" className="skip-link">Skip to main content</a>
       <SiteNav />
-      {children}
+      <div id="main" tabIndex={-1}>
+        {children}
+      </div>
       <SiteFooter />
       <Concierge />
       <ValuationPopup />

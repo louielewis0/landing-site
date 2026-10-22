@@ -124,17 +124,20 @@ export default function ContactForm() {
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="contact-form-card reveal" style={{ height: "fit-content" }}>
+          <form onSubmit={handleSubmit} className="contact-form-card reveal" style={{ height: "fit-content" }} aria-label="Contact form">
             <h3>Tell us your move.</h3>
             <div className="form-row">
               <input
                 required
+                aria-required="true"
+                aria-label="Full name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Full name"
               />
               <input
+                aria-label="Phone number (optional)"
                 type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -144,6 +147,8 @@ export default function ContactForm() {
             <div className="form-row" style={{ gridTemplateColumns: "1fr" }}>
               <input
                 required
+                aria-required="true"
+                aria-label="Email address"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -152,6 +157,8 @@ export default function ContactForm() {
             </div>
             <textarea
               required
+              aria-required="true"
+              aria-label="Message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="How can we help?"

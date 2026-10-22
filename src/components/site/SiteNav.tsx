@@ -34,7 +34,7 @@ export default function SiteNav() {
         <Link href="/" className="t-nav-brand" aria-label={`${company.name} home`}>
           <Image src="/mcr-logo-color-3d.png" alt={company.name} width={64} height={64} priority />
         </Link>
-        <nav className="t-nav-links">
+        <nav className="t-nav-links" aria-label="Primary">
           {links.map((l) => (
             <Link key={l.label} href={l.href}>
               {l.label}

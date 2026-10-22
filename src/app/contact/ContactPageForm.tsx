@@ -65,9 +65,11 @@ export default function ContactPageForm() {
   }
 
   return (
-    <form className="cq-card" onSubmit={submit}>
+    <form className="cq-card" onSubmit={submit} aria-label="Contact form">
       <input
         className="cq-input"
+        aria-label="Full name"
+        aria-required="true"
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Your name"
@@ -75,6 +77,8 @@ export default function ContactPageForm() {
       />
       <input
         className="cq-input"
+        aria-label="Phone number"
+        aria-required="true"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
         placeholder="Phone number"
@@ -84,6 +88,7 @@ export default function ContactPageForm() {
       />
       <input
         className="cq-input"
+        aria-label="Email address (optional)"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email (optional)"
@@ -92,6 +97,7 @@ export default function ContactPageForm() {
       />
       <textarea
         className="cq-input"
+        aria-label="Message (optional)"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="What can we help with? (optional)"

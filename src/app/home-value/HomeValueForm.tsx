@@ -228,6 +228,8 @@ export default function HomeValueForm() {
           <div style={{ display: "grid", gap: 12 }}>
             <input
               style={input}
+              aria-label="Street address"
+              aria-required="true"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               placeholder="Street address — e.g. 2032 E Square Lake Rd"
@@ -236,6 +238,8 @@ export default function HomeValueForm() {
             <div style={{ display: "grid", gridTemplateColumns: "1.4fr 0.8fr", gap: 12 }}>
               <input
                 style={input}
+                aria-label="City"
+                aria-required="true"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 placeholder="City"
@@ -243,6 +247,7 @@ export default function HomeValueForm() {
               />
               <input
                 style={input}
+                aria-label="ZIP code"
                 value={zip}
                 onChange={(e) => setZip(e.target.value)}
                 placeholder="ZIP"
@@ -277,6 +282,8 @@ export default function HomeValueForm() {
           <div style={{ display: "grid", gap: 12 }}>
             <input
               style={input}
+              aria-label="Full name"
+              aria-required="true"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Full name"
@@ -284,6 +291,7 @@ export default function HomeValueForm() {
             />
             <input
               style={input}
+              aria-label="Email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
@@ -292,6 +300,7 @@ export default function HomeValueForm() {
             />
             <input
               style={input}
+              aria-label="Phone number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="Phone"

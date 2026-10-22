@@ -85,17 +85,18 @@ export default function ListingInquiry({
   }
 
   return (
-    <form onSubmit={submit} className="lead-card">
+    <form onSubmit={submit} className="lead-card" aria-label="Showing request">
       <h3>Ask about this home</h3>
       <p style={{ color: "var(--s-muted)", fontSize: 13.5, marginBottom: 18 }}>
         It&rsquo;s off market right now, but we&rsquo;re the listing agents. Leave your details and a licensed
         broker will reach back — and let you know if it comes back on.
       </p>
       <div style={{ display: "grid", gap: 12 }}>
-        <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" autoComplete="name" required />
-        <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email" autoComplete="email" />
-        <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" type="tel" autoComplete="tel" />
+        <input aria-label="Full name" aria-required="true" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" autoComplete="name" required />
+        <input aria-label="Email address" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email" autoComplete="email" />
+        <input aria-label="Phone number" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" type="tel" autoComplete="tel" />
         <textarea
+          aria-label="Message"
           value={msg}
           onChange={(e) => setMsg(e.target.value)}
           placeholder="Your questions (and the best way to reach you)"

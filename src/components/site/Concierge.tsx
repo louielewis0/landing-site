@@ -221,9 +221,12 @@ export default function Concierge() {
         }
         .conc-foot button:disabled { opacity: .45; cursor: default; }
         .conc-note { font-size: 11px; color: var(--s-muted, #757a83); text-align: center; padding: 0 12px 10px; background: #fff; }
-        .conc-teaser {
+        .conc-teaser-wrap {
           position: fixed; bottom: 94px; right: 26px; z-index: 94;
           width: min(300px, calc(100vw - 40px));
+        }
+        .conc-teaser {
+          width: 100%; text-align: left; font: inherit; color: inherit;
           background: #fff; border: 1px solid var(--line, #e7e4dd);
           border-radius: 18px; border-bottom-right-radius: 6px;
           box-shadow: 0 22px 50px -16px rgba(22,24,29,0.3);
@@ -235,7 +238,7 @@ export default function Concierge() {
         .conc-teaser img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
         .conc-teaser b { display: block; font-size: 13px; color: var(--navy); margin-bottom: 2px; }
         .conc-teaser p { font-size: 13.5px; line-height: 1.5; color: var(--s-ink, #23262d); margin: 0; }
-        .conc-teaser .tclose {
+        .conc-teaser-wrap .tclose {
           position: absolute; top: -9px; left: -9px; width: 24px; height: 24px;
           border-radius: 50%; border: 1px solid var(--line, #e7e4dd);
           background: #fff; color: var(--s-muted, #757a83); font-size: 14px;
@@ -248,17 +251,19 @@ export default function Concierge() {
           font-size: 11.5px; font-weight: 700; display: flex; align-items: center;
           justify-content: center; border: 2px solid var(--cream, #fafaf8);
         }
-        @media (max-width: 560px) { .conc-panel { right: 16px; bottom: 90px; } .conc-bubble { bottom: 20px; right: 20px; } .conc-teaser { right: 16px; bottom: 88px; } }
+        @media (max-width: 560px) { .conc-panel { right: 16px; bottom: 90px; } .conc-bubble { bottom: 20px; right: 20px; } .conc-teaser-wrap { right: 16px; bottom: 88px; } }
       `}</style>
 
       {teaser && !open && (
-        <div
-          className="conc-teaser"
-          role="button"
-          tabIndex={0}
-          onClick={openChat}
-          onKeyDown={(e) => e.key === "Enter" && openChat()}
-        >
+        <div className="conc-teaser-wrap">
+          <button type="button" className="conc-teaser" onClick={openChat}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/concierge-avatar.jpg" alt="" />
+            <div>
+              <b>Maya</b>
+              <p>Hi! Curious what your home&rsquo;s worth, or what&rsquo;s on the market? I can help right now.</p>
+            </div>
+          </button>
           <button
             className="tclose"
             aria-label="Dismiss"
@@ -269,12 +274,6 @@ export default function Concierge() {
           >
             ×
           </button>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/concierge-avatar.jpg" alt="" />
-          <div>
-            <b>Maya</b>
-            <p>Hi! Curious what your home&rsquo;s worth, or what&rsquo;s on the market? I can help right now.</p>
-          </div>
         </div>
       )}
 

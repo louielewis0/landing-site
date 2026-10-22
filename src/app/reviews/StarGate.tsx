@@ -202,6 +202,7 @@ export default function StarGate() {
 
         <form
           onSubmit={submitFeedback}
+          aria-label="Private feedback"
           style={{ borderRadius: "var(--s-radius)", border: "1px solid var(--line)", background: "#fff", padding: 28, textAlign: "left", display: "grid", gap: 16, boxShadow: "0 20px 50px -24px rgba(25,26,28,0.18)" }}
         >
           <div>
@@ -218,14 +219,16 @@ export default function StarGate() {
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             placeholder="What could we have done better?"
+            aria-label="What could we have done better?"
+            aria-required="true"
             rows={4}
             required
             style={{ ...inputStyle, resize: "vertical" }}
           />
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name (optional)" autoComplete="name" style={inputStyle} />
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email (optional)" autoComplete="email" style={inputStyle} />
+            <input type="text" aria-label="Your name (optional)" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name (optional)" autoComplete="name" style={inputStyle} />
+            <input type="email" aria-label="Email address (optional)" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email (optional)" autoComplete="email" style={inputStyle} />
           </div>
 
           <button

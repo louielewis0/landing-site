@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -17,6 +17,9 @@ const KEY = "remc-val-popup";
 export default function ValuationPopup() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const cardRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const prevFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (pathname.startsWith("/home-value") || pathname.startsWith("/crm")) return;
@@ -44,25 +47,52 @@ export default function ValuationPopup() {
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    prevFocusRef.current = document.activeElement as HTMLElement | null;
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const card = cardRef.current;
+      if (!card) return;
+      const focusables = card.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+      if (e.shiftKey) {
+        if (active === first || !card.contains(active)) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      prevFocusRef.current?.focus();
     };
   }, [open]);
 
   if (!open) return null;
 
   return (
-    <div className="vp-overlay" role="dialog" aria-label="Free home valuation" onClick={() => setOpen(false)}>
-      <div className="vp-card" onClick={(e) => e.stopPropagation()}>
-        <button className="vp-close" aria-label="Close" onClick={() => setOpen(false)}>
+    <div className="vp-overlay" role="dialog" aria-modal="true" aria-labelledby="vp-title" onClick={() => setOpen(false)}>
+      <div className="vp-card" ref={cardRef} onClick={(e) => e.stopPropagation()}>
+        <button className="vp-close" aria-label="Close" ref={closeRef} onClick={() => setOpen(false)}>
           &times;
         </button>
         <div className="vp-eyebrow">Free &middot; 60 seconds</div>
-        <h3>
+        <h3 id="vp-title">
           What&rsquo;s your home worth
           <br />
           <span>in today&rsquo;s market?</span>

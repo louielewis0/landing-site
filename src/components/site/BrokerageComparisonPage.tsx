@@ -179,7 +179,7 @@ export default function BrokerageComparisonPage({ data }: { data: BrokerageCompa
                 <tbody>
                   {all.map((b) => (
                     <tr key={b.name} style={{ borderTop: "1px solid var(--line)", background: b.publisher ? "rgba(217,118,47,0.05)" : undefined }}>
-                      <td style={{ padding: "13px 16px", fontWeight: 600, color: "var(--s-ink)" }}>{b.name}{b.publisher && <span style={{ fontSize: 10, color: "var(--s-gold)", marginLeft: 6 }}>(publisher)</span>}</td>
+                      <td style={{ padding: "13px 16px", fontWeight: 600, color: "var(--s-ink)" }}>{b.name}{b.publisher && <span style={{ fontSize: 10, color: "var(--s-gold-ink)", marginLeft: 6 }}>(publisher)</span>}</td>
                       <td style={{ padding: "13px 16px", color: "var(--s-muted)" }}>{b.city}</td>
                       <td style={{ padding: "13px 16px", color: "var(--s-muted)" }}>{b.type}</td>
                       <td style={{ padding: "13px 16px", color: "var(--s-muted)", fontVariantNumeric: "tabular-nums" }}>{b.est}</td>
@@ -231,7 +231,7 @@ export default function BrokerageComparisonPage({ data }: { data: BrokerageCompa
                     <p style={{ fontSize: 13, color: "var(--s-muted)" }}>{b.type}</p>
                   )}
                   {b.publisher && (
-                    <a href="/" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, color: "var(--s-gold)", fontWeight: 600, marginTop: 12 }}>See our sourced guides <ArrowRight className="w-3.5 h-3.5" /></a>
+                    <a href="/" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, color: "var(--s-gold-ink)", fontWeight: 600, marginTop: 12 }}>See our sourced guides <ArrowRight className="w-3.5 h-3.5" /></a>
                   )}
                 </div>
               ))}

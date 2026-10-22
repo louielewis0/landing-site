@@ -124,7 +124,7 @@ export default function GuidePage({ data }: { data: GuidePageData }) {
             {data.related.length > 0 && (
               <div style={{ marginTop: 26, display: "flex", gap: "10px 22px", flexWrap: "wrap", fontSize: 13.5 }}>
                 {data.related.map((r) => (
-                  <a key={r.href} href={r.href} style={{ color: "var(--s-gold)", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6 }}>
+                  <a key={r.href} href={r.href} style={{ color: "var(--s-gold-ink)", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6 }}>
                     {r.label} <ArrowRight className="w-3.5 h-3.5" />
                   </a>
                 ))}
