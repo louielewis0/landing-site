@@ -12,11 +12,12 @@ import { usePathname } from "next/navigation";
 
 const NAV = [
   { num: "01", label: "Dashboard", href: "/crm" },
-  { num: "02", label: "Leads", href: "/crm/leads" },
-  { num: "03", label: "Pipeline", href: "/crm/pipeline" },
-  { num: "04", label: "Activity", href: "/crm/activity" },
-  { num: "05", label: "Farm map", href: "/crm/farm" },
-  { num: "06", label: "Playbook", href: "/crm/playbook" },
+  { num: "02", label: "Call block", href: "/crm/call-block" },
+  { num: "03", label: "Leads", href: "/crm/leads" },
+  { num: "04", label: "Pipeline", href: "/crm/pipeline" },
+  { num: "05", label: "Activity", href: "/crm/activity" },
+  { num: "06", label: "Farm map", href: "/crm/farm" },
+  { num: "07", label: "Playbook", href: "/crm/playbook" },
 ];
 
 const GROTESK = "var(--font-grotesk), 'Space Grotesk', sans-serif";
