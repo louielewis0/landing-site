@@ -26,6 +26,17 @@ import { TERMINAL_STATUSES, type Lead } from "@/lib/lead-shape";
 const GROTESK = "var(--font-grotesk), 'Space Grotesk', sans-serif";
 const DAY = 86400000;
 
+/** One-tap phrases to drop into the note — the common things people say. */
+const QUICK_NOTES = [
+  "Still wants to sell",
+  "Relisting soon",
+  "Call back later",
+  "Just testing the market",
+  "Going FSBO",
+  "Already sold",
+  "Not the owner",
+];
+
 /** tel:/sms: links from a free-text phone, or null if unusable. */
 function phoneLinks(phone: string | null): { tel: string; sms: string; pretty: string } | null {
   const d = (phone ?? "").replace(/[^\d]/g, "");
@@ -344,21 +355,54 @@ export default function CallBlockClient() {
             </a>
           </div>
 
-          {/* Optional note */}
-          <div style={{ padding: "8px 28px 0" }}>
-            <input
+          {/* What was said */}
+          <div style={{ padding: "18px 28px 0" }}>
+            <label
+              htmlFor="cb-note"
+              style={{ display: "block", fontSize: 14, fontWeight: 600, color: "var(--crm-ink)", marginBottom: 8 }}
+            >
+              What did they say?{" "}
+              <span style={{ color: "var(--crm-ink-faint)", fontWeight: 400, fontSize: 12.5 }}>
+                — saved with the outcome below
+              </span>
+            </label>
+            <textarea
+              id="cb-note"
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              placeholder="Quick note (optional) — attaches to whatever you log below"
+              rows={3}
+              placeholder="Type what they told you…  e.g. still wants to sell, relisting in spring, call back after the holidays."
               className="crm-input"
-              style={{ fontSize: 13.5 }}
+              style={{ fontSize: 15, lineHeight: 1.5, resize: "vertical", minHeight: 86 }}
             />
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 7, marginTop: 10 }}>
+              {QUICK_NOTES.map((q) => (
+                <button
+                  key={q}
+                  type="button"
+                  onClick={() => setNote((cur) => (cur.trim() ? cur.trim() + "; " + q : q))}
+                  style={{
+                    padding: "6px 12px",
+                    borderRadius: 999,
+                    cursor: "pointer",
+                    fontFamily: GROTESK,
+                    fontSize: 12.5,
+                    fontWeight: 500,
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid var(--crm-line)",
+                    color: "var(--crm-ink-dim)",
+                  }}
+                >
+                  + {q}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Outcomes */}
-          <div style={{ padding: "16px 28px 8px" }}>
-            <div style={{ fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--crm-ink-faint)", marginBottom: 10 }}>
-              Log the outcome &amp; go to next
+          <div style={{ padding: "18px 28px 8px" }}>
+            <div style={{ fontSize: 13, color: "var(--crm-ink-dim)", marginBottom: 12 }}>
+              Then tap what happened &mdash; your note saves and the next lead loads.
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 10 }}>
               <OutcomeBtn onClick={() => handle("spoke")} disabled={busy} icon={<CheckCircle className="w-4 h-4" strokeWidth={2} />} label="Had a conversation" tone="good" />
