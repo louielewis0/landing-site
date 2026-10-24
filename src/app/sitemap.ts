@@ -112,6 +112,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/who-pays-realtor-commission-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${base}/michigan-seller-disclosure-requirements`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${base}/home-inspection-vs-appraisal`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/should-i-buy-or-sell-now-metro-detroit`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/accessibility`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     ...cityPages,
   ];

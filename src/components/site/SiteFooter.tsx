@@ -28,6 +28,7 @@ export default function SiteFooter() {
     { label: "Who Pays Realtor Commission?", href: "/who-pays-realtor-commission-michigan" },
     { label: "Seller Disclosure Rules", href: "/michigan-seller-disclosure-requirements" },
     { label: "Inspection vs. Appraisal", href: "/home-inspection-vs-appraisal" },
+    { label: "Buy or Sell Now?", href: "/should-i-buy-or-sell-now-metro-detroit" },
     { label: "Royal Oak Home Values", href: "/what-is-my-home-worth-royal-oak" },
     { label: "Oakland County Brokerages", href: "/best-real-estate-brokerages-oakland-county" },
     { label: "Michigan Brokerages", href: "/best-real-estate-brokerages-michigan" },
