@@ -155,6 +155,7 @@ const data: GuidePageData = {
   ],
   related: [
     { href: "/sell-your-home-metro-detroit", label: "Sell your home for more" },
+    { href: "/water-damage-sell-or-restore", label: "Damage to disclose? Restore or sell as-is" },
     { href: "/michigan-closing-costs", label: "Michigan closing costs, explained" },
     { href: "/home-sale-proceeds-calculator", label: "Net proceeds calculator (sellers)" },
     { href: "/how-to-buy-a-home-in-michigan", label: "How to buy a home in Michigan" },

@@ -27,6 +27,7 @@ export default function SiteFooter() {
     { label: "Michigan Property Taxes", href: "/michigan-property-taxes-explained" },
     { label: "Who Pays Realtor Commission?", href: "/who-pays-realtor-commission-michigan" },
     { label: "Seller Disclosure Rules", href: "/michigan-seller-disclosure-requirements" },
+    { label: "Damage: Sell or Restore?", href: "/water-damage-sell-or-restore" },
     { label: "Inspection vs. Appraisal", href: "/home-inspection-vs-appraisal" },
     { label: "Buy or Sell Now?", href: "/should-i-buy-or-sell-now-metro-detroit" },
     { label: "Royal Oak Home Values", href: "/what-is-my-home-worth-royal-oak" },

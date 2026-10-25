@@ -234,6 +234,7 @@ const data: GuidePageData = {
   ],
   related: [
     { href: "/home-value", label: "What's my home worth? (free valuation)" },
+    { href: "/water-damage-sell-or-restore", label: "Damage to disclose? Restore or sell as-is" },
     { href: "/home-sale-proceeds-calculator", label: "Net proceeds calculator" },
     { href: "/sell-or-rent-calculator", label: "Sell or rent calculator" },
     { href: "/metro-detroit-housing-market-update", label: "Metro Detroit market update" },
