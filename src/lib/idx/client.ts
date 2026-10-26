@@ -77,6 +77,7 @@ interface RawMedia {
   MediaType?: string;
   MediaCategory?: string;
   MediaStatus?: string;
+  ResourceRecordKey?: string;
 }
 
 interface RawProperty {
@@ -197,7 +198,7 @@ function normalize(p: RawProperty): IdxListing {
     bathrooms: p.BathroomsTotalInteger ?? null,
     livingArea: p.LivingArea ?? null,
     propertySubType: p.PropertySubType ?? null,
-    photos: pickPhotos(p.Media),
+    photos: [], // populated by attachPhotos() in a separate, fast Media query
     photoCount: p.PhotosCount ?? 0,
     virtualTourUrl: p.VirtualTourURLUnbranded?.trim() || null,
     listOfficeName: office,
@@ -214,6 +215,61 @@ function isIdxDisplayable(p: RawProperty): boolean {
   // contains() isn't supported by Realcomp's OData, so this check runs here.
   if (!(p.SyndicateTo ?? "").includes(IDX_SYNDICATION_TOKEN)) return false;
   return true;
+}
+
+/**
+ * Populate each listing's `photos` via a single, lightweight Media query.
+ *
+ * Why separate: `$expand=Media` on the Property query pulls *every* photo for
+ * every listing (~500KB, ~2s), and `$top`/`$orderby` inside the expand are
+ * catastrophically slow (26–85s). Querying the Media resource directly for just
+ * the shown listings, capped to the first few photos (Order lt 5), returns the
+ * primary image for all of them in ~230ms / ~20KB. Best-effort: a failure here
+ * leaves photos empty rather than breaking the page.
+ */
+async function attachPhotos(
+  listings: IdxListing[],
+  cfg: { base: string },
+  token: string
+): Promise<void> {
+  const keys = listings.map((l) => l.listingKey).filter(Boolean);
+  if (keys.length === 0) return;
+
+  // Chunk to keep the OR filter a sane length.
+  const chunkSize = 25;
+  const byKey = new Map<string, RawMedia[]>();
+
+  for (let i = 0; i < keys.length; i += chunkSize) {
+    const chunk = keys.slice(i, i + chunkSize);
+    const ors = chunk.map((k) => `ResourceRecordKey eq '${k}'`).join(" or ");
+    const filter = `(${ors}) and Order lt 5`;
+    const url =
+      `${cfg.base}/odata/Media` +
+      `?$top=2000` +
+      `&$select=${encodeURIComponent("ResourceRecordKey,MediaURL,Order,MediaType,MediaStatus")}` +
+      `&$filter=${encodeURIComponent(filter)}`;
+    try {
+      const res = await fetch(url, {
+        headers: { Authorization: `Bearer ${token}` },
+        cache: "no-store",
+      });
+      if (!res.ok) continue;
+      const rows = ((await res.json()) as { value?: RawMedia[] }).value ?? [];
+      for (const m of rows) {
+        const k = m.ResourceRecordKey;
+        if (!k) continue;
+        const arr = byKey.get(k) ?? [];
+        arr.push(m);
+        byKey.set(k, arr);
+      }
+    } catch {
+      /* best-effort — leave these listings without photos */
+    }
+  }
+
+  for (const l of listings) {
+    l.photos = pickPhotos(byKey.get(l.listingKey));
+  }
 }
 
 async function fetchFeaturedUncached(q: FeaturedQuery): Promise<IdxListing[]> {
@@ -236,12 +292,12 @@ async function fetchFeaturedUncached(q: FeaturedQuery): Promise<IdxListing[]> {
   if (q.county) clauses.push(`CountyOrParish eq '${q.county}'`);
   const filter = clauses.join(" and ");
 
-  const fetchTop = Math.min(Math.max(limit * 3, 30), 200);
+  // Photos come from a separate Media query (see attachPhotos), so no $expand.
+  const fetchTop = Math.min(limit + 10, 60);
   const url =
     `${cfg.base}/odata/Property` +
     `?$top=${fetchTop}` +
     `&$select=${encodeURIComponent(SELECT)}` +
-    `&$expand=${encodeURIComponent("Media($select=MediaURL,Order,MediaType,MediaCategory,MediaStatus)")}` +
     `&$filter=${encodeURIComponent(filter)}`;
 
   const res = await fetch(url, {
@@ -263,9 +319,11 @@ async function fetchFeaturedUncached(q: FeaturedQuery): Promise<IdxListing[]> {
     );
   }
 
-  // Sort highest-price first (nulls last), then cap.
+  // Sort highest-price first (nulls last), cap, then attach photos.
   listings.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
-  return listings.slice(0, limit);
+  const top = listings.slice(0, limit);
+  await attachPhotos(top, cfg, token);
+  return top;
 }
 
 /**
@@ -318,14 +376,14 @@ async function searchUncached(
   }
   const filter = clauses.join(" and ");
 
-  // Over-fetch so the client-side SyndicateTo/permission filter still leaves a
-  // full page. No $orderby (slow) — we sort client-side.
-  const fetchTop = Math.min(Math.max(limit * 3, 60), 200);
+  // Over-fetch a small buffer so the client-side SyndicateTo filter still
+  // leaves a full page. No $orderby (slow) and no Media $expand (slow) — we
+  // sort client-side and pull photos in a separate fast query.
+  const fetchTop = Math.min(limit + 10, 60);
   const url =
     `${cfg.base}/odata/Property` +
     `?$top=${fetchTop}` +
     `&$select=${encodeURIComponent(SELECT)}` +
-    `&$expand=${encodeURIComponent("Media($select=MediaURL,Order,MediaType,MediaCategory,MediaStatus)")}` +
     `&$filter=${encodeURIComponent(filter)}`;
 
   const res = await fetch(url, {
@@ -341,6 +399,8 @@ async function searchUncached(
     .map(normalize)
     .sort((a, b) => (b.price ?? 0) - (a.price ?? 0))
     .slice(0, limit);
+
+  await attachPhotos(listings, cfg, token);
 
   return {
     listings,
