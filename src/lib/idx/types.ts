@@ -66,6 +66,22 @@ export interface FeaturedQuery {
   limit?: number;
 }
 
+/** A single listing with the extra fields shown on its detail page. */
+export interface IdxListingDetail extends IdxListing {
+  /** Public marketing remarks (the listing description). */
+  description: string | null;
+  yearBuilt: number | null;
+  /** Lot size in acres, when provided. */
+  lotSizeAcres: number | null;
+  /** Lot size in square feet, when provided. */
+  lotSizeSqFt: number | null;
+  bathroomsFull: number | null;
+  bathroomsHalf: number | null;
+  garageSpaces: number | null;
+  daysOnMarket: number | null;
+  propertyType: string | null;
+}
+
 /** Result of a /homes location search. */
 export interface SearchResult {
   /** Compliant, display-ready listings (may be empty). */

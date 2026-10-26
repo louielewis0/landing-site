@@ -2122,3 +2122,129 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
   font-weight: 500; font-size: 26px; margin: 0 0 6px;
 }
 .site-theme .lg-done p { color: rgba(244,239,231,0.68); font-size: 14px; margin: 0; }
+
+/* ============================================================
+   Listing detail page (/homes/[listingKey]) + inquiry form
+   ============================================================ */
+.site-theme .hm-card-link { display: block; color: inherit; text-decoration: none; }
+
+.site-theme .ld-main { background: #0d0f13; min-height: 100vh; color: #F4EFE7; }
+.site-theme .ld-wrap { max-width: 1120px; margin: 0 auto; padding: 120px 24px 70px; }
+.site-theme .ld-back {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: rgba(244,239,231,0.7); font-size: 14px; font-weight: 600;
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  margin-bottom: 22px;
+}
+.site-theme .ld-back:hover { color: var(--s-gold); }
+
+.site-theme .ld-gallery { margin-bottom: 34px; }
+.site-theme .ld-hero {
+  width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+  border-radius: 16px; display: block; background: #161a21;
+}
+.site-theme .ld-gallery-empty {
+  display: flex; align-items: center; justify-content: center;
+  aspect-ratio: 16 / 9; background: #161a21; border-radius: 16px;
+  color: rgba(244,239,231,0.4);
+}
+.site-theme .ld-thumbs {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px;
+}
+.site-theme .ld-thumbs img {
+  width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  border-radius: 10px; display: block; background: #161a21;
+}
+
+.site-theme .ld-grid {
+  display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: start;
+}
+.site-theme .ld-price {
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 4px;
+}
+.site-theme .ld-addr {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-weight: 500; font-size: 26px; color: #F4EFE7; margin: 0 0 4px; line-height: 1.2;
+}
+.site-theme .ld-place { color: rgba(244,239,231,0.6); font-size: 15px; margin-bottom: 20px; }
+.site-theme .ld-specs {
+  display: flex; flex-wrap: wrap; gap: 22px;
+  padding: 16px 0; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1);
+  color: #F4EFE7; font-size: 15px;
+  font-family: var(--font-manrope), system-ui, sans-serif;
+}
+.site-theme .ld-specs span { display: inline-flex; align-items: center; gap: 7px; }
+.site-theme .ld-specs svg { color: var(--s-gold); }
+
+.site-theme .ld-section { margin-top: 30px; }
+.site-theme .ld-section h2 {
+  font-family: var(--font-fraunces), Georgia, serif; font-weight: 500;
+  font-size: 20px; color: #F4EFE7; margin: 0 0 12px;
+}
+.site-theme .ld-desc {
+  color: rgba(244,239,231,0.82); font-size: 15px; line-height: 1.7;
+  white-space: pre-line;
+}
+.site-theme .ld-facts {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; overflow: hidden;
+}
+.site-theme .ld-fact { background: #141821; padding: 13px 15px; }
+.site-theme .ld-fact dt { color: rgba(244,239,231,0.5); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+.site-theme .ld-fact dd { color: #F4EFE7; font-size: 15px; font-weight: 600; margin: 0; }
+.site-theme .ld-tour {
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 24px;
+  color: var(--s-gold); font-weight: 600; font-size: 15px;
+}
+.site-theme .ld-tour:hover { color: var(--s-gold-ink); }
+.site-theme .ld-attr {
+  margin-top: 26px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08);
+  color: rgba(244,239,231,0.5); font-size: 12.5px; font-style: italic;
+}
+.site-theme .ld-aside { position: sticky; top: 100px; }
+
+/* Inquiry form */
+.site-theme .pi-card {
+  background: #161a21; border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px; padding: 24px;
+}
+.site-theme .pi-title {
+  font-family: var(--font-fraunces), Georgia, serif; font-weight: 500;
+  font-size: 20px; color: #F4EFE7; margin: 0 0 6px;
+}
+.site-theme .pi-sub { color: rgba(244,239,231,0.65); font-size: 13.5px; margin: 0 0 18px; }
+.site-theme .pi-form { display: flex; flex-direction: column; gap: 10px; }
+.site-theme .pi-input {
+  width: 100%; background: #0f1217; color: #F4EFE7;
+  border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 12px 13px;
+  font-family: var(--font-manrope), system-ui, sans-serif; font-size: 16px;
+  outline: none; transition: border-color .2s;
+}
+.site-theme .pi-input::placeholder { color: rgba(244,239,231,0.42); }
+.site-theme .pi-input:focus { border-color: var(--s-gold); }
+.site-theme .pi-textarea { resize: vertical; line-height: 1.5; }
+.site-theme .pi-submit {
+  margin-top: 4px; background: var(--s-gold); color: #fff;
+  font-family: var(--font-manrope), system-ui, sans-serif; font-weight: 700; font-size: 15px;
+  border: none; border-radius: 10px; padding: 14px; cursor: pointer; transition: background .2s;
+}
+.site-theme .pi-submit:hover { background: var(--s-gold-ink); }
+.site-theme .pi-submit:disabled { opacity: 0.6; cursor: default; }
+.site-theme .pi-err { color: #ff8a6a; font-size: 13px; }
+.site-theme .pi-fine { color: rgba(244,239,231,0.42); font-size: 11px; line-height: 1.5; margin: 14px 0 0; }
+.site-theme .pi-done { text-align: center; }
+.site-theme .pi-check {
+  width: 48px; height: 48px; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center;
+  background: rgba(228,80,30,0.16); color: var(--s-gold); border-radius: 50%; font-size: 23px; font-weight: 700;
+}
+.site-theme .pi-done h3 { font-family: var(--font-fraunces), Georgia, serif; font-weight: 500; font-size: 21px; color: #F4EFE7; margin: 0 0 6px; }
+.site-theme .pi-done p { color: rgba(244,239,231,0.68); font-size: 14px; margin: 0; }
+
+@media (max-width: 860px) {
+  .site-theme .ld-grid { grid-template-columns: 1fr; gap: 28px; }
+  .site-theme .ld-aside { position: static; }
+  .site-theme .ld-wrap { padding: 100px 18px 60px; }
+  .site-theme .ld-thumbs { grid-template-columns: repeat(2, 1fr); }
+}

@@ -65,7 +65,7 @@ function ListingCard({ listing }: { listing: IdxListing }) {
   const photo = listing.photos[0];
   const place = [listing.city, listing.state].filter(Boolean).join(", ");
   return (
-    <article className="hm-card">
+    <Link href={`/homes/${listing.listingKey}`} className="hm-card hm-card-link" aria-label={listing.address ?? `Home in ${listing.city ?? "Metro Detroit"}`}>
       <div className="hm-card-media">
         {photo ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -92,7 +92,7 @@ function ListingCard({ listing }: { listing: IdxListing }) {
         {/* Listing-office attribution — required with every IDX listing. */}
         {listing.attribution && <div className="hm-card-attr">{listing.attribution}</div>}
       </div>
-    </article>
+    </Link>
   );
 }
 

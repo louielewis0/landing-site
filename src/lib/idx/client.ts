@@ -2,7 +2,7 @@ import "server-only";
 import { unstable_cache } from "next/cache";
 import { getIdxConfig } from "./config";
 import { resolveLocation } from "./cities";
-import type { FeaturedQuery, IdxListing, SearchResult } from "./types";
+import type { FeaturedQuery, IdxListing, IdxListingDetail, SearchResult } from "./types";
 
 /** Bump when the normalized listing shape changes, to bust stale cache entries. */
 const IDX_CACHE_VERSION = "v2";
@@ -108,6 +108,16 @@ interface RawProperty {
   OriginatingSystemName?: string;
   ModificationTimestamp?: string;
   Media?: RawMedia[];
+  // Detail-page fields (only requested by getListing):
+  PublicRemarks?: string;
+  YearBuilt?: number;
+  LotSizeAcres?: number;
+  LotSizeSquareFeet?: number;
+  BathroomsFull?: number;
+  BathroomsHalf?: number;
+  GarageSpaces?: number;
+  DaysOnMarket?: number;
+  PropertyType?: string;
 }
 
 // The $select keeps the payload tight and guarantees we never pull confidential
@@ -423,6 +433,100 @@ export async function searchListings(
     () => searchUncached(locationInput, limit),
     ["idx-search", IDX_CACHE_VERSION, normalized, String(limit)],
     { revalidate: 3600, tags: ["idx", "idx-search"] }
+  );
+  return cached();
+}
+
+// ---- Single listing detail (powers /homes/[listingKey]) --------------------
+
+const DETAIL_SELECT = [
+  SELECT,
+  "PublicRemarks",
+  "YearBuilt",
+  "LotSizeAcres",
+  "LotSizeSquareFeet",
+  "BathroomsFull",
+  "BathroomsHalf",
+  "GarageSpaces",
+  "DaysOnMarket",
+  "PropertyType",
+].join(",");
+
+function normalizeDetail(p: RawProperty): IdxListingDetail {
+  const base = normalize(p);
+  return {
+    ...base,
+    description: p.PublicRemarks?.trim() || null,
+    yearBuilt: p.YearBuilt ?? null,
+    lotSizeAcres: p.LotSizeAcres ?? null,
+    lotSizeSqFt: p.LotSizeSquareFeet ?? null,
+    bathroomsFull: p.BathroomsFull ?? null,
+    bathroomsHalf: p.BathroomsHalf ?? null,
+    garageSpaces: p.GarageSpaces ?? null,
+    daysOnMarket: p.DaysOnMarket ?? null,
+    propertyType: p.PropertyType ?? null,
+  };
+}
+
+/** Fetch ALL photos for one listing (full gallery), sorted by Order. */
+async function fetchAllPhotos(
+  listingKey: string,
+  cfg: { base: string },
+  token: string
+): Promise<string[]> {
+  const url =
+    `${cfg.base}/odata/Media` +
+    `?$top=2000` +
+    `&$select=${encodeURIComponent("MediaURL,Order,MediaType,MediaStatus")}` +
+    `&$filter=${encodeURIComponent(`ResourceRecordKey eq '${listingKey}'`)}`;
+  try {
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${token}` },
+      cache: "no-store",
+    });
+    if (!res.ok) return [];
+    const rows = ((await res.json()) as { value?: RawMedia[] }).value ?? [];
+    return pickPhotos(rows);
+  } catch {
+    return [];
+  }
+}
+
+async function getListingUncached(
+  listingKey: string
+): Promise<IdxListingDetail | null> {
+  if (!/^[0-9A-Za-z]+$/.test(listingKey)) return null; // guard the OData literal
+  const cfg = getIdxConfig();
+  const token = await getAccessToken();
+
+  const url =
+    `${cfg.base}/odata/Property` +
+    `?$select=${encodeURIComponent(DETAIL_SELECT)}` +
+    `&$filter=${encodeURIComponent(`ListingKey eq '${listingKey}'`)}`;
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${token}` },
+    cache: "no-store",
+  });
+  if (!res.ok) return null;
+  const raw = ((await res.json()) as { value?: RawProperty[] }).value ?? [];
+  const p = raw[0];
+  // Only serve listings that are permissioned for IDX display.
+  if (!p || !isIdxDisplayable(p)) return null;
+
+  const detail = normalizeDetail(p);
+  detail.photos = await fetchAllPhotos(listingKey, cfg, token);
+  return detail;
+}
+
+/** Fetch one listing's detail, cached 1h. Returns null if not found or not
+ *  IDX-displayable (caller should 404). */
+export async function getListing(
+  listingKey: string
+): Promise<IdxListingDetail | null> {
+  const cached = unstable_cache(
+    () => getListingUncached(listingKey),
+    ["idx-listing", IDX_CACHE_VERSION, listingKey],
+    { revalidate: 3600, tags: ["idx", "idx-listing"] }
   );
   return cached();
 }
