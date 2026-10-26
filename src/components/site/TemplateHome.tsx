@@ -158,13 +158,13 @@ export function TemplateAbout() {
   );
 }
 
+// Each card shows a luxury home and links straight into the live IDX search
+// for that city (not the agent landing pages).
 const AREAS = [
-  { slug: "troy-real-estate-agent", city: "Troy", img: "/areas/troy-real-estate-agent.jpg" },
-  { slug: "rochester-hills-real-estate-agent", city: "Rochester Hills", img: "/areas/rochester-hills-real-estate-agent.jpg" },
-  { slug: "rochester-real-estate-agent", city: "Rochester", img: "/areas/rochester-real-estate-agent.jpg" },
-  { slug: "birmingham-real-estate-agent", city: "Birmingham", img: "/areas/birmingham-real-estate-agent.jpg" },
-  { slug: "bloomfield-hills-real-estate-agent", city: "Bloomfield Hills", img: "/areas/bloomfield-hills-real-estate-agent.jpg" },
-  { slug: "west-bloomfield-real-estate-agent", city: "West Bloomfield", img: "/areas/west-bloomfield-real-estate-agent.jpg" },
+  { city: "Troy", img: "/areas/city-troy.jpg" },
+  { city: "Rochester Hills", img: "/areas/city-rochester-hills.jpg" },
+  { city: "Birmingham", img: "/areas/city-birmingham.jpg" },
+  { city: "Bloomfield Hills", img: "/areas/city-bloomfield-hills.jpg" },
 ];
 
 export function TemplateAreas() {
@@ -184,13 +184,17 @@ export function TemplateAreas() {
       </div>
       <div className="t-areas-grid">
         {AREAS.map((a) => (
-          <Link key={a.slug} href={`/${a.slug}`} className="t-area-card">
+          <Link
+            key={a.city}
+            href={`/homes?location=${encodeURIComponent(a.city)}`}
+            className="t-area-card"
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={a.img} alt={`Real estate agent in ${a.city}, MI`} loading="lazy" />
+            <img src={a.img} alt={`Luxury homes for sale in ${a.city}, MI`} loading="lazy" />
             <div className="t-area-shade" aria-hidden />
             <div className="t-area-label">
               <span className="t-area-city">{a.city}</span>
-              <span className="t-area-sub">Real estate agent &rarr;</span>
+              <span className="t-area-sub">View homes &rarr;</span>
             </div>
           </Link>
         ))}
