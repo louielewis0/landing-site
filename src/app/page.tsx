@@ -1,6 +1,6 @@
 import SiteShell from "@/components/site/SiteShell";
+import HeroExplore from "@/components/site/HeroExplore";
 import {
-  TemplateHero,
   TemplateStats,
   TemplateAreas,
   TemplateAbout,
@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <SiteShell navOnDark>
       <main>
-        <TemplateHero />
+        <HeroExplore />
         <TemplateStats />
         <ListingsShowcase />
         <TemplateAreas />

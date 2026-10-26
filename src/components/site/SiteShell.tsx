@@ -14,10 +14,15 @@ import ValuationPopup from "./ValuationPopup";
 export default function SiteShell({
   children,
   navOnDark = false,
+  hideOverlays = false,
 }: {
   children: React.ReactNode;
   /** White nav text while un-scrolled — for pages opening on video/dark media. */
   navOnDark?: boolean;
+  /** Suppress the Concierge chat + home-value popup (e.g. on the IDX /homes
+   *  page, where a valuation prompt shouldn't sit over other brokers' listings
+   *  and the registration gate is the only intended overlay). */
+  hideOverlays?: boolean;
 }) {
   return (
     <div
@@ -29,8 +34,8 @@ export default function SiteShell({
         {children}
       </div>
       <SiteFooter />
-      <Concierge />
-      <ValuationPopup />
+      {!hideOverlays && <Concierge />}
+      {!hideOverlays && <ValuationPopup />}
       <SiteMotion />
     </div>
   );
