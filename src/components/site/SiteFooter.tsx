@@ -1,18 +1,58 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { company } from "@/lib/config";
 
 /**
- * Template footer (user's design): bone ground, hairline top rule,
- * logo + stacked wordmark left, links center, contact right, then a
- * bottom row with copyright + Equal Housing line.
+ * Footer (DOBI-inspired, clean): centered logo, email / phone / address,
+ * reliability disclaimer, REALTOR® + Equal Housing Opportunity marks, a
+ * hairline rule, then copyright + Privacy Policy + Accessibility.
+ *
+ * The large set of internal SEO links (guides, tools, city pages) is preserved
+ * inside a subtle collapsible "Site directory" — it keeps those pages linked
+ * and crawlable without cluttering the clean footer.
  */
+
+function RealtorMark() {
+  return (
+    <span className="df-badge" aria-label="REALTOR®">
+      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden>
+        <defs>
+          <mask id="df-r">
+            <rect width="64" height="64" fill="#fff" />
+            <text x="32" y="47" textAnchor="middle" fontSize="44" fontWeight="800"
+              fontFamily="Georgia, serif" fill="#000">R</text>
+          </mask>
+        </defs>
+        <rect width="64" height="64" rx="4" fill="currentColor" mask="url(#df-r)" />
+      </svg>
+      <span className="df-badge-label">REALTOR&reg;</span>
+    </span>
+  );
+}
+
+function EqualHousingMark() {
+  return (
+    <span className="df-badge" aria-label="Equal Housing Opportunity">
+      <svg width="30" height="30" viewBox="0 0 64 64" fill="none"
+        stroke="currentColor" strokeWidth="4" strokeLinejoin="round" aria-hidden>
+        <path d="M7 31 L32 11 L57 31" />
+        <path d="M14 30 V52 H50 V30" />
+        <line x1="25" y1="40" x2="39" y2="40" strokeWidth="4.5" />
+        <line x1="25" y1="47" x2="39" y2="47" strokeWidth="4.5" />
+      </svg>
+      <span className="df-badge-label">Equal Housing<br />Opportunity</span>
+    </span>
+  );
+}
+
 export default function SiteFooter() {
   const year = new Date().getFullYear();
 
-  const links = [
+  const directory = [
     { label: "Sell Your Home", href: "/sell-your-home-metro-detroit" },
     { label: "What's My Home Worth?", href: "/home-value" },
+    { label: "Search Homes", href: "/homes" },
     { label: "Listings", href: "/#listings" },
     { label: "Team", href: "/#about" },
     { label: "Reviews", href: "/reviews" },
@@ -30,15 +70,8 @@ export default function SiteFooter() {
     { label: "Damage: Sell or Restore?", href: "/water-damage-sell-or-restore" },
     { label: "Inspection vs. Appraisal", href: "/home-inspection-vs-appraisal" },
     { label: "Buy or Sell Now?", href: "/should-i-buy-or-sell-now-metro-detroit" },
-    { label: "Royal Oak Home Values", href: "/what-is-my-home-worth-royal-oak" },
     { label: "Oakland County Brokerages", href: "/best-real-estate-brokerages-oakland-county" },
     { label: "Michigan Brokerages", href: "/best-real-estate-brokerages-michigan" },
-    { label: "Privacy", href: "/privacy" },
-    { label: "Accessibility", href: "/accessibility" },
-  ];
-
-  // Free interactive tools — de-orphaned into the footer sitewide.
-  const tools = [
     { label: "Home Sale Proceeds", href: "/home-sale-proceeds-calculator" },
     { label: "Affordability Calculator", href: "/home-affordability-calculator" },
     { label: "Rental ROI Calculator", href: "/rental-property-roi-calculator" },
@@ -46,9 +79,6 @@ export default function SiteFooter() {
     { label: "1031 Exchange", href: "/1031-exchange-calculator" },
     { label: "Sell or Rent?", href: "/sell-or-rent-calculator" },
     { label: "Down Payment Help", href: "/michigan-down-payment-assistance" },
-  ];
-
-  const areas = [
     { label: "Troy", href: "/troy-real-estate-agent" },
     { label: "Rochester Hills", href: "/rochester-hills-real-estate-agent" },
     { label: "Birmingham", href: "/birmingham-real-estate-agent" },
@@ -61,52 +91,55 @@ export default function SiteFooter() {
   ];
 
   return (
-    <footer className="t-foot">
-      <div className="t-wrap">
-        <div className="t-foot-top">
-          <Link href="/" className="t-nav-brand" aria-label={`${company.name} home`}>
-            <Image src="/mcr-logo-color-3d.png" alt="" width={36} height={36} />
-            <span className="t-nav-word">
-              Real Estate
-              <br />
-              Market Center
-            </span>
-          </Link>
-          <div className="t-foot-links">
-            {links.map((l) => (
-              <Link key={l.label} href={l.href}>
-                {l.label}
-              </Link>
-            ))}
-          </div>
-          <div className="t-foot-areas">
-            <span className="t-foot-areas-h">Free tools</span>
-            {tools.map((t) => (
-              <Link key={t.href} href={t.href}>
-                {t.label}
-              </Link>
-            ))}
-          </div>
-          <div className="t-foot-areas">
-            <span className="t-foot-areas-h">Real estate agents in</span>
-            {areas.map((a) => (
-              <Link key={a.href} href={a.href}>
-                {a.label}
-              </Link>
-            ))}
-          </div>
-          <div className="t-foot-contact">
-            <a href={`tel:${company.phoneTel}`}>{company.phone}</a>
-            <br />
-            {company.address}
-            <br />
-            {company.email}
+    <footer className="df-foot">
+      <div className="df-inner">
+        <Link href="/" className="df-logo" aria-label={`${company.name} home`}>
+          <Image src="/mcr-logo-color-3d.png" alt={company.name} width={180} height={180} />
+        </Link>
+
+        <div className="df-contact">
+          <a className="df-contact-item" href={`mailto:${company.email}`}>
+            <Mail width={22} height={22} aria-hidden />
+            <span>{company.email}</span>
+          </a>
+          <a className="df-contact-item" href={`tel:${company.phoneTel}`}>
+            <Phone width={22} height={22} aria-hidden />
+            <span>{company.phone}</span>
+          </a>
+          <div className="df-contact-item">
+            <MapPin width={22} height={22} aria-hidden />
+            <span>{company.address}</span>
           </div>
         </div>
-        <div className="t-foot-bottom">
+
+        <p className="df-disclaimer">
+          All information is deemed reliable but not guaranteed and should be independently reviewed and verified.
+        </p>
+
+        <div className="df-badges">
+          <RealtorMark />
+          <EqualHousingMark />
+        </div>
+
+        <div className="df-rule" />
+
+        <div className="df-legal">
           <span>&copy; {year} {company.name}</span>
-          <span>Equal Housing Opportunity &middot; Licensed in Michigan</span>
+          <span className="df-dot">&middot;</span>
+          <Link href="/privacy">Privacy Policy</Link>
+          <span className="df-dot">&middot;</span>
+          <Link href="/accessibility">Accessibility</Link>
         </div>
+        <div className="df-license">Licensed in Michigan &middot; Equal Housing Opportunity</div>
+
+        <details className="df-more">
+          <summary>Site directory</summary>
+          <nav className="df-more-links" aria-label="Site directory">
+            {directory.map((l) => (
+              <Link key={l.href} href={l.href}>{l.label}</Link>
+            ))}
+          </nav>
+        </details>
       </div>
     </footer>
   );

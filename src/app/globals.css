@@ -2248,3 +2248,93 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
   .site-theme .ld-wrap { padding: 100px 18px 60px; }
   .site-theme .ld-thumbs { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ============================================================
+   Footer (DOBI-style, clean)
+   ============================================================ */
+.site-theme .df-foot {
+  background: #10141b;
+  color: #F4EFE7;
+  padding: 72px 24px 48px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.site-theme .df-inner {
+  max-width: 1000px; margin: 0 auto;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.site-theme .df-logo { display: inline-block; margin-bottom: 34px; }
+.site-theme .df-logo img { width: 170px; height: auto; }
+
+.site-theme .df-contact {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 40px 64px; margin-bottom: 36px;
+}
+.site-theme .df-contact-item {
+  display: flex; flex-direction: column; align-items: center; gap: 11px;
+  color: #F4EFE7; font-size: 14px; letter-spacing: 0.03em;
+  font-family: var(--font-manrope), system-ui, sans-serif;
+}
+.site-theme .df-contact-item svg { color: #F4EFE7; opacity: 0.92; }
+.site-theme a.df-contact-item span { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(244,239,231,0.35); }
+.site-theme a.df-contact-item:hover span { text-decoration-color: var(--s-gold); color: var(--s-gold); }
+.site-theme a.df-contact-item:hover svg { color: var(--s-gold); opacity: 1; }
+
+.site-theme .df-disclaimer {
+  max-width: 660px; margin: 0 auto 28px;
+  color: rgba(244,239,231,0.66); font-size: 13.5px; line-height: 1.6;
+  font-family: var(--font-manrope), system-ui, sans-serif;
+}
+
+.site-theme .df-badges {
+  display: flex; align-items: center; justify-content: center; gap: 30px;
+  margin-bottom: 30px; color: #fff;
+}
+.site-theme .df-badge { display: inline-flex; align-items: center; gap: 9px; color: #fff; }
+.site-theme .df-badge-label {
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em;
+  line-height: 1.15; text-transform: uppercase; text-align: left;
+  color: rgba(244,239,231,0.9);
+}
+
+.site-theme .df-rule {
+  width: 100%; max-width: 860px; height: 1px;
+  background: rgba(255,255,255,0.13); margin: 6px auto 26px;
+}
+
+.site-theme .df-legal {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 10px; font-size: 14px; color: #F4EFE7;
+  font-family: var(--font-manrope), system-ui, sans-serif;
+}
+.site-theme .df-legal a { color: #F4EFE7; text-decoration: underline; text-underline-offset: 3px; }
+.site-theme .df-legal a:hover { color: var(--s-gold); }
+.site-theme .df-dot { opacity: 0.45; }
+.site-theme .df-license {
+  margin-top: 10px; font-size: 12px; color: rgba(244,239,231,0.55);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+}
+
+.site-theme .df-more { margin-top: 30px; width: 100%; max-width: 900px; }
+.site-theme .df-more summary {
+  cursor: pointer; list-style: none; text-align: center;
+  color: rgba(244,239,231,0.45); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; font-family: var(--font-manrope), system-ui, sans-serif;
+}
+.site-theme .df-more summary::-webkit-details-marker { display: none; }
+.site-theme .df-more summary:hover { color: rgba(244,239,231,0.75); }
+.site-theme .df-more-links {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 9px 18px; margin-top: 18px;
+}
+.site-theme .df-more-links a {
+  color: rgba(244,239,231,0.55); font-size: 12.5px;
+  font-family: var(--font-manrope), system-ui, sans-serif;
+}
+.site-theme .df-more-links a:hover { color: var(--s-gold); }
+
+@media (max-width: 600px) {
+  .site-theme .df-foot { padding: 56px 18px 40px; }
+  .site-theme .df-contact { gap: 26px; flex-direction: column; }
+  .site-theme .df-logo img { width: 140px; }
+}
