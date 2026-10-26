@@ -10,7 +10,7 @@ const BASE = "https://marketcenterrealty.com";
 const SUNDUS = {
   name: "Sundus Lewis",
   title: "Broker & Owner · Real Estate Market Center",
-  photo: "/sundus-lewis.png",
+  photo: "/sundus-lewis-hd.png",
   stats: [
     { num: "20+", label: "Years in the business" },
     { num: "500+", label: "Homes closed" },
