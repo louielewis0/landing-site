@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SiteShell from "@/components/site/SiteShell";
+import { TemplateReviews } from "@/components/site/TemplateHome";
 import { company } from "@/lib/config";
 import { Star, Phone } from "lucide-react";
 import StarGate from "./StarGate";
@@ -39,6 +40,9 @@ export default function ReviewPage() {
             <StarGate />
           </div>
         </section>
+
+        {/* Our current Google reviews — same marquee as the homepage */}
+        <TemplateReviews />
 
         {/* How it works */}
         <section className="t-wrap t-rev-steps">

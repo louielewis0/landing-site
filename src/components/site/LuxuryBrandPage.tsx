@@ -126,7 +126,7 @@ export default function LuxuryBrandPage({ data }: { data: LuxuryBrandData }) {
         {/* ── Editorial sections ── */}
         {data.sections.map((s, i) => (
           <section key={s.heading} className={i % 2 === 0 ? "bg-cream" : "bg-cream-2"} style={{ padding: "clamp(44px,6vw,72px) 0" }}>
-            <div className="container" style={{ maxWidth: 820 }}>
+            <div className="container reveal" style={{ maxWidth: 820 }}>
               <h2 style={{ fontFamily: SERIF, fontWeight: 500, fontSize: "clamp(26px,3.4vw,40px)", letterSpacing: "-0.01em", color: "var(--navy)", marginBottom: 22, lineHeight: 1.1 }}>{s.heading}</h2>
               <div style={{ fontSize: 16, lineHeight: 1.85, color: "var(--s-ink)", display: "grid", gap: 16 }}>{s.body}</div>
             </div>
@@ -136,7 +136,7 @@ export default function LuxuryBrandPage({ data }: { data: LuxuryBrandData }) {
         {/* ── Award band ── */}
         {data.awardBand && (
           <section style={{ background: "#121A24", color: "#F1EADB", padding: "clamp(48px,6vw,72px) 0", textAlign: "center" }}>
-            <div className="container" style={{ maxWidth: 680 }}>
+            <div className="container reveal" style={{ maxWidth: 680 }}>
               <a href="/best-real-estate-brokerage-in-michigan" style={{ display: "inline-block", marginBottom: 20 }} title="Named #1 real estate brokerage in Michigan by TownAnswer">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/townanswer-award-2026.svg" alt="Certified TownAnswer Best 2026 — #1 Real Estate Brokerage in Michigan" width={300} height={89} style={{ maxWidth: "88%", height: "auto", borderRadius: 14 }} />
@@ -156,7 +156,7 @@ export default function LuxuryBrandPage({ data }: { data: LuxuryBrandData }) {
 
         {/* ── FAQ ── */}
         <section className={data.sections.length % 2 === 0 ? "bg-cream" : "bg-cream-2"} style={{ padding: "clamp(48px,6vw,76px) 0" }}>
-          <div className="container" style={{ maxWidth: 820 }}>
+          <div className="container reveal" style={{ maxWidth: 820 }}>
             <h2 style={{ fontFamily: SERIF, fontWeight: 500, fontSize: "clamp(26px,3.4vw,40px)", color: "var(--navy)", marginBottom: 28, lineHeight: 1.1 }}>{data.faqHeading}</h2>
             <div style={{ display: "grid", gap: 12 }}>
               {data.faqs.map((f) => (
