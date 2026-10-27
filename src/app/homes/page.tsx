@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Search, BedDouble, Bath, Ruler } from "lucide-react";
 import SiteShell from "@/components/site/SiteShell";
+import BgVideo from "@/components/site/BgVideo";
 import LeadGate from "@/components/site/LeadGate";
 import {
   searchListings,
@@ -124,6 +125,8 @@ export default async function HomesPage({
     <SiteShell navOnDark hideOverlays>
       <main className="hm-main">
         <section className="hm-head">
+          <BgVideo srcMp4="/hero-buy.mp4" poster="/hero-buy-poster.jpg" />
+          <div className="hm-head-shade" aria-hidden />
           <div className="hm-head-inner">
             <div className="hx-eyebrow">Metro Detroit &middot; Live MLS listings</div>
             <h1 className="hm-title">
