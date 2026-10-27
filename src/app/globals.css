@@ -2026,6 +2026,36 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
   .site-theme .hv-hero-inner { padding-top: clamp(104px,14vh,150px); }
 }
 
+/* Contact cinematic hero */
+.site-theme .cq-hero-inner {
+  max-width: 540px; margin: 0 auto; text-align: center;
+  position: relative; z-index: 2;
+  padding: clamp(128px,15vh,190px) 24px clamp(64px,8vw,100px);
+}
+.site-theme .cq-hero-eyebrow {
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  text-transform: uppercase; letter-spacing: 0.24em; font-size: 12px; font-weight: 700;
+  color: var(--s-gold); margin-bottom: 18px; text-shadow: 0 2px 14px rgba(0,0,0,0.6);
+}
+.site-theme .cq-hero-title {
+  font-family: var(--font-fraunces), Georgia, serif; font-weight: 500;
+  font-size: clamp(36px,5.2vw,60px); line-height: 1.05; letter-spacing: -0.015em;
+  color: #F4EFE7; margin: 0 0 18px; text-shadow: 0 6px 40px rgba(0,0,0,0.5);
+}
+.site-theme .cq-hero-title em { font-style: italic; color: var(--s-gold); font-weight: 600; }
+.site-theme .cq-hero-sub {
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-size: 15.5px; line-height: 1.65; color: rgba(244,239,231,0.84);
+  max-width: 440px; margin: 0 auto 28px; text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+.site-theme .cq-hero-form { max-width: 440px; margin: 0 auto; }
+.site-theme .cq-hero-phone {
+  display: inline-block; margin-top: 22px; font-size: 14.5px; font-weight: 600;
+  color: var(--s-gold); font-family: var(--font-manrope), system-ui, sans-serif;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+.site-theme .cq-hero-phone:hover { color: #fff; }
+
 /* ============================================================
    /homes — live IDX search results (dark cinematic)
    ============================================================ */
