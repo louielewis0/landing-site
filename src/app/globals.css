@@ -1988,6 +1988,44 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
     radial-gradient(125% 100% at 50% 38%, transparent 28%, rgba(6,8,12,0.55) 100%);
 }
 
+/* Sell / home-value cinematic hero */
+.site-theme .hv-hero-inner {
+  max-width: 1200px; margin: 0 auto; position: relative; z-index: 2;
+  padding: clamp(130px,16vh,196px) 24px clamp(60px,8vw,96px);
+}
+.site-theme .hv-hero-grid {
+  display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,430px);
+  gap: clamp(36px,5vw,70px); align-items: center;
+}
+.site-theme .hv-eyebrow {
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  text-transform: uppercase; letter-spacing: 0.26em; font-size: 12.5px; font-weight: 700;
+  color: var(--s-gold); margin-bottom: 20px; text-shadow: 0 2px 14px rgba(0,0,0,0.6);
+}
+.site-theme .hv-title {
+  font-family: var(--font-fraunces), Georgia, serif; font-weight: 500;
+  font-size: clamp(38px,5.2vw,64px); line-height: 1.04; letter-spacing: -0.015em;
+  color: #F4EFE7; margin: 0 0 24px; text-shadow: 0 6px 40px rgba(0,0,0,0.5);
+}
+.site-theme .hv-title em { font-style: italic; color: var(--s-gold); font-weight: 600; }
+.site-theme .hv-sub {
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-size: 16.5px; line-height: 1.7; color: rgba(244,239,231,0.84);
+  max-width: 540px; margin: 0 0 26px; text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+.site-theme .hv-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 13px; }
+.site-theme .hv-checks li {
+  display: flex; align-items: center; gap: 11px;
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-size: 15px; color: rgba(244,239,231,0.92);
+}
+.site-theme .hv-checks svg { color: var(--s-gold); flex-shrink: 0; }
+.site-theme .hv-hero-form { width: 100%; }
+@media (max-width: 860px) {
+  .site-theme .hv-hero-grid { grid-template-columns: 1fr; gap: 30px; }
+  .site-theme .hv-hero-inner { padding-top: clamp(104px,14vh,150px); }
+}
+
 /* ============================================================
    /homes — live IDX search results (dark cinematic)
    ============================================================ */
