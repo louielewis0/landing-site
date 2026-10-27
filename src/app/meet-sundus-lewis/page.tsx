@@ -12,7 +12,7 @@ const personSchema = {
     "@id": "https://marketcenterrealty.com/#organization",
   },
   url: "https://marketcenterrealty.com/meet-sundus-lewis",
-  image: "https://marketcenterrealty.com/sundus-lewis-hd.png",
+  image: "https://marketcenterrealty.com/agent.jpg",
   telephone: "+12485686081",
   address: {
     "@type": "PostalAddress",
@@ -48,7 +48,7 @@ const data: LuxuryBrandData = {
       representation from first call to closing.
     </>
   ),
-  heroImage: "/sundus-lewis-hd.png",
+  heroImage: "/agent.jpg",
   heroImageAlt: "Sundus Lewis, Broker & Owner of Real Estate Market Center",
   stats: [
     { value: "2003", label: "Founded the firm" },
