@@ -2056,6 +2056,42 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
 }
 .site-theme .cq-hero-phone:hover { color: #fff; }
 
+/* Homepage action tiles (Buying / Selling / Just Listed) */
+.site-theme .at-section { padding-top: 10px; padding-bottom: 16px; }
+.site-theme .at-head { text-align: center; margin-bottom: 34px; }
+.site-theme .at-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.site-theme .at-tile {
+  position: relative; display: block; border-radius: 20px; overflow: hidden;
+  aspect-ratio: 3 / 4; min-height: 420px; color: #fff;
+  box-shadow: 0 14px 40px rgba(25,26,28,0.14);
+  transition: transform .4s cubic-bezier(.2,.9,.3,1), box-shadow .4s;
+}
+.site-theme .at-tile:hover { transform: translateY(-6px); box-shadow: 0 26px 64px rgba(25,26,28,0.26); }
+.site-theme .at-tile > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+.site-theme .at-tile:hover > img { transform: scale(1.06); }
+.site-theme .at-shade {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(13,15,19,0.05) 28%, rgba(13,15,19,0.5) 60%, rgba(9,11,15,0.92) 100%);
+}
+.site-theme .at-content { position: absolute; left: 24px; right: 24px; bottom: 24px; z-index: 2; }
+.site-theme .at-label {
+  font-family: var(--font-fraunces), Georgia, serif; font-weight: 500;
+  font-size: 26px; color: #fff; margin: 0 0 8px; line-height: 1.1;
+}
+.site-theme .at-sub { font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.84); margin: 0 0 14px; }
+.site-theme .at-cta {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-weight: 600; font-size: 14px; color: #fff; transition: color .25s;
+}
+.site-theme .at-cta svg { transition: transform .3s; }
+.site-theme .at-tile:hover .at-cta { color: var(--s-gold); }
+.site-theme .at-tile:hover .at-cta svg { transform: translateX(4px); }
+@media (max-width: 860px) {
+  .site-theme .at-grid { grid-template-columns: 1fr; gap: 16px; }
+  .site-theme .at-tile { aspect-ratio: 16 / 10; min-height: 260px; }
+}
+
 /* ============================================================
    /homes — live IDX search results (dark cinematic)
    ============================================================ */

@@ -7,7 +7,7 @@ import {
   TemplateReviews,
   TemplateCta,
 } from "@/components/site/TemplateHome";
-import ListingsShowcase from "@/components/site/ListingsShowcase";
+import ActionTiles from "@/components/site/ActionTiles";
 import ContactForm from "@/components/ContactForm";
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
       <main>
         <HeroExplore />
         <TemplateStats />
-        <ListingsShowcase />
+        <ActionTiles />
         <TemplateAreas />
         <TemplateAbout />
         <TemplateReviews />
