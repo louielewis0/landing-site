@@ -149,7 +149,8 @@ export default async function HomesPage({
 
           {!result && !serviceDown && (
             <div className="hm-empty">
-              <p>Search any Metro Detroit city, area, or ZIP code to see live listings.</p>
+              <h2 className="hm-empty-h">Browse by popular area</h2>
+              <p>Search any Metro Detroit city, area, or ZIP in the bar above &mdash; or jump straight into one of these:</p>
               <div className="hm-suggest">
                 {SUGGESTED_CITIES.map((c) => (
                   <Link key={c} href={`/homes?location=${encodeURIComponent(c)}`} className="hm-chip">{c}</Link>
@@ -191,13 +192,15 @@ export default async function HomesPage({
             <LeadGate location={result.label} />
           )}
 
-          {/* Required IDX attribution / disclaimer — always visible with results. */}
-          <div className="hm-disclaimer">
-            <p>{IDX_DISCLAIMER}</p>
-            <p className="hm-disclaimer-fine">
-              Listings refreshed hourly from Realcomp II Ltd. &copy; {new Date().getFullYear()} Realcomp II Ltd. All rights reserved.
-            </p>
-          </div>
+          {/* Required IDX attribution / disclaimer — only shown when listings display. */}
+          {result && result.listings.length > 0 && (
+            <div className="hm-disclaimer">
+              <p>{IDX_DISCLAIMER}</p>
+              <p className="hm-disclaimer-fine">
+                Listings refreshed hourly from Realcomp II Ltd. &copy; {new Date().getFullYear()} Realcomp II Ltd. All rights reserved.
+              </p>
+            </div>
+          )}
         </section>
       </main>
     </SiteShell>

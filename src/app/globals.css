@@ -2059,7 +2059,7 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
 /* ============================================================
    /homes — live IDX search results (dark cinematic)
    ============================================================ */
-.site-theme .hm-main { background: #0d0f13; min-height: 100vh; }
+.site-theme .hm-main { background: #0d0f13; min-height: 60vh; }
 .site-theme .hm-head {
   position: relative; overflow: hidden;
   background: linear-gradient(180deg, #141821 0%, #0d0f13 100%);
@@ -2144,8 +2144,12 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
   font-size: 11.5px; font-style: italic;
 }
 
-.site-theme .hm-empty { text-align: center; padding: 30px 0 10px; color: rgba(244,239,231,0.8); }
-.site-theme .hm-empty p { font-size: 16px; margin-bottom: 22px; }
+.site-theme .hm-empty { text-align: center; padding: clamp(44px,8vh,92px) 0; color: rgba(244,239,231,0.8); }
+.site-theme .hm-empty-h {
+  font-family: var(--font-fraunces), Georgia, serif; font-weight: 500;
+  font-size: clamp(24px,3vw,32px); color: #F4EFE7; margin: 0 0 10px; line-height: 1.1;
+}
+.site-theme .hm-empty p { font-size: 16px; margin: 0 auto 24px; max-width: 460px; }
 .site-theme .hm-suggest { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
 .site-theme .hm-chip {
   background: #1a1f28; border: 1px solid rgba(255,255,255,0.12);
