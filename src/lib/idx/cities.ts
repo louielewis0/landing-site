@@ -106,6 +106,5 @@ export function resolveLocation(input: string): ResolvedLocation {
 
 /** A short list of marquee cities for empty-state suggestions. */
 export const SUGGESTED_CITIES = [
-  "Birmingham", "Bloomfield Hills", "Troy", "Rochester", "Royal Oak",
-  "Grosse Pointe", "Northville", "Novi", "West Bloomfield", "Franklin",
+  "Birmingham", "Bloomfield Hills", "Troy", "Rochester", "West Bloomfield",
 ];
