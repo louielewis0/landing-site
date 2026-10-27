@@ -44,8 +44,8 @@ const data: LuxuryBrandData = {
     <>
       Broker and owner of <strong>Real Estate Market Center</strong>, the independent luxury brokerage
       she founded in Troy in 2003 &mdash; and built into the <strong>#1 real estate brokerage in
-      Michigan</strong> for 2026. Twenty years in, she still gives every client discreet, owner-level
-      representation from first call to closing.
+      Michigan</strong> for 2026. She built it on honesty and genuine care, with one goal that
+      hasn&rsquo;t changed in twenty years: helping people get into the home they truly want.
     </>
   ),
   heroImage: "/agent.jpg",
@@ -72,9 +72,10 @@ const data: LuxuryBrandData = {
             sales</strong> across Oakland, Macomb, and Wayne counties.
           </p>
           <p>
-            She built the brokerage on a simple idea: that buyers and sellers deserve to work directly
-            with the broker &mdash; not get handed off &mdash; and get honest, street-level guidance
-            instead of a franchise script. In 2026, that approach earned Real Estate Market Center the{" "}
+            She built the brokerage on a simple set of principles &mdash; honesty, genuine care for
+            every client, and straight, street-level guidance instead of a franchise script. From the
+            start, her focus has been the same: helping people get into the home they truly want. In
+            2026, that approach earned Real Estate Market Center the{" "}
             <a href="/best-real-estate-brokerage-in-michigan" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
               #1 real estate brokerage in Michigan
             </a>{" "}
@@ -87,9 +88,9 @@ const data: LuxuryBrandData = {
       heading: "Her approach",
       body: (
         <ul style={{ margin: 0, paddingLeft: 20, display: "grid", gap: 8 }}>
-          <li><strong>One point of contact.</strong> You work with Sundus directly, from first call to closing.</li>
-          <li><strong>Straight answers.</strong> Honest pricing and clear guidance, even when it&rsquo;s not what you hoped to hear.</li>
-          <li><strong>Street-level expertise.</strong> She prices block by block, not off a city-wide average.</li>
+          <li><strong>Built on honesty.</strong> Clear, truthful guidance and honest pricing &mdash; even when it&rsquo;s not what you hoped to hear.</li>
+          <li><strong>Client-first, always.</strong> One focus that never changes: helping you get into the home you truly want.</li>
+          <li><strong>Street-level expertise.</strong> Pricing block by block, not off a city-wide average.</li>
           <li><strong>Discreet, white-glove service.</strong> Especially on luxury and estate transactions where privacy matters.</li>
         </ul>
       ),
@@ -146,7 +147,7 @@ const data: LuxuryBrandData = {
   ctaBody: (
     <>
       Start with a free, no-pressure home valuation &mdash; or reach out to talk through buying or
-      selling in Metro Detroit with the broker herself.
+      selling in Metro Detroit with Sundus and her team.
     </>
   ),
   ctaPrimary: { href: "/home-value", label: "Get My Free Home Valuation" },
