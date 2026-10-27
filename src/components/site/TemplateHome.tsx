@@ -208,7 +208,7 @@ export function TemplateCta() {
     <div className="t-wrap t-cta-wrap">
       <div className="t-cta">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/areas/bloomfield-hills-real-estate-agent.jpg" alt="" loading="lazy" />
+        <img src="/areas/cta-interior.jpg" alt="" loading="lazy" />
         <div className="t-cta-shade" aria-hidden />
         <div className="t-cta-copy">
           <h2>
