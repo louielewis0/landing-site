@@ -1,10 +1,11 @@
 import type { ReactNode } from "react";
 import SiteShell from "@/components/site/SiteShell";
+import BgVideo from "@/components/site/BgVideo";
 import { company } from "@/lib/config";
 import { ArrowRight, ChevronRight, Phone, MapPin } from "lucide-react";
 
 const BASE = "https://marketcenterrealty.com";
-const SERIF = 'var(--font-display), "Cormorant Garamond", Georgia, serif';
+const SERIF = 'var(--font-fraunces), Georgia, serif';
 
 export type LuxFAQ = { question: string; answer: string };
 export type LuxSection = { heading: string; body: ReactNode };
@@ -71,7 +72,7 @@ export default function LuxuryBrandPage({ data }: { data: LuxuryBrandData }) {
   };
 
   return (
-    <SiteShell>
+    <SiteShell navOnDark>
       <main>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
@@ -80,9 +81,11 @@ export default function LuxuryBrandPage({ data }: { data: LuxuryBrandData }) {
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data.extraSchema) }} />
         )}
 
-        {/* ── Cinematic navy hero ── */}
-        <section style={{ background: "#121A24", color: "#F1EADB", padding: "clamp(40px,7vw,96px) 0 clamp(44px,6vw,80px)" }}>
-          <div className="container" style={{ maxWidth: 1060 }}>
+        {/* ── Cinematic motion hero (luxury video background) ── */}
+        <section className="lb-hero" style={{ color: "#F1EADB" }}>
+          <BgVideo srcMp4="/hero-luxury.mp4" poster="/hero-luxury-poster.jpg" />
+          <div className="lb-hero-shade" aria-hidden />
+          <div className="container" style={{ maxWidth: 1060, position: "relative", zIndex: 2, paddingTop: "clamp(128px,15vh,184px)", paddingBottom: "clamp(48px,6vw,84px)" }}>
             <nav aria-label="Breadcrumb" style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(241,234,219,0.5)", marginBottom: 40 }}>
               <a href="/" style={{ color: "rgba(241,234,219,0.6)" }}>Home</a>
               <ChevronRight className="w-3 h-3" />
@@ -125,10 +128,10 @@ export default function LuxuryBrandPage({ data }: { data: LuxuryBrandData }) {
 
         {/* ── Editorial sections ── */}
         {data.sections.map((s, i) => (
-          <section key={s.heading} className={i % 2 === 0 ? "bg-cream" : "bg-cream-2"} style={{ padding: "clamp(44px,6vw,72px) 0" }}>
+          <section key={s.heading} style={{ background: i % 2 === 0 ? "#111823" : "#0d131c", padding: "clamp(44px,6vw,72px) 0" }}>
             <div className="container reveal" style={{ maxWidth: 820 }}>
-              <h2 style={{ fontFamily: SERIF, fontWeight: 500, fontSize: "clamp(26px,3.4vw,40px)", letterSpacing: "-0.01em", color: "var(--navy)", marginBottom: 22, lineHeight: 1.1 }}>{s.heading}</h2>
-              <div style={{ fontSize: 16, lineHeight: 1.85, color: "var(--s-ink)", display: "grid", gap: 16 }}>{s.body}</div>
+              <h2 style={{ fontFamily: SERIF, fontWeight: 500, fontSize: "clamp(26px,3.4vw,40px)", letterSpacing: "-0.01em", color: "#F1EADB", marginBottom: 22, lineHeight: 1.1 }}>{s.heading}</h2>
+              <div style={{ fontSize: 16, lineHeight: 1.85, color: "rgba(241,234,219,0.82)", display: "grid", gap: 16 }}>{s.body}</div>
             </div>
           </section>
         ))}
@@ -155,14 +158,14 @@ export default function LuxuryBrandPage({ data }: { data: LuxuryBrandData }) {
         )}
 
         {/* ── FAQ ── */}
-        <section className={data.sections.length % 2 === 0 ? "bg-cream" : "bg-cream-2"} style={{ padding: "clamp(48px,6vw,76px) 0" }}>
+        <section style={{ background: data.sections.length % 2 === 0 ? "#111823" : "#0d131c", padding: "clamp(48px,6vw,76px) 0" }}>
           <div className="container reveal" style={{ maxWidth: 820 }}>
-            <h2 style={{ fontFamily: SERIF, fontWeight: 500, fontSize: "clamp(26px,3.4vw,40px)", color: "var(--navy)", marginBottom: 28, lineHeight: 1.1 }}>{data.faqHeading}</h2>
+            <h2 style={{ fontFamily: SERIF, fontWeight: 500, fontSize: "clamp(26px,3.4vw,40px)", color: "#F1EADB", marginBottom: 28, lineHeight: 1.1 }}>{data.faqHeading}</h2>
             <div style={{ display: "grid", gap: 12 }}>
               {data.faqs.map((f) => (
-                <details key={f.question} style={{ borderRadius: 16, border: "1px solid var(--line)", background: "#fff", padding: "20px 26px" }}>
-                  <summary style={{ fontSize: 16, fontWeight: 600, color: "var(--s-ink)", cursor: "pointer" }}>{f.question}</summary>
-                  <p style={{ fontSize: 14.5, lineHeight: 1.8, color: "var(--s-muted)", marginTop: 14 }}>{f.answer}</p>
+                <details key={f.question} style={{ borderRadius: 16, border: "1px solid rgba(255,255,255,0.1)", background: "#161c25", padding: "20px 26px" }}>
+                  <summary style={{ fontSize: 16, fontWeight: 600, color: "#F1EADB", cursor: "pointer" }}>{f.question}</summary>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.8, color: "rgba(241,234,219,0.72)", marginTop: 14 }}>{f.answer}</p>
                 </details>
               ))}
             </div>

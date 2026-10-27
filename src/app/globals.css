@@ -1978,6 +1978,16 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
   .site-theme .hx-search-btn:hover { transform: none; }
 }
 
+/* Luxury brand page — cinematic motion hero (about, meet-sundus) */
+.site-theme .lb-hero { position: relative; overflow: hidden; background: #0d1119; }
+.site-theme .lb-hero > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.site-theme .lb-hero-shade {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(8,10,14,0.84) 0%, rgba(8,10,14,0.5) 32%, rgba(8,10,14,0.58) 62%, rgba(10,13,19,0.96) 100%),
+    radial-gradient(125% 100% at 50% 38%, transparent 28%, rgba(6,8,12,0.55) 100%);
+}
+
 /* ============================================================
    /homes — live IDX search results (dark cinematic)
    ============================================================ */
