@@ -3,17 +3,17 @@
 import { useEffect } from "react";
 
 /**
- * ListTracPixel — fires a ListTrac "listing detail view" on each IDX listing
- * detail page. Realcomp REQUIRES the ListTrac monitoring code on the detail
- * page of all IDX displays (per the IDX Data Access Agreement).
+ * ListTracPixel — fires the ListTrac "view" event on each IDX listing detail
+ * page. Realcomp REQUIRES the ListTrac monitoring code on the detail page of
+ * all IDX displays (per the IDX Data Access Agreement).
  *
- * The exact tracking snippet is partner-specific — you get it from the
- * "Developers" area after registering at http://realcomp.listtrac.com/admin/register.
- * Until the ID is configured this component is inert (no network call), so the
- * detail pages ship safely; set NEXT_PUBLIC_LISTTRAC_ID in Vercel (and paste
- * the exact developer snippet if it differs from the standard beacon below) to
- * activate it.
+ * Partner token issued by ListTrac for marketcenterrealty.com. It's a public
+ * client-side tracking ID (not a secret), so it lives here in code.
+ * Required params: lid = MLS listing number, zc = property zip code.
+ * Docs: //code.listtrac.com/sm/dt/x_1091831_e/view/?lid=[listingID]&zc=[zipcode]
  */
+const LISTTRAC_PARTNER = "x_1091831_e";
+
 export default function ListTracPixel({
   listingId,
   zip,
@@ -22,23 +22,23 @@ export default function ListTracPixel({
   zip?: string | null;
 }) {
   useEffect(() => {
-    const partnerId = process.env.NEXT_PUBLIC_LISTTRAC_ID;
-    if (!partnerId || !listingId) return; // inert until configured
+    if (!listingId) return;
+    const params = new URLSearchParams({ lid: listingId });
+    if (zip) params.set("zc", zip);
 
-    // Standard ListTrac page-view beacon. If your Developers-area snippet
-    // differs, replace the body of this effect with it verbatim.
-    try {
-      const params = new URLSearchParams({
-        pid: partnerId,
-        pagetype: "detail",
-        mlsnum: listingId,
-        ...(zip ? { zip } : {}),
-      });
-      const img = new Image();
-      img.src = `https://listtrac.com/Track/Track.aspx?${params.toString()}`;
-    } catch {
-      /* tracking must never break the page */
-    }
+    const s = document.createElement("script");
+    s.src = `https://code.listtrac.com/sm/dt/${LISTTRAC_PARTNER}/view/?${params.toString()}`;
+    s.async = true;
+    s.defer = true;
+    document.body.appendChild(s);
+
+    return () => {
+      try {
+        document.body.removeChild(s);
+      } catch {
+        /* already removed */
+      }
+    };
   }, [listingId, zip]);
 
   return null;
