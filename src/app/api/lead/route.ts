@@ -65,9 +65,8 @@ export async function POST(req: NextRequest) {
 
   // Fire the alert in-code. Best-effort: a notify failure must not fail the
   // capture — the lead is already saved and visible in the CRM.
-  let notify: Record<string, string> = {};
   try {
-    notify = await sendLeadNotification({
+    await sendLeadNotification({
       name,
       email: typeof row.email === "string" ? row.email : null,
       phone: typeof row.phone === "string" ? row.phone : null,
@@ -83,5 +82,5 @@ export async function POST(req: NextRequest) {
     /* alert is best-effort; lead is already captured */
   }
 
-  return NextResponse.json({ ok: true, id: data?.id, notify });
+  return NextResponse.json({ ok: true, id: data?.id });
 }
