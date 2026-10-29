@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { submitLead } from "@/lib/submit-lead";
 
 /**
  * Book-a-showing buttons + modal request form for a listing detail
@@ -77,7 +77,7 @@ export default function ShowingCTA({
     setErr("");
     const parts = [`Showing request for ${property}.`];
     if (when.trim()) parts.push(`Preferred time: ${when.trim()}.`);
-    const { error } = await supabase.from("leads").insert({
+    const { error } = await submitLead({
       name,
       email: email || null,
       phone: phone || null,

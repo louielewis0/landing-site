@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { submitLead } from "@/lib/submit-lead";
 
 /**
  * Inline inquiry form for a listing detail page — used when a property is
@@ -34,7 +34,7 @@ export default function ListingInquiry({
     setErr("");
     const parts = [`Off-market inquiry for ${property}.`];
     if (msg.trim()) parts.push(`Message: ${msg.trim()}`);
-    const { error } = await supabase.from("leads").insert({
+    const { error } = await submitLead({
       name: name.trim(),
       email: email.trim() || null,
       phone: phone.trim() || null,

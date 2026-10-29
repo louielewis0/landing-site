@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { submitLead } from "@/lib/submit-lead";
 
 type Intent = "buy" | "sell" | "invest" | "other";
 
@@ -25,9 +25,7 @@ export default function HeroLeadForm({ source = "hero" }: { source?: string }) {
     setStatus("loading");
     setMessage("");
 
-    const { error } = await supabase
-      .from("leads")
-      .insert({ name, email, phone, intent, source });
+    const { error } = await submitLead({ name, email, phone, intent, source });
 
     if (error) {
       setStatus("error");

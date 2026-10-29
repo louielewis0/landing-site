@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
+import { sendLeadNotification } from "@/lib/notify";
 import { company, cities } from "@/lib/config";
 
 /**
@@ -118,6 +119,22 @@ async function saveLead(
     body: `AI concierge conversation:\n\n${transcript}`.slice(0, 8000),
     created_by: null,
   });
+
+  // Alert the broker in-code (not via the Supabase webhook) — hot AI-chat lead.
+  try {
+    await sendLeadNotification({
+      name: str(input.name),
+      phone: str(input.phone) || null,
+      email: str(input.email) || null,
+      intent,
+      source: "ai-concierge",
+      budget_range: str(input.budget) || null,
+      message: `AI concierge chat — ${parts.join(" | ")}`,
+      priority: "hot",
+    });
+  } catch {
+    /* alert is best-effort; lead is already captured */
+  }
   return true;
 }
 

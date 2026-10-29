@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
+import { sendLeadNotification } from "@/lib/notify";
 
 /**
  * POST /api/call-summary — Vapi "server URL" webhook for the AI phone
@@ -185,6 +186,25 @@ export async function POST(req: NextRequest) {
   if (error) {
     // Don't 500 — log and ack so Vapi doesn't hammer the endpoint.
     return NextResponse.json({ ok: false, error: error.message }, { status: 200 });
+  }
+
+  // Alert the broker in-code (not via the Supabase webhook). Skip spam so a
+  // likely LSA-refund dispute call never buzzes the phone.
+  if (!isSpam) {
+    try {
+      await sendLeadNotification({
+        name,
+        phone,
+        email: null,
+        intent,
+        source: "ai-receptionist",
+        address: city ? `${city}, MI` : null,
+        message,
+        priority: payload.priority as string,
+      });
+    } catch {
+      /* alert is best-effort; lead is already captured */
+    }
   }
 
   return NextResponse.json({ ok: true, id: data?.id, spam: isSpam });

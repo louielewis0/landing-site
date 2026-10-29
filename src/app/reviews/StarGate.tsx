@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Star, CheckCircle2, AlertCircle, Lock } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { submitLead } from "@/lib/submit-lead";
 import { company } from "@/lib/config";
 
 /**
@@ -109,7 +109,7 @@ export default function StarGate() {
     // a clearly-internal sentinel address when none is given, rather than
     // sending null and failing the insert. If a real email is provided, the
     // team can follow up with the unhappy client directly.
-    const { error } = await supabase.from("leads").insert({
+    const { error } = await submitLead({
       name: name.trim() || "Review feedback (no name given)",
       email: email.trim() || "review-feedback@marketcenterrealty.com",
       phone: null,

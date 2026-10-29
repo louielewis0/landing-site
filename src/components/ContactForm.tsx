@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { submitLead } from "@/lib/submit-lead";
 import { company } from "@/lib/config";
 
 /**
@@ -22,7 +22,7 @@ export default function ContactForm() {
     setStatus("loading");
     setErr("");
 
-    const { error } = await supabase.from("leads").insert({
+    const { error } = await submitLead({
       name,
       email,
       phone,

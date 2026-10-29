@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
+import { sendLeadNotification } from "@/lib/notify";
 
 /**
  * POST /api/valuation — the instant-valuation lead funnel.
@@ -79,49 +80,69 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: insErr.message }, { status: 500 });
   }
 
-  // 2 ─ instant AVM
+  // 2 ─ instant AVM (best-effort — a failure just means "pending")
+  let estimate: { value: number; low: number; high: number; comps: number } | null = null;
+  let leadMessage = "Requested an instant valuation";
+  let budgetRange: string | null = null;
+
   const key = process.env.RENTCAST_API_KEY;
-  if (!key) {
-    return NextResponse.json({ pending: true });
+  if (key) {
+    try {
+      const url = `https://api.rentcast.io/v1/avm/value?address=${encodeURIComponent(fullAddress)}`;
+      const res = await fetch(url, {
+        headers: { "X-Api-Key": key, accept: "application/json" },
+        signal: AbortSignal.timeout(9000),
+      });
+      if (res.ok) {
+        const data = (await res.json()) as {
+          price?: number;
+          priceRangeLow?: number;
+          priceRangeHigh?: number;
+          comparables?: unknown[];
+        };
+        if (data.price) {
+          estimate = {
+            value: Math.round(data.price),
+            low: Math.round(data.priceRangeLow ?? data.price * 0.93),
+            high: Math.round(data.priceRangeHigh ?? data.price * 1.07),
+            comps: Array.isArray(data.comparables) ? data.comparables.length : 0,
+          };
+          leadMessage = `Instant valuation shown: $${estimate.value.toLocaleString("en-US")} (range $${estimate.low.toLocaleString("en-US")}–$${estimate.high.toLocaleString("en-US")}, ${estimate.comps} comps)`;
+          budgetRange = `$${estimate.value.toLocaleString("en-US")}`;
+
+          // 3 ─ note what the visitor saw on the lead record
+          await admin
+            .from("leads")
+            .update({ message: leadMessage, budget_range: budgetRange })
+            .eq("id", lead.id);
+        }
+      }
+    } catch {
+      /* AVM unavailable — fall through to pending; lead is already captured */
+    }
   }
 
+  // 4 ─ ALERT THE BROKER (in-code, not via the fragile Supabase webhook).
+  // This is a hot seller lead — it must reach the phone every time. Awaited
+  // so it reliably fires in the serverless function, but never allowed to
+  // fail the response.
   try {
-    const url = `https://api.rentcast.io/v1/avm/value?address=${encodeURIComponent(fullAddress)}`;
-    const res = await fetch(url, {
-      headers: { "X-Api-Key": key, accept: "application/json" },
-      signal: AbortSignal.timeout(9000),
+    await sendLeadNotification({
+      name,
+      email: email || null,
+      phone: phone || null,
+      source: "instant-valuation",
+      intent,
+      message: leadMessage,
+      budget_range: budgetRange,
+      address: fullAddress,
+      priority: "hot",
     });
-    if (!res.ok) {
-      return NextResponse.json({ pending: true });
-    }
-    const data = (await res.json()) as {
-      price?: number;
-      priceRangeLow?: number;
-      priceRangeHigh?: number;
-      comparables?: unknown[];
-    };
-    if (!data.price) {
-      return NextResponse.json({ pending: true });
-    }
-
-    const estimate = {
-      value: Math.round(data.price),
-      low: Math.round(data.priceRangeLow ?? data.price * 0.93),
-      high: Math.round(data.priceRangeHigh ?? data.price * 1.07),
-      comps: Array.isArray(data.comparables) ? data.comparables.length : 0,
-    };
-
-    // 3 ─ note what the visitor saw on the lead record
-    await admin
-      .from("leads")
-      .update({
-        message: `Instant valuation shown: $${estimate.value.toLocaleString("en-US")} (range $${estimate.low.toLocaleString("en-US")}–$${estimate.high.toLocaleString("en-US")}, ${estimate.comps} comps)`,
-        budget_range: `$${estimate.value.toLocaleString("en-US")}`,
-      })
-      .eq("id", lead.id);
-
-    return NextResponse.json({ estimate });
   } catch {
-    return NextResponse.json({ pending: true });
+    /* alert is best-effort; lead is already saved */
   }
+
+  return estimate
+    ? NextResponse.json({ estimate })
+    : NextResponse.json({ pending: true });
 }
