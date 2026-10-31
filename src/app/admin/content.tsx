@@ -261,7 +261,7 @@ function CurrentStateSection() {
             </div>
             <div className="mt-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20">
               <p className="text-sm text-red-300 font-medium">
-                You need 85+ more reviews just to enter 3-Pack contention.
+                You need 100+ more reviews just to enter 3-Pack contention.
               </p>
             </div>
           </GlassCard>

@@ -148,7 +148,7 @@ export default function LuxuryBrandPage({ data }: { data: LuxuryBrandData }) {
                 Michigan&rsquo;s <span style={{ color: "var(--s-gold)" }}>#1</span> real estate brokerage, 2026
               </h2>
               <p style={{ fontSize: 15, lineHeight: 1.7, color: "rgba(241,234,219,0.75)", margin: "0 auto 18px", maxWidth: 520 }}>
-                Named first of 1,634 Michigan brokerages by TownAnswer &mdash; on a methodology businesses can&rsquo;t pay to influence. 5.0&#9733; across 85+ Google reviews.
+                Named first of 1,634 Michigan brokerages by TownAnswer &mdash; on a methodology businesses can&rsquo;t pay to influence. 5.0&#9733; across 100+ Google reviews.
               </p>
               <a href="/best-real-estate-brokerage-in-michigan" style={{ color: "var(--s-gold-ink)", fontWeight: 600, fontSize: 14, display: "inline-flex", alignItems: "center", gap: 6 }}>
                 See how we earned it <ArrowRight className="w-3.5 h-3.5" />
