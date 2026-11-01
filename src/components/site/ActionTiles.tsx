@@ -22,11 +22,11 @@ const TILES = [
     cta: "Get your home value",
   },
   {
-    href: "/homes",
+    href: "#just-listed",
     img: "/tiles/tile-listed.jpg",
     label: "Just Listed",
-    sub: "The newest homes on the market, refreshed hourly.",
-    cta: "View live listings",
+    sub: "Our newest listings, straight from the MLS.",
+    cta: "See our listings",
   },
 ];
 
