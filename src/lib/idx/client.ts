@@ -593,6 +593,96 @@ export async function getOfficeListings(): Promise<OfficeListing[]> {
   return cached();
 }
 
+// ---- Live market statistics (powers /metro-detroit-housing-market) ---------
+
+/** Aggregate stats for one county's active for-sale residential market. */
+export interface CountyMarketStat {
+  county: string;
+  forSale: number;
+  avgList: number;
+}
+
+/** A live snapshot of the Metro Detroit for-sale market, computed from the
+ *  Realcomp feed via OData $apply aggregates. All numbers are first-party and
+ *  describe ACTIVE inventory / asking prices (not closed sales). */
+export interface MarketStats {
+  asOf: string; // ISO date the stats were computed
+  counties: CountyMarketStat[];
+  totalForSale: number;
+  avgListMetro: number;
+  newLast30: number;
+  luxuryCount: number;
+  avgDaysOnMarket: number;
+}
+
+const METRO_COUNTIES = ["Oakland", "Macomb", "Wayne"] as const;
+const METRO_FILTER =
+  "StandardStatus eq 'Active' and PropertyType eq 'Residential' and (" +
+  METRO_COUNTIES.map((c) => `CountyOrParish eq '${c}'`).join(" or ") +
+  ")";
+
+async function applyAgg(
+  cfg: { base: string },
+  token: string,
+  applyExpr: string
+): Promise<Record<string, number>[]> {
+  const url = `${cfg.base}/odata/Property?$apply=${encodeURIComponent(applyExpr)}`;
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${token}` },
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error(`Realcomp aggregate failed: ${res.status}`);
+  const j = (await res.json()) as unknown;
+  if (Array.isArray(j)) return j as Record<string, number>[];
+  const v = (j as { value?: Record<string, number>[] }).value;
+  return v ?? [];
+}
+
+async function fetchMarketStatsUncached(): Promise<MarketStats> {
+  const cfg = getIdxConfig();
+  const token = await getAccessToken();
+
+  const since = new Date(Date.now() - 30 * 86400_000).toISOString().slice(0, 10);
+
+  const [metro, oak, mac, way, lux, fresh, dom] = await Promise.all([
+    applyAgg(cfg, token, `filter(${METRO_FILTER})/aggregate(ListPrice with average as avg, $count as n)`),
+    applyAgg(cfg, token, `filter(StandardStatus eq 'Active' and PropertyType eq 'Residential' and CountyOrParish eq 'Oakland')/aggregate(ListPrice with average as avg, $count as n)`),
+    applyAgg(cfg, token, `filter(StandardStatus eq 'Active' and PropertyType eq 'Residential' and CountyOrParish eq 'Macomb')/aggregate(ListPrice with average as avg, $count as n)`),
+    applyAgg(cfg, token, `filter(StandardStatus eq 'Active' and PropertyType eq 'Residential' and CountyOrParish eq 'Wayne')/aggregate(ListPrice with average as avg, $count as n)`),
+    applyAgg(cfg, token, `filter(${METRO_FILTER} and ListPrice ge 1000000)/aggregate($count as n)`),
+    applyAgg(cfg, token, `filter(${METRO_FILTER} and ListingContractDate ge ${since})/aggregate($count as n)`),
+    applyAgg(cfg, token, `filter(${METRO_FILTER})/aggregate(DaysOnMarket with average as avgDom)`),
+  ]);
+
+  const num = (rows: Record<string, number>[], key: string): number =>
+    rows.length && typeof rows[0][key] === "number" ? rows[0][key] : 0;
+
+  return {
+    asOf: new Date().toISOString().slice(0, 10),
+    counties: [
+      { county: "Oakland", forSale: num(oak, "n"), avgList: num(oak, "avg") },
+      { county: "Macomb", forSale: num(mac, "n"), avgList: num(mac, "avg") },
+      { county: "Wayne", forSale: num(way, "n"), avgList: num(way, "avg") },
+    ],
+    totalForSale: num(metro, "n"),
+    avgListMetro: num(metro, "avg"),
+    newLast30: num(fresh, "n"),
+    luxuryCount: num(lux, "n"),
+    avgDaysOnMarket: num(dom, "avgDom"),
+  };
+}
+
+/** Live Metro Detroit market stats, cached 12h. Throws on failure (caller
+ *  should render a graceful fallback). */
+export async function getMarketStats(): Promise<MarketStats> {
+  const cached = unstable_cache(
+    () => fetchMarketStatsUncached(),
+    ["idx-market", IDX_CACHE_VERSION],
+    { revalidate: 43200, tags: ["idx", "idx-market"] }
+  );
+  return cached();
+}
+
 /** Standard Realcomp IDX disclaimer that must display with IDX results. */
 export const IDX_DISCLAIMER =
   "IDX provided courtesy of Realcomp II Ltd., via Real Estate Market Center. " +

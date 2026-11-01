@@ -2548,3 +2548,36 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
 .jl-courtesy { font-size: 11px; color: var(--s-muted); margin-top: 10px; }
 .jl-cta { display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--s-gold-ink); }
 .jl-disclaimer { font-size: 11px; line-height: 1.5; color: var(--s-muted); margin-top: 22px; max-width: 780px; }
+
+/* ── Metro Detroit market report (/metro-detroit-housing-market) ───────── */
+.mkt-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.mkt-stat {
+  background: var(--navy); color: #fff; border-radius: 16px; padding: 24px 20px;
+  text-align: center; box-shadow: 0 8px 26px rgba(25,26,28,.1);
+}
+.mkt-stat-v { font-size: clamp(30px, 5vw, 44px); font-weight: 700; line-height: 1; color: #fff; }
+.mkt-stat-l { margin-top: 10px; font-size: 13px; letter-spacing: .02em; color: rgba(255,255,255,.72); }
+.mkt-counties { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 6px; }
+.mkt-county {
+  background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 24px 22px;
+  box-shadow: 0 6px 22px rgba(25,26,28,.06);
+}
+.mkt-county-name { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--s-gold-ink); }
+.mkt-county-price { font-size: 32px; font-weight: 700; color: var(--s-ink); margin-top: 8px; line-height: 1; }
+.mkt-county-sub { font-size: 12px; color: var(--s-muted); margin-top: 4px; }
+.mkt-county-count { font-size: 14px; font-weight: 600; color: var(--s-ink); margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+.mkt-takes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.mkt-take { background: #faf8f4; border: 1px solid var(--line); border-radius: 16px; padding: 24px 26px; }
+.mkt-take h3 { font-size: 18px; margin: 0 0 10px; color: var(--s-ink); }
+.mkt-take p { font-size: 15px; line-height: 1.6; color: var(--s-ink); margin: 0; }
+.mkt-faq { display: flex; flex-direction: column; gap: 10px; }
+.mkt-faq-item { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 4px 18px; }
+.mkt-faq-item summary { cursor: pointer; font-weight: 600; color: var(--s-ink); padding: 14px 0; list-style: none; font-size: 15px; }
+.mkt-faq-item summary::-webkit-details-marker { display: none; }
+.mkt-faq-item[open] summary { border-bottom: 1px solid var(--line); }
+.mkt-faq-item p { font-size: 14px; line-height: 1.6; color: var(--s-muted); padding: 12px 0 14px; margin: 0; }
+@media (max-width: 860px) {
+  .mkt-stats { grid-template-columns: repeat(2, 1fr); }
+  .mkt-counties { grid-template-columns: 1fr; }
+  .mkt-takes { grid-template-columns: 1fr; }
+}

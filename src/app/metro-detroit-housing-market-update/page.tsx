@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import SiteShell from "@/components/site/SiteShell";
 import { company } from "@/lib/config";
-import { ArrowRight, ChevronRight, CalendarDays, Landmark, BarChart3, Phone, MapPin } from "lucide-react";
+import { getMarketStats, isIdxConfigured, type MarketStats } from "@/lib/idx";
+import { ArrowRight, ChevronRight, CalendarDays, Landmark, BarChart3, Phone, MapPin, Activity } from "lucide-react";
 
 const BASE = "https://marketcenterrealty.com";
 const SLUG = "metro-detroit-housing-market-update";
@@ -108,7 +109,25 @@ const breadcrumbSchema = {
   ],
 };
 
-export default function MarketUpdatePage() {
+function longDateLive(iso: string): string {
+  const M = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const d = new Date(iso + "T12:00:00");
+  return `${M[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+}
+const nf = (v: number) => Math.round(v).toLocaleString("en-US");
+const dK = (v: number) => `$${(Math.round(v / 1000) * 1000).toLocaleString("en-US")}`;
+
+async function safeLive(): Promise<MarketStats | null> {
+  if (!isIdxConfigured()) return null;
+  try {
+    return await getMarketStats();
+  } catch {
+    return null;
+  }
+}
+
+export default async function MarketUpdatePage() {
+  const live = await safeLive();
   return (
     <SiteShell>
       <main style={{ paddingTop: 24 }} className="bg-cream">
@@ -140,6 +159,51 @@ export default function MarketUpdatePage() {
             </div>
           </div>
         </section>
+
+        {live && live.totalForSale > 0 && (
+          <section className="bg-cream-2" style={{ padding: "60px 0" }}>
+            <div className="container">
+              <div className="reveal">
+                <div className="s-eyebrow">
+                  <Activity className="w-3 h-3" style={{ marginRight: 2 }} />
+                  Live from the MLS &middot; updated {longDateLive(live.asOf)}
+                </div>
+                <h2 style={{ fontSize: "clamp(26px, 3.2vw, 38px)", marginBottom: 12 }}>
+                  The market right now
+                </h2>
+                <p style={{ fontSize: 16, lineHeight: 1.7, color: "var(--s-muted)", maxWidth: 760, marginBottom: 28 }}>
+                  The sale-price trends below are a Q3 snapshot. These supply-side
+                  numbers refresh continuously from the Realcomp MLS &mdash; active
+                  inventory, fresh listings, and current asking prices across
+                  Oakland, Macomb, and Wayne counties.
+                </p>
+              </div>
+              <div className="mkt-stats reveal">
+                <div className="mkt-stat"><div className="mkt-stat-v">{nf(live.totalForSale)}</div><div className="mkt-stat-l">Homes for sale</div></div>
+                <div className="mkt-stat"><div className="mkt-stat-v">{nf(live.newLast30)}</div><div className="mkt-stat-l">New in the last 30 days</div></div>
+                <div className="mkt-stat"><div className="mkt-stat-v">{Math.round(live.avgDaysOnMarket)}</div><div className="mkt-stat-l">Avg. days on market</div></div>
+                <div className="mkt-stat"><div className="mkt-stat-v">{nf(live.luxuryCount)}</div><div className="mkt-stat-l">Luxury homes ($1M+)</div></div>
+              </div>
+              <div className="mkt-counties reveal" style={{ marginTop: 18 }}>
+                {live.counties.map((c) => (
+                  <div key={c.county} className="mkt-county">
+                    <div className="mkt-county-name">{c.county} County</div>
+                    <div className="mkt-county-price">{dK(c.avgList)}</div>
+                    <div className="mkt-county-sub">avg. list price</div>
+                    <div className="mkt-county-count">{nf(c.forSale)} homes for sale</div>
+                  </div>
+                ))}
+              </div>
+              <p className="reveal" style={{ fontSize: 12, lineHeight: 1.6, color: "var(--s-muted)", marginTop: 22, maxWidth: 780 }}>
+                Source: compiled by {company.name} from the Realcomp II Ltd. MLS,
+                active for-sale residential listings in Oakland, Macomb, and Wayne
+                counties as of {longDateLive(live.asOf)}. List prices are current
+                asking prices, not closed sales; averages include all active
+                listings and can be pulled up by high-value outliers.
+              </p>
+            </div>
+          </section>
+        )}
 
         <section className="bg-cream-2" style={{ padding: "70px 0" }}>
           <div className="container">
