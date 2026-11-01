@@ -531,6 +531,68 @@ export async function getListing(
   return cached();
 }
 
+// ---- Our own office listings (powers the homepage "Just Listed" section) ----
+
+/** The brokerage's exact ListOfficeName in the Realcomp feed. */
+const OFFICE_NAME = "Real Estate Market Center";
+
+/** A card for one of RMC's own active listings. `isLease` distinguishes a
+ *  for-rent listing (price shown as $X/mo) from a for-sale one. */
+export type OfficeListing = IdxListing & { isLease: boolean };
+
+async function fetchOfficeListingsUncached(): Promise<OfficeListing[]> {
+  const cfg = getIdxConfig();
+  const token = await getAccessToken();
+
+  // Our own active, IDX-displayable listings — sale OR lease (unlike /homes,
+  // which is for-sale only). No $orderby (slow); sort client-side.
+  const filter =
+    `StandardStatus eq 'Active' and ListOfficeName eq '${OFFICE_NAME}' ` +
+    `and InternetEntireListingDisplayYN eq true`;
+  const url =
+    `${cfg.base}/odata/Property` +
+    `?$top=24` +
+    `&$select=${encodeURIComponent(`${SELECT},PropertyType`)}` +
+    `&$filter=${encodeURIComponent(filter)}`;
+
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${token}` },
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error(`Realcomp office query failed: ${res.status}`);
+  }
+  const raw = ((await res.json()) as { value?: RawProperty[] }).value ?? [];
+  const displayable = raw.filter(isIdxDisplayable);
+
+  const listings = displayable.map(normalize);
+  // Newest first (ModificationTimestamp is an ISO string).
+  listings.sort((a, b) => (b.modified ?? "").localeCompare(a.modified ?? ""));
+  await attachPhotos(listings, cfg, token);
+
+  const leaseByKey = new Map(
+    displayable.map((p) => [
+      p.ListingKey ?? "",
+      (p.PropertyType ?? "") === "ResidentialLease",
+    ])
+  );
+  return listings.map((l) => ({
+    ...l,
+    isLease: leaseByKey.get(l.listingKey) ?? false,
+  }));
+}
+
+/** RMC's own active listings for the homepage "Just Listed" section. Cached
+ *  30 min. Caller should treat a throw as "hide the section". */
+export async function getOfficeListings(): Promise<OfficeListing[]> {
+  const cached = unstable_cache(
+    () => fetchOfficeListingsUncached(),
+    ["idx-office", IDX_CACHE_VERSION],
+    { revalidate: 1800, tags: ["idx", "idx-office"] }
+  );
+  return cached();
+}
+
 /** Standard Realcomp IDX disclaimer that must display with IDX results. */
 export const IDX_DISCLAIMER =
   "IDX provided courtesy of Realcomp II Ltd., via Real Estate Market Center. " +

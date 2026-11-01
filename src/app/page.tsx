@@ -8,6 +8,7 @@ import {
   TemplateCta,
 } from "@/components/site/TemplateHome";
 import ActionTiles from "@/components/site/ActionTiles";
+import JustListed from "@/components/site/JustListed";
 import ContactForm from "@/components/ContactForm";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
         <HeroExplore />
         <TemplateStats />
         <ActionTiles />
+        <JustListed />
         <TemplateAreas />
         <TemplateAbout />
         <TemplateReviews />
