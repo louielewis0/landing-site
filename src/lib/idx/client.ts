@@ -630,6 +630,7 @@ async function applyAgg(
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${token}` },
     cache: "no-store",
+    signal: AbortSignal.timeout(8000),
   });
   if (!res.ok) throw new Error(`Realcomp aggregate failed: ${res.status}`);
   const j = (await res.json()) as unknown;
