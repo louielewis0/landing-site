@@ -2581,3 +2581,17 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
   .mkt-counties { grid-template-columns: 1fr; }
   .mkt-takes { grid-template-columns: 1fr; }
 }
+
+/* ── Office locations (/locations) ───────────────────────────────────── */
+.loc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.loc-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 28px 26px; box-shadow: 0 6px 22px rgba(25,26,28,.06); display: flex; flex-direction: column; }
+.loc-city { font-size: 22px; margin: 0 0 14px; color: var(--s-ink); }
+.loc-addr { display: flex; gap: 8px; font-size: 15px; line-height: 1.5; color: var(--s-ink); font-weight: 500; }
+.loc-phone { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; font-size: 15px; font-weight: 600; color: var(--s-gold-ink); text-decoration: none; }
+.loc-blurb { font-size: 14px; line-height: 1.6; color: var(--s-muted); margin: 16px 0 14px; }
+.loc-serving { font-size: 13px; color: var(--s-ink); padding-top: 14px; border-top: 1px solid var(--line); }
+.loc-serving-label { text-transform: uppercase; letter-spacing: .08em; font-size: 11px; font-weight: 700; color: var(--s-muted); }
+.loc-links { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+.loc-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--s-gold-ink); text-decoration: none; }
+.loc-link:hover { text-decoration: underline; }
+@media (max-width: 860px) { .loc-grid { grid-template-columns: 1fr; } }

@@ -113,6 +113,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/selling-a-house-during-divorce-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${base}/selling-an-inherited-house-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${base}/luxury-homes-franklin-bingham-farms`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/locations`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/michigan-seller-disclosure-requirements`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${base}/home-inspection-vs-appraisal`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/should-i-buy-or-sell-now-metro-detroit`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
