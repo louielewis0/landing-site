@@ -2595,3 +2595,22 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
 .loc-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--s-gold-ink); text-decoration: none; }
 .loc-link:hover { text-decoration: underline; }
 @media (max-width: 860px) { .loc-grid { grid-template-columns: 1fr; } }
+/* Featured Troy HQ card */
+.loc-main {
+  position: relative; background: var(--navy); color: #fff; border-radius: 20px;
+  padding: 40px 44px; box-shadow: 0 16px 44px rgba(18,26,36,.22);
+  border: 1px solid rgba(214,170,94,.28);
+}
+.loc-main-badge {
+  display: inline-block; background: #E4501E; color: #fff; font-size: 11px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; padding: 6px 13px; border-radius: 100px; margin-bottom: 18px;
+}
+.loc-main-city { font-size: clamp(26px, 3.4vw, 36px); margin: 0 0 16px; color: #fff; }
+.loc-main-addr { display: flex; gap: 10px; font-size: 18px; line-height: 1.5; color: #fff; font-weight: 600; }
+.loc-main-phone { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 18px; font-weight: 700; color: var(--s-gold); text-decoration: none; }
+.loc-main-blurb { font-size: 15.5px; line-height: 1.65; color: rgba(255,255,255,.82); margin: 18px 0 16px; max-width: 760px; }
+.loc-main-serving { font-size: 14px; color: rgba(255,255,255,.9); padding-top: 16px; border-top: 1px solid rgba(255,255,255,.14); }
+.loc-main-serving .loc-serving-label { color: rgba(255,255,255,.6); }
+.loc-main-links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 18px; }
+.loc-link-light { color: var(--s-gold) !important; }
+@media (max-width: 600px) { .loc-main { padding: 30px 24px; } }
