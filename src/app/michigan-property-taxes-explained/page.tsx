@@ -85,7 +85,9 @@ const data: GuidePageData = {
             <strong>&ldquo;uncaps&rdquo; and resets to the full SEV</strong> (50% of market value). The seller
             may have enjoyed years of capped increases &mdash; but as the new owner,{" "}
             <strong>you lose that protection</strong>, and your first full-year tax bill can be{" "}
-            <strong>meaningfully higher than what the seller was paying</strong>.
+            <strong>meaningfully higher than what the seller was paying</strong>. We break down exactly how
+            uncapping works &mdash; and how to estimate your real bill &mdash; in{" "}
+            <a href="https://themiledetroit.com/articles/michigan-property-tax-uncapping-explained" target="_blank" rel="noopener noreferrer" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>The Mile Detroit</a>.
           </p>
           <p>
             <strong>Never budget off the seller&rsquo;s current tax bill.</strong> Estimate your taxes using

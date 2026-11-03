@@ -154,7 +154,10 @@ export default async function MarketUpdatePage() {
                 year-over-year, from <strong>Birmingham&rsquo;s +6.5%</strong> at the hot luxury end to
                 <strong> Warren&rsquo;s +0.4%</strong>, nearly flat, at the affordable end. Homes still move
                 fast in the mid-market (Rochester Hills 14 days, Sterling Heights 15) while luxury takes longer.
-                No city is declining on the value index. Every figure below is sourced and dated.
+                No city is declining on the value index. Every figure below is sourced and dated. For the
+                latest monthly readings, see{" "}
+                <a href="https://themiledetroit.com/articles/metro-detroit-home-values-september-2026" target="_blank" rel="noopener noreferrer" style={{ color: "var(--s-gold)" }}>The Mile Detroit</a>{" "}
+                and its <a href="https://themiledetroit.com/markets" target="_blank" rel="noopener noreferrer" style={{ color: "var(--s-gold)" }}>community market board</a>.
               </p>
             </div>
           </div>

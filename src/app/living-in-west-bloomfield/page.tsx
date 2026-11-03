@@ -82,7 +82,8 @@ const data: GuidePageData = {
           <p>
             <a href="/what-is-my-home-worth-west-bloomfield">See West Bloomfield home values</a>{" "}
             &middot;{" "}
-            <a href="/west-bloomfield-lakefront-homes">West Bloomfield lakefront guide</a>
+            <a href="/west-bloomfield-lakefront-homes">West Bloomfield lakefront guide</a> &middot;{" "}
+            <a href="https://themiledetroit.com/markets/west-bloomfield" target="_blank" rel="noopener noreferrer">West Bloomfield market trends on The Mile</a>
           </p>
         </>
       ),

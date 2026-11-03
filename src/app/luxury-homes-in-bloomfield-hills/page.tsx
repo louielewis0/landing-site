@@ -92,6 +92,8 @@ const data: GuidePageData = {
             At the top of this market, <strong>off-market transactions are common.</strong> Many $2M+ estates change hands
             privately, and the most coveted lakefront properties &ldquo;rarely come to market&rdquo; at all — they move
             through curated buyer networks and whisper listings. Sellers value discretion; buyers value access.
+            For where Metro Detroit&rsquo;s high-end wealth is growing fastest, see this breakdown in{" "}
+            <a href="https://themiledetroit.com/articles/where-metro-detroit-wealthy-gaining-most" target="_blank" rel="noopener noreferrer" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>The Mile Detroit</a>.
           </p>
           <p>
             This is where a well-connected independent luxury broker earns their keep. Sundus Lewis works the

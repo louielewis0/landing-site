@@ -81,7 +81,8 @@ const data: GuidePageData = {
           </p>
           <p>
             <a href="/what-is-my-home-worth-birmingham">See Birmingham home values</a> &middot;{" "}
-            <a href="/luxury-homes-in-birmingham">Birmingham luxury market guide</a>
+            <a href="/luxury-homes-in-birmingham">Birmingham luxury market guide</a> &middot;{" "}
+            <a href="https://themiledetroit.com/markets/birmingham" target="_blank" rel="noopener noreferrer">Birmingham market trends on The Mile</a>
           </p>
         </>
       ),

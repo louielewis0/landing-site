@@ -110,7 +110,9 @@ export default function FastestAppreciatingPage() {
                 and Rochester Hills (+3.6%). Warren was slowest on this gauge at +1.7%. One honest caveat up
                 front: past appreciation is history, not a forecast — and the fastest-appreciating city is
                 often the priciest to enter. Use this to see where demand has been strong, then match it to
-                your goal. Every figure is sourced below.
+                your goal. Every figure is sourced below. For the latest monthly readings, see{" "}
+                <a href="https://themiledetroit.com/articles/metro-detroit-home-values-september-2026" target="_blank" rel="noopener noreferrer" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>The Mile Detroit</a>{" "}
+                and its <a href="https://themiledetroit.com/markets" target="_blank" rel="noopener noreferrer" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>community market board</a>.
               </p>
             </div>
           </div>

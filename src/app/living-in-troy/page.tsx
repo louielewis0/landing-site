@@ -83,7 +83,8 @@ const data: GuidePageData = {
           <p>
             Curious what a specific home is worth, or what your current one would sell for?{" "}
             <a href="/what-is-my-home-worth-troy">See Troy home values</a> or run the{" "}
-            <a href="/home-affordability-calculator">affordability calculator</a>.
+            <a href="/home-affordability-calculator">affordability calculator</a>. You can also track{" "}
+            <a href="https://themiledetroit.com/markets/troy" target="_blank" rel="noopener noreferrer">Troy&rsquo;s market trends on The Mile Detroit</a>.
           </p>
         </>
       ),

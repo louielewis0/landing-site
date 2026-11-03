@@ -40,7 +40,9 @@ const data: GuidePageData = {
           <p>
             Because both villages are small and tightly held, inventory is limited and many of the best homes
             trade <strong>quietly, off-market</strong>. That makes a well-connected local luxury broker the
-            difference between seeing every option and missing the one that never hit the MLS.
+            difference between seeing every option and missing the one that never hit the MLS. For a wider
+            view of where Metro Detroit&rsquo;s wealth is growing fastest, see this analysis in{" "}
+            <a href="https://themiledetroit.com/articles/where-metro-detroit-wealthy-gaining-most" target="_blank" rel="noopener noreferrer" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>The Mile Detroit</a>.
           </p>
         </>
       ),

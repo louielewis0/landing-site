@@ -90,7 +90,8 @@ const data: GuidePageData = {
           </p>
           <p>
             <a href="/luxury-homes-in-novi">See Novi&rsquo;s luxury market</a> &middot;{" "}
-            <a href="/home-affordability-calculator">affordability calculator</a>
+            <a href="/home-affordability-calculator">affordability calculator</a> &middot;{" "}
+            <a href="https://themiledetroit.com/markets/novi" target="_blank" rel="noopener noreferrer">Novi market trends on The Mile</a>
           </p>
         </>
       ),

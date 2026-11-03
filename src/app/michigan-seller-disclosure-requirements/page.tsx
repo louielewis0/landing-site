@@ -41,7 +41,10 @@ const data: GuidePageData = {
           <p>
             The key standard is <strong>good faith</strong>: you disclose what you actually know, to the
             best of your knowledge. It is not a warranty or a guarantee of condition &mdash; but you cannot
-            knowingly hide or misrepresent a defect.
+            knowingly hide or misrepresent a defect. Water intrusion is one of the most commonly disputed
+            defects &mdash; here are the{" "}
+            <a href="https://themiledetroit.com/articles/never-buy-michigan-house-water-damage-signs" target="_blank" rel="noopener noreferrer" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>warning signs buyers should look for</a>{" "}
+            in The Mile Detroit.
           </p>
         </>
       ),

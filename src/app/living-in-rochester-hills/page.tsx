@@ -81,7 +81,8 @@ const data: GuidePageData = {
           </p>
           <p>
             <a href="/what-is-my-home-worth-rochester-hills">See Rochester Hills home values</a>{" "}
-            &middot; <a href="/home-affordability-calculator">affordability calculator</a>
+            &middot; <a href="/home-affordability-calculator">affordability calculator</a> &middot;{" "}
+            <a href="https://themiledetroit.com/markets/rochester-hills" target="_blank" rel="noopener noreferrer">Rochester Hills market trends on The Mile</a>
           </p>
         </>
       ),

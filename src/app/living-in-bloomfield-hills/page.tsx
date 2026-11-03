@@ -82,7 +82,8 @@ const data: GuidePageData = {
           <p>
             <a href="/what-is-my-home-worth-bloomfield-hills">See Bloomfield Hills home values</a>{" "}
             &middot;{" "}
-            <a href="/luxury-homes-in-bloomfield-hills">Bloomfield Hills luxury market guide</a>
+            <a href="/luxury-homes-in-bloomfield-hills">Bloomfield Hills luxury market guide</a> &middot;{" "}
+            <a href="https://themiledetroit.com/markets/bloomfield-hills" target="_blank" rel="noopener noreferrer">Bloomfield Hills market trends on The Mile</a>
           </p>
         </>
       ),

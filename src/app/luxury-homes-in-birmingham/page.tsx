@@ -75,7 +75,9 @@ const data: GuidePageData = {
             The luxury product splits into two types: renovated or historic estate homes (especially around Quarton Lake)
             and new-construction luxury with premium, smart-home finishes. Lot sizes scale with the tier, from about 0.15
             acre in-town up to an acre-plus for trophy properties. The market also pulls out-of-state buyers from Los
-            Angeles, Chicago, and New York looking for value against coastal prices.
+            Angeles, Chicago, and New York looking for value against coastal prices. For a closer look at
+            where Metro Detroit&rsquo;s wealth is concentrating fastest, see this analysis in{" "}
+            <a href="https://themiledetroit.com/articles/where-metro-detroit-wealthy-gaining-most" target="_blank" rel="noopener noreferrer" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>The Mile Detroit</a>.
           </p>
         </>
       ),

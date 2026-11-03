@@ -229,7 +229,9 @@ export default function WaterDamageSellOrRestorePage() {
                 </p>
                 <p>
                   So the question is never whether the damage enters the transaction. It is whether it enters
-                  as a documented, solved problem or as an open question the buyer prices for you.
+                  as a documented, solved problem or as an open question the buyer prices for you. For a
+                  buyer&rsquo;s-eye view of the red flags that signal hidden water damage, see{" "}
+                  <a href="https://themiledetroit.com/articles/never-buy-michigan-house-water-damage-signs" target="_blank" rel="noopener noreferrer" style={{ color: "var(--s-gold)" }}>The Mile Detroit</a>.
                 </p>
               </div>
             </div>
