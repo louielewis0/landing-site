@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { company } from "@/lib/config";
+import NewsletterSignup from "./NewsletterSignup";
 
 /**
  * Footer (DOBI-inspired, clean): centered logo, email / phone / address,
@@ -95,6 +96,7 @@ export default function SiteFooter() {
 
   return (
     <footer className="df-foot">
+      <NewsletterSignup />
       <div className="df-inner">
         <Link href="/" className="df-logo" aria-label={`${company.name} home`}>
           <Image src="/mcr-logo-color-3d.png" alt={company.name} width={180} height={180} />

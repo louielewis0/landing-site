@@ -2614,3 +2614,24 @@ textarea.cq-input { resize: vertical; min-height: 66px; }
 .loc-main-links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 18px; }
 .loc-link-light { color: var(--s-gold) !important; }
 @media (max-width: 600px) { .loc-main { padding: 30px 24px; } }
+
+/* ── "Get The Mile Detroit" newsletter module (newspaper style) ───────── */
+.nl-band { padding: 44px 20px 8px; }
+.nl-box {
+  max-width: 660px; margin: 0 auto; background: #f7f4ec; color: #15110c;
+  border: 2px solid #15110c; border-radius: 3px; padding: 34px 38px; text-align: center;
+  font-family: Georgia, "Times New Roman", serif; box-shadow: 0 10px 30px rgba(0,0,0,.28);
+}
+.nl-head { display: flex; justify-content: center; }
+.nl-masthead { height: 48px; width: auto; max-width: 86%; object-fit: contain; }
+.nl-eyebrow { text-transform: uppercase; letter-spacing: .2em; font-size: 11px; font-weight: 700; color: #8a7d68; margin: 16px 0 10px; font-family: Georgia, serif; }
+.nl-sub { font-size: 14.5px; line-height: 1.6; color: #3a342b; max-width: 520px; margin: 0 auto 20px; }
+.nl-form { display: flex; gap: 10px; max-width: 470px; margin: 0 auto; flex-wrap: wrap; }
+.nl-input { flex: 1; min-width: 200px; padding: 13px 15px; border: 1.5px solid #15110c; border-radius: 2px; background: #fff; font-size: 15px; color: #15110c; font-family: Georgia, serif; }
+.nl-input:focus { outline: 2px solid #15110c; outline-offset: 1px; }
+.nl-btn { padding: 13px 24px; background: #15110c; color: #f7f4ec; border: none; border-radius: 2px; font-weight: 700; font-size: 14px; letter-spacing: .02em; cursor: pointer; white-space: nowrap; font-family: Georgia, serif; }
+.nl-btn:hover { background: #000; }
+.nl-btn:disabled { opacity: .6; cursor: default; }
+.nl-readlink { display: inline-block; margin-top: 16px; font-size: 13px; font-weight: 700; color: #15110c; text-decoration: underline; }
+.nl-err { margin-top: 12px; font-size: 13px; color: #b23a1a; font-weight: 600; }
+.nl-done p { font-size: 16px; color: #15110c; margin-bottom: 6px; }
