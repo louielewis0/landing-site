@@ -25,8 +25,8 @@ const TROY = {
   serving: ["Troy", "Rochester Hills", "Sterling Heights", "Birmingham", "Bloomfield Hills", "Oakland County", "Macomb County"],
   blurb:
     "Our Troy headquarters on Square Lake Road is the heart of Real Estate Market Center. Centrally located in Oakland County near the I-75 corridor, it anchors everything we do across Metro Detroit — from Troy and the Rochester area to the Birmingham–Bloomfield luxury corridor and into Macomb County.",
-  cityHref: "/best-real-estate-agent-troy",
-  cityLabel: "Troy real estate",
+  cityHref: "/best-real-estate-brokerages-troy",
+  cityLabel: "Troy real estate brokerage",
 };
 
 const OFFICES = [
@@ -38,8 +38,8 @@ const OFFICES = [
     serving: ["Birmingham", "Bloomfield Hills", "Franklin", "Bingham Farms", "Beverly Hills"],
     blurb:
       "In the heart of downtown Birmingham, steps from Old Woodward — the center of Metro Detroit's luxury market. We serve the Birmingham–Bloomfield corridor, where discretion and high-end marketing matter most.",
-    cityHref: "/best-real-estate-agent-birmingham",
-    cityLabel: "Birmingham real estate",
+    cityHref: "/best-real-estate-brokerages-birmingham",
+    cityLabel: "Birmingham real estate brokerage",
   },
   {
     id: "rochester-hills",
@@ -49,8 +49,8 @@ const OFFICES = [
     serving: ["Rochester Hills", "Rochester", "Oakland Township", "Shelby Township", "Washington Township"],
     blurb:
       "Anchoring us in north Oakland County — Rochester, Rochester Hills, and Oakland Township. A market of top schools, trails, and newer estate neighborhoods we know street by street.",
-    cityHref: "/best-real-estate-agent-rochester-hills",
-    cityLabel: "Rochester Hills real estate",
+    cityHref: "/best-real-estate-brokerages-rochester-hills",
+    cityLabel: "Rochester Hills real estate brokerage",
   },
   {
     id: "bloomfield-hills",
@@ -60,8 +60,8 @@ const OFFICES = [
     serving: ["Bloomfield Hills", "Bloomfield Township", "West Bloomfield", "Birmingham", "Franklin"],
     blurb:
       "On Woodward in one of Michigan's most prestigious communities. We represent estate buyers and sellers across Bloomfield Hills, Bloomfield Township, and West Bloomfield with white-glove service.",
-    cityHref: "/best-real-estate-agent-bloomfield-hills",
-    cityLabel: "Bloomfield Hills real estate",
+    cityHref: "/best-real-estate-brokerages-bloomfield-hills",
+    cityLabel: "Bloomfield Hills real estate brokerage",
   },
 ] as const;
 
@@ -72,6 +72,10 @@ function mapsUrl(street: string, city: string, zip: string) {
 }
 
 const FAQ = [
+  {
+    q: "Is Real Estate Market Center a real estate brokerage in Birmingham, Rochester Hills, Troy, and Bloomfield Hills?",
+    a: "Yes. Real Estate Market Center is an independent luxury real estate brokerage headquartered in Troy, MI, with offices in Birmingham, Rochester Hills, and Bloomfield Hills. We serve buyers and sellers across Oakland and Macomb counties and can be reached at 248-568-6081.",
+  },
   {
     q: "Where is Real Estate Market Center's main office?",
     a: "Our headquarters is at 2032 E Square Lake Rd, Suite 400A, Troy, MI 48085. Call or text 248-568-6081. We also have offices in Birmingham, Rochester Hills, and Bloomfield Hills.",
