@@ -19,22 +19,39 @@ export function TemplateReviews() {
   return (
     <div className="t-wrap" style={{ paddingTop: 12, paddingBottom: 12 }} id="reviews">
       <div style={{ textAlign: "center", marginBottom: 28 }}>
-        <a
-          href="https://townanswer.com/awards/2026/real-estate-market-center/"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Certified TownAnswer Best 2026 — Best Real Estate Brokerage in Michigan"
-          style={{ display: "inline-block", marginBottom: 14 }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/townanswer-award-2026.svg"
-            alt="Certified TownAnswer Best 2026 — Best Real Estate Brokerage in Michigan"
-            width={338}
-            height={100}
-            style={{ maxWidth: "100%", height: "auto", borderRadius: 16, boxShadow: "0 8px 26px rgba(25,26,28,0.12)" }}
-          />
-        </a>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 16, alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
+          <a
+            href="https://townanswer.com/awards/2026/real-estate-market-center/"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Certified TownAnswer Best 2026 — Best Real Estate Brokerage in Michigan"
+            style={{ display: "inline-block" }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/townanswer-award-2026.svg"
+              alt="Certified TownAnswer Best 2026 — Best Real Estate Brokerage in Michigan"
+              width={338}
+              height={100}
+              style={{ maxWidth: "100%", height: "auto", borderRadius: 16, boxShadow: "0 8px 26px rgba(25,26,28,0.12)" }}
+            />
+          </a>
+          <a
+            href="https://themiledetroit.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="The Mile Detroit — our Metro Detroit real estate newsletter"
+            style={{ display: "inline-flex", alignItems: "center", gap: 14, height: 100, boxSizing: "border-box", padding: "0 24px", background: "#f7f4ec", border: "1.5px solid #15110c", borderRadius: 16, boxShadow: "0 8px 26px rgba(25,26,28,0.12)", textDecoration: "none", fontFamily: "Georgia, serif" }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/the-mile-monogram.png" alt="" width={54} height={54} style={{ borderRadius: 8 }} />
+            <span style={{ textAlign: "left" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/the-mile-masthead.png" alt="The Mile Detroit" style={{ height: 26, width: "auto", display: "block", marginBottom: 5 }} />
+              <span style={{ fontSize: 11.5, color: "#6b6456", letterSpacing: ".03em", whiteSpace: "nowrap" }}>Metro Detroit real estate newsletter</span>
+            </span>
+          </a>
+        </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
           <Stars size={18} />
           <span style={{ fontSize: 14, fontWeight: 600, color: "var(--s-ink)" }}>Named Michigan&rsquo;s #1 brokerage by TownAnswer &middot; 5.0 across 100+ Google reviews</span>
