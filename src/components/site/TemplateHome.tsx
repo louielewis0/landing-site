@@ -47,7 +47,7 @@ export function TemplateReviews() {
             <img src="/the-mile-monogram.png" alt="" width={60} height={60} style={{ borderRadius: 9, flexShrink: 0 }} />
             <span style={{ textAlign: "left", minWidth: 0 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/the-mile-masthead.png" alt="The Mile Detroit" style={{ height: 40, width: "auto", maxWidth: "100%", display: "block", marginBottom: 6 }} />
+              <img src="/the-mile-masthead.png" alt="The Mile Detroit" style={{ height: 48, width: "auto", maxWidth: "100%", display: "block", marginBottom: 6 }} />
               <span style={{ display: "block", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", fontSize: 7.5, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#6b6456", lineHeight: 1.35 }}>Metro Detroit Real Estate Newsletter</span>
             </span>
           </a>
