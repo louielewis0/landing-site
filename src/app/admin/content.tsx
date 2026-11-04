@@ -501,7 +501,7 @@ function RevenueTiersSection() {
     {
       tier: 1,
       label: "Review System Live",
-      desc: "100+ reviews in first 90 days",
+      desc: "105+ reviews in first 90 days",
       leads: "~28 leads/mo",
       revenue: "$149K/yr",
       delta: "+$107K",

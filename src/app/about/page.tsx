@@ -66,7 +66,7 @@ const data: LuxuryBrandData = {
           <p>
             In 2026, <a href="/best-real-estate-brokerage-in-michigan" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>TownAnswer named Real Estate Market Center the #1 real estate brokerage in Michigan</a>{" "}
             &mdash; first of 1,634 eligible brokerages statewide, on a methodology that businesses
-            cannot pay to influence. We also hold a perfect <strong>5.0 rating across 100+ Google
+            cannot pay to influence. We also hold a perfect <strong>5.0 rating across 105+ Google
             reviews</strong>, with clients consistently describing the process as smooth, professional,
             and handled start to finish. Read them on our{" "}
             <a href="/reviews" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>reviews page</a>.
@@ -109,7 +109,7 @@ const data: LuxuryBrandData = {
     {
       question: "Is Real Estate Market Center a good brokerage?",
       answer:
-        "In 2026, TownAnswer ranked Real Estate Market Center the #1 real estate brokerage in Michigan — first of 1,634 statewide — on a methodology businesses cannot pay to influence. It holds a 5.0 rating across 100+ Google reviews, with 20+ years in business, 500+ homes closed, and $100M+ in sales.",
+        "In 2026, TownAnswer ranked Real Estate Market Center the #1 real estate brokerage in Michigan — first of 1,634 statewide — on a methodology businesses cannot pay to influence. It holds a 5.0 rating across 105+ Google reviews, with 20+ years in business, 500+ homes closed, and $100M+ in sales.",
     },
     {
       question: "How do I contact Real Estate Market Center?",
@@ -133,7 +133,7 @@ const data: LuxuryBrandData = {
   ctaPrimary: { href: "/home-value", label: "Get My Free Home Valuation" },
   metaTitle: "About Real Estate Market Center | Metro Detroit's Independent Luxury Brokerage",
   metaDescription:
-    "Real Estate Market Center is an independent luxury real estate brokerage in Troy, MI, led by broker-owner Sundus Lewis since 2003 — named the #1 brokerage in Michigan (TownAnswer 2026), 5.0★ across 100+ reviews, 500+ homes closed, $100M+ sold.",
+    "Real Estate Market Center is an independent luxury real estate brokerage in Troy, MI, led by broker-owner Sundus Lewis since 2003 — named the #1 brokerage in Michigan (TownAnswer 2026), 5.0★ across 105+ reviews, 500+ homes closed, $100M+ sold.",
 };
 
 export const metadata: Metadata = luxuryMetadata(data);

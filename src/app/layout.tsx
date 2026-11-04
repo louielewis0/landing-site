@@ -74,7 +74,7 @@ const jsonLd = {
   // award = third-party, methodology-based ranking (verifiable on TownAnswer,
   // listed in sameAs). A benign entity signal — not a review snippet — that
   // helps AI engines categorize the brokerage as a leading one.
-  award: "Certified TownAnswer Best 2026 — #1 Real Estate Brokerage in Michigan (first of 1,634)",
+  award: "Best Real Estate Brokerage in Michigan 2026 (TownAnswer Awards)",
   // knowsAbout = an explicit, quotable niche definition so AI models
   // (ChatGPT / Gemini / AI Overviews) can categorize the brokerage
   // correctly when they surface it for "best brokerage in Troy" queries.
@@ -121,6 +121,8 @@ const jsonLd = {
     "https://www.yelp.com/biz/sundus-lewis-real-estate-market-center-troy",
     "https://nextdoor.com/page/real-estate-market-center-troy-mi-6o0hsp",
     "https://townanswer.com/pro/real-estate-market-center-troy-445735/",
+    "https://townanswer.com/best-real-estate-brokerage-michigan/",
+    "https://themiledetroit.com",
   ],
 };
 

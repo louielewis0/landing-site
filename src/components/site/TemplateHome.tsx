@@ -4,6 +4,7 @@ import { Star } from "lucide-react";
 import { company, googleReviews } from "@/lib/config";
 import CountUpStats from "./CountUpStats";
 import BgVideo from "./BgVideo";
+import AwardBadges from "./AwardBadges";
 
 function Stars({ size = 15 }: { size?: number }) {
   return (
@@ -19,42 +20,10 @@ export function TemplateReviews() {
   return (
     <div className="t-wrap" style={{ paddingTop: 12, paddingBottom: 12 }} id="reviews">
       <div style={{ textAlign: "center", marginBottom: 28 }}>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 16, alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
-          <a
-            href="https://townanswer.com/awards/2026/real-estate-market-center/"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Certified TownAnswer Best 2026 — Best Real Estate Brokerage in Michigan"
-            style={{ display: "inline-block" }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/townanswer-award-2026.svg"
-              alt="Certified TownAnswer Best 2026 — Best Real Estate Brokerage in Michigan"
-              width={338}
-              height={100}
-              style={{ maxWidth: "100%", height: "auto", borderRadius: 16, boxShadow: "0 8px 26px rgba(25,26,28,0.12)" }}
-            />
-          </a>
-          <a
-            href="https://themiledetroit.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="The Mile Detroit — our Metro Detroit real estate newsletter"
-            style={{ display: "inline-flex", alignItems: "center", gap: 12, width: 338, maxWidth: "100%", height: 100, boxSizing: "border-box", padding: "0 18px", background: "#f7f4ec", border: "1.5px solid #15110c", borderRadius: 16, boxShadow: "0 8px 26px rgba(25,26,28,0.12)", textDecoration: "none" }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/the-mile-monogram.png" alt="" width={60} height={60} style={{ borderRadius: 9, flexShrink: 0 }} />
-            <span style={{ textAlign: "left", minWidth: 0 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/the-mile-masthead.png" alt="The Mile Detroit" style={{ height: 48, width: "auto", maxWidth: "100%", display: "block", marginBottom: 6 }} />
-              <span style={{ display: "block", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", fontSize: 7.5, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#6b6456", lineHeight: 1.35 }}>Metro Detroit Real Estate Newsletter</span>
-            </span>
-          </a>
-        </div>
+        <AwardBadges style={{ marginBottom: 14 }} />
         <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
           <Stars size={18} />
-          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--s-ink)" }}>Named Michigan&rsquo;s #1 brokerage by TownAnswer &middot; 5.0 across 100+ Google reviews</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--s-ink)" }}>Named Michigan&rsquo;s #1 brokerage by TownAnswer &middot; 5.0 across 105+ Google reviews</span>
         </div>
         <div style={{ marginTop: 8 }}>
           <Link href="/best-real-estate-brokerage-in-michigan" style={{ fontSize: 13, fontWeight: 600, color: "var(--s-gold-ink)" }}>
