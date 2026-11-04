@@ -41,14 +41,14 @@ export function TemplateReviews() {
             target="_blank"
             rel="noopener noreferrer"
             title="The Mile Detroit — our Metro Detroit real estate newsletter"
-            style={{ display: "inline-flex", alignItems: "center", gap: 20, boxSizing: "border-box", padding: "18px 32px", background: "#f7f4ec", border: "1.5px solid #15110c", borderRadius: 18, boxShadow: "0 8px 26px rgba(25,26,28,0.12)", textDecoration: "none" }}
+            style={{ display: "inline-flex", alignItems: "center", gap: 14, width: 338, maxWidth: "100%", height: 100, boxSizing: "border-box", padding: "0 20px", background: "#f7f4ec", border: "1.5px solid #15110c", borderRadius: 16, boxShadow: "0 8px 26px rgba(25,26,28,0.12)", textDecoration: "none" }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/the-mile-monogram.png" alt="" width={92} height={92} style={{ borderRadius: 14, flexShrink: 0 }} />
-            <span style={{ textAlign: "left" }}>
+            <img src="/the-mile-monogram.png" alt="" width={76} height={76} style={{ borderRadius: 11, flexShrink: 0 }} />
+            <span style={{ textAlign: "left", minWidth: 0 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/the-mile-masthead.png" alt="The Mile Detroit" style={{ height: 34, width: "auto", display: "block", marginBottom: 9 }} />
-              <span style={{ display: "block", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", fontSize: 10.5, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "#6b6456", whiteSpace: "nowrap" }}>Metro Detroit Real Estate Newsletter</span>
+              <img src="/the-mile-masthead.png" alt="The Mile Detroit" style={{ height: 22, width: "auto", maxWidth: "100%", display: "block", marginBottom: 7 }} />
+              <span style={{ display: "block", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", fontSize: 8.5, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6b6456", lineHeight: 1.35 }}>Metro Detroit Real Estate Newsletter</span>
             </span>
           </a>
         </div>
