@@ -41,14 +41,14 @@ export function TemplateReviews() {
             target="_blank"
             rel="noopener noreferrer"
             title="The Mile Detroit — our Metro Detroit real estate newsletter"
-            style={{ display: "inline-flex", alignItems: "center", gap: 14, height: 100, boxSizing: "border-box", padding: "0 24px", background: "#f7f4ec", border: "1.5px solid #15110c", borderRadius: 16, boxShadow: "0 8px 26px rgba(25,26,28,0.12)", textDecoration: "none", fontFamily: "Georgia, serif" }}
+            style={{ display: "inline-flex", alignItems: "center", gap: 20, boxSizing: "border-box", padding: "18px 32px", background: "#f7f4ec", border: "1.5px solid #15110c", borderRadius: 18, boxShadow: "0 8px 26px rgba(25,26,28,0.12)", textDecoration: "none" }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/the-mile-monogram.png" alt="" width={54} height={54} style={{ borderRadius: 8 }} />
+            <img src="/the-mile-monogram.png" alt="" width={92} height={92} style={{ borderRadius: 14, flexShrink: 0 }} />
             <span style={{ textAlign: "left" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/the-mile-masthead.png" alt="The Mile Detroit" style={{ height: 26, width: "auto", display: "block", marginBottom: 5 }} />
-              <span style={{ fontSize: 11.5, color: "#6b6456", letterSpacing: ".03em", whiteSpace: "nowrap" }}>Metro Detroit real estate newsletter</span>
+              <img src="/the-mile-masthead.png" alt="The Mile Detroit" style={{ height: 34, width: "auto", display: "block", marginBottom: 9 }} />
+              <span style={{ display: "block", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", fontSize: 10.5, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "#6b6456", whiteSpace: "nowrap" }}>Metro Detroit Real Estate Newsletter</span>
             </span>
           </a>
         </div>
