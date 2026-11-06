@@ -1,7 +1,7 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
 import { getIdxConfig } from "./config";
-import { resolveLocation } from "./cities";
+import { resolveLocation, POSTAL_CITIES, prettyCity } from "./cities";
 import type { FeaturedQuery, IdxListing, IdxListingDetail, SearchResult } from "./types";
 
 /** Bump when the normalized listing shape changes, to bust stale cache entries. */
@@ -704,81 +704,109 @@ function citySlug(name: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
+// Priority Metro Detroit communities we publish per-city stats for (RMC + The
+// Mile city pages). Names match prettyCity() output; the strings come from the
+// canonical POSTAL_CITIES list, so every filter is valid.
+const CITY_PRIORITY = new Set<string>([
+  "troy", "birmingham", "bloomfield hills", "rochester hills", "rochester",
+  "west bloomfield", "royal oak", "novi", "northville", "farmington hills",
+  "farmington", "sterling heights", "shelby township", "macomb", "warren",
+  "clawson", "ferndale", "berkley", "madison heights", "auburn hills",
+  "clarkston", "commerce township", "milford", "oxford", "lake orion",
+  "beverly hills", "franklin", "huntington woods", "southfield", "waterford",
+  "oak park", "washington", "chesterfield", "clinton township",
+  "st clair shores", "wixom", "walled lake", "south lyon", "hazel park",
+]);
+
+/** Run async fn over items with bounded concurrency — keeps us inside the
+ *  serverless time budget and gentle on Realcomp. */
+async function mapLimit<T, R>(items: T[], limit: number, fn: (t: T) => Promise<R>): Promise<R[]> {
+  const out: R[] = new Array(items.length);
+  let i = 0;
+  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (i < items.length) {
+      const idx = i++;
+      out[idx] = await fn(items[idx]);
+    }
+  });
+  await Promise.all(workers);
+  return out;
+}
+
 async function fetchCityMarketStatsUncached(): Promise<CityMarketStat[]> {
   const cfg = getIdxConfig();
   const token = await getAccessToken();
   const since = new Date(Date.now() - 30 * 86400_000).toISOString().slice(0, 10);
 
-  // Realcomp's `City` is a numeric code; `PostalCity` holds the text name
-  // (e.g. "BloomfieldHills_Oakland"). Group by it, then cleanCity() → name.
-  // One groupby per metric instead of N calls per city.
-  const [rows, freshRows] = await Promise.all([
-    applyAgg(
+  // Realcomp aggregates return PostalCity as a numeric CODE, but filtering BY
+  // the PostalCity string works — so we aggregate one priority city at a time
+  // (valid string filters, real names) rather than grouping (codes only).
+  const groups = new Map<string, { name: string; slug: string; postal: string[] }>();
+  for (const pc of POSTAL_CITIES) {
+    const name = prettyCity(pc);
+    if (!CITY_PRIORITY.has(name.toLowerCase())) continue;
+    const slug = citySlug(name);
+    const g = groups.get(slug) ?? { name, slug, postal: [] };
+    g.postal.push(pc);
+    groups.set(slug, g);
+  }
+  const cityList = [...groups.values()];
+
+  // Per-city stats, plus the PostalCity codes each city owns (so we can
+  // attribute the new-listings groupby, which only returns codes).
+  const perCity = await mapLimit(cityList, 10, async (g) => {
+    const orFilter = g.postal.map((p) => `PostalCity eq '${p}'`).join(" or ");
+    const rows = await applyAgg(
       cfg,
       token,
-      `filter(${METRO_FILTER})/groupby((PostalCity),aggregate(ListPrice with average as avg, DaysOnMarket with average as avgDom, $count as n))`
-    ),
-    applyAgg(
+      `filter(${METRO_FILTER} and (${orFilter}))/groupby((PostalCity),aggregate(ListPrice with average as avg, DaysOnMarket with average as avgDom, $count as n))`
+    ).catch(() => [] as Record<string, number>[]);
+    let forSale = 0, priceSum = 0, domSum = 0;
+    const codes: number[] = [];
+    for (const r of rows as unknown as Record<string, unknown>[]) {
+      const n = Number(r.n) || 0;
+      if (n < 1) continue;
+      forSale += n;
+      priceSum += (Number(r.avg) || 0) * n;
+      domSum += (Number(r.avgDom) || 0) * n;
+      const code = Number(r.PostalCity);
+      if (!Number.isNaN(code)) codes.push(code);
+    }
+    return { g, forSale, priceSum, domSum, codes };
+  });
+
+  // New listings in the last 30 days, per PostalCity code, in one call.
+  const freshByCode = new Map<number, number>();
+  try {
+    const freshRows = await applyAgg(
       cfg,
       token,
       `filter(${METRO_FILTER} and ListingContractDate ge ${since})/groupby((PostalCity),aggregate($count as n))`
-    ),
-  ]);
-
-  // Merge by cleaned slug (two PostalCity suffixes can map to one city name).
-  type Acc = { city: string; slug: string; forSale: number; priceSum: number; domSum: number; newLast30: number };
-  const acc = new Map<string, Acc>();
-  const named = (raw: unknown): { city: string; slug: string } | null => {
-    const city = cleanCity(typeof raw === "string" ? raw : undefined);
-    return city ? { city, slug: citySlug(city) } : null;
-  };
-
-  for (const r of rows as unknown as Record<string, unknown>[]) {
-    const nm = named(r.PostalCity);
-    const n = Number(r.n) || 0;
-    if (!nm || n < 1) continue;
-    const cur = acc.get(nm.slug) ?? { city: nm.city, slug: nm.slug, forSale: 0, priceSum: 0, domSum: 0, newLast30: 0 };
-    cur.forSale += n;
-    cur.priceSum += (Number(r.avg) || 0) * n;
-    cur.domSum += (Number(r.avgDom) || 0) * n;
-    acc.set(nm.slug, cur);
-  }
-  for (const r of freshRows as unknown as Record<string, unknown>[]) {
-    const nm = named(r.PostalCity);
-    if (!nm) continue;
-    const cur = acc.get(nm.slug);
-    if (cur) cur.newLast30 += Number(r.n) || 0;
+    );
+    for (const r of freshRows as unknown as Record<string, unknown>[]) {
+      const code = Number(r.PostalCity);
+      if (!Number.isNaN(code)) freshByCode.set(code, Number(r.n) || 0);
+    }
+  } catch {
+    /* new-listings count is best-effort */
   }
 
   const out: CityMarketStat[] = [];
-  for (const a of acc.values()) {
+  for (const c of perCity) {
+    if (c.forSale < 1) continue;
+    let newLast30 = 0;
+    for (const code of c.codes) newLast30 += freshByCode.get(code) ?? 0;
     out.push({
-      city: a.city,
-      slug: a.slug,
-      forSale: a.forSale,
-      avgListPrice: a.forSale ? Math.round(a.priceSum / a.forSale) : 0,
-      avgDaysOnMarket: a.forSale ? Math.round(a.domSum / a.forSale) : 0,
-      newLast30: a.newLast30,
+      city: c.g.name,
+      slug: c.g.slug,
+      forSale: c.forSale,
+      avgListPrice: Math.round(c.priceSum / c.forSale),
+      avgDaysOnMarket: Math.round(c.domSum / c.forSale),
+      newLast30,
     });
   }
   out.sort((a, b) => b.forSale - a.forSale);
   return out;
-}
-
-/** TEMP diagnostic — probe groupby((PostalCity)) raw shape. Remove after. */
-export async function _debugCityRaw(): Promise<unknown> {
-  const cfg = getIdxConfig();
-  const token = await getAccessToken();
-  try {
-    const rows = await applyAgg(
-      cfg,
-      token,
-      `filter(${METRO_FILTER})/groupby((PostalCity),aggregate(ListPrice with average as avg, $count as n))`
-    );
-    return { ok: true, count: rows.length, sample: rows.slice(0, 4) };
-  } catch (e) {
-    return { ok: false, error: e instanceof Error ? e.message : String(e) };
-  }
 }
 
 /** Per-city active-inventory stats for every Metro Detroit city with listings,
@@ -786,7 +814,7 @@ export async function _debugCityRaw(): Promise<unknown> {
 export async function getCityMarketStats(): Promise<CityMarketStat[]> {
   const cached = unstable_cache(
     () => fetchCityMarketStatsUncached(),
-    ["idx-city-market-v2-postalcity", IDX_CACHE_VERSION],
+    ["idx-city-market-v3-percity", IDX_CACHE_VERSION],
     { revalidate: 43200, tags: ["idx", "idx-market"] }
   );
   return cached();
