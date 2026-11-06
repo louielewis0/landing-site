@@ -19,7 +19,7 @@ import type { CityMarketStat } from "@/lib/idx/client";
  */
 
 export const dynamic = "force-dynamic";
-export const revalidate = 0; // always run the handler; getMarketStats caches 12h internally
+export const revalidate = 0; // always run the handler; getMarketStats caches 6h internally
 export const maxDuration = 30; // per-city aggregates fan out; give them headroom
 
 const CORS = {
@@ -78,7 +78,9 @@ export async function GET() {
       headers: {
         ...CORS,
         // CDN-cache 12h, serve stale up to 24h while revalidating
-        "Cache-Control": "public, s-maxage=43200, stale-while-revalidate=86400",
+        // Realcomp §18.2.5 requires refresh at least every 12h. Cap CDN cache
+        // at 6h with NO stale-serving so no layer ever hands out data >12h old.
+        "Cache-Control": "public, s-maxage=21600, stale-while-revalidate=0",
       },
     });
   } catch {

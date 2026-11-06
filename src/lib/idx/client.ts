@@ -679,7 +679,7 @@ export async function getMarketStats(): Promise<MarketStats> {
   const cached = unstable_cache(
     () => fetchMarketStatsUncached(),
     ["idx-market", IDX_CACHE_VERSION],
-    { revalidate: 43200, tags: ["idx", "idx-market"] }
+    { revalidate: 21600, tags: ["idx", "idx-market"] }
   );
   return cached();
 }
@@ -815,7 +815,7 @@ export async function getCityMarketStats(): Promise<CityMarketStat[]> {
   const cached = unstable_cache(
     () => fetchCityMarketStatsUncached(),
     ["idx-city-market-v3-percity", IDX_CACHE_VERSION],
-    { revalidate: 43200, tags: ["idx", "idx-market"] }
+    { revalidate: 21600, tags: ["idx", "idx-market"] }
   );
   return cached();
 }
