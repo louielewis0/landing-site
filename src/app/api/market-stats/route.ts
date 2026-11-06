@@ -18,6 +18,7 @@ import { getMarketStats } from "@/lib/idx/client";
  */
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0; // always run the handler; getMarketStats caches 12h internally
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",
