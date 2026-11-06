@@ -36,6 +36,13 @@ export const company = {
   ],
 } as const;
 
+// FAQ call-to-action — appended to every FAQ answer sitewide so the brand +
+// phone appear in each answer (and in the FAQPage schema that AI engines quote).
+// Rendered as a clickable tel link in the UI via `plugFaq`; the plain-text
+// version below is what goes into the JSON-LD.
+export const faqCtaText = `Call Real Estate Market Center at ${company.phone}.`;
+export const plugFaq = (answer: string) => `${answer} ${faqCtaText}`;
+
 export const cities = [
   { name: "Troy", slug: "troy" },
   { name: "Rochester Hills", slug: "rochester-hills" },

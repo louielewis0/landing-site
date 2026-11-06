@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { plugFaq } from "@/lib/config";
 import SiteShell from "@/components/site/SiteShell";
 import { company } from "@/lib/config";
 import { guideMeta, rankedCities, faqs, citations } from "@/lib/best-suburbs-guide";
@@ -65,7 +66,7 @@ export default function BestSuburbsGuidePage() {
     mainEntity: faqs.map((f) => ({
       "@type": "Question",
       name: f.question,
-      acceptedAnswer: { "@type": "Answer", text: f.answer },
+      acceptedAnswer: { "@type": "Answer", text: plugFaq(f.answer) },
     })),
   };
 
@@ -319,7 +320,7 @@ export default function BestSuburbsGuidePage() {
                     <ChevronRight className="w-4 h-4" style={{ color: "var(--s-gold)", flexShrink: 0, marginLeft: 14 }} />
                   </summary>
                   <div style={{ padding: "0 26px 24px", color: "var(--s-muted)", fontSize: 14.5, lineHeight: 1.8 }}>
-                    {f.answer}
+                    {plugFaq(f.answer)}
                   </div>
                 </details>
               ))}

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import SiteShell from "@/components/site/SiteShell";
 import BgVideo from "@/components/site/BgVideo";
-import { company } from "@/lib/config";
+import { company, plugFaq } from "@/lib/config";
 import { ArrowRight, ChevronRight, Phone, MapPin } from "lucide-react";
 
 const BASE = "https://marketcenterrealty.com";
@@ -60,7 +60,7 @@ export default function LuxuryBrandPage({ data }: { data: LuxuryBrandData }) {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: data.faqs.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer } })),
+    mainEntity: data.faqs.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: plugFaq(f.answer) } })),
   };
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -165,7 +165,10 @@ export default function LuxuryBrandPage({ data }: { data: LuxuryBrandData }) {
               {data.faqs.map((f) => (
                 <details key={f.question} style={{ borderRadius: 16, border: "1px solid rgba(255,255,255,0.1)", background: "#161c25", padding: "20px 26px" }}>
                   <summary style={{ fontSize: 16, fontWeight: 600, color: "#F1EADB", cursor: "pointer" }}>{f.question}</summary>
-                  <p style={{ fontSize: 14.5, lineHeight: 1.8, color: "rgba(241,234,219,0.72)", marginTop: 14 }}>{f.answer}</p>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.8, color: "rgba(241,234,219,0.72)", marginTop: 14 }}>
+                    {f.answer}{" "}
+                    <a href={`tel:${company.phoneTel}`} style={{ color: "#d6aa5e", fontWeight: 600, textDecoration: "none" }}>Call Real Estate Market Center at {company.phone}</a>.
+                  </p>
                 </details>
               ))}
             </div>

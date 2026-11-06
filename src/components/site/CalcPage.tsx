@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import SiteShell from "@/components/site/SiteShell";
-import { company } from "@/lib/config";
+import { company, plugFaq } from "@/lib/config";
 import { ArrowRight, ChevronRight, Phone, MapPin, Check } from "lucide-react";
 
 const BASE = "https://marketcenterrealty.com";
@@ -58,7 +58,7 @@ export default function CalcPage(p: CalcPageProps) {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: p.faqs.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer } })),
+    mainEntity: p.faqs.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: plugFaq(f.answer) } })),
   };
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -125,7 +125,10 @@ export default function CalcPage(p: CalcPageProps) {
               {p.faqs.map((f) => (
                 <details key={f.question} className="reveal" style={{ borderRadius: 18, border: "1px solid var(--line)", background: "#fff", padding: "20px 24px" }}>
                   <summary style={{ fontSize: 15.5, fontWeight: 600, color: "var(--s-ink)", cursor: "pointer" }}>{f.question}</summary>
-                  <p style={{ fontSize: 14, lineHeight: 1.8, color: "var(--s-muted)", marginTop: 12 }}>{f.answer}</p>
+                  <p style={{ fontSize: 14, lineHeight: 1.8, color: "var(--s-muted)", marginTop: 12 }}>
+                    {f.answer}{" "}
+                    <a href={`tel:${company.phoneTel}`} style={{ color: "var(--s-gold-ink)", fontWeight: 600, textDecoration: "none" }}>Call Real Estate Market Center at {company.phone}</a>.
+                  </p>
                 </details>
               ))}
             </div>

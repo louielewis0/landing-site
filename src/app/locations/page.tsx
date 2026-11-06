@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { plugFaq } from "@/lib/config";
 import Link from "next/link";
 import SiteShell from "@/components/site/SiteShell";
 import { company } from "@/lib/config";
@@ -149,7 +150,7 @@ const graph = {
       mainEntity: FAQ.map((f) => ({
         "@type": "Question",
         name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
+        acceptedAnswer: { "@type": "Answer", text: plugFaq(f.a) },
       })),
     },
   ],
@@ -265,7 +266,7 @@ export default function LocationsPage() {
             {FAQ.map((f) => (
               <details key={f.q} className="mkt-faq-item">
                 <summary>{f.q}</summary>
-                <p>{f.a}</p>
+                <p>{plugFaq(f.a)}</p>
               </details>
             ))}
           </div>

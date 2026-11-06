@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { plugFaq } from "@/lib/config";
 import SiteShell from "@/components/site/SiteShell";
 import { company } from "@/lib/config";
 import { citations, rankedCities } from "@/lib/best-suburbs-guide";
@@ -83,7 +84,7 @@ export default function BirminghamVsBloomfieldHillsPage() {
     mainEntity: faqs.map((f) => ({
       "@type": "Question",
       name: f.question,
-      acceptedAnswer: { "@type": "Answer", text: f.answer },
+      acceptedAnswer: { "@type": "Answer", text: plugFaq(f.answer) },
     })),
   };
 
@@ -242,7 +243,7 @@ export default function BirminghamVsBloomfieldHillsPage() {
               {faqs.map((f) => (
                 <details key={f.question} className="reveal" style={{ borderRadius: 18, border: "1px solid var(--line)", background: "#fff", padding: "20px 24px" }}>
                   <summary style={{ fontSize: 15.5, fontWeight: 600, color: "var(--s-ink)", cursor: "pointer" }}>{f.question}</summary>
-                  <p style={{ fontSize: 14, lineHeight: 1.8, color: "var(--s-muted)", marginTop: 12 }}>{f.answer}</p>
+                  <p style={{ fontSize: 14, lineHeight: 1.8, color: "var(--s-muted)", marginTop: 12 }}>{plugFaq(f.answer)}</p>
                 </details>
               ))}
             </div>

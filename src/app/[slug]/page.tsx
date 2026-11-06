@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { plugFaq } from "@/lib/config";
 import { notFound } from "next/navigation";
 import SiteShell from "@/components/site/SiteShell";
 import { company } from "@/lib/config";
@@ -154,7 +155,7 @@ export default async function CityLandingPage({ params }: Props) {
     mainEntity: page.faqs.map((f) => ({
       "@type": "Question",
       name: f.question,
-      acceptedAnswer: { "@type": "Answer", text: f.answer },
+      acceptedAnswer: { "@type": "Answer", text: plugFaq(f.answer) },
     })),
   };
 
@@ -507,7 +508,7 @@ export default async function CityLandingPage({ params }: Props) {
                     <ChevronRight className="w-4 h-4" style={{ color: "var(--s-gold)", flexShrink: 0, marginLeft: 14 }} />
                   </summary>
                   <div style={{ padding: "0 26px 24px", color: "var(--s-muted)", fontSize: 14.5, lineHeight: 1.8 }}>
-                    {f.answer}
+                    {plugFaq(f.answer)}
                   </div>
                 </details>
               ))}

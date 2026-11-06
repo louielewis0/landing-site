@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { plugFaq } from "@/lib/config";
 import SiteShell from "@/components/site/SiteShell";
 import { company } from "@/lib/config";
 import { citations } from "@/lib/best-suburbs-guide";
@@ -66,7 +67,7 @@ export default function SchoolDistrictsGuidePage() {
     mainEntity: schoolsFaqs.map((f) => ({
       "@type": "Question",
       name: f.question,
-      acceptedAnswer: { "@type": "Answer", text: f.answer },
+      acceptedAnswer: { "@type": "Answer", text: plugFaq(f.answer) },
     })),
   };
 
@@ -289,7 +290,7 @@ export default function SchoolDistrictsGuidePage() {
                   <summary style={{ fontSize: 15.5, fontWeight: 600, color: "var(--s-ink)", cursor: "pointer" }}>
                     {f.question}
                   </summary>
-                  <p style={{ fontSize: 14, lineHeight: 1.8, color: "var(--s-muted)", marginTop: 12 }}>{f.answer}</p>
+                  <p style={{ fontSize: 14, lineHeight: 1.8, color: "var(--s-muted)", marginTop: 12 }}>{plugFaq(f.answer)}</p>
                 </details>
               ))}
             </div>
