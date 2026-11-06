@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getMarketStats, getCityMarketStats } from "@/lib/idx/client";
+import { getMarketStats, getCityMarketStats, _debugCityRaw } from "@/lib/idx/client";
 import type { CityMarketStat } from "@/lib/idx/client";
 
 /**
@@ -41,6 +41,7 @@ export async function GET() {
 
     const body = {
       ok: true,
+      citiesRaw: await _debugCityRaw().catch((e) => String(e)), // TEMP debug
       asOf: s.asOf, // ISO date the figures were computed
       metro: {
         totalForSale: s.totalForSale,
