@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import SiteShell from "@/components/site/SiteShell";
+import CityMarketStats from "@/components/site/CityMarketStats";
 import { company, googleReviews, plugFaq } from "@/lib/config";
 import { ArrowRight, ChevronRight, CalendarDays, Award, Phone, MapPin, Star, CheckCircle2 } from "lucide-react";
 
@@ -206,6 +207,9 @@ export default function BestAgentPage({ data }: { data: BestAgentData }) {
             </div>
           </div>
         </section>
+
+        {/* Live market snapshot (renders nothing for regional pages w/o a city match) */}
+        <CityMarketStats city={city} />
 
         {/* How to choose */}
         <section className="bg-cream-2" style={{ padding: "64px 0" }}>
