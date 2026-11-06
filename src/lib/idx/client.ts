@@ -684,6 +684,80 @@ export async function getMarketStats(): Promise<MarketStats> {
   return cached();
 }
 
+/** Aggregate active-inventory stats for a single city. First-party, computed
+ *  from the Realcomp feed via one $apply groupby — same compliance posture as
+ *  the county-level MarketStats (asking prices on ACTIVE listings, not sales). */
+export interface CityMarketStat {
+  city: string; // city name as Realcomp records it
+  slug: string; // kebab-case, matches The Mile / RMC city-page slugs
+  forSale: number;
+  avgListPrice: number;
+  avgDaysOnMarket: number;
+  newLast30: number;
+}
+
+function citySlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/\./g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+async function fetchCityMarketStatsUncached(): Promise<CityMarketStat[]> {
+  const cfg = getIdxConfig();
+  const token = await getAccessToken();
+  const since = new Date(Date.now() - 30 * 86400_000).toISOString().slice(0, 10);
+
+  // One groupby per metric instead of N calls per city.
+  const [rows, freshRows] = await Promise.all([
+    applyAgg(
+      cfg,
+      token,
+      `filter(${METRO_FILTER})/groupby((City),aggregate(ListPrice with average as avg, DaysOnMarket with average as avgDom, $count as n))`
+    ),
+    applyAgg(
+      cfg,
+      token,
+      `filter(${METRO_FILTER} and ListingContractDate ge ${since})/groupby((City),aggregate($count as n))`
+    ),
+  ]);
+
+  const fresh = new Map<string, number>();
+  for (const r of freshRows as unknown as Record<string, unknown>[]) {
+    const c = typeof r.City === "string" ? r.City.trim().toLowerCase() : "";
+    if (c) fresh.set(c, Number(r.n) || 0);
+  }
+
+  const out: CityMarketStat[] = [];
+  for (const r of rows as unknown as Record<string, unknown>[]) {
+    const city = typeof r.City === "string" ? r.City.trim() : "";
+    const forSale = Number(r.n) || 0;
+    if (!city || forSale < 1) continue;
+    out.push({
+      city,
+      slug: citySlug(city),
+      forSale,
+      avgListPrice: Math.round(Number(r.avg) || 0),
+      avgDaysOnMarket: Math.round(Number(r.avgDom) || 0),
+      newLast30: fresh.get(city.toLowerCase()) ?? 0,
+    });
+  }
+  out.sort((a, b) => b.forSale - a.forSale);
+  return out;
+}
+
+/** Per-city active-inventory stats for every Metro Detroit city with listings,
+ *  cached 12h. Consumers (The Mile city pages, RMC city pages) look up by slug. */
+export async function getCityMarketStats(): Promise<CityMarketStat[]> {
+  const cached = unstable_cache(
+    () => fetchCityMarketStatsUncached(),
+    ["idx-city-market", IDX_CACHE_VERSION],
+    { revalidate: 43200, tags: ["idx", "idx-market"] }
+  );
+  return cached();
+}
+
 /** Standard Realcomp IDX disclaimer that must display with IDX results. */
 export const IDX_DISCLAIMER =
   "IDX provided courtesy of Realcomp II Ltd., via Real Estate Market Center. " +

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { getMarketStats } from "@/lib/idx/client";
+import { getMarketStats, getCityMarketStats } from "@/lib/idx/client";
+import type { CityMarketStat } from "@/lib/idx/client";
 
 /**
  * GET /api/market-stats — a PUBLIC, read-only feed of aggregate Metro Detroit
@@ -28,6 +29,16 @@ const CORS = {
 export async function GET() {
   try {
     const s = await getMarketStats();
+
+    // Per-city stats are best-effort: a failure here must not take down the
+    // county/metro feed, so it falls back to an empty array.
+    let cities: CityMarketStat[] = [];
+    try {
+      cities = await getCityMarketStats();
+    } catch {
+      cities = [];
+    }
+
     const body = {
       ok: true,
       asOf: s.asOf, // ISO date the figures were computed
@@ -42,6 +53,16 @@ export async function GET() {
         county: c.county,
         forSale: c.forSale,
         avgListPrice: Math.round(c.avgList),
+      })),
+      // Per-city active-inventory stats, sorted by # for sale (desc). Look up
+      // by `slug` (troy, birmingham, bloomfield-hills, rochester-hills, …).
+      cities: cities.map((c) => ({
+        city: c.city,
+        slug: c.slug,
+        forSale: c.forSale,
+        avgListPrice: c.avgListPrice,
+        avgDaysOnMarket: c.avgDaysOnMarket,
+        newLast30: c.newLast30,
       })),
       source: "Realcomp II Ltd. — active residential listings, Oakland / Macomb / Wayne",
       attribution:
