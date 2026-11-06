@@ -33,14 +33,17 @@ export async function GET() {
     // Per-city stats are best-effort: a failure here must not take down the
     // county/metro feed, so it falls back to an empty array.
     let cities: CityMarketStat[] = [];
+    let citiesError: string | null = null; // TEMP debug — remove after diagnosing
     try {
       cities = await getCityMarketStats();
-    } catch {
+    } catch (e) {
+      citiesError = e instanceof Error ? e.message : String(e);
       cities = [];
     }
 
     const body = {
       ok: true,
+      citiesError, // TEMP debug
       asOf: s.asOf, // ISO date the figures were computed
       metro: {
         totalForSale: s.totalForSale,
