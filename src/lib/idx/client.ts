@@ -770,7 +770,7 @@ async function fetchCityMarketStatsUncached(): Promise<CityMarketStat[]> {
 export async function getCityMarketStats(): Promise<CityMarketStat[]> {
   const cached = unstable_cache(
     () => fetchCityMarketStatsUncached(),
-    ["idx-city-market", IDX_CACHE_VERSION],
+    ["idx-city-market-v2-postalcity", IDX_CACHE_VERSION],
     { revalidate: 43200, tags: ["idx", "idx-market"] }
   );
   return cached();
