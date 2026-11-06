@@ -709,59 +709,60 @@ async function fetchCityMarketStatsUncached(): Promise<CityMarketStat[]> {
   const token = await getAccessToken();
   const since = new Date(Date.now() - 30 * 86400_000).toISOString().slice(0, 10);
 
+  // Realcomp's `City` is a numeric code; `PostalCity` holds the text name
+  // (e.g. "BloomfieldHills_Oakland"). Group by it, then cleanCity() → name.
   // One groupby per metric instead of N calls per city.
   const [rows, freshRows] = await Promise.all([
     applyAgg(
       cfg,
       token,
-      `filter(${METRO_FILTER})/groupby((City),aggregate(ListPrice with average as avg, DaysOnMarket with average as avgDom, $count as n))`
+      `filter(${METRO_FILTER})/groupby((PostalCity),aggregate(ListPrice with average as avg, DaysOnMarket with average as avgDom, $count as n))`
     ),
     applyAgg(
       cfg,
       token,
-      `filter(${METRO_FILTER} and ListingContractDate ge ${since})/groupby((City),aggregate($count as n))`
+      `filter(${METRO_FILTER} and ListingContractDate ge ${since})/groupby((PostalCity),aggregate($count as n))`
     ),
   ]);
 
-  const fresh = new Map<string, number>();
+  // Merge by cleaned slug (two PostalCity suffixes can map to one city name).
+  type Acc = { city: string; slug: string; forSale: number; priceSum: number; domSum: number; newLast30: number };
+  const acc = new Map<string, Acc>();
+  const named = (raw: unknown): { city: string; slug: string } | null => {
+    const city = cleanCity(typeof raw === "string" ? raw : undefined);
+    return city ? { city, slug: citySlug(city) } : null;
+  };
+
+  for (const r of rows as unknown as Record<string, unknown>[]) {
+    const nm = named(r.PostalCity);
+    const n = Number(r.n) || 0;
+    if (!nm || n < 1) continue;
+    const cur = acc.get(nm.slug) ?? { city: nm.city, slug: nm.slug, forSale: 0, priceSum: 0, domSum: 0, newLast30: 0 };
+    cur.forSale += n;
+    cur.priceSum += (Number(r.avg) || 0) * n;
+    cur.domSum += (Number(r.avgDom) || 0) * n;
+    acc.set(nm.slug, cur);
+  }
   for (const r of freshRows as unknown as Record<string, unknown>[]) {
-    const c = typeof r.City === "string" ? r.City.trim().toLowerCase() : "";
-    if (c) fresh.set(c, Number(r.n) || 0);
+    const nm = named(r.PostalCity);
+    if (!nm) continue;
+    const cur = acc.get(nm.slug);
+    if (cur) cur.newLast30 += Number(r.n) || 0;
   }
 
   const out: CityMarketStat[] = [];
-  for (const r of rows as unknown as Record<string, unknown>[]) {
-    const city = typeof r.City === "string" ? r.City.trim() : "";
-    const forSale = Number(r.n) || 0;
-    if (!city || forSale < 1) continue;
+  for (const a of acc.values()) {
     out.push({
-      city,
-      slug: citySlug(city),
-      forSale,
-      avgListPrice: Math.round(Number(r.avg) || 0),
-      avgDaysOnMarket: Math.round(Number(r.avgDom) || 0),
-      newLast30: fresh.get(city.toLowerCase()) ?? 0,
+      city: a.city,
+      slug: a.slug,
+      forSale: a.forSale,
+      avgListPrice: a.forSale ? Math.round(a.priceSum / a.forSale) : 0,
+      avgDaysOnMarket: a.forSale ? Math.round(a.domSum / a.forSale) : 0,
+      newLast30: a.newLast30,
     });
   }
   out.sort((a, b) => b.forSale - a.forSale);
   return out;
-}
-
-/** TEMP diagnostic — returns the raw groupby response shape so we can see the
- *  actual field names Realcomp uses. Remove after fixing getCityMarketStats. */
-export async function _debugCityRaw(): Promise<unknown> {
-  const cfg = getIdxConfig();
-  const token = await getAccessToken();
-  try {
-    const rows = await applyAgg(
-      cfg,
-      token,
-      `filter(${METRO_FILTER})/groupby((City),aggregate(ListPrice with average as avg, $count as n))`
-    );
-    return { ok: true, count: rows.length, sample: rows.slice(0, 3) };
-  } catch (e) {
-    return { ok: false, error: e instanceof Error ? e.message : String(e) };
-  }
 }
 
 /** Per-city active-inventory stats for every Metro Detroit city with listings,

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getMarketStats, getCityMarketStats, _debugCityRaw } from "@/lib/idx/client";
+import { getMarketStats, getCityMarketStats } from "@/lib/idx/client";
 import type { CityMarketStat } from "@/lib/idx/client";
 
 /**
@@ -33,18 +33,14 @@ export async function GET() {
     // Per-city stats are best-effort: a failure here must not take down the
     // county/metro feed, so it falls back to an empty array.
     let cities: CityMarketStat[] = [];
-    let citiesError: string | null = null; // TEMP debug — remove after diagnosing
     try {
       cities = await getCityMarketStats();
-    } catch (e) {
-      citiesError = e instanceof Error ? e.message : String(e);
+    } catch {
       cities = [];
     }
 
     const body = {
       ok: true,
-      citiesError, // TEMP debug
-      citiesRaw: await _debugCityRaw().catch((e) => String(e)), // TEMP debug
       asOf: s.asOf, // ISO date the figures were computed
       metro: {
         totalForSale: s.totalForSale,
