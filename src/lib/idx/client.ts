@@ -747,6 +747,23 @@ async function fetchCityMarketStatsUncached(): Promise<CityMarketStat[]> {
   return out;
 }
 
+/** TEMP diagnostic — returns the raw groupby response shape so we can see the
+ *  actual field names Realcomp uses. Remove after fixing getCityMarketStats. */
+export async function _debugCityRaw(): Promise<unknown> {
+  const cfg = getIdxConfig();
+  const token = await getAccessToken();
+  try {
+    const rows = await applyAgg(
+      cfg,
+      token,
+      `filter(${METRO_FILTER})/groupby((City),aggregate(ListPrice with average as avg, $count as n))`
+    );
+    return { ok: true, count: rows.length, sample: rows.slice(0, 3) };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : String(e) };
+  }
+}
+
 /** Per-city active-inventory stats for every Metro Detroit city with listings,
  *  cached 12h. Consumers (The Mile city pages, RMC city pages) look up by slug. */
 export async function getCityMarketStats(): Promise<CityMarketStat[]> {
