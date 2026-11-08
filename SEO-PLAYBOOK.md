@@ -176,6 +176,38 @@ once, because the unique fact is different for every city.
 
 ---
 
+## Directories & citations ("directories are money")
+
+Two reasons this pays: (1) **AI engines cite directories, not your site** — being on Zillow / HomeLight / Rate-My-Agent is how you surface in ChatGPT & AI "best agent in {city}" answers; (2) matching listings across many sites build a **"data-confidence score"** Google trusts for the map pack, and several of these also send **referral leads**.
+
+**The #1 rule — NAP consistency.** Exact same **N**ame, **A**ddress, **P**hone on every listing, character-for-character identical to the Google Business Profile ("Real Estate Market Center" — never "Market Center Realty"; 2032 E Square Lake Rd Ste 400A, Troy, MI 48085; (248) 568-6081). One phone, one address everywhere. *Inconsistent NAP hurts more than a missing listing.* **Claim** auto-generated listings before creating duplicates. Add every claimed profile URL to the site's schema `sameAs` so AI/Google tie them to one entity.
+
+**Build order (do top-down):**
+
+**Tier 0 — Data aggregators (submit once → they push NAP to hundreds of sites):**
+- Data Axle (formerly Infogroup) · Foursquare (feeds Apple, Uber, Snap, etc.) · TransUnion Digital Business Profile (formerly Neustar Localeze)
+
+**Tier 1 — Core map/search + review (non-negotiable):**
+- ✅ Google Business Profile · Bing Places (import from Google — feeds ChatGPT/Copilot) · Apple Business Connect (Maps/Siri/Spotlight) · Yelp · Facebook Page · Nextdoor Business · Better Business Bureau (BBB) · Yellow Pages (YP.com)
+
+**Tier 2 — Real estate portals (visibility + reviews):**
+- Zillow (Premier Agent profile) · Realtor.com · Homes.com · Trulia (reviews flow into Zillow) · Redfin (partner agent) · Movoto
+
+**Tier 3 — Agent-match / AI-cited directories (what ChatGPT pulls from; most are free):**
+- HomeLight · FastExpert · Rate-My-Agent · UpNest · Clever Real Estate · Agent Pronto · Real Estate Bees · RealTrends Verified · Sold.com (free referral network)
+
+**Tier 4 — General business directories (authority citations):**
+- MapQuest · Manta · Hotfrog · Citysearch · Chamberofcommerce.com · Cylex · Brownbook · Angi / Thumbtack (if offering services) · Houzz
+
+**Tier 5 — Local Michigan / Metro Detroit (high local relevance):**
+- Troy Chamber of Commerce · Birmingham Bloomfield Chamber · Rochester Regional Chamber · Detroit Regional Chamber · Greater Metropolitan Association of Realtors (GMAR) member profile · Michigan Realtors directory · local "best of {city}" lists
+
+**Credential profiles:** NAR/Realtor.com Realtor profile (via license) · Realcomp agent profile if public · state LARA license listing (already public).
+
+**Don'ts:** no spammy bulk-directory blasts (quality/relevant > quantity); never a fake/virtual address on any of them (it gets GBP suspended); don't let a vendor invent a second business-name variant.
+
+**Already in our schema `sameAs` (keep expanding as we claim):** Facebook, Instagram, Zillow, Realtor.com, Yelp, Nextdoor, TownAnswer, The Mile. Add Bing, Apple, HomeLight, FastExpert, etc. as each is claimed.
+
 ## Deploy gates (script them — memory-based rules fail quietly)
 
 1. **Index gate:** every indexable page has a self-referencing canonical, is in a
