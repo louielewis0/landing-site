@@ -24,6 +24,12 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        // Rental listing: point the old custom URL at the native IDX detail page.
+        source: "/listing/5556-pine-aires",
+        destination: "/homes/225977483",
+        permanent: true,
+      },
+      {
         source: "/dashboard",
         destination: "/crm",
         permanent: true,
