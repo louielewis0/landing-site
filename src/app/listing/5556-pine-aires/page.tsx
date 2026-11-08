@@ -158,7 +158,7 @@ const paStyles = `
 .pa-hero-glow{position:absolute;inset:0;background:radial-gradient(540px 300px at 50% 8%,rgba(205,174,112,0.16),transparent 70%);pointer-events:none;}
 .pa-hero-inner{position:relative;max-width:900px;margin:0 auto;}
 .pa-eyebrow{font-family:var(--font-geist-sans),sans-serif;font-size:13px;font-weight:600;letter-spacing:0.32em;text-transform:uppercase;color:#cdae70;}
-.pa-h1{font-family:var(--font-display),"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:clamp(44px,7vw,92px);line-height:1.0;letter-spacing:-0.01em;color:#f6efe0;margin:18px 0 0;}
+.pa-root .pa-h1{font-family:var(--font-display),"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:clamp(44px,7vw,92px);line-height:1.0;letter-spacing:-0.01em;color:#f6efe0;margin:18px 0 0;}
 .pa-price{font-family:var(--font-display),Georgia,serif;font-size:clamp(30px,4.4vw,52px);color:#e8d4a2;margin-top:14px;}
 .pa-price span{font-size:0.45em;color:#cdae70;letter-spacing:0.04em;}
 .pa-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:26px;}
@@ -175,7 +175,7 @@ const paStyles = `
 .pa-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 10px;padding-bottom:30px;border-bottom:1px solid rgba(205,174,112,0.2);margin-bottom:34px;}
 .pa-stat-num{font-family:var(--font-display),Georgia,serif;font-size:clamp(28px,3vw,40px);color:#e8d4a2;line-height:1;}
 .pa-stat-label{font-family:var(--font-geist-sans),sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#9aa0a8;margin-top:8px;}
-.pa-h2{font-family:var(--font-display),Georgia,serif;font-weight:600;font-size:clamp(28px,3.4vw,40px);color:#f6efe0;margin-bottom:16px;}
+.pa-root .pa-h2{font-family:var(--font-display),Georgia,serif;font-weight:600;font-size:clamp(28px,3.4vw,40px);color:#f6efe0;margin-bottom:16px;}
 .pa-body{font-size:16px;line-height:1.8;color:#c6ccce;}
 .pa-rows{margin-top:28px;display:grid;gap:16px;}
 .pa-row{display:flex;gap:18px;align-items:flex-start;font-size:15.5px;line-height:1.5;color:#e4e7e6;}
