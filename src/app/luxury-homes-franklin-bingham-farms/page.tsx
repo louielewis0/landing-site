@@ -148,6 +148,8 @@ const data: GuidePageData = {
     { href: "/homes", label: "Search Metro Detroit homes" },
     { href: "/home-value", label: "What's my home worth? (free valuation)" },
     { href: "/metro-detroit-housing-market-update", label: "Metro Detroit market update" },
+    { href: "/most-expensive-neighborhoods-metro-detroit", label: "Metro Detroit's most expensive communities" },
+    { href: "/luxury-homes-in-west-bloomfield", label: "Luxury homes in West Bloomfield" },
     { href: "/contact", label: "Work with a local luxury broker" },
   ],
   ctaHeading: "Buying or selling in Franklin or Bingham Farms?",
