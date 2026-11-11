@@ -134,6 +134,15 @@ const data: GuidePageData = {
     },
   ],
   faqHeading: "Michigan seller disclosure — common questions",
+  video: {
+    src: "/videos/seller-disclosure.mp4",
+    poster: "/videos/seller-disclosure.png",
+    title: "What You Must Disclose When Selling a House in Michigan",
+    description:
+      "Michigan requires a Seller's Disclosure Statement on almost every home sale. Here's what you legally have to tell buyers — systems, structure, environmental issues, and lead paint.",
+    uploadDate: "2026-11-11",
+    durationISO: "PT58S",
+  },
   faqs: [
     {
       question: "Is a seller's disclosure statement required in Michigan?",

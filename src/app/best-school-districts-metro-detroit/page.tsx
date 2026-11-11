@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { plugFaq } from "@/lib/config";
 import SiteShell from "@/components/site/SiteShell";
+import VideoEmbed from "@/components/site/VideoEmbed";
 import { company } from "@/lib/config";
 import { citations } from "@/lib/best-suburbs-guide";
 import { schoolsMeta, districtEntries, schoolsFaqs } from "@/lib/school-districts-guide";
@@ -144,6 +145,15 @@ export default function SchoolDistrictsGuidePage() {
             </div>
           </div>
         </section>
+
+        <VideoEmbed
+          src="/videos/school-districts.mp4"
+          poster="/videos/school-districts.png"
+          title="Best School Districts in Metro Detroit (2026 Rankings)"
+          description="The top-ranked Metro Detroit school districts for 2026 (Niche) — Troy, Rochester, Bloomfield Hills, Birmingham and more — and what they mean if you're buying a home."
+          uploadDate="2026-11-11"
+          durationISO="PT1M14S"
+        />
 
         {/* ── Ranked table ── */}
         <section className="bg-cream-2" style={{ padding: "70px 0" }}>

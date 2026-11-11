@@ -147,6 +147,15 @@ const data: GuidePageData = {
     },
   ],
   faqHeading: "Metro Detroit luxury market questions",
+  video: {
+    src: "/videos/most-expensive.mp4",
+    poster: "/videos/most-expensive.png",
+    title: "The Most Expensive Communities in Metro Detroit (2026)",
+    description:
+      "A ranked look at Metro Detroit's most expensive and prestigious communities for 2026 — Bloomfield Hills, Franklin, Birmingham, Orchard Lake, Grosse Pointe and more.",
+    uploadDate: "2026-11-11",
+    durationISO: "PT1M1S",
+  },
   related: [
     { href: "/luxury-homes-in-bloomfield-hills", label: "Luxury homes in Bloomfield Hills" },
     { href: "/luxury-homes-in-birmingham", label: "Luxury homes in Birmingham" },

@@ -23,6 +23,15 @@ export default function Page() {
         </>
       }
       h1Text="Michigan MSHDA Down Payment Assistance Eligibility Checker"
+      video={{
+        src: "/videos/down-payment.mp4",
+        poster: "/videos/down-payment.png",
+        title: "$10,000 Toward Your Down Payment (Michigan First-Time Buyers)",
+        description:
+          "Michigan first-time buyers can get up to $10,000 toward a down payment through MSHDA's MI 10K DPA — a 0% loan. Here are the four requirements and how to check if you qualify.",
+        uploadDate: "2026-11-11",
+        durationISO: "PT54S",
+      }}
       sub="Michigan's MSHDA program offers first-time buyers up to $10,000 toward a down payment and closing costs — as a 0% loan you don't repay until you sell or refinance. Answer a few questions to see if you likely qualify."
       bullets={["Up to $10,000 assistance", "Current 2026 MSHDA limits", "Instant — no email required"]}
       appDescription="A free eligibility checker for Michigan's MSHDA MI Home Loan and MI 10K DPA down-payment-assistance program, using current income, credit, and sales-price limits."

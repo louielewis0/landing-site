@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { plugFaq } from "@/lib/config";
 import SiteShell from "@/components/site/SiteShell";
+import VideoEmbed from "@/components/site/VideoEmbed";
 import { company } from "@/lib/config";
 import { guideMeta, rankedCities, faqs, citations } from "@/lib/best-suburbs-guide";
 import {
@@ -143,6 +144,15 @@ export default function BestSuburbsGuidePage() {
             </div>
           </div>
         </section>
+
+        <VideoEmbed
+          src="/videos/best-suburbs.mp4"
+          poster="/videos/best-suburbs.png"
+          title="The 7 Best Metro Detroit Suburbs to Live In (2026), Ranked"
+          description="A ranked guide to Metro Detroit's best suburbs for 2026 — Troy, Rochester Hills, Birmingham, Sterling Heights, West Bloomfield, Bloomfield Hills and Warren — with typical home values and growth."
+          uploadDate="2026-11-11"
+          durationISO="PT58S"
+        />
 
         {/* ── Comparison table ── */}
         <section className="bg-cream-2" style={{ padding: "70px 0" }}>

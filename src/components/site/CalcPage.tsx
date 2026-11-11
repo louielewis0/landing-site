@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import SiteShell from "@/components/site/SiteShell";
+import VideoEmbed, { type VideoEmbedData } from "@/components/site/VideoEmbed";
 import { company, plugFaq } from "@/lib/config";
 import { ArrowRight, ChevronRight, Phone, MapPin, Check } from "lucide-react";
 
@@ -19,6 +20,8 @@ export type CalcPageProps = {
   bullets: string[];
   /** The interactive calculator (a client component). */
   children: ReactNode;
+  /** Optional self-hosted video — player + VideoObject schema (watch page). */
+  video?: VideoEmbedData;
   /** Rich supporting content sections below the tool. */
   sections: CalcSection[];
   faqs: CalcFAQ[];
@@ -102,6 +105,8 @@ export default function CalcPage(p: CalcPageProps) {
         <section className="bg-cream" style={{ padding: "24px 0 60px" }}>
           <div className="container" style={{ maxWidth: 1040 }}>{p.children}</div>
         </section>
+
+        {p.video && <VideoEmbed {...p.video} />}
 
         {/* Supporting content */}
         {p.sections.length > 0 && (

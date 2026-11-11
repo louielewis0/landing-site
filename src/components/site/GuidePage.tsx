@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import SiteShell from "@/components/site/SiteShell";
+import VideoEmbed, { type VideoEmbedData } from "@/components/site/VideoEmbed";
 import { company, plugFaq } from "@/lib/config";
 import { ArrowRight, ChevronRight, Phone, MapPin, Check } from "lucide-react";
 
@@ -21,6 +22,8 @@ export type GuidePageData = {
   sections: GuideSection[];
   faqs: GuideFAQ[];
   faqHeading: string;
+  /** Optional self-hosted video — renders a player + VideoObject schema (watch page). */
+  video?: VideoEmbedData;
   /** Reinforcing internal links. */
   related: { href: string; label: string }[];
   ctaHeading: string;
@@ -96,6 +99,9 @@ export default function GuidePage({ data }: { data: GuidePageData }) {
             </ul>
           </div>
         </section>
+
+        {/* Optional video (watch page) */}
+        {data.video && <VideoEmbed {...data.video} />}
 
         {/* Content sections — alternating backgrounds */}
         {data.sections.map((s, i) => (
