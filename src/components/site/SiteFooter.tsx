@@ -70,6 +70,7 @@ export default function SiteFooter() {
     { label: "Selling an Inherited House", href: "/selling-an-inherited-house-michigan" },
     { label: "Franklin & Bingham Farms Homes", href: "/luxury-homes-franklin-bingham-farms" },
     { label: "Luxury Homes in West Bloomfield", href: "/luxury-homes-in-west-bloomfield" },
+    { label: "Luxury Homes in Orchard Lake", href: "/luxury-homes-in-orchard-lake" },
     { label: "Luxury Homes in Grosse Pointe", href: "/luxury-homes-in-grosse-pointe" },
     { label: "Most Expensive Metro Detroit Communities", href: "/most-expensive-neighborhoods-metro-detroit" },
     { label: "Best Agent in Novi", href: "/best-real-estate-agent-novi" },

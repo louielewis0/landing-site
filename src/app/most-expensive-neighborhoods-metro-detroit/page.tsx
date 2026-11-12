@@ -54,7 +54,7 @@ const data: GuidePageData = {
             <li>
               <strong>4. Orchard Lake Village (Oakland)</strong> — a tiny, moneyed lakefront enclave wrapped around Orchard
               Lake and its country club; among the wealthiest small communities in the state.{" "}
-              <a href="/luxury-homes-in-west-bloomfield" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>West Bloomfield &amp; the lakes →</a>
+              <a href="/luxury-homes-in-orchard-lake" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>Orchard Lake luxury →</a>
             </li>
             <li>
               <strong>5. Grosse Pointe Shores &amp; Farms (Wayne/Macomb)</strong> — historic old-money estates along Lake

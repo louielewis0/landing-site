@@ -65,6 +65,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/luxury-homes-in-birmingham`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/luxury-homes-in-bloomfield-hills`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/luxury-homes-in-west-bloomfield`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/luxury-homes-in-orchard-lake`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/luxury-homes-in-grosse-pointe`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/most-expensive-neighborhoods-metro-detroit`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/homes-in-birmingham-public-schools`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },

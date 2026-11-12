@@ -146,6 +146,7 @@ const data: GuidePageData = {
   faqHeading: "Oakland County lakefront questions",
   related: [
     { href: "/west-bloomfield-lakefront-homes", label: "West Bloomfield lakefront homes" },
+    { href: "/luxury-homes-in-orchard-lake", label: "Luxury homes in Orchard Lake" },
     { href: "/most-exclusive-neighborhoods-oakland-county", label: "Most exclusive neighborhoods in Oakland County" },
     { href: "/luxury-homes-in-bloomfield-hills", label: "Luxury homes in Bloomfield Hills" },
   ],
