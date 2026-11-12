@@ -7,9 +7,18 @@ export type VideoEmbedData = {
   poster: string;
   title: string;
   description: string;
-  uploadDate: string; // ISO date, e.g. "2026-11-11"
+  uploadDate: string; // ISO date, e.g. "2026-11-11" (normalized to a full datetime w/ timezone below)
   durationISO: string; // ISO 8601, e.g. "PT1M1S"
 };
+
+/**
+ * Google's VideoObject requires uploadDate to be a full ISO 8601 datetime WITH a
+ * timezone. A bare "YYYY-MM-DD" triggers GSC's "missing a timezone" / "invalid
+ * datetime" warnings, so pad a date-only value to noon Eastern (-05:00).
+ */
+function normalizeUploadDate(value: string): string {
+  return /^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T12:00:00-05:00` : value;
+}
 
 /**
  * Renders a self-hosted video player plus VideoObject structured data, turning
@@ -24,7 +33,7 @@ export default function VideoEmbed({ src, poster, title, description, uploadDate
     name: title,
     description,
     thumbnailUrl: [`${BASE}${poster}`],
-    uploadDate,
+    uploadDate: normalizeUploadDate(uploadDate),
     duration: durationISO,
     contentUrl: `${BASE}${src}`,
     publisher: {
