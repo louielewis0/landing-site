@@ -142,6 +142,15 @@ const data: GuidePageData = {
     },
   ],
   faqHeading: "Michigan closing costs — common questions",
+  video: {
+    src: "/videos/closing-costs.mp4",
+    poster: "/videos/closing-costs.png",
+    title: "Michigan Closing Costs, Explained (2026): Who Pays What",
+    description:
+      "What closing costs really run in Michigan and who customarily pays — the 0.86% transfer tax ($8.60 per $1,000), ~4% seller totals, 2–5% buyer totals, and a transfer-tax refund tip for sellers.",
+    uploadDate: "2026-11-12",
+    durationISO: "PT58S",
+  },
   faqs: [
     {
       question: "How much are closing costs in Michigan?",
