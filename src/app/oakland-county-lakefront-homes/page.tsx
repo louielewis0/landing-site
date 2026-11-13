@@ -144,6 +144,15 @@ const data: GuidePageData = {
     },
   ],
   faqHeading: "Oakland County lakefront questions",
+  video: {
+    src: "/videos/lakes-to-buy-on.mp4",
+    poster: "/videos/lakes-to-buy-on.png",
+    title: "The Best Lakes Near Detroit to Buy a Home On (2026)",
+    description:
+      "An insider shortlist of Oakland County's best lakes to buy a home on — Cass, Orchard, Pine, Walnut, and Lake Angelus — plus the all-sports vs. no-wake rule that drives lakefront prices.",
+    uploadDate: "2026-11-13",
+    durationISO: "PT58S",
+  },
   related: [
     { href: "/west-bloomfield-lakefront-homes", label: "West Bloomfield lakefront homes" },
     { href: "/luxury-homes-in-orchard-lake", label: "Luxury homes in Orchard Lake" },
