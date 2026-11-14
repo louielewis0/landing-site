@@ -23,6 +23,15 @@ export default function Page() {
         </>
       }
       h1Text="Home Affordability Calculator (Metro Detroit)"
+      video={{
+        src: "/videos/income-to-buy.mp4",
+        poster: "/videos/income-to-buy.png",
+        title: "How Much You Need to Make to Buy a Home in Metro Detroit (2026)",
+        description:
+          "The income you need to buy a home in Metro Detroit in 2026 by price tier — $250K home ~$73K/yr, $400K ~$115K, $500K ~$142K, $750K ~$211K (20% down, ~6.9% rate, ~28% of income).",
+        uploadDate: "2026-11-14",
+        durationISO: "PT28S",
+      }}
       sub="Enter your income, debts, and down payment to see your realistic price range — with real Oakland, Macomb, and Wayne County property-tax rates built in, using the same 28/36 rule lenders start from."
       bullets={["Real MI county tax rates", "28/36 DTI rule + PMI", "Instant — no email required"]}
       appDescription="A free home affordability calculator that estimates the maximum home price a buyer can afford in Metro Detroit based on income, debts, down payment, and local property taxes using the 28/36 debt-to-income rule."
