@@ -65,6 +65,8 @@ export default function SiteFooter() {
     { label: "How to Buy in Michigan", href: "/how-to-buy-a-home-in-michigan" },
     { label: "Michigan Closing Costs", href: "/michigan-closing-costs" },
     { label: "Michigan Property Taxes", href: "/michigan-property-taxes-explained" },
+    { label: "Sell My House As-Is", href: "/sell-my-house-as-is-metro-detroit" },
+    { label: "Cost of Selling a House in MI", href: "/cost-of-selling-a-house-in-michigan" },
     { label: "Who Pays Realtor Commission?", href: "/who-pays-realtor-commission-michigan" },
     { label: "Selling a House in a Divorce", href: "/selling-a-house-during-divorce-michigan" },
     { label: "Selling an Inherited House", href: "/selling-an-inherited-house-michigan" },

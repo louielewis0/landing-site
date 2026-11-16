@@ -176,6 +176,7 @@ const data: GuidePageData = {
   related: [
     { href: "/who-pays-realtor-commission-michigan", label: "Who pays realtor commission in Michigan?" },
     { href: "/home-sale-proceeds-calculator", label: "Net proceeds calculator (sellers)" },
+    { href: "/cost-of-selling-a-house-in-michigan", label: "Cost of selling a house in Michigan" },
     { href: "/how-to-buy-a-home-in-michigan", label: "How to buy a home in Michigan" },
     { href: "/michigan-property-taxes-explained", label: "Michigan property taxes explained" },
     { href: "/sell-your-home-metro-detroit", label: "Sell your home for more" },

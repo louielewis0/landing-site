@@ -79,6 +79,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/first-time-home-buyer-programs-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/water-damage-sell-or-restore`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/sell-your-home-metro-detroit`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/sell-my-house-as-is-metro-detroit`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/cost-of-selling-a-house-in-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/what-is-my-home-worth-troy`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/what-is-my-home-worth-birmingham`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/what-is-my-home-worth-rochester-hills`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
