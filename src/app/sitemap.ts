@@ -118,6 +118,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/home-affordability-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/rent-vs-buy-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/1031-exchange-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/1031-exchange-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/sell-or-rent-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/michigan-down-payment-assistance`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/michigan-fha-loans`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },

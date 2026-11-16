@@ -92,6 +92,7 @@ export default function SiteFooter() {
     { label: "Rental ROI Calculator", href: "/rental-property-roi-calculator" },
     { label: "Rent vs. Buy", href: "/rent-vs-buy-calculator" },
     { label: "1031 Exchange", href: "/1031-exchange-calculator" },
+    { label: "1031 Exchange in Michigan", href: "/1031-exchange-michigan" },
     { label: "Sell or Rent?", href: "/sell-or-rent-calculator" },
     { label: "Down Payment Help", href: "/michigan-down-payment-assistance" },
     { label: "Troy", href: "/troy-real-estate-agent" },
