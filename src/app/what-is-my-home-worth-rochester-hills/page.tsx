@@ -122,6 +122,7 @@ const data: GuidePageData = {
   ],
   related: [
     { href: "/home-value", label: "Free home valuation" },
+    { href: "/what-is-my-home-worth-rochester", label: "City of Rochester home values" },
     { href: "/homes-in-the-avondale-school-district", label: "Avondale vs. Rochester schools" },
     { href: "/sell-your-home-metro-detroit", label: "How we sell homes for more" },
     { href: "/rochester-hills-real-estate-agent", label: "Rochester Hills real estate agent" },

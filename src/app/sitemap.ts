@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: base, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
     { url: `${base}/best-metro-detroit-suburbs`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/safest-suburbs-metro-detroit`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/best-school-districts-metro-detroit`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/troy-vs-rochester-hills`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/troy-vs-birmingham`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
@@ -84,6 +85,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/what-is-my-home-worth-troy`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/what-is-my-home-worth-birmingham`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/what-is-my-home-worth-rochester-hills`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/what-is-my-home-worth-rochester`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/what-is-my-home-worth-bloomfield-hills`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/what-is-my-home-worth-west-bloomfield`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/what-is-my-home-worth-sterling-heights`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
