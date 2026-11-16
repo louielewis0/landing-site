@@ -120,6 +120,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/1031-exchange-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/sell-or-rent-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/michigan-down-payment-assistance`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/michigan-fha-loans`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/who-pays-realtor-commission-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${base}/selling-a-house-during-divorce-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${base}/selling-an-inherited-house-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },

@@ -62,6 +62,7 @@ export default function SiteFooter() {
     { label: "School Districts Guide", href: "/best-school-districts-metro-detroit" },
     { label: "Home Budget Guide", href: "/how-much-home-metro-detroit-budget" },
     { label: "First-Time Buyer Programs", href: "/first-time-home-buyer-programs-michigan" },
+    { label: "Michigan FHA Loans", href: "/michigan-fha-loans" },
     { label: "How to Buy in Michigan", href: "/how-to-buy-a-home-in-michigan" },
     { label: "Michigan Closing Costs", href: "/michigan-closing-costs" },
     { label: "Michigan Property Taxes", href: "/michigan-property-taxes-explained" },
