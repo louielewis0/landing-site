@@ -23,6 +23,15 @@ export default function Page() {
         </>
       }
       h1Text="Rent vs. Buy Calculator (Metro Detroit)"
+      video={{
+        src: "/videos/rent-vs-buy.mp4",
+        poster: "/videos/rent-vs-buy.png",
+        title: "Rent vs. Buy in Metro Detroit — The Real Math (2026)",
+        description:
+          "The real 5-year math on renting vs. buying in Metro Detroit: renting ~$1,700/mo leaves $0 equity (~$110K paid), while buying a $280K home builds ~$76,000 in equity (10% down, 6.9% rate, ~4%/yr appreciation).",
+        uploadDate: "2026-11-16",
+        durationISO: "PT27S",
+      }}
       sub="There's a year when buying stops costing more than renting and starts paying you back. This calculator finds that break-even point for your numbers — so the decision is math, not a gut feeling."
       bullets={["Finds your break-even year", "Counts equity + appreciation", "Instant — no email required"]}
       appDescription="A free rent vs. buy calculator that finds the break-even year when buying a home becomes cheaper than renting in Metro Detroit, based on rent, home price, financing, and length of stay."
