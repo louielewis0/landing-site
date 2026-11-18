@@ -138,6 +138,15 @@ const data: GuidePageData = {
     },
   ],
   faqHeading: "Safest Metro Detroit suburbs — common questions",
+  video: {
+    src: "/videos/safest-suburbs.mp4",
+    poster: "/videos/safest-suburbs.png",
+    title: "The Safest Suburbs in Metro Detroit (2026) — Ranked by FBI Data",
+    description:
+      "The safest suburbs in Metro Detroit ranked by FBI-sourced crime data: Oakland Township (#2 safest in Michigan), Grosse Ile, Milford, South Lyon, Berkley, plus how Novi, Rochester Hills, and Troy rate.",
+    uploadDate: "2026-11-18",
+    durationISO: "PT27S",
+  },
   faqs: [
     {
       question: "What is the safest suburb in Metro Detroit?",
