@@ -123,6 +123,15 @@ const data: GuidePageData = {
     },
   ],
   faqHeading: "Michigan home loans — common questions",
+  video: {
+    src: "/videos/no-money-down.mp4",
+    poster: "/videos/no-money-down.png",
+    title: "You Don't Need 20% Down to Buy a Home in Michigan (2026)",
+    description:
+      "The 20%-down myth, busted: FHA 3.5% down, conventional as little as 3%, VA & USDA 0% if eligible, plus up to $10,000 in MSHDA down-payment assistance in Michigan.",
+    uploadDate: "2026-11-21",
+    durationISO: "PT27S",
+  },
   faqs: [
     {
       question: "What home loans are available in Michigan?",
