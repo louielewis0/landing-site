@@ -15,6 +15,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: base, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
     { url: `${base}/best-metro-detroit-suburbs`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/best-metro-detroit-suburbs-to-invest`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/real-estate-investment-sterling-heights`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/terra-at-novi`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/safest-suburbs-metro-detroit`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/best-school-districts-metro-detroit`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/best-school-districts-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
