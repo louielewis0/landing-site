@@ -121,6 +121,7 @@ const data: GuidePageData = {
   ],
   related: [
     { href: "/home-value", label: "Free home valuation" },
+    { href: "/what-is-my-home-worth-farmington-hills", label: "Farmington Hills home values" },
     { href: "/luxury-homes-in-novi", label: "Luxury homes in Novi" },
     { href: "/living-in-novi", label: "Living in Novi" },
     { href: "/home-sale-proceeds-calculator", label: "Net proceeds calculator" },

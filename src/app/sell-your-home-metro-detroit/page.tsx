@@ -234,6 +234,7 @@ const data: GuidePageData = {
   ],
   related: [
     { href: "/home-value", label: "What's my home worth? (free valuation)" },
+    { href: "/what-is-my-home-worth-farmington-hills", label: "Farmington Hills home values" },
     { href: "/water-damage-sell-or-restore", label: "Damage to disclose? Restore or sell as-is" },
     { href: "/sell-my-house-as-is-metro-detroit", label: "Sell my house as-is (no repairs)" },
     { href: "/cost-of-selling-a-house-in-michigan", label: "Cost of selling a house in Michigan" },

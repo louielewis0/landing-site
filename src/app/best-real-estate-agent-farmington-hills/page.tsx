@@ -17,7 +17,17 @@ const data: BestAgentData = {
   publishedLabel: "November 4, 2026",
   localHeading: "Why Sundus is the agent to know in Farmington Hills",
   localParagraphs: [
-    "Farmington Hills is big and varied — ranches and colonials from several decades, newer subdivisions, and wooded, larger-lot pockets, spread across a wide area. Price and demand shift a lot from one neighborhood to the next, so a city-wide guess doesn't cut it. Sundus has closed across the city and prices street by street.",
+    (
+      <>
+        Farmington Hills is big and varied — ranches and colonials from several decades, newer subdivisions, and
+        wooded, larger-lot pockets, spread across a wide area. Price and demand shift a lot from one neighborhood to
+        the next, so a city-wide guess doesn&rsquo;t cut it (see our{" "}
+        <a href="/what-is-my-home-worth-farmington-hills" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>
+          Farmington Hills home-value guide
+        </a>
+        ). Sundus has closed across the city and prices street by street.
+      </>
+    ),
     "The city also spans more than one school district — much of it is Farmington Public Schools, with areas feeding other districts — and the right subdivision depends on your commute and budget. As broker and owner of Real Estate Market Center, Sundus verifies the school assignment on every listing and gives you one point of contact from first call to closing.",
   ],
   chooseTip1: (
