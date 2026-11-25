@@ -133,6 +133,8 @@ const data: GuidePageData = {
   related: [
     { href: "/gated-communities-oakland-county", label: "Oakland County gated communities" },
     { href: "/most-exclusive-neighborhoods-oakland-county", label: "Most exclusive neighborhoods in Oakland County" },
+    { href: "/turtle-lake-bloomfield-hills", label: "Turtle Lake (Bloomfield Hills)" },
+    { href: "/oakhurst-clarkston", label: "Oakhurst (Clarkston)" },
     { href: "/luxury-homes-in-bloomfield-hills", label: "Luxury homes in Bloomfield Hills" },
     { href: "/luxury-homes-in-novi", label: "Luxury homes in Novi" },
     { href: "/best-real-estate-agent-bloomfield-hills", label: "Meet our luxury broker" },

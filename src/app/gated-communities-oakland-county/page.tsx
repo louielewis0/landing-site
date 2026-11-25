@@ -101,6 +101,8 @@ const data: GuidePageData = {
   faqHeading: "Oakland County gated community questions",
   related: [
     { href: "/most-exclusive-neighborhoods-oakland-county", label: "Most exclusive neighborhoods in Oakland County" },
+    { href: "/turtle-lake-bloomfield-hills", label: "Turtle Lake (Bloomfield Hills)" },
+    { href: "/oakhurst-clarkston", label: "Oakhurst (Clarkston)" },
     { href: "/luxury-homes-in-bloomfield-hills", label: "Luxury homes in Bloomfield Hills" },
     { href: "/best-real-estate-agent-bloomfield-hills", label: "Meet Bloomfield Hills' luxury broker" },
   ],

@@ -131,6 +131,7 @@ const data: GuidePageData = {
     { href: "/luxury-homes-in-bloomfield-hills", label: "Luxury homes in Bloomfield Hills" },
     { href: "/luxury-homes-in-birmingham", label: "Luxury homes in Birmingham" },
     { href: "/luxury-homes-in-troy", label: "Luxury homes in Troy" },
+    { href: "/turtle-lake-bloomfield-hills", label: "Turtle Lake gated estates" },
   ],
   ctaHeading: "See Oakland County's most exclusive homes — including off-market",
   ctaBody: "Tell us what you're looking for and we'll show you the luxury and estate inventory across Oakland County's top neighborhoods, including the private and pocket listings a public search never surfaces.",

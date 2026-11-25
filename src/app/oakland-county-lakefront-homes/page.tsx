@@ -156,6 +156,8 @@ const data: GuidePageData = {
   related: [
     { href: "/west-bloomfield-lakefront-homes", label: "West Bloomfield lakefront homes" },
     { href: "/luxury-homes-in-orchard-lake", label: "Luxury homes in Orchard Lake" },
+    { href: "/luxury-homes-cass-lake", label: "Cass Lake waterfront homes" },
+    { href: "/lake-st-clair-waterfront-homes", label: "Lake St. Clair waterfront homes" },
     { href: "/most-exclusive-neighborhoods-oakland-county", label: "Most exclusive neighborhoods in Oakland County" },
     { href: "/luxury-homes-in-bloomfield-hills", label: "Luxury homes in Bloomfield Hills" },
   ],

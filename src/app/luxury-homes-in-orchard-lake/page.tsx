@@ -158,6 +158,8 @@ const data: GuidePageData = {
   faqHeading: "Orchard Lake luxury home questions",
   related: [
     { href: "/luxury-homes-in-west-bloomfield", label: "Luxury homes in West Bloomfield" },
+    { href: "/luxury-homes-cass-lake", label: "Cass Lake waterfront homes" },
+    { href: "/luxury-homes-pine-lake", label: "Pine Lake private country-club homes" },
     { href: "/oakland-county-lakefront-homes", label: "Oakland County lakefront market" },
     { href: "/most-expensive-neighborhoods-metro-detroit", label: "Most expensive communities in Metro Detroit" },
     { href: "/best-real-estate-agent-west-bloomfield", label: "Meet our West Bloomfield luxury broker" },

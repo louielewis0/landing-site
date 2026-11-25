@@ -134,6 +134,7 @@ const data: GuidePageData = {
     { href: "/luxury-homes-in-birmingham", label: "Luxury homes in Birmingham" },
     { href: "/luxury-homes-in-bloomfield-hills", label: "Luxury homes in Bloomfield Hills" },
     { href: "/luxury-homes-in-west-bloomfield", label: "Luxury homes in West Bloomfield" },
+    { href: "/lake-st-clair-waterfront-homes", label: "Lake St. Clair waterfront homes" },
     { href: "/contact", label: "Talk to a luxury specialist" },
   ],
   ctaHeading: "See Grosse Pointe luxury & waterfront — including off-market",

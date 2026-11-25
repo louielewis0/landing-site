@@ -141,6 +141,7 @@ const data: GuidePageData = {
     { href: "/luxury-homes-in-grosse-pointe", label: "Luxury homes in Grosse Pointe" },
     { href: "/luxury-homes-in-west-bloomfield", label: "Luxury homes in West Bloomfield" },
     { href: "/luxury-homes-in-troy", label: "Luxury homes in Troy" },
+    { href: "/turtle-lake-bloomfield-hills", label: "Turtle Lake gated estates" },
   ],
   ctaHeading: "Access Bloomfield Hills estates — including private listings",
   ctaBody: "Tell us what you're after and we'll show you Bloomfield Hills' luxury and estate inventory, including the off-market and private-lake properties a public search never surfaces. Selling an estate? We'll market it discreetly.",

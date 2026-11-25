@@ -117,6 +117,7 @@ const data: GuidePageData = {
     { href: "/oakland-county-lakefront-homes", label: "Oakland County lakefront market" },
     { href: "/gated-communities-michigan", label: "Gated communities in Michigan" },
     { href: "/most-exclusive-neighborhoods-oakland-county", label: "Most exclusive neighborhoods in Oakland County" },
+    { href: "/oakhurst-clarkston", label: "Oakhurst gated golf community" },
     { href: "/luxury-homes-in-rochester", label: "Luxury homes in Rochester" },
     { href: "/contact", label: "Talk to a luxury specialist" },
   ],

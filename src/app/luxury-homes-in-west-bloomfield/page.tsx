@@ -140,6 +140,7 @@ const data: GuidePageData = {
   faqHeading: "West Bloomfield luxury home questions",
   related: [
     { href: "/west-bloomfield-lakefront-homes", label: "West Bloomfield lakefront homes" },
+    { href: "/luxury-homes-pine-lake", label: "Pine Lake private country-club homes" },
     { href: "/luxury-homes-in-orchard-lake", label: "Luxury homes in Orchard Lake" },
     { href: "/oakland-county-lakefront-homes", label: "Oakland County lakefront market" },
     { href: "/luxury-homes-in-bloomfield-hills", label: "Luxury homes in Bloomfield Hills" },

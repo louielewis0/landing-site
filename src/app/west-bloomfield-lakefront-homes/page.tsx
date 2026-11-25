@@ -119,6 +119,8 @@ const data: GuidePageData = {
   faqHeading: "West Bloomfield lakefront questions",
   related: [
     { href: "/oakland-county-lakefront-homes", label: "Oakland County lakes: lakefront buyer's guide" },
+    { href: "/luxury-homes-cass-lake", label: "Cass Lake waterfront homes" },
+    { href: "/luxury-homes-pine-lake", label: "Pine Lake private country-club homes" },
     { href: "/west-bloomfield-real-estate-agent", label: "West Bloomfield real estate guide" },
     { href: "/best-real-estate-agent-west-bloomfield", label: "Meet West Bloomfield's top broker" },
   ],
