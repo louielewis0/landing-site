@@ -45,7 +45,7 @@ export function TemplateReviews() {
           >
             <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontSize: 9.5, fontWeight: 600, letterSpacing: "0.38em", textTransform: "uppercase", color: "#141414", whiteSpace: "nowrap", paddingLeft: "0.38em" }}>As Featured On</span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/the-mile-masthead.png" alt="The Mile Detroit" style={{ height: 64, width: "auto", maxWidth: "100%", display: "block", filter: "brightness(0)" }} />
+            <img src="/the-mile-masthead-hd.png" alt="The Mile Detroit" style={{ height: 64, width: "auto", maxWidth: "100%", display: "block" }} />
           </a>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
