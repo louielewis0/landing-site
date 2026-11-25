@@ -111,6 +111,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/lake-st-clair-waterfront-homes`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/luxury-homes-cass-lake`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/luxury-homes-pine-lake`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/luxury-homes-in-troy`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/how-to-buy-a-home-in-michigan`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/michigan-closing-costs`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/michigan-property-taxes-explained`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },

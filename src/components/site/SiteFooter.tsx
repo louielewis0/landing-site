@@ -88,6 +88,7 @@ export default function SiteFooter() {
     { label: "Lake St. Clair Waterfront Homes", href: "/lake-st-clair-waterfront-homes" },
     { label: "Cass Lake Homes", href: "/luxury-homes-cass-lake" },
     { label: "Pine Lake Homes", href: "/luxury-homes-pine-lake" },
+    { label: "Luxury Homes in Troy", href: "/luxury-homes-in-troy" },
     { label: "Most Expensive Metro Detroit Communities", href: "/most-expensive-neighborhoods-metro-detroit" },
     { label: "Best Agent in Novi", href: "/best-real-estate-agent-novi" },
     { label: "Best Agent in Northville", href: "/best-real-estate-agent-northville" },
