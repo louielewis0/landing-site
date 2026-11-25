@@ -139,6 +139,7 @@ const data: GuidePageData = {
     { href: "/troy-real-estate-agent", label: "Troy real estate & neighborhoods" },
     { href: "/what-is-my-home-worth-troy", label: "What's my Troy home worth?" },
     { href: "/homes-in-the-troy-school-district", label: "Homes in the Troy School District" },
+    { href: "/luxury-homes-in-troy", label: "Luxury homes in Troy" },
     { href: "/relocating-to-metro-detroit", label: "Relocating to Metro Detroit" },
     { href: "/best-real-estate-agent-troy", label: "Best real estate agent in Troy" },
   ],

@@ -137,6 +137,7 @@ const data: GuidePageData = {
     { href: "/most-expensive-neighborhoods-metro-detroit", label: "Metro Detroit's most expensive communities" },
     { href: "/luxury-homes-in-grosse-pointe", label: "Luxury homes in Grosse Pointe" },
     { href: "/luxury-homes-in-west-bloomfield", label: "Luxury homes in West Bloomfield" },
+    { href: "/luxury-homes-in-troy", label: "Luxury homes in Troy" },
   ],
   ctaHeading: "See Birmingham luxury homes — including off-market",
   ctaBody: "Tell us what you're looking for and we'll show you Birmingham's luxury inventory, including the off-market and pocket listings a public search never surfaces. Selling? We'll market your home discreetly to the right buyers.",

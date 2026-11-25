@@ -161,6 +161,7 @@ const data: GuidePageData = {
     { href: "/luxury-homes-in-birmingham", label: "Luxury homes in Birmingham" },
     { href: "/luxury-homes-in-grosse-pointe", label: "Luxury homes in Grosse Pointe" },
     { href: "/luxury-homes-in-west-bloomfield", label: "Luxury homes in West Bloomfield" },
+    { href: "/luxury-homes-in-troy", label: "Luxury homes in Troy" },
     { href: "/luxury-homes-franklin-bingham-farms", label: "Luxury homes in Franklin & Bingham Farms" },
   ],
   ctaHeading: "Buying or selling at the top of the Metro Detroit market?",

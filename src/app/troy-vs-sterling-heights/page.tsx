@@ -205,7 +205,8 @@ export default function TroyVsSterlingHeightsPage() {
               Weighing more options? See{" "}
               <a href="/best-metro-detroit-suburbs" style={{ color: "var(--s-gold)", fontWeight: 600 }}>all seven suburbs ranked</a>{" "}
               or{" "}
-              <a href="/how-much-home-metro-detroit-budget" style={{ color: "var(--s-gold)", fontWeight: 600 }}>how much home your budget buys</a>.
+              <a href="/how-much-home-metro-detroit-budget" style={{ color: "var(--s-gold)", fontWeight: 600 }}>how much home your budget buys</a>. At the top of the Troy market, see{" "}
+              <a href="/luxury-homes-in-troy" style={{ color: "var(--s-gold)", fontWeight: 600 }}>luxury homes in Troy</a>.
             </p>
           </div>
         </section>

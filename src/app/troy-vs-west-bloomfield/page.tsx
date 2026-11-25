@@ -203,7 +203,8 @@ export default function TroyVsWestBloomfieldPage() {
             <p style={{ fontSize: 13, color: "var(--s-muted)", marginTop: 18 }}>
               More matchups:{" "}
               <a href="/troy-vs-rochester-hills" style={{ color: "var(--s-gold)", fontWeight: 600 }}>Troy vs Rochester Hills</a>{" "}·{" "}
-              <a href="/west-bloomfield-vs-bloomfield-hills" style={{ color: "var(--s-gold)", fontWeight: 600 }}>West Bloomfield vs Bloomfield Hills</a>.
+              <a href="/west-bloomfield-vs-bloomfield-hills" style={{ color: "var(--s-gold)", fontWeight: 600 }}>West Bloomfield vs Bloomfield Hills</a>{" "}·{" "}
+              <a href="/luxury-homes-in-troy" style={{ color: "var(--s-gold)", fontWeight: 600 }}>Luxury homes in Troy</a>.
             </p>
           </div>
         </section>

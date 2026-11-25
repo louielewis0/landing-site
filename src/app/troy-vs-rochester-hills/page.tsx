@@ -293,6 +293,10 @@ export default function TroyVsRochesterHillsPage() {
               <a href="/best-school-districts-metro-detroit" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
                 the best school districts in Metro Detroit
               </a>
+              . Leaning Troy? See{" "}
+              <a href="/luxury-homes-in-troy" style={{ color: "var(--s-gold)", fontWeight: 600 }}>
+                luxury homes in Troy
+              </a>
               .
             </p>
           </div>

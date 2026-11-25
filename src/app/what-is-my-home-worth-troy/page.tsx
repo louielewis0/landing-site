@@ -128,6 +128,7 @@ const data: GuidePageData = {
     { href: "/home-value", label: "Free home valuation" },
     { href: "/home-sale-proceeds-calculator", label: "Net proceeds calculator" },
     { href: "/sell-your-home-metro-detroit", label: "How we sell homes for more" },
+    { href: "/luxury-homes-in-troy", label: "Luxury homes in Troy" },
     { href: "/troy-real-estate-agent", label: "Troy real estate agent" },
     { href: "/best-real-estate-agent-troy", label: "Best real estate agent in Troy" },
   ],

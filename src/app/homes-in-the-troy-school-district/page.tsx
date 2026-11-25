@@ -138,6 +138,7 @@ const data: GuidePageData = {
   related: [
     { href: "/troy-real-estate-agent", label: "Troy real estate guide" },
     { href: "/best-real-estate-agent-troy", label: "Meet Troy's top broker" },
+    { href: "/luxury-homes-in-troy", label: "Luxury homes in Troy" },
     { href: "/best-real-estate-brokerages-troy", label: "Compare Troy brokerages" },
   ],
   ctaHeading: "Find a home in the Troy High feeder you want",
