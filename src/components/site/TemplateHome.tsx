@@ -40,21 +40,21 @@ export function TemplateReviews() {
             href="https://themiledetroit.com/articles/best-real-estate-brokerage-michigan-2026"
             target="_blank"
             rel="noopener noreferrer"
-            title="Real Estate Market Center, featured in The Mile Detroit"
-            style={{ display: "inline-flex", alignItems: "center", gap: 12, width: 338, maxWidth: "100%", height: 100, boxSizing: "border-box", padding: "0 18px", background: "#f7f4ec", border: "1.5px solid #15110c", borderRadius: 16, boxShadow: "0 8px 26px rgba(25,26,28,0.12)", textDecoration: "none" }}
+            title="Real Estate Market Center, as featured on The Mile Detroit"
+            style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 9, width: 338, maxWidth: "100%", height: 100, boxSizing: "border-box", padding: "0 22px", background: "linear-gradient(180deg, #fcf9f2, #f3ecdb)", border: "1.5px solid #c9a86a", borderRadius: 16, boxShadow: "0 10px 28px rgba(25,26,28,0.14), inset 0 0 0 4px #fcf9f2, inset 0 0 0 5px rgba(201,168,106,0.45)", textDecoration: "none" }}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/the-mile-monogram.png" alt="" width={60} height={60} style={{ borderRadius: 9, flexShrink: 0 }} />
-            <span style={{ textAlign: "left", minWidth: 0 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/the-mile-masthead.png" alt="The Mile Detroit" style={{ height: 48, width: "auto", maxWidth: "100%", display: "block", marginBottom: 6 }} />
-              <span style={{ display: "block", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", fontSize: 7.5, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#6b6456", lineHeight: 1.35 }}>Metro Detroit Real Estate Newsletter</span>
+            <span style={{ display: "flex", alignItems: "center", gap: 11 }}>
+              <span aria-hidden style={{ width: 28, height: 1, background: "linear-gradient(90deg, transparent, #c9a86a)" }} />
+              <span style={{ fontFamily: "'Didot', 'Bodoni 72', 'Hoefler Text', Georgia, serif", fontSize: 11, fontWeight: 600, letterSpacing: "0.34em", textTransform: "uppercase", color: "#9a7a37", whiteSpace: "nowrap" }}>As Featured On</span>
+              <span aria-hidden style={{ width: 28, height: 1, background: "linear-gradient(90deg, #c9a86a, transparent)" }} />
             </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/the-mile-masthead.png" alt="The Mile Detroit" style={{ height: 40, width: "auto", maxWidth: "100%", display: "block" }} />
           </a>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
           <Stars size={18} />
-          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--s-ink)" }}>Named Michigan&rsquo;s #1 brokerage by TownAnswer &middot; 5.0 across 105+ Google reviews</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: "var(--s-ink)" }}>Named Michigan&rsquo;s #1 brokerage by TownAnswer &middot; 5.0 across 110+ Google reviews</span>
         </div>
         <div style={{ marginTop: 8 }}>
           <Link href="/best-real-estate-brokerage-in-michigan" style={{ fontSize: 13, fontWeight: 600, color: "var(--s-gold-ink)" }}>
