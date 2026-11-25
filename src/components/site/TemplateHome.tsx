@@ -41,11 +41,11 @@ export function TemplateReviews() {
             target="_blank"
             rel="noopener noreferrer"
             title="Real Estate Market Center, as featured on The Mile Detroit"
-            style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 7, width: 338, maxWidth: "100%", height: 100, boxSizing: "border-box", padding: "0 16px", background: "#fdfcf9", border: "1.5px solid #141414", borderRadius: 14, boxShadow: "0 10px 26px rgba(20,20,20,0.16), inset 0 0 0 4px #fdfcf9, inset 0 0 0 4.9px rgba(20,20,20,0.9)", textDecoration: "none" }}
+            style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 5, width: 338, maxWidth: "100%", height: 100, boxSizing: "border-box", padding: "0 12px", background: "#fdfcf9", border: "1.5px solid #141414", borderRadius: 14, boxShadow: "0 10px 26px rgba(20,20,20,0.16), inset 0 0 0 4px #fdfcf9, inset 0 0 0 4.9px rgba(20,20,20,0.9)", textDecoration: "none" }}
           >
-            <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: "0.4em", textTransform: "uppercase", color: "#141414", whiteSpace: "nowrap", paddingLeft: "0.4em" }}>As Featured On</span>
+            <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontSize: 9.5, fontWeight: 600, letterSpacing: "0.38em", textTransform: "uppercase", color: "#141414", whiteSpace: "nowrap", paddingLeft: "0.38em" }}>As Featured On</span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/the-mile-masthead.png" alt="The Mile Detroit" style={{ height: 64, width: "auto", maxWidth: "100%", display: "block", filter: "brightness(0)" }} />
+            <img src="/the-mile-masthead.png" alt="The Mile Detroit" style={{ height: 74, width: "auto", maxWidth: "100%", display: "block", filter: "brightness(0)" }} />
           </a>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
