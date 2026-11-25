@@ -120,6 +120,8 @@ const data: GuidePageData = {
     },
   ],
   related: [
+    { href: "/homes", label: "Browse luxury homes for sale in Troy" },
+    { href: "/what-is-my-home-worth-troy", label: "What's my Troy home worth?" },
     { href: "/homes-in-the-troy-school-district", label: "Homes in the Troy School District" },
     { href: "/troy-vs-birmingham", label: "Troy vs. Birmingham" },
     { href: "/troy-vs-rochester-hills", label: "Troy vs. Rochester Hills" },
