@@ -54,7 +54,7 @@ const data: BestAgentData = {
         "Weigh recent local closings, current Google reviews you can read yourself, and a license verifiable through Michigan LARA — and an agent who knows the subdivisions and school boundaries. Sundus offers 500+ closings and a public 5.0 rating across 105+ reviews.",
     },
   ],
-  cityPage: { href: "/homes", label: "Browse Shelby Township homes for sale" },
+  cityPage: { href: "/homes?location=Shelby%20Township", label: "Browse Shelby Township homes for sale" },
   brokeragePage: { href: "/best-real-estate-brokerages-sterling-heights", label: "Compare nearby Macomb brokerages" },
   metaTitle: "Best Real Estate Agent in Shelby Township, MI | Sundus Lewis, Broker | Real Estate Market Center",
   metaDescription:

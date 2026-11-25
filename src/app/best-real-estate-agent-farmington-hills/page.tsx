@@ -54,7 +54,7 @@ const data: BestAgentData = {
         "Weigh recent local closings, current Google reviews you can read yourself, and a license verifiable through Michigan LARA. In a city this large, local, neighborhood-level knowledge matters most. Sundus offers 500+ closings and a public 5.0 rating across 105+ reviews.",
     },
   ],
-  cityPage: { href: "/homes", label: "Browse Farmington Hills homes for sale" },
+  cityPage: { href: "/homes?location=Farmington%20Hills", label: "Browse Farmington Hills homes for sale" },
   brokeragePage: { href: "/best-real-estate-brokerages-oakland-county", label: "Best brokerages in Oakland County" },
   metaTitle: "Best Real Estate Agent in Farmington Hills, MI | Sundus Lewis, Broker | Real Estate Market Center",
   metaDescription:
