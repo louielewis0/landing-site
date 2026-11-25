@@ -41,15 +41,15 @@ export function TemplateReviews() {
             target="_blank"
             rel="noopener noreferrer"
             title="Real Estate Market Center, as featured on The Mile Detroit"
-            style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 9, width: 338, maxWidth: "100%", height: 100, boxSizing: "border-box", padding: "0 22px", background: "linear-gradient(180deg, #fcf9f2, #f3ecdb)", border: "1.5px solid #c9a86a", borderRadius: 16, boxShadow: "0 10px 28px rgba(25,26,28,0.14), inset 0 0 0 4px #fcf9f2, inset 0 0 0 5px rgba(201,168,106,0.45)", textDecoration: "none" }}
+            style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 11, width: 338, maxWidth: "100%", height: 100, boxSizing: "border-box", padding: "0 22px", background: "#fdfcf9", border: "1.5px solid #141414", borderRadius: 14, boxShadow: "0 10px 26px rgba(20,20,20,0.16), inset 0 0 0 4px #fdfcf9, inset 0 0 0 4.9px rgba(20,20,20,0.9)", textDecoration: "none" }}
           >
-            <span style={{ display: "flex", alignItems: "center", gap: 11 }}>
-              <span aria-hidden style={{ width: 28, height: 1, background: "linear-gradient(90deg, transparent, #c9a86a)" }} />
-              <span style={{ fontFamily: "'Didot', 'Bodoni 72', 'Hoefler Text', Georgia, serif", fontSize: 11, fontWeight: 600, letterSpacing: "0.34em", textTransform: "uppercase", color: "#9a7a37", whiteSpace: "nowrap" }}>As Featured On</span>
-              <span aria-hidden style={{ width: 28, height: 1, background: "linear-gradient(90deg, #c9a86a, transparent)" }} />
+            <span style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <span aria-hidden style={{ width: 30, height: 1, background: "linear-gradient(90deg, transparent, #141414)" }} />
+              <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontSize: 10.5, fontWeight: 600, letterSpacing: "0.42em", textTransform: "uppercase", color: "#141414", whiteSpace: "nowrap", paddingLeft: "0.42em" }}>As Featured On</span>
+              <span aria-hidden style={{ width: 30, height: 1, background: "linear-gradient(90deg, #141414, transparent)" }} />
             </span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/the-mile-masthead.png" alt="The Mile Detroit" style={{ height: 40, width: "auto", maxWidth: "100%", display: "block" }} />
+            <img src="/the-mile-masthead.png" alt="The Mile Detroit" style={{ height: 42, width: "auto", maxWidth: "100%", display: "block", filter: "brightness(0)" }} />
           </a>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
