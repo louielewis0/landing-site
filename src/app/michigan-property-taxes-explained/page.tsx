@@ -91,7 +91,8 @@ const data: GuidePageData = {
           </p>
           <p>
             <strong>Never budget off the seller&rsquo;s current tax bill.</strong> Estimate your taxes using
-            the SEV (roughly half the price you&rsquo;re paying) times the local millage. A good agent and
+            the SEV (roughly half the price you&rsquo;re paying) times the local millage, or run any price through our{" "}
+            <a href="/michigan-property-tax-uncapping-calculator" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>property tax uncapping calculator</a>. A good agent and
             lender will help you project the uncapped number before you buy. Certain transfers &mdash;
             between spouses and some close relatives, or into some trusts &mdash; can be exempt from
             uncapping; confirm your specific situation with the local assessor.

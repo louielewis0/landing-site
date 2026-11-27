@@ -167,9 +167,9 @@ const data: GuidePageData = {
   ctaHeading: "Buying or selling at the top of the Metro Detroit market?",
   ctaBody: "Tell us which communities you're weighing and we'll show you the market, including the off-market estates a public search never surfaces. Selling a luxury home? We'll market it discreetly to the right buyers.",
   ctaPrimary: { href: "/contact", label: "Talk to a luxury specialist" },
-  metaTitle: "Most Expensive Communities in Metro Detroit (2026) | Where the Wealth Lives",
+  metaTitle: "Richest & Most Expensive Communities in Metro Detroit (2026), Ranked",
   metaDescription:
-    "A ranked guide to Metro Detroit's most expensive and prestigious communities — Bloomfield Hills, Franklin, Birmingham, Orchard Lake, Grosse Pointe and more — with sourced home values, estate ceilings, and why the trophy homes sell off-market.",
+    "The richest, most expensive communities in Metro Detroit, ranked — Bloomfield Hills, Franklin, Birmingham, Orchard Lake, Grosse Pointe and more — with sourced home values, estate ceilings, and why the trophy homes sell off-market.",
 };
 
 export const metadata: Metadata = guideMetadata(data);

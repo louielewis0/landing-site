@@ -56,7 +56,7 @@ const data: GuidePageData = {
             well-known suburbs. By <strong>NeighborhoodScout</strong> (2024 FBI data, released Oct 2025):
           </p>
           <ul style={{ margin: 0, paddingLeft: 18, display: "grid", gap: 10 }}>
-            <li><strong>Novi</strong> &mdash; about 1.0 violent per 1,000; <strong>safer than ~69% of U.S. cities</strong>.</li>
+            <li><strong>Novi</strong> &mdash; about 1.06 violent per 1,000; <strong>safer than ~50% of U.S. cities</strong> (2024 data, released Oct 2025).</li>
             <li><strong>Rochester Hills</strong> &mdash; 0.97 violent / 5.31 property; <strong>safer than ~58% of U.S. cities</strong>.</li>
             <li><strong>Troy</strong> &mdash; 1.22 violent / 12.67 property; a low violent rate, with property crime elevated by its huge retail/office base (Somerset Collection and corporate campuses inflate the count). A good reminder that one composite number can mislead.</li>
           </ul>
@@ -89,7 +89,8 @@ const data: GuidePageData = {
             </li>
             <li>
               <strong>Northville &amp; Milford</strong> &mdash; charming walkable downtowns, sought-after historic homes,
-              and tightly held, low-inventory markets.
+              and tightly held, low-inventory markets. Compare them in our{" "}
+              <a href="/safest-luxury-communities-near-northville" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>safest luxury communities near Northville</a>.
             </li>
             <li>
               <strong>Beverly Hills &amp; Bloomfield Township</strong> &mdash; leafy, affluent Birmingham-schools-feeder
@@ -161,7 +162,7 @@ const data: GuidePageData = {
     {
       question: "Is Novi or Rochester Hills safer?",
       answer:
-        "Both are very safe. By NeighborhoodScout's 2024 FBI data, Novi is safer than about 69% of U.S. cities and Rochester Hills safer than about 58%, with both posting low violent-crime rates near 1.0 per 1,000. Niche grades both communities highly as well. The right pick usually comes down to schools, commute, and home style rather than a safety gap.",
+        "Both are very safe. By NeighborhoodScout's 2024 FBI data, Novi is safer than about 50% of U.S. cities (2024 data, released October 2025) and Rochester Hills safer than about 58%, with both posting low violent-crime rates near 1.0 per 1,000. Niche grades both communities highly as well. The right pick usually comes down to schools, commute, and home style rather than a safety gap.",
     },
     {
       question: "How are these safest-suburb rankings measured?",

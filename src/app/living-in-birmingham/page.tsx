@@ -33,7 +33,7 @@ const data: GuidePageData = {
           <p>
             Birmingham attracts people who want an <strong>urban lifestyle without leaving the
             suburbs</strong> &mdash; professionals, empty-nesters, and families who value walkability,
-            dining, and a polished downtown over a big lot. It spans in-town condos and lofts,
+            dining, and a polished downtown over a big lot. It spans <a href="/birmingham-condos" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>in-town condos</a> and lofts,
             historic homes, and multimillion-dollar Quarton Lake estates, so it works across a wide
             range &mdash; as long as walkable, upscale living is the priority.
           </p>

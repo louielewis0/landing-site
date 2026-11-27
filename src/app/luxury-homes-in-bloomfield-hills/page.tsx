@@ -101,6 +101,12 @@ const data: GuidePageData = {
             buyers need — so you reach the private inventory a public search will never show, and sell your estate without
             broadcasting it to the world.
           </p>
+          <p>
+            One number to run before any offer here: long-held estates carry deeply capped tax values that reset when you buy.
+            Our{" "}
+            <a href="/michigan-property-tax-uncapping-calculator" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>property tax uncapping calculator</a>{" "}
+            uses the City of Bloomfield Hills&rsquo; official millage to show your real annual tax.
+          </p>
         </>
       ),
     },

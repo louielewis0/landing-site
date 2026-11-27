@@ -129,7 +129,9 @@ const data: GuidePageData = {
             in Michigan (Niche 2026: A+, around #2 statewide), with Northville High itself ranked near
             the top of the state. Add a genuinely <strong>walkable historic downtown</strong> (anchored
             by the 1925 Marquis Theater), adjacency to <strong>Maybury State Park</strong>, and golf,
-            and you have a rare blend of small-town character and amenity.
+            and you have a rare blend of small-town character and amenity. For crime data on Northville and its
+            luxury neighbors, see the{" "}
+            <a href="/safest-luxury-communities-near-northville" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>safest luxury communities near Northville</a>.
           </p>
           <p style={{ fontSize: 13, color: "var(--s-muted)" }}>
             Note: the City of Northville straddles the Wayne/Oakland county line (roughly half in each),
@@ -168,6 +170,7 @@ const data: GuidePageData = {
     { href: "/living-in-northville", label: "Living in Northville: the relocation guide" },
     { href: "/home-value", label: "What's my home worth? (free valuation)" },
     { href: "/luxury-homes-in-novi", label: "Luxury homes in Novi" },
+    { href: "/safest-luxury-communities-near-northville", label: "Safest luxury communities near Northville" },
     { href: "/most-exclusive-neighborhoods-oakland-county", label: "Most exclusive neighborhoods in Oakland County" },
     { href: "/sell-your-home-metro-detroit", label: "Sell your home for more" },
   ],

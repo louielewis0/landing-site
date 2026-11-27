@@ -56,7 +56,7 @@ const data: GuidePageData = {
             <li><strong>Quarton Lake Estates</strong> — Birmingham's most prestigious address: larger lots, lake views, winding streets, significant historic architecture, and walkable to downtown. Roughly $1.5M to $5M+.</li>
             <li><strong>Poppleton Park</strong> — classic tree-lined streets, quieter than the downtown core, within the Birmingham school district; a strong entry-luxury and move-up tier (roughly $700K–$1.4M and up).</li>
             <li><strong>Holy Name</strong> — just east of Old Woodward near Maple; a wide mix of large new builds and renovated older homes, with the top end reaching into luxury.</li>
-            <li><strong>Downtown / Old Woodward &ldquo;In-Town&rdquo;</strong> — a 96 Walk Score walkable core of luxury condos and in-town homes; the walkability itself is the differentiator versus neighboring estate suburbs.</li>
+            <li><strong>Downtown / Old Woodward &ldquo;In-Town&rdquo;</strong> — a 96 Walk Score walkable core of <a href="/birmingham-condos" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>luxury condos</a> and in-town homes; the walkability itself is the differentiator versus neighboring estate suburbs.</li>
           </ul>
         </>
       ),
