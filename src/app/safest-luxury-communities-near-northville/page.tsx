@@ -42,7 +42,7 @@ const rows: { name: string; safety: string; value: string; draw: string }[] = [
     name: "Novi",
     safety: "1.06 violent / 6.58 property per 1,000; safer than 50% of U.S. cities (NeighborhoodScout, 2024)",
     value: "$602,116 median (NeighborhoodScout, Q1 2026)",
-    draw: "Gated Island Lake of Novi, newer estates, Twelve Oaks retail corridor",
+    draw: "Gated Terra at Novi, resort-style Island Lake, Twelve Oaks retail corridor",
   },
   {
     name: "Plymouth (city)",
@@ -213,8 +213,8 @@ const data: GuidePageData = {
       body: (
         <>
           <p>
-            <strong>Novi</strong>{" "}(median about $602,100) offers newer estates and one of Oakland County&rsquo;s best-known
-            gated communities, Island Lake of Novi. Its violent-crime rate is about 1.06 per 1,000, while property
+            <strong>Novi</strong>{" "}(median about $602,100) offers newer estates, the gated Terra at Novi enclave, and the
+            resort-style Island Lake of Novi. Its violent-crime rate is about 1.06 per 1,000, while property
             crime is higher at 6.58. Like most cities with major shopping centers, check crime maps for the specific
             blocks around a home.
             See our{" "}
@@ -305,7 +305,7 @@ const data: GuidePageData = {
     {
       question: "Are there gated luxury communities near Northville?",
       answer:
-        "Yes. Island Lake of Novi is one of Oakland County's best-known gated communities and sits a short drive from Northville. Most Northville luxury enclaves, such as Northville Hills Golf Club, Bella Vista, and Stonewater, are private subdivisions rather than gated.",
+        "Yes. Novi, a short drive from Northville, has gated Terra at Novi and the resort-style Island Lake of Novi, and the guard-gated Bellagio estates sit on the Novi and Northville line. Most Northville luxury enclaves, such as Northville Hills Golf Club, Bella Vista, and Stonewater, are private subdivisions rather than gated.",
     },
     {
       question: "Which Northville-area community has the best schools?",

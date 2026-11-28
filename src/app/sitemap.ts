@@ -134,6 +134,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/home-sale-proceeds-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/michigan-property-tax-uncapping-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/safest-luxury-communities-near-northville`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/richest-neighborhoods-in-detroit`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/rental-property-roi-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/home-affordability-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/rent-vs-buy-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },

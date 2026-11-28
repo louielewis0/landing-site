@@ -27,6 +27,11 @@ const data: GuidePageData = {
             ceiling in the millions — so both are worth knowing. Small villages (Franklin, Bingham Farms, Orchard Lake)
             often out-prestige bigger cities on a per-home basis while barely registering on citywide medians.
           </p>
+          <p>
+            This guide covers the suburbs. For the wealthiest neighborhoods inside the city itself, such as Palmer Woods,
+            Sherwood Forest, and Indian Village, see the{" "}
+            <a href="/richest-neighborhoods-in-detroit" style={{ color: "var(--s-gold-ink)", fontWeight: 600 }}>richest neighborhoods in Detroit</a>.
+          </p>
         </>
       ),
     },
@@ -157,6 +162,7 @@ const data: GuidePageData = {
     durationISO: "PT1M1S",
   },
   related: [
+    { href: "/richest-neighborhoods-in-detroit", label: "Richest neighborhoods in Detroit (city)" },
     { href: "/luxury-homes-in-bloomfield-hills", label: "Luxury homes in Bloomfield Hills" },
     { href: "/luxury-homes-in-birmingham", label: "Luxury homes in Birmingham" },
     { href: "/luxury-homes-in-grosse-pointe", label: "Luxury homes in Grosse Pointe" },

@@ -61,6 +61,7 @@ export default function SiteFooter() {
     { label: "Best Suburbs Guide", href: "/best-metro-detroit-suburbs" },
     { label: "Safest Suburbs in Metro Detroit", href: "/safest-suburbs-metro-detroit" },
     { label: "Safest Luxury Near Northville", href: "/safest-luxury-communities-near-northville" },
+    { label: "Richest Neighborhoods in Detroit", href: "/richest-neighborhoods-in-detroit" },
     { label: "Best School Districts in Michigan", href: "/best-school-districts-michigan" },
     { label: "Gated Communities in Michigan", href: "/gated-communities-michigan" },
     { label: "School Districts Guide", href: "/best-school-districts-metro-detroit" },
